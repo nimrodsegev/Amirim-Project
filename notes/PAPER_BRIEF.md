@@ -95,15 +95,15 @@ When a language model is partway through a familiar multi-word expression, does 
 
 ### Settled (2026-09-19, by cluster rerun)
 
+- **The slide-14 bin chart is dropped**, by the author's decision. Figure~7 (correlation between probe confidence and true phrase difficulty, by layer) already carries the same argument on data that reproduces exactly, so nothing is lost. No further cluster work needed on it.
 - **The slide-14 bin-count discrepancy is resolved.** The deck's chart covers 194 phrases; no script or saved file produces that number. Sweeping the minimum-observations filter gives 180 / 190 / 196, so 194 is unreachable and the chart came from an earlier feature snapshot that no longer exists. **180 is correct.** The correlation the paper cites (0.517) was confirmed by direct rerun to four decimal places and belongs to the 180-phrase set — so no number in the paper was affected.
 - **One recorded value did not reproduce**: the natural-training MLP at L25 reran as 0.499 against 0.531 recorded. Footnoted in the appendix rather than silently corrected, since the recorded value is what the original analysis produced and the paragraph's claim (the ordering across variants) is unaffected either way.
 
 ### Still open for the authors
 
 - Whether to spend cluster time closing the two reproducibility gaps above (word-aligned targets; archived probe features) before submission.
-- Whether to regenerate the slide-14 bin chart at n=180 and add it to §5.5. Optional — Figure 7 already carries the same argument on exactly-reproducible data.
 
 ## Interview status
 
-- Last interview/checkpoint: 2026-09-18 — brief reconstructed by agent from the August 2026 summary deck, the July 2026 analysis reports, and the raw result files, not from a live author interview.
-- Questions still requiring author judgment: everything under Open decisions; the target venue; and whether the efficiency motivation (skip-ahead decoding) should stay as framing given that no decoding experiment is reported here.
+- Last checkpoint: 2026-09-19. The brief was reconstructed by an agent from the August 2026 summary deck, the July 2026 analysis reports, and the raw result files, then corrected against the project assistant's records and two cluster reruns. The editorial center was confirmed by the author on 2026-09-19; it is no longer an inference.
+- Everything under **Open decisions** above is settled. The only remaining author judgment is whether to spend cluster time on the two reproducibility gaps before submission.
