@@ -43,12 +43,16 @@ Nothing here speaks to compositional continuations, to rarer expressions, or to
 other languages, and the three categories are unbalanced: idioms are $82\%$ of
 pooled instances, so aggregate rates are close to idiom rates.
 
-\paragraph{Layer budgets differ between analyses.}
-The Patchscopes union is over $32$ layers where the analysis permits it and over
-eight where hidden states had to be stored. \S\ref{sec:disagreement} shows this
-choice changes the apparent gap between readouts by several points. We report
-the budget with every number, but the eight-layer results are not directly
-comparable to the $32$-layer ones.
+\paragraph{The Patchscopes readout is sampled, not exhaustive.}
+Our primary measurement unions eight of the model's $32$ layers, chosen so that
+every per-layer, per-category and probing result rests on the same states. That
+undercounts what a full sweep recovers by six to eight points, and it is the
+single largest contributor to the apparent asymmetry between the two readouts
+(\S\ref{sec:disagreement}). We report the $32$-layer sweep wherever we have it,
+but it is not available for the per-category or probing analyses, so those
+should be read as lower bounds on Patchscopes performance. A budget-matched
+comparison across every analysis would require storing hidden states for all
+$32$ layers at every trial.
 
 \paragraph{Probe results are not reproducible from the released artifacts.}
 The probing experiments require per-trial hidden states, which are too large to

@@ -7,14 +7,15 @@
 \textbf{Readout / condition} & 2 & 3 & 4 & 5 \\
 \midrule
 \multicolumn{5}{l}{\textit{Phrase in isolation}} \\
-\quad Patchscopes (32 layers) & 57.8 & 30.9 & 19.4 & 16.5 \\
+\quad Patchscopes & 57.8 & 30.9 & 19.4 & 16.5 \\
 \quad Generation & 59.2 & 31.2 & 20.6 & 17.6 \\
 \midrule
 \multicolumn{5}{l}{\textit{Phrase in natural context}} \\
-\quad Patchscopes (32 layers) & 79.6 & 64.1 & 51.6 & 46.4 \\
+\quad Patchscopes & 73.2 & 57.5 & 43.9 & 38.7 \\
 \quad Generation & 84.0 & 64.8 & 55.6 & 53.6 \\
 \midrule
-\quad Patchscopes (8 layers) & 73.2 & 57.5 & 43.9 & 38.7 \\
+\multicolumn{5}{l}{\textit{Robustness: wider Patchscopes layer sweep}} \\
+\quad Patchscopes, all 32 layers & 79.6 & 64.1 & 51.6 & 46.4 \\
 \bottomrule
 \end{tabular}
 \caption{Recovery rate (\%) of the final $i$ phrase tokens, OLMo-2-7B.
@@ -25,8 +26,9 @@ Isolation rows are computed over phrases
 4,677 and
 2,386 at $i=2\ldots5$).
 Patchscopes counts a success if \emph{any} probed layer recovers the
-continuation; the last row restricts that union to the eight layers used for
-probing (\S\ref{sec:probe}), and is the source of the much larger
-patchscopes--generation gap reported in earlier drafts of this work.}
+continuation, over the eight layers used throughout this paper
+(\S\ref{sec:setup}); isolation rows sweep all 32. The final row re-runs the
+in-context sweep over all 32 layers and is discussed in
+\S\ref{sec:disagreement}.}
 \label{tab:main}
 \end{table}

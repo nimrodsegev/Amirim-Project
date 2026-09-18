@@ -59,11 +59,15 @@ complete the phrase at $76.8\%$ balanced accuracy and $87.6\%$ precision
 (\S\ref{sec:probe}).
 
 The two readouts, however, do not measure the same thing. Run on identical
-instances, they agree on only $81.1\%$ of them, and their disagreements run in
-both directions --- $1{,}924$ instances recovered only by Patchscopes against
-$2{,}751$ recovered only by generation (\S\ref{sec:disagreement}). They order
-the three phrase categories differently, and the two probes trained on their
-respective labels place the ``best'' layer in different parts of the network.
+instances, they agree on only $78.7\%$ of them, and generation recovers
+continuations that Patchscopes misses about three times as often as the reverse
+(\S\ref{sec:disagreement}). They also reverse the ranking of the phrase
+categories --- idioms are the easiest category under Patchscopes and the hardest
+under generation --- and the two probes trained on their respective labels place
+the ``best'' layer in different parts of the network. Part of the asymmetry is a
+matter of how many layers the Patchscopes union is taken over, and we quantify
+that; the disagreement itself is not, and survives the widest sweep we can
+run.
 We take this as a caution rather than a refutation: Patchscopes remains
 informative about representational content, but a claim of the form \emph{the
 model knows $X$ at layer $\ell$} is not readout-independent, and should say
@@ -80,9 +84,10 @@ Concretely, we contribute:
       ahead, is greatly strengthened by natural context, and is a stable
       property of the phrase (\S\ref{sec:lookahead}--\S\ref{sec:stability}).
 \item A direct comparison showing that the two readouts disagree substantially
-      and asymmetrically, and that conclusions about category difficulty and
-      layer localisation depend on which one is used
-      (\S\ref{sec:disagreement}).
+      and asymmetrically, that conclusions about category difficulty and layer
+      localisation depend on which one is used, and that a sizeable part of the
+      apparent gap between them is set by the layer budget rather than by the
+      model (\S\ref{sec:disagreement}).
 \item A hidden-state probe that predicts real completion success well above
       chance from the first transformer layer onward, together with an
       adjudication of its apparent errors showing that roughly four in five are

@@ -1,19 +1,21 @@
 \begin{table}[t]
 \centering\small
-\begin{tabular}{lrrr}
+\begin{tabular}{lrrrr}
 \toprule
-& & \multicolumn{2}{c}{\textbf{Recovery (\%)}} \\
+& & \multicolumn{2}{c}{\textbf{Recovery (\%)}} & \\
 \cmidrule(lr){3-4}
-\textbf{Category} & \textbf{Inst.} & patchscopes & generation \\
+\textbf{Category} & \textbf{Inst.} & patchscopes & generation & \small{(32L)} \\
 \midrule
-Landmarks & 1,409 & 56.8 & 75.3 \\
-Idioms & 20,371 & 65.9 & 66.4 \\
-Film titles & 2,960 & 68.6 & 84.5 \\
+Landmarks & 1,409 & 47.2 & 75.3 & 56.8 \\
+Idioms & 20,371 & 57.4 & 66.4 & 65.9 \\
+Film titles & 2,960 & 54.7 & 84.5 & 68.6 \\
 \bottomrule
 \end{tabular}
 \caption{Recovery by phrase category, pooled over $i=2\ldots5$, in natural
-context. The two readouts order the categories differently: under generation,
-idioms are the hardest category, while under patchscopes they sit between
-landmarks and film titles.}
+context. The two readouts reverse the ordering of idioms: under Patchscopes
+idioms are the \emph{easiest} category, under generation the hardest. The final
+column repeats the Patchscopes measurement over all 32 layers, under which
+idioms fall to the middle of the ranking; the reversal against generation is
+therefore weaker but does not disappear.}
 \label{tab:categories}
 \end{table}

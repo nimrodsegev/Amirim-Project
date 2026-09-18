@@ -6,14 +6,18 @@
 \subsection{Phrases}
 
 We assemble $1{,}164$ fixed multi-word expressions of three kinds
-(Table~\ref{tab:dataset}). \textbf{Idioms} ($852$) come from
-MAGPIE \citep{haagsma-etal-2020-magpie} and
-LIdioms \citep{moussallem-etal-2018-lidioms} together with two smaller
-lists distributed with the same release.\footnote{\nimrod{The release also
-labels $81$ items \texttt{EPIC} and $95$ across two \texttt{ep\_*} splits; we
-should identify and cite their source before submission.}} \textbf{Landmarks}
-($127$) are drawn from a curated list of well-known buildings and sites, and
-\textbf{film titles} ($185$) are the multi-word entries of the IMDb Top 250.
+(Table~\ref{tab:dataset}). \textbf{Idioms} ($852$) are drawn from the same four
+sources used to build IDIOMEM \citep{haviv-etal-2023-understanding}:
+MAGPIE \citep{haagsma-etal-2020-magpie} ($511$),
+LIdioms \citep{moussallem-etal-2018-lidioms} ($165$),
+EPIE \citep{saxena-paul-2020-epie} ($81$), and a public list of English idioms
+and proverbs ($95$).\footnote{\url{https://www.ef.com/wwen/english-resources/english-idioms/},
+the source \citet{haviv-etal-2023-understanding} label \texttt{EF}.} Our set is
+not IDIOMEM itself: we retain items their predictability and prompt-similarity
+filters remove, since our success criterion is a multi-token string match rather
+than a single-token prediction. \textbf{Landmarks} ($127$) are drawn from a
+curated list of well-known buildings and sites, and \textbf{film titles} ($185$)
+are the multi-word entries of the IMDb Top 250.
 
 The three kinds are chosen to vary the reason a continuation is predictable.
 An idiom is fixed by convention, a landmark name by reference, and a film title
@@ -66,9 +70,11 @@ principle. We replicate the central measurements on OLMo-3-7B and, for the
 generation readout, on Qwen2.5-14B \citep{qwen-2024-qwen25}
 (Appendix~\ref{app:details}).
 
-For the Patchscopes readout we sweep all $32$ layers where the analysis permits
-it. The probing experiments (\S\ref{sec:probe}) require storing hidden states
-for every trial, so they use a fixed subset of eight layers
-$\{5, 7, 10, 13, 15, 20, 25, 30\}$. \S\ref{sec:disagreement} shows that this
-difference is not cosmetic, and we are explicit throughout about which layer set
-a given number reflects.
+Our primary Patchscopes readout takes the union over eight layers,
+$\{5, 7, 10, 13, 15, 20, 25, 30\}$. This is the layer set on which the
+per-layer, per-category and probing analyses were run --- storing hidden states
+for all $32$ layers at every trial was not feasible --- so using it throughout
+keeps those results mutually comparable. Where a wider sweep is available we
+report it alongside: \S\ref{sec:disagreement} quantifies what the budget costs,
+which is six to eight points of Patchscopes recovery, and we state which layer
+set every number reflects.

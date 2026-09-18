@@ -1,21 +1,26 @@
 \begin{table}[t]
 \centering\small
-\begin{tabular}{rrrrrrr}
+\begin{tabular}{lrrrrrr}
 \toprule
-$i$ & $n$ & both & \makecell{ps.\\only} & \makecell{gen.\\only} & neither & \makecell{agree\\(\%)} \\
+& $n$ & both & \makecell{ps.\\only} & \makecell{gen.\\only} & neither & agree \\
 \midrule
-2 & 9,148 & 6,757 & 521 & 923 & 947 & 84.2 \\
-3 & 8,529 & 4,681 & 783 & 849 & 2,216 & 80.9 \\
-4 & 4,677 & 1,968 & 445 & 632 & 1,632 & 77.0 \\
-5 & 2,386 & 933 & 175 & 347 & 931 & 78.1 \\
+\multicolumn{7}{l}{\textit{Eight probed layers, pooled $i=2\ldots5$}} \\
+\quad & 24,740 & 53.4 & 5.6 & 15.7 & 25.3 & 78.7 \\
 \midrule
-2--5 & 24,740 & 14,339 & 1,924 & 2,751 & 5,726 & 81.1 \\
+\multicolumn{7}{l}{\textit{All 32 layers, by lookahead distance}} \\
+\quad $i=2$ & 9,148 & 73.9 & 5.7 & 10.1 & 10.4 & 84.2 \\
+\quad $i=3$ & 8,529 & 54.9 & 9.2 & 10.0 & 26.0 & 80.9 \\
+\quad $i=4$ & 4,677 & 42.1 & 9.5 & 13.5 & 34.9 & 77.0 \\
+\quad $i=5$ & 2,386 & 39.1 & 7.3 & 14.5 & 39.0 & 78.1 \\
+\quad pooled & 24,740 & 58.0 & 7.8 & 11.1 & 23.1 & 81.1 \\
 \bottomrule
 \end{tabular}
-\caption{Patchscopes (32-layer union) and generation on \emph{identical}
-(phrase, context, $i$) instances. The two readouts disagree on
-18.9\% of instances, and the disagreement runs in both
-directions: 1,924 instances are recovered only by
-patchscopes and 2,751 only by generation.}
+\caption{Patchscopes and generation on \emph{identical} (phrase, context, $i$)
+instances; all cells are percentages of $n$. Over the eight probed layers the
+two readouts agree on 78.7\% of instances and the disagreement is lopsided ---
+generation recovers what Patchscopes misses roughly three times as often as the
+reverse. Widening the Patchscopes sweep to all 32 layers raises agreement to
+81.1\% and rebalances the disagreement, but does not remove it: 7.8\% of
+instances are still recovered only by Patchscopes.}
 \label{tab:agreement}
 \end{table}

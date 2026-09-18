@@ -12,16 +12,22 @@ representation itself, well enough that a small probe reading a single hidden
 vector predicts real completion at $87.6\%$ precision.
 
 The second finding is a caution about how the first was obtained. Patchscopes
-and ordinary generation, run on identical instances, agree on only four fifths
-of them and disagree in both directions; they rank the phrase categories
-differently, and probes trained on their labels locate the relevant information
-in different parts of the network. Neither instrument is wrong, but neither is a
-neutral window onto what the model knows. Claims of the form \emph{the model
-already knows $X$} should carry the readout that produced them.
+and ordinary generation, run on identical instances, agree on only $78.7\%$ of
+them; they reverse the ranking of the phrase categories, and probes trained on
+their labels locate the relevant information in different parts of the network.
+Part of that gap is a budget we chose --- widening the Patchscopes sweep from
+eight layers to all $32$ recovers six to eight points and rebalances the
+asymmetry --- but the disagreement itself survives the widest sweep we can run.
+Neither instrument is wrong, and neither is a neutral window onto what the model
+knows. Claims of the form \emph{the model already knows $X$} should carry the
+readout that produced them, and the budget that readout was given.
 
 The practical thread we have not pulled is efficiency. A signal that is stable
 per phrase, available from mid-network states, and precise enough to act on is
 the kind of signal a decoding scheme could use to commit several tokens at once
-rather than paying full depth for each. Whether an extractor can be made cheap
-enough to be worth it, and whether the phrases it fires on are frequent enough
-to matter, are questions this work motivates but does not answer.
+rather than paying full depth for each. We are pursuing that direction
+separately, as an adaptive multi-token prediction policy evaluated against an
+autoregressive baseline under exact verification; nothing in the present paper
+depends on its outcome. Whether an extractor of this kind can be made cheap
+enough to be worth its own cost, and whether the phrases it fires on are frequent
+enough to matter in ordinary text, remain open.

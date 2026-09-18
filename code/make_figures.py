@@ -25,22 +25,22 @@ def save(fig, name):
     print("  wrote figures/" + name + ".pdf")
 
 
-# Fig 1: isolation vs context, both readouts
+# Fig 1: context effect (generation) + Patchscopes layer-budget sensitivity
 fig, ax = plt.subplots(figsize=(3.2, 2.1))
-x = range(len(IS))
+x = list(range(len(IS)))
 iso_g = [NUM["isolated"]["generation_olmo2"][str(i)][2] for i in IS]
 ctx_g = [NUM["in_context"]["generation_olmo2"][str(i)][2] for i in IS]
-iso_p = [NUM["isolated"]["patchscopes_olmo2_32L"][str(i)][2] for i in IS]
-ctx_p = [NUM["in_context"]["patchscopes_olmo2_32L"][str(i)][2] for i in IS]
+ctx_p8 = [NUM["external"]["patchscopes_8L_union_in_context_pct"][str(i)] for i in IS]
+ctx_p32 = [NUM["in_context"]["patchscopes_olmo2_32L"][str(i)][2] for i in IS]
 ax.plot(x, ctx_g, "o-", color=C["gen"], label="generation, in context")
-ax.plot(x, iso_g, "o--", color=C["gen"], alpha=.55, label="generation, isolated")
-ax.plot(x, ctx_p, "s-", color=C["ps"], label="patchscopes, in context")
-ax.plot(x, iso_p, "s--", color=C["ps"], alpha=.55, label="patchscopes, isolated")
-ax.set_xticks(list(x)); ax.set_xticklabels([f"$i={i}$" for i in IS])
+ax.plot(x, iso_g, "o--", color=C["gen"], alpha=.5, label="generation, isolated")
+ax.plot(x, ctx_p8, "s-", color=C["ps"], label="patchscopes (8L), in context")
+ax.plot(x, ctx_p32, "s:", color=C["ps"], alpha=.6, label="patchscopes (32L), in context")
+ax.set_xticks(x); ax.set_xticklabels([f"$i={i}$" for i in IS])
 ax.set_ylabel("recovery rate (%)"); ax.set_ylim(0, 100)
 ax.set_xlabel("lookahead distance")
 ax.grid(axis="y", lw=.4, alpha=.3); ax.set_axisbelow(True)
-ax.legend(frameon=False, loc="upper right")
+ax.legend(frameon=False, loc="upper right", fontsize=6)
 save(fig, "context_vs_isolation")
 
 # Fig 2: per-phrase consistency on distinct contexts, vs binomial null

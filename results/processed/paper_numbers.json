@@ -669,14 +669,6 @@
     }
   },
   "agreement_32L": {
-    "2": {
-      "n": 9148,
-      "both": 6757,
-      "patchscopes_only": 521,
-      "generation_only": 923,
-      "neither": 947,
-      "agreement_pct": 84.2
-    },
     "1": {
       "n": 9148,
       "both": 8584,
@@ -684,6 +676,14 @@
       "generation_only": 129,
       "neither": 163,
       "agreement_pct": 95.6
+    },
+    "2": {
+      "n": 9148,
+      "both": 6757,
+      "patchscopes_only": 521,
+      "generation_only": 923,
+      "neither": 947,
+      "agreement_pct": 84.2
     },
     "3": {
       "n": 8529,
@@ -765,14 +765,6 @@
       "neither": 14,
       "agreement_pct": 80.0
     },
-    "13": {
-      "n": 20,
-      "both": 4,
-      "patchscopes_only": 7,
-      "generation_only": 6,
-      "neither": 3,
-      "agreement_pct": 35.0
-    },
     "12": {
       "n": 21,
       "both": 12,
@@ -781,7 +773,15 @@
       "neither": 0,
       "agreement_pct": 57.1
     },
-    "16": {
+    "13": {
+      "n": 20,
+      "both": 4,
+      "patchscopes_only": 7,
+      "generation_only": 6,
+      "neither": 3,
+      "agreement_pct": 35.0
+    },
+    "18": {
       "n": 10,
       "both": 0,
       "patchscopes_only": 0,
@@ -789,7 +789,7 @@
       "neither": 6,
       "agreement_pct": 60.0
     },
-    "15": {
+    "16": {
       "n": 10,
       "both": 0,
       "patchscopes_only": 0,
@@ -805,7 +805,7 @@
       "neither": 6,
       "agreement_pct": 60.0
     },
-    "18": {
+    "15": {
       "n": 10,
       "both": 0,
       "patchscopes_only": 0,
@@ -1192,10 +1192,20 @@
       "5": 38.7
     },
     "agreement_8L_pooled_i2_5": {
+      "n": 24740,
       "agreement_pct": 78.7,
       "generation_only_pct": 15.7,
       "patchscopes_only_pct": 5.6,
-      "n": 24740
+      "both_pct": 53.4,
+      "neither_pct": 25.3,
+      "patchscopes_pct": 59.0,
+      "generation_pct": 69.1,
+      "note": "Reported in the July 2026 analysis report as agreement 78.7%, generation-only 15.7%, patchscopes-only 5.6%. The remaining cells follow from those and the fixed 69.1% generation rate; they are derived from rounded percentages, so we quote percentages rather than counts."
+    },
+    "category_8L_pooled_i2_5_pct": {
+      "building": 47.2,
+      "idiom": 57.4,
+      "movie": 54.7
     },
     "generation_confidence": {
       "mean_when_success": 0.878,

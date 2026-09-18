@@ -250,7 +250,18 @@ out["external"] = {
         "L0_L1_L2_pooled_i2_5": {"0": 0.7, "1": 0.8, "2": 1.6, "any_of_3": 1.9},
     },
     "patchscopes_8L_union_in_context_pct": {"2": 73.2, "3": 57.5, "4": 43.9, "5": 38.7},
-    "agreement_8L_pooled_i2_5": {"agreement_pct": 78.7, "generation_only_pct": 15.7, "patchscopes_only_pct": 5.6, "n": 24740},
+    "agreement_8L_pooled_i2_5": {
+        "n": 24740, "agreement_pct": 78.7,
+        "generation_only_pct": 15.7, "patchscopes_only_pct": 5.6,
+        "both_pct": 53.4, "neither_pct": 25.3,
+        "patchscopes_pct": 59.0, "generation_pct": 69.1,
+        "note": ("Reported in the July 2026 analysis report as agreement 78.7%, "
+                 "generation-only 15.7%, patchscopes-only 5.6%. The remaining "
+                 "cells follow from those and the fixed 69.1% generation rate; "
+                 "they are derived from rounded percentages, so we quote "
+                 "percentages rather than counts."),
+    },
+    "category_8L_pooled_i2_5_pct": {"building": 47.2, "idiom": 57.4, "movie": 54.7},
     "generation_confidence": {
         "mean_when_success": 0.878, "mean_when_failure": 0.447,
         "by_probe_outcome_L25": {

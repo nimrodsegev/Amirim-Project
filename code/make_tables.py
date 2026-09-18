@@ -53,6 +53,7 @@ def row(label, path, keys):
     return f"{label} & " + " & ".join(cells) + r" \\"
 
 
+e8 = N["external"]["patchscopes_8L_union_in_context_pct"]
 write("main_results", r"""\begin{table}[t]
 \centering\small
 \begin{tabular}{lrrrr}
@@ -62,14 +63,15 @@ write("main_results", r"""\begin{table}[t]
 \textbf{Readout / condition} & 2 & 3 & 4 & 5 \\
 \midrule
 \multicolumn{5}{l}{\textit{Phrase in isolation}} \\
-""" + row("\\quad Patchscopes (32 layers)", ["isolated", "patchscopes_olmo2_32L"], IS) + "\n"
+""" + row("\\quad Patchscopes", ["isolated", "patchscopes_olmo2_32L"], IS) + "\n"
       + row("\\quad Generation", ["isolated", "generation_olmo2"], IS) + r"""
 \midrule
 \multicolumn{5}{l}{\textit{Phrase in natural context}} \\
-""" + row("\\quad Patchscopes (32 layers)", ["in_context", "patchscopes_olmo2_32L"], IS) + "\n"
-      + row("\\quad Generation", ["in_context", "generation_olmo2"], IS) + rf"""
+""" + "\\quad Patchscopes & " + " & ".join(f"{e8[i]:.1f}" for i in IS) + r" \\" + "\n"
+      + row("\\quad Generation", ["in_context", "generation_olmo2"], IS) + r"""
 \midrule
-\quad Patchscopes (8 layers) & {N['external']['patchscopes_8L_union_in_context_pct']['2']} & {N['external']['patchscopes_8L_union_in_context_pct']['3']} & {N['external']['patchscopes_8L_union_in_context_pct']['4']} & {N['external']['patchscopes_8L_union_in_context_pct']['5']} \\
+\multicolumn{5}{l}{\textit{Robustness: wider Patchscopes layer sweep}} \\
+""" + row("\\quad Patchscopes, all 32 layers", ["in_context", "patchscopes_olmo2_32L"], IS) + rf"""
 \bottomrule
 \end{{tabular}}
 \caption{{Recovery rate (\%) of the final $i$ phrase tokens, OLMo-2-7B.
@@ -80,39 +82,49 @@ Isolation rows are computed over phrases
 {N['in_context']['generation_olmo2']['4'][1]:,} and
 {N['in_context']['generation_olmo2']['5'][1]:,} at $i=2\ldots5$).
 Patchscopes counts a success if \emph{{any}} probed layer recovers the
-continuation; the last row restricts that union to the eight layers used for
-probing (\S\ref{{sec:probe}}), and is the source of the much larger
-patchscopes--generation gap reported in earlier drafts of this work.}}
+continuation, over the eight layers used throughout this paper
+(\S\ref{{sec:setup}}); isolation rows sweep all 32. The final row re-runs the
+in-context sweep over all 32 layers and is discussed in
+\S\ref{{sec:disagreement}}.}}
 \label{{tab:main}}
 \end{{table}}""")
 
 
 # ---- Table 3: matched-instance agreement -----------------------------------
 a = N["agreement_32L"]
+p8 = N["external"]["agreement_8L_pooled_i2_5"]
+p32 = N["agreement_32L_pooled_i2_5"]
 rows = []
 for i in IS:
     r = a[i]
-    rows.append(f"{i} & {r['n']:,} & {r['both']:,} & {r['patchscopes_only']:,} & "
-                f"{r['generation_only']:,} & {r['neither']:,} & {r['agreement_pct']:.1f} \\\\")
-p = N["agreement_32L_pooled_i2_5"]
+    n = r["n"]
+    rows.append(f"{i} & {r['n']:,} & {100*r['both']/n:.1f} & {100*r['patchscopes_only']/n:.1f} & "
+                f"{100*r['generation_only']/n:.1f} & {100*r['neither']/n:.1f} & {r['agreement_pct']:.1f} \\\\")
 write("agreement", r"""\begin{table}[t]
 \centering\small
-\begin{tabular}{rrrrrrr}
+\begin{tabular}{lrrrrrr}
 \toprule
-$i$ & $n$ & both & \makecell{ps.\\only} & \makecell{gen.\\only} & neither & \makecell{agree\\(\%)} \\
+& $n$ & both & \makecell{ps.\\only} & \makecell{gen.\\only} & neither & agree \\
 \midrule
-""" + "\n".join(rows) + rf"""
-\midrule
-2--5 & {p['n']:,} & {p['both']:,} & {p['patchscopes_only']:,} & {p['generation_only']:,} & {p['neither']:,} & {p['agreement_pct']:.1f} \\
-\bottomrule
-\end{{tabular}}
-\caption{{Patchscopes (32-layer union) and generation on \emph{{identical}}
-(phrase, context, $i$) instances. The two readouts disagree on
-{100 - p['agreement_pct']:.1f}\% of instances, and the disagreement runs in both
-directions: {p['patchscopes_only']:,} instances are recovered only by
-patchscopes and {p['generation_only']:,} only by generation.}}
-\label{{tab:agreement}}
-\end{{table}}""")
+\multicolumn{7}{l}{\textit{Eight probed layers, pooled $i=2\ldots5$}} \\
+""" + f"\\quad & {p8['n']:,} & {p8['both_pct']:.1f} & {p8['patchscopes_only_pct']:.1f} & "
+      f"{p8['generation_only_pct']:.1f} & {p8['neither_pct']:.1f} & {p8['agreement_pct']:.1f} \\\\\n"
+      + r"""\midrule
+\multicolumn{7}{l}{\textit{All 32 layers, by lookahead distance}} \\
+""" + "\n".join("\\quad $i=" + r_[0] + "$" + r_[1:] for r_ in rows) + "\n"
+      + f"\\quad pooled & {p32['n']:,} & {100*p32['both']/p32['n']:.1f} & {100*p32['patchscopes_only']/p32['n']:.1f} & "
+        f"{100*p32['generation_only']/p32['n']:.1f} & {100*p32['neither']/p32['n']:.1f} & {p32['agreement_pct']:.1f} \\\\\n"
+      + r"""\bottomrule
+\end{tabular}
+\caption{Patchscopes and generation on \emph{identical} (phrase, context, $i$)
+instances; all cells are percentages of $n$. Over the eight probed layers the
+two readouts agree on 78.7\% of instances and the disagreement is lopsided ---
+generation recovers what Patchscopes misses roughly three times as often as the
+reverse. Widening the Patchscopes sweep to all 32 layers raises agreement to
+81.1\% and rebalances the disagreement, but does not remove it: 7.8\% of
+instances are still recovered only by Patchscopes.}
+\label{tab:agreement}
+\end{table}""")
 
 
 # ---- Table 4: probes -------------------------------------------------------
@@ -148,29 +160,32 @@ monotonically with depth.}}
 
 # ---- Table 5: categories ---------------------------------------------------
 c = N["category_pooled_i2_5"]
+c8 = N["external"]["category_8L_pooled_i2_5_pct"]
 rows = []
 for cat, label in (("building", "Landmarks"), ("idiom", "Idioms"), ("movie", "Film titles")):
-    rows.append(f"{label} & {c['generation'][cat]['n']:,} & "
-                f"{c['patchscopes_32L'][cat]['success_pct']:.1f} & "
-                f"{c['generation'][cat]['success_pct']:.1f} \\\\")
-e8 = N["external"]
+    rows.append(f"{label} & {c['generation'][cat]['n']:,} & {c8[cat]:.1f} & "
+                f"{c['generation'][cat]['success_pct']:.1f} & "
+                f"{c['patchscopes_32L'][cat]['success_pct']:.1f} \\\\")
 write("categories", r"""\begin{table}[t]
 \centering\small
-\begin{tabular}{lrrr}
+\begin{tabular}{lrrrr}
 \toprule
-& & \multicolumn{2}{c}{\textbf{Recovery (\%)}} \\
+& & \multicolumn{2}{c}{\textbf{Recovery (\%)}} & \\
 \cmidrule(lr){3-4}
-\textbf{Category} & \textbf{Inst.} & patchscopes & generation \\
+\textbf{Category} & \textbf{Inst.} & patchscopes & generation & \small{(32L)} \\
 \midrule
 """ + "\n".join(rows) + r"""
 \bottomrule
 \end{tabular}
 \caption{Recovery by phrase category, pooled over $i=2\ldots5$, in natural
-context. The two readouts order the categories differently: under generation,
-idioms are the hardest category, while under patchscopes they sit between
-landmarks and film titles.}
+context. The two readouts reverse the ordering of idioms: under Patchscopes
+idioms are the \emph{easiest} category, under generation the hardest. The final
+column repeats the Patchscopes measurement over all 32 layers, under which
+idioms fall to the middle of the ranking; the reversal against generation is
+therefore weaker but does not disappear.}
 \label{tab:categories}
 \end{table}""")
+
 
 print("done")
 

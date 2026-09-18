@@ -9,10 +9,11 @@
 \begin{figure}[t]
 \centering
 \includegraphics[width=\columnwidth]{figures/context_vs_isolation}
-\caption{Recovery rate against lookahead distance, for both readouts, with and
-without natural context. Context lifts both readouts by $20$--$36$ points; the
-two readouts themselves track each other closely once the Patchscopes union is
-taken over all $32$ layers.}
+\caption{Recovery rate against lookahead distance. Natural context lifts the
+generation readout by $25$--$36$ points over the same phrases in isolation. The
+two Patchscopes curves are the same measurement under different layer budgets
+and differ by $6$--$8$ points, which is most of the apparent gap to generation
+(\S\ref{sec:disagreement}).}
 \label{fig:context}
 \end{figure}
 
@@ -27,9 +28,10 @@ next-token prediction.
 The same phrases presented alone, with no surrounding text, are recovered far
 less often: $59.2\%$ at $i=2$ falling to $17.6\%$ at $i=5$ (Figure~\ref{fig:context}).
 The gap widens with distance, from $24.8$ points at $i=2$ to $36.0$ points at
-$i=5$. This is the expected direction --- context supplies both topical evidence
-and the signal that a fixed expression is under way --- but its size matters for
-interpreting prior results. A bare phrase is a poor proxy for the condition
+$i=5$, and the Patchscopes readout shows the same pattern. This is the expected
+direction --- context supplies both topical evidence and the signal that a fixed
+expression is under way --- but its size matters for interpreting prior
+results. A bare phrase is a poor proxy for the condition
 under which a model actually encounters these expressions, and measurements
 taken in isolation should be read as a lower bound.
 
@@ -122,48 +124,65 @@ gradually and, for a large minority of cases, quite early.
 So far we have reported both readouts as if they were interchangeable
 measurements of one underlying quantity. They are not. Table~\ref{tab:agreement}
 compares them on identical instances --- same phrase, same context, same cut
-point, same success criterion --- and they agree on $81.1\%$ of the $24{,}740$
+point, same success criterion --- and they agree on $78.7\%$ of the $24{,}740$
 pooled trials.
 
-The residual $18.9\%$ is the informative part, because it is not one-sided.
-$1{,}924$ instances are recovered by Patchscopes and not by generation, and
-$2{,}751$ by generation and not by Patchscopes. These are different kinds of
-error. In the first, the state does contain the phrase --- the patchscope
-verbalises it --- but the real context steers the model elsewhere; given
-\textit{Why should one person be brought up}, the model writes \textit{a wealthy
-family, with every opportunity} rather than completing \textit{in the lap of
-luxury}. In the second, the model completes the phrase correctly from its real
-prefix while the patchscope, at the same position, produces a related expression
-instead: for \textit{a bird in the hand is worth two in the bush} it returns
-\textit{worth more than one}. The first is a failure of the continuation to be
-the one we asked about; the second is a failure of the instrument.
+The residual $21.3\%$ is the informative part. It is lopsided: generation
+recovers a continuation that Patchscopes misses in $15.7\%$ of instances, while
+Patchscopes recovers one that generation misses in only $5.6\%$ --- roughly a
+three-to-one asymmetry. Read on its own, that says Patchscopes undercounts what
+the model can do.
 
-\paragraph{The size of the gap depends on how many layers are read.}
-Restricting the Patchscopes union to the eight layers used for probing drops it
-from $79.6\%$ to $73.2\%$ at $i=2$ and from $46.4\%$ to $38.7\%$ at $i=5$
-(Table~\ref{tab:main}, last row). Under that restriction, generation appears to
-outperform Patchscopes by $7$ to $15$ points and the gap appears to grow with
-$i$; under the full $32$-layer sweep the gap is $0.7$ to $7.2$ points and is
-essentially absent at $i=3$. The apparent superiority of one readout over the
-other is thus largely a function of how thoroughly the other was sampled, which
-is a reason to report the layer budget explicitly whenever a Patchscopes rate is
-quoted.
+But the two failure directions are qualitatively different, and neither is
+simply an instrument defect. Where Patchscopes succeeds and generation does not,
+the state does contain the phrase --- the patchscope verbalises it --- yet the
+real context steers the model elsewhere; given \textit{Why should one person be
+brought up}, the model writes \textit{a wealthy family, with every opportunity}
+instead of completing \textit{in the lap of luxury}. Where generation succeeds
+and Patchscopes does not, the model completes the phrase correctly from its real
+prefix while the patchscope, at the same position, reaches for a neighbouring
+expression: for \textit{a bird in the hand is worth two in the bush} it returns
+\textit{worth more than one}. The first is a continuation that was available but
+not taken; the second is a readout that recovered the sense and lost the
+wording.
+
+\paragraph{The asymmetry is partly a layer-budget artifact.}
+The comparison above gives Patchscopes eight layers. Sweeping all $32$ raises
+its in-context rate from $73.2\%$ to $79.6\%$ at $i=2$ and from $38.7\%$ to
+$46.4\%$ at $i=5$ (Table~\ref{tab:main}), lifts agreement to $81.1\%$, and
+rebalances the disagreement from three-to-one to roughly three-to-two
+(Table~\ref{tab:agreement}). At $i=3$ the two readouts then differ by $0.7$
+points overall. Most of the apparent superiority of generation is therefore a
+statement about how thoroughly Patchscopes was sampled, not about the model.
+What survives the wider sweep is the disagreement itself: even at $32$ layers,
+$18.9\%$ of instances are classified differently, and $7.8\%$ are recovered only
+by Patchscopes. The two instruments are not nested, and no layer budget makes
+one a refinement of the other.
+
+We use the eight-layer readout as our primary measurement because it is the
+layer set on which every per-layer, per-category and probing analysis in this
+paper was run, so all of those results are mutually consistent. Readers
+comparing our Patchscopes rates against other work should note that the budget
+moves them by six to eight points.
 
 \paragraph{Category difficulty is readout-dependent.}
-Table~\ref{tab:categories} breaks the pooled rates down by phrase kind. Under
-generation, film titles are recovered most often ($84.5\%$), landmarks next
-($75.3\%$) and idioms least ($66.4\%$). Under Patchscopes the ordering differs:
-film titles again lead ($68.6\%$) but idioms ($65.9\%$) sit above landmarks
-($56.8\%$), and the spread between best and worst narrows from $18.1$ to $11.8$
-points. Idioms are the category whose relative standing moves most, which is
-consistent with the scoring artifact of \S\ref{sec:falsepos}: idioms have
-accepted variants, so exact-match scoring penalises them under a readout that
-produces fluent continuations more than under one that produces fragments.
+Table~\ref{tab:categories} breaks the pooled rates down by phrase kind, and the
+two readouts do not merely differ in level --- they reverse an ordering. Under
+Patchscopes, idioms are the \emph{easiest} category at $57.4\%$, ahead of film
+titles ($54.7\%$) and landmarks ($47.2\%$). Under generation, idioms are the
+\emph{hardest} at $66.4\%$, well behind film titles ($84.5\%$) and landmarks
+($75.3\%$). The reversal is consistent with the scoring artifact of
+\S\ref{sec:falsepos}: idioms have accepted variants, so exact-match scoring
+penalises them most under the readout that produces the most fluent
+continuations. Under the wider $32$-layer sweep idioms move to the middle of the
+Patchscopes ranking rather than the top, so the reversal weakens to a
+re-ordering, but the categories are still ranked differently by the two
+instruments.
 
-The practical consequence is narrow but real. A study that measured only with
-Patchscopes would report that this model finds idioms about as easy as
-landmarks; one that measured only with generation would report idioms as clearly
-the hardest category. Both would be reporting their instrument.
+The practical consequence is narrow but real. A study measuring only with
+Patchscopes would report that this model handles idioms better than landmarks or
+titles; one measuring only with generation would report the opposite. Both would
+be reporting their instrument as much as their model.
 
 \subsection{The hidden state predicts real completion}
 \label{sec:probe}
