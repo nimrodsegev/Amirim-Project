@@ -116,3 +116,79 @@ ax.grid(axis="y", lw=.4, alpha=.3); ax.set_axisbelow(True)
 save(fig, "first_successful_layer")
 
 print("done")
+
+
+# Fig 6: per-phrase correlation between probe confidence and true difficulty
+corr = json.load(open(RAW / "correlation_per_i.json"))
+Ls = sorted(corr, key=int)
+fig, ax = plt.subplots(figsize=(3.2, 1.9))
+for key, lab, st in (("3", "$i=3$", "o-"), ("all", "pooled $i=2\\ldots5$", "s--")):
+    ax.plot([int(l) for l in Ls], [corr[l][key][0] for l in Ls], st, ms=3,
+            label=lab, color=C["alt"] if key == "3" else C["grey"],
+            alpha=1 if key == "3" else .75)
+ax.set_xlabel("layer"); ax.set_ylabel("Pearson $r$")
+ax.set_xticks([int(l) for l in Ls]); ax.set_ylim(0, .75)
+ax.grid(axis="y", lw=.4, alpha=.3); ax.set_axisbelow(True)
+ax.legend(frameon=False, loc="lower center")
+save(fig, "probe_phrase_correlation")
+
+
+# Fig 7: model confidence by probe outcome, and false-positive adjudication
+conf = NUM["external"]["generation_confidence"]["by_probe_outcome_L25"]
+fp = NUM["external"]["false_positive_llm_judgement"]
+fig, axes = plt.subplots(1, 2, figsize=(6.6, 1.95), gridspec_kw={"width_ratios": [1.15, 1]})
+a = axes[0]
+order = [("true_positive", "TP"), ("false_negative", "FN"),
+         ("false_positive", "FP"), ("true_negative", "TN")]
+cols = ["#2e8b57", "#7fb89a", C["gen"], C["grey"]]
+a.bar(range(4), [conf[k]["mean"] for k, _ in order], color=cols, width=.66)
+for j, (k, lab) in enumerate(order):
+    a.text(j, conf[k]["mean"] + .02, f'{conf[k]["mean"]:.3f}', ha="center", fontsize=6.5)
+a.set_xticks(range(4))
+a.set_xticklabels([f'{lab}\n$n$={conf[k]["n"]:,}' for k, lab in order], fontsize=6.5)
+a.set_ylabel("mean model confidence"); a.set_ylim(0, 1.05)
+a.axvline(1.5, ls=":", lw=.8, color="#c9c9c9")
+a.text(0.5, 1.0, "model succeeded", ha="center", fontsize=6.3, color=C["grey"], style="italic")
+a.text(2.5, 1.0, "model failed", ha="center", fontsize=6.3, color=C["grey"], style="italic")
+a.grid(axis="y", lw=.4, alpha=.3); a.set_axisbelow(True)
+
+b = axes[1]
+segs = [("valid_alternate_pct", "valid alternate", "#2e8b57"),
+        ("partially_right_pct", "partially right", "#c9a227"),
+        ("unrelated_pct", "unrelated", C["grey"])]
+left = 0
+for k, lab, col in segs:
+    v = fp[k]
+    b.barh(0, v, left=left, color=col, height=.5, label=lab)
+    b.text(left + v / 2, 0, f"{v:.1f}%", ha="center", va="center",
+           fontsize=6.8, color="white", fontweight="bold")
+    left += v
+b.set_xlim(0, 100); b.set_ylim(-.75, .95); b.set_yticks([])
+b.legend(frameon=False, fontsize=6.3, ncol=3, loc="upper center",
+         handlelength=1.0, columnspacing=1.2, handletextpad=0.4)
+b.set_xlabel(f'all {fp["n"]} probe false positives, adjudicated')
+for sp in ("left", "right", "top"):
+    b.spines[sp].set_visible(False)
+save(fig, "confidence_and_falsepos")
+
+
+# Fig 8: probe at the earliest layers (learned signal, not base rate)
+ge = NUM["external"]["generation_label_probe"]
+early = ge["early_layers_balanced_accuracy_pct"]
+eprec = ge["early_layers_precision_pct"]
+keys = ["0", "1", "2", "5"]
+fig, ax = plt.subplots(figsize=(3.2, 1.9))
+xs = range(len(keys) + 1)
+bacc = [early[k] for k in keys] + [ge["balanced_accuracy_pct"]["30"]]
+prec = [eprec[k] for k in keys] + [ge["precision_pct"]["30"]]
+w = .38
+ax.bar([x - w / 2 for x in xs], bacc, width=w, color=C["gen"], label="balanced acc.")
+ax.bar([x + w / 2 for x in xs], prec, width=w, color=C["ps"], label="precision")
+ax.axhline(50, ls=":", lw=.8, color=C["grey"])
+ax.text(-0.42, 51.5, "chance", ha="left", fontsize=6, color=C["grey"])
+ax.set_xticks(list(xs))
+ax.set_xticklabels([f"L{k}" for k in keys] + ["L30\n(best)"], fontsize=6.8)
+ax.set_ylabel("%"); ax.set_ylim(0, 100)
+ax.legend(frameon=False, fontsize=6.3, ncol=2, loc="upper center")
+ax.grid(axis="y", lw=.4, alpha=.3); ax.set_axisbelow(True)
+save(fig, "probe_early_layers")

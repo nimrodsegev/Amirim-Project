@@ -284,3 +284,21 @@ OUT.parent.mkdir(parents=True, exist_ok=True)
 with open(OUT, "w") as f:
     json.dump(out, f, indent=2)
 print(f"wrote {OUT}")
+
+
+# ---- Additional transcribed results (August 2026 deck) --------------------
+NUM = json.load(open(OUT))
+NUM["external"]["layer_group_pooling"] = {
+    "note": ("Deck slide 11. Grouping the eight probed layers into A={5,7}, "
+             "B={10,13,15}, C={20,25,30} and asking, per phrase, which groups "
+             "contain at least one context at one layer that succeeded. Pooled "
+             "over up to 10 contexts, so this is a deliberately generous "
+             "criterion. Requires data/probing_features.npz to recompute."),
+    "A_and_B_and_C_pct": 47.8,
+    "B_and_C_only_pct": 17.3,
+    "C_only_pct": 33.7,
+    "covered_pct": 98.8,
+}
+with open(OUT, "w") as f:
+    json.dump(NUM, f, indent=2)
+print("appended transcribed deck results")

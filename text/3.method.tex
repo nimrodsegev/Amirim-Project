@@ -1,6 +1,19 @@
 \section{Measuring Phrase Anticipation}
 \label{sec:method}
 
+\begin{figure*}[t]
+\centering
+\includegraphics[width=\textwidth]{figures/protocol}
+\caption{The protocol. We interrupt the model inside a known phrase, leaving $i$
+tokens unread, and ask whether those tokens are recoverable from that point by
+two different means: injecting the hidden state into an unrelated prompt
+(Patchscopes), or simply letting the model continue from the prefix it has
+actually seen (generation). Both are scored identically.}
+\label{fig:protocol}
+\end{figure*}
+
+Figure~\ref{fig:protocol} summarises the protocol.
+
 \subsection{Lookahead distance}
 
 Let a phrase tokenize as $t_1 \ldots t_n$. We interrupt the model at position

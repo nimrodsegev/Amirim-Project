@@ -669,14 +669,6 @@
     }
   },
   "agreement_32L": {
-    "1": {
-      "n": 9148,
-      "both": 8584,
-      "patchscopes_only": 272,
-      "generation_only": 129,
-      "neither": 163,
-      "agreement_pct": 95.6
-    },
     "2": {
       "n": 9148,
       "both": 6757,
@@ -684,6 +676,14 @@
       "generation_only": 923,
       "neither": 947,
       "agreement_pct": 84.2
+    },
+    "1": {
+      "n": 9148,
+      "both": 8584,
+      "patchscopes_only": 272,
+      "generation_only": 129,
+      "neither": 163,
+      "agreement_pct": 95.6
     },
     "3": {
       "n": 8529,
@@ -693,14 +693,6 @@
       "neither": 2216,
       "agreement_pct": 80.9
     },
-    "4": {
-      "n": 4677,
-      "both": 1968,
-      "patchscopes_only": 445,
-      "generation_only": 632,
-      "neither": 1632,
-      "agreement_pct": 77.0
-    },
     "5": {
       "n": 2386,
       "both": 933,
@@ -708,6 +700,14 @@
       "generation_only": 347,
       "neither": 931,
       "agreement_pct": 78.1
+    },
+    "4": {
+      "n": 4677,
+      "both": 1968,
+      "patchscopes_only": 445,
+      "generation_only": 632,
+      "neither": 1632,
+      "agreement_pct": 77.0
     },
     "6": {
       "n": 1123,
@@ -757,14 +757,6 @@
       "neither": 12,
       "agreement_pct": 71.7
     },
-    "14": {
-      "n": 20,
-      "both": 2,
-      "patchscopes_only": 2,
-      "generation_only": 2,
-      "neither": 14,
-      "agreement_pct": 80.0
-    },
     "12": {
       "n": 21,
       "both": 12,
@@ -781,21 +773,13 @@
       "neither": 3,
       "agreement_pct": 35.0
     },
-    "18": {
-      "n": 10,
-      "both": 0,
-      "patchscopes_only": 0,
-      "generation_only": 4,
-      "neither": 6,
-      "agreement_pct": 60.0
-    },
-    "16": {
-      "n": 10,
-      "both": 0,
-      "patchscopes_only": 0,
-      "generation_only": 4,
-      "neither": 6,
-      "agreement_pct": 60.0
+    "14": {
+      "n": 20,
+      "both": 2,
+      "patchscopes_only": 2,
+      "generation_only": 2,
+      "neither": 14,
+      "agreement_pct": 80.0
     },
     "17": {
       "n": 10,
@@ -806,6 +790,22 @@
       "agreement_pct": 60.0
     },
     "15": {
+      "n": 10,
+      "both": 0,
+      "patchscopes_only": 0,
+      "generation_only": 4,
+      "neither": 6,
+      "agreement_pct": 60.0
+    },
+    "18": {
+      "n": 10,
+      "both": 0,
+      "patchscopes_only": 0,
+      "generation_only": 4,
+      "neither": 6,
+      "agreement_pct": 60.0
+    },
+    "16": {
       "n": 10,
       "both": 0,
       "patchscopes_only": 0,
@@ -1256,6 +1256,13 @@
         "4": 57.4,
         "5": 54.7
       }
+    },
+    "layer_group_pooling": {
+      "note": "Deck slide 11. Grouping the eight probed layers into A={5,7}, B={10,13,15}, C={20,25,30} and asking, per phrase, which groups contain at least one context at one layer that succeeded. Pooled over up to 10 contexts, so this is a deliberately generous criterion. Requires data/probing_features.npz to recompute.",
+      "A_and_B_and_C_pct": 47.8,
+      "B_and_C_only_pct": 17.3,
+      "C_only_pct": 33.7,
+      "covered_pct": 98.8
     }
   }
 }

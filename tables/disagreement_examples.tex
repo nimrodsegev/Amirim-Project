@@ -1,0 +1,39 @@
+\begin{table*}[t]
+\centering\small
+\begin{tabular}{p{0.19\textwidth}p{0.15\textwidth}p{0.27\textwidth}p{0.27\textwidth}}
+\toprule
+\textbf{Context (tail)} & \textbf{Target} & \textbf{Patchscopes said} & \textbf{Generation said} \\
+\midrule
+\multicolumn{4}{l}{\textit{Patchscopes recovered the phrase; generation did not}} \\[2pt]
+\ldots{}Why should one person be brought up & the lap of luxury &
+\textcolor{hit}{``the lap of luxury, and you''} &
+``a wealthy family, with every opportunity'' \\[3pt]
+\ldots{}one of Australia's most iconic tourist destinations. & Opera House &
+\textcolor{hit}{``Opera House, Sydney Opera''} &
+``Harbour, New South Wales'' \\[3pt]
+\ldots{}the bridled nailtail wallaby and the numbat. All & by a thread &
+\textcolor{hit}{``on by a thread, and''} &
+``on in tiny, fragmented populations'' \\
+\midrule
+\multicolumn{4}{l}{\textit{Generation recovered the phrase; Patchscopes did not}} \\[2pt]
+\ldots{}15 common English proverbs & worth two in the bush &
+``worth more than one.'' &
+\textcolor{hit}{``worth two in the bush: it is''} \\[3pt]
+\ldots{}the government shuts down anyway while they & cross the t's &
+``cross your t's and dot your'' &
+\textcolor{hit}{``cross the t's. The president''} \\[3pt]
+\ldots{}Instead of telling themselves, There's not & chance in hell &
+``chance of a successful outcome.'' &
+\textcolor{hit}{``chance in hell that I'll''} \\
+\bottomrule
+\end{tabular}
+\caption{Instances where the two readouts disagree, drawn from the
+$24{,}740$ matched trials of \S\ref{sec:disagreement}. Patchscopes outputs are
+shown at the layer that succeeded, or at L25 where it failed. The two failure
+directions are qualitatively different. Where Patchscopes wins, the state does
+contain the phrase and the real context simply steers the model to a different,
+often equally sensible continuation. Where generation wins, Patchscopes has
+recovered the \emph{sense} --- a neighbouring idiom, a paraphrase, a topical
+echo --- but not the wording.}
+\label{tab:disagree}
+\end{table*}

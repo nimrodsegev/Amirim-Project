@@ -60,6 +60,24 @@ the median is L16 and $41.9\%$ of successes first appear at or before L10. The
 early mode is not visible in the eight-layer analysis of \S\ref{sec:layers},
 which samples only L5 and L7 below L10.
 
+\subsection{Pooling across layer groups}
+
+The per-layer view of \S\ref{sec:layers} asks where recovery happens; a
+complementary question is whether the early layers ever succeed \emph{alone}.
+Grouping the eight probed layers into $A=\{5,7\}$, $B=\{10,13,15\}$ and
+$C=\{20,25,30\}$, and asking for each phrase which groups contain at least one
+context at one layer that succeeded, $47.8\%$ of phrases succeed in all three
+groups, $17.3\%$ in $B$ and $C$ but not $A$, and $33.7\%$ in $C$ only. These
+three patterns cover $98.8\%$ of phrases: almost no phrase succeeds in the early
+layers without also succeeding later. Recovery accumulates with depth rather
+than appearing and disappearing.
+
+This is a deliberately generous criterion --- any of up to ten contexts, at any
+layer in the group, counts --- so the absolute numbers are much higher than a
+single context checked at a single layer would give, and the duplicate-context
+issue of \S\ref{sec:setup} inflates them further. The ordering is the
+informative part, not the levels.
+
 \subsection{Probe generalisation to unseen categories}
 
 Training the generation-label probe on two phrase categories and testing on the
@@ -74,15 +92,32 @@ across phrase types rather than memorising category-specific surface features,
 but the transfer is imperfect --- a pattern also reported by
 \citet{orgad-etal-2025-llms} for truthfulness probes across datasets.
 
-\subsection{Per-phrase correlation between probe confidence and difficulty}
+\subsection{Per-phrase correlation: robustness}
 
-A complementary check on whether the probe tracks phrase identity: for each test
-phrase, we compare the probe's mean predicted probability across that phrase's
-contexts with the phrase's true success rate. At $i=3$ over $180$ test phrases,
-Pearson correlation by layer is $0.413$ (L5), $0.551$ (L7), $0.621$ (L10),
-$0.584$ (L13), $0.603$ (L15), $0.556$ (L20), $0.517$ (L25) and $0.480$ (L30) ---
-a broad mid-network peak. The probe's confidence therefore varies with which
-phrase it is looking at, not only with generic features of the position.
+Figure~\ref{fig:corr} reports the correlation between probe confidence and true
+phrase difficulty for the balanced MLP probe at $i=3$ over $180$ test phrases.
+The shape is not an artifact of that particular probe. Across the four
+combinations of classifier (logistic, MLP) and training regime (natural,
+class-balanced), at L13 the correlation ranges from $0.444$ to $0.584$ on $i=3$
+and $0.432$ to $0.564$ pooled, with the MLP consistently ahead of logistic
+regression and balanced training consistently ahead of natural. At L25 the same
+ordering holds at lower values ($0.381$ to $0.531$). Across five random
+phrase-level splits the L13 balanced logistic probe gives AUC-ROC between
+$0.806$ and $0.828$, so the split contributes little of the variation.
+
+\subsection{Full probe metrics}
+
+Table~\ref{tab:probes} reports balanced accuracy and precision, the two measures
+we rely on. For completeness, the generation-label probe's AUC-ROC rises from
+$0.76$ (L5) to $0.83$ (L30) and its AUC-PR from $0.85$ to $0.91$ against a base
+rate of $0.69$, both monotone in depth. The patchscopes-label probe inverts this:
+AUC-ROC is highest at L5 ($0.89$) and lowest at L25 and L30 ($0.74$), the
+opposite ordering to its balanced accuracy. The two metrics disagree because
+they answer different questions --- ranking quality versus thresholded decision
+quality --- under a positive rate that moves from $6.6\%$ to $47.7\%$ across
+layers. On $F_1$ the generation-label probe only beats the trivial
+always-predict-success baseline ($81.7$) at L30 ($82.9$), because that baseline
+buys perfect recall for free on a $69.1\%$-positive test set.
 
 \subsection{Reproducing the numbers}
 

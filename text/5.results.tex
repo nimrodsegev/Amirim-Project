@@ -119,6 +119,7 @@ gradually and, for a large minority of cases, quite early.
 \label{sec:disagreement}
 
 \input{tables/agreement}
+\input{tables/disagreement_examples}
 \input{tables/categories}
 
 So far we have reported both readouts as if they were interchangeable
@@ -134,17 +135,19 @@ three-to-one asymmetry. Read on its own, that says Patchscopes undercounts what
 the model can do.
 
 But the two failure directions are qualitatively different, and neither is
-simply an instrument defect. Where Patchscopes succeeds and generation does not,
-the state does contain the phrase --- the patchscope verbalises it --- yet the
-real context steers the model elsewhere; given \textit{Why should one person be
-brought up}, the model writes \textit{a wealthy family, with every opportunity}
-instead of completing \textit{in the lap of luxury}. Where generation succeeds
-and Patchscopes does not, the model completes the phrase correctly from its real
-prefix while the patchscope, at the same position, reaches for a neighbouring
-expression: for \textit{a bird in the hand is worth two in the bush} it returns
-\textit{worth more than one}. The first is a continuation that was available but
-not taken; the second is a readout that recovered the sense and lost the
-wording.
+simply an instrument defect (Table~\ref{tab:disagree}). Where Patchscopes
+succeeds and generation does not, the state does contain the phrase --- the
+patchscope verbalises it --- yet the real context steers the model elsewhere;
+given \textit{Why should one person be brought up}, the model writes \textit{a
+wealthy family, with every opportunity} instead of completing \textit{in the lap
+of luxury}. That is not a wrong continuation, merely a different one, and it is
+a reminder that our success criterion asks about a specific string rather than a
+good completion. Where generation succeeds and Patchscopes does not, the
+patchscope reaches for a neighbouring expression: for \textit{a bird in the hand
+is worth two in the bush} it returns \textit{worth more than one}, and for
+\textit{a snowball's chance in hell}, \textit{chance of a successful outcome}.
+Here the readout has recovered the sense and lost the wording --- which is
+itself informative about what the injected vector carries.
 
 \paragraph{The asymmetry is partly a layer-budget artifact.}
 The comparison above gives Patchscopes eight layers. Sweeping all $32$ raises
@@ -213,17 +216,50 @@ positive call from this probe is right roughly seven times in eight, and it is
 made from a single hidden vector, before the model has produced any of the
 tokens in question.
 
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{figures/probe_early_layers}
+\caption{The generation-label probe at the earliest layers, against its best
+layer. At L0 --- the raw embedding, before any contextual processing --- the
+probe is barely above chance on balanced accuracy; it climbs steadily as
+computation accumulates. A base-rate artifact would be flat.}
+\label{fig:early}
+\end{figure}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{figures/probe_phrase_correlation}
+\caption{Correlation between the probe's mean predicted probability for a phrase
+and that phrase's true success rate, by layer. The probe's confidence tracks
+which phrase it is looking at, most strongly in the middle of the network.}
+\label{fig:corr}
+\end{figure}
+
 \paragraph{The signal is learned, not a base rate.}
 Because $69.1\%$ of instances are positive, a probe could score respectably by
 guessing. Two checks argue against that reading. First, balanced accuracy
 corrects for the base rate by construction, and the probe clears $50\%$
 everywhere. Second, running the same probe on the earliest layers gives a clean
-gradient: $58.6\%$ balanced accuracy at L0 --- the raw embedding, before any
-contextual processing --- rising to $65.1\%$ at L1, $66.5\%$ at L2 and $69.8\%$
-at L5. A base-rate artifact would be flat across layers; this climbs as
-computation accumulates. We note nonetheless that $58.6\%$ at L0 is above
-chance, which suggests some of the signal is carried by lexical identity of the
-cut token rather than by contextual processing.
+gradient (Figure~\ref{fig:early}): $58.6\%$ balanced accuracy at L0 --- the raw
+embedding, before any contextual processing --- rising to $65.1\%$ at L1,
+$66.5\%$ at L2 and $69.8\%$ at L5. A base-rate artifact would be flat across
+layers; this climbs as computation accumulates. We note nonetheless that
+$58.6\%$ at L0 is above chance, which suggests some of the signal is carried by
+the lexical identity of the cut token rather than by contextual processing.
+
+\paragraph{The probe tracks which phrase it is looking at.}
+Balanced accuracy pools over instances and so cannot distinguish a probe that
+has learned a general notion of difficulty from one that has learned
+phrase identity. As a direct check, for each held-out phrase we compare the
+probe's mean predicted probability across that phrase's contexts with the
+phrase's true success rate. The correlation peaks in the middle of the network
+at $r=0.62$ (L10), with $0.60$ at L15 and $0.58$ at L13, and falls away at both
+ends, to $0.41$ at L5 and $0.48$ at L30 (Figure~\ref{fig:corr}). Phrase identity
+is therefore most decodable in the middle layers --- after tokens have been
+assembled into a phrase-level representation, but before the late layers begin
+reshaping the state toward the next token. This peak sits several layers earlier
+than the one that maximises the probe's balanced accuracy, another instance of
+different measurements naming different ``best'' layers.
 
 \paragraph{The label changes where the ``best'' layer is.}
 Training the identical architecture on the Patchscopes label instead produces a
@@ -240,15 +276,29 @@ layer being probed, but the divergence is itself the point.
 \subsection{Most apparent errors are valid alternates}
 \label{sec:falsepos}
 
+\input{tables/falsepos_examples}
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=\textwidth]{figures/confidence_and_falsepos}
+\caption{\textbf{Left:} the model's own mean confidence in the tokens it
+generated, split by the four probe outcomes at L25. Confidence follows the true
+outcome, not the probe's guess --- both real-success groups sit far above both
+real-failure groups, including where the probe was wrong. \textbf{Right:} an LLM
+judge's adjudication of all $412$ probe false positives.}
+\label{fig:conf}
+\end{figure*}
+
 The probe's precision is bounded by the scoring criterion, not only by the
 model. We adjudicated all $412$ false positives of the generation-label probe at
 L25 --- cases where the probe predicted completion and exact-match scoring
 recorded a failure --- using an LLM judge asked whether the generated text means
-the same as the target. It labelled $62.9\%$ valid alternates,
-$17.5\%$ partially correct and $19.7\%$ unrelated. Typical valid alternates are
-\textit{laughs best} for \textit{laughs loudest}, \textit{plowshares} for
-\textit{ploughshares}, and \textit{beat around the bush} for \textit{beat about
-the bush}: the more common form of the expression, scored as a failure.
+the same as the target. It labelled $62.9\%$ valid alternates, $17.5\%$
+partially correct and $19.7\%$ unrelated (Figure~\ref{fig:conf}, right).
+Table~\ref{tab:falsepos} gives examples: \textit{laughs best} for
+\textit{laughs loudest}, \textit{plowshares} for \textit{ploughshares},
+\textit{beat around the bush} for \textit{beat about the bush} --- in each case
+the more common form of the expression, scored as a failure.
 
 Read cautiously --- this is a single unvalidated judge, and we report it as
 indicative rather than as a corrected accuracy --- it suggests that roughly four
@@ -258,8 +308,11 @@ consistent across our analyses: our reported rates are conservative.
 
 \paragraph{The model's own confidence tracks the real outcome.}
 Averaging the probability the model assigns to each token it generates, mean
-confidence is $0.878$ on successful completions and $0.447$ on failures. Split
-by probe outcome at L25, confidence follows the true label rather than the
+confidence is $0.878$ on successful completions and $0.447$ on failures --- a
+usable signal in its own right. Split by probe outcome at L25
+(Figure~\ref{fig:conf}, left), confidence follows the true label rather than the
 probe's guess: true positives average $0.904$ and false negatives $0.791$, while
-false positives average $0.599$ and true negatives $0.414$. Where the probe is
-wrong, the model was not.
+false positives average $0.599$ and true negatives $0.414$. The ordering is by
+what the model actually did, not by what the probe predicted. Where the probe is
+wrong, the model was not, which suggests the two signals are partly complementary
+and that combining them is worth trying.
