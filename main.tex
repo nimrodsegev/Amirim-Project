@@ -1,7 +1,13 @@
 \documentclass[11pt]{article}
 
-% Change review to final for the camera-ready version.
-\usepackage[review]{acl}
+% acl.sty modes:
+%   preprint - author names shown, page numbers, no line numbers  (current)
+%   review   - ANONYMISED ("Anonymous ACL submission"), line numbers, page
+%              numbers. Use this only when submitting somewhere double-blind.
+%              Line numbers make it much easier to give feedback by reference,
+%              so switch to it for a commenting round if that helps.
+%   final    - author names shown, no line numbers, no page numbers. Camera-ready.
+\usepackage[preprint]{acl}
 \usepackage{times}
 \usepackage{latexsym}
 \usepackage[T1]{fontenc}
@@ -16,9 +22,14 @@
 \input{editing_macros}
 
 \title{Do Language Models Recognize a Phrase Before Reading It?}
-\author{Nimrod Segev \and
-  Yuval Reif \and
-  Roy Schwartz}
+% One centred block: robust, and right for co-authors at a single institution.
+% If this ever becomes a multi-institution paper, split into columns with \And.
+\author{
+  Nimrod Segev \quad Yuval Reif \quad Roy Schwartz \\
+  School of Computer Science and Engineering \\
+  The Hebrew University of Jerusalem \\
+  \texttt{nimrod.segev@mail.huji.ac.il}
+}
 
 \begin{document}
 \maketitle
