@@ -54,13 +54,22 @@ agreement table.
   through ChatGPT (most likely GPT-5.6; not logged). The prompt is in Appendix
   A.8 of the paper. The judge-free split by model confidence, reported
   alongside it, is reproducible and points the same way.
-- **One deck figure is deliberately absent.** The slide-14 chart (L25
-  per-phrase prediction bins, `i=3` only, four probe variants) cannot be
-  regenerated: `probe_bins_and_seeds.py` computed the per-phrase
-  `(avg_pred, actual_rate)` points in memory and saved only the correlations.
-  It is reproducible by dumping those rows and rerunning against
-  `probing_features.npz`. Note before doing so: the deck's bin counts sum to
-  194 phrases, while `probing_bins_seeds.json` records 180 for `i=3_only` at
-  L25 and 203 for `all_i` — so the chart and the saved correlation come from
-  runs with different phrase counts. Resolve that before putting the figure in
+- **One deck figure is absent, and the discrepancy behind it is resolved.** The
+  slide-14 chart (L25 per-phrase prediction bins, `i=3` only) covers 194
+  phrases, while every saved file records 180. Resolved by rerunning
+  `probe_bins_and_seeds.py` on the cluster against the current
+  `probing_features.npz`: sweeping the minimum-observations-per-phrase filter
+  gives 180 (filter = 3, the current setting), 190 (2) or 196 (1) — **194 is
+  not reachable**. The chart was therefore built from an earlier snapshot of
+  the extracted features that no longer exists. **Use 180.** The correlation
+  the paper cites for L25 at `i=3` (0.517) was confirmed by direct rerun to
+  four decimal places, so it belongs to the 180-phrase set.
+- **One recorded correlation did not reproduce.** The same rerun returned 0.499
+  for the natural-training MLP at L25, against the 0.531 in
+  `probing_bins_seeds.json`. Most likely package-version drift. Both values are
+  recorded in `bin_chart_provenance` in `processed/paper_numbers.json` and the
+  paper footnotes the discrepancy. The balanced-MLP value, which is the one the
+  figure uses, reproduced exactly.
+- **A third variant exists, do not confuse it.** `sanity_check_probe_l25.py`
+  trains on `i=3` data only and gives 178 phrases at r=0.614. It is not used in
   the paper.

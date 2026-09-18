@@ -93,10 +93,15 @@ When a language model is partway through a familiar multi-word expression, does 
 
 - **The editorial center is confirmed as the dual claim**, with phenomenon and instrument sharing billing roughly 45/55: *the hidden state mid-phrase carries a usable, phrase-stable signal about what is coming, and how much of it you measure depends on the readout.* The author chose this over two alternatives — leading with the phenomenon and demoting the readout comparison to a methods caveat, or leading with instrument-dependence and treating phrase anticipation as the testbed. No restructuring needed; the draft already reflects this. Contribution 3 stays a claim rather than a caveat.
 
+### Settled (2026-09-19, by cluster rerun)
+
+- **The slide-14 bin-count discrepancy is resolved.** The deck's chart covers 194 phrases; no script or saved file produces that number. Sweeping the minimum-observations filter gives 180 / 190 / 196, so 194 is unreachable and the chart came from an earlier feature snapshot that no longer exists. **180 is correct.** The correlation the paper cites (0.517) was confirmed by direct rerun to four decimal places and belongs to the 180-phrase set — so no number in the paper was affected.
+- **One recorded value did not reproduce**: the natural-training MLP at L25 reran as 0.499 against 0.531 recorded. Footnoted in the appendix rather than silently corrected, since the recorded value is what the original analysis produced and the paragraph's claim (the ordering across variants) is unaffected either way.
+
 ### Still open for the authors
 
 - Whether to spend cluster time closing the two reproducibility gaps above (word-aligned targets; archived probe features) before submission.
-- The slide-14 bin-count discrepancy: the deck's chart covers 194 phrases while every saved file records 180 (`i=3_only`) or 203 (`all_i`). Sent to the project assistant to resolve. Until it is, the correlation we cite for L25 at `i=3` (0.517) cannot be matched to a phrase set with certainty, and the bin chart stays out of the paper.
+- Whether to regenerate the slide-14 bin chart at n=180 and add it to §5.5. Optional — Figure 7 already carries the same argument on exactly-reproducible data.
 
 ## Interview status
 

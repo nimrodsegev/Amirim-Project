@@ -131,7 +131,12 @@ combinations of classifier (logistic, MLP) and training regime (natural,
 class-balanced), at L13 the correlation ranges from $0.444$ to $0.584$ on $i=3$
 and $0.432$ to $0.564$ pooled, with the MLP consistently ahead of logistic
 regression and balanced training consistently ahead of natural. At L25 the same
-ordering holds at lower values ($0.381$ to $0.531$). Across five random
+ordering holds at lower values, $0.381$ to $0.531$.\footnote{Re-running this
+sweep reproduced the balanced MLP value at L25 to four decimal places
+($0.5173$), but returned $0.499$ for the natural-training MLP against the
+$0.531$ recorded at the time, most likely package-version drift. We report the
+recorded values and flag the one that did not reproduce; the ordering across
+variants, which is what the paragraph claims, is unaffected.} Across five random
 phrase-level splits the L13 balanced logistic probe gives AUC-ROC between
 $0.806$ and $0.828$, so the split contributes little of the variation.
 

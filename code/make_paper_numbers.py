@@ -325,6 +325,28 @@ print(f"wrote {OUT}")
 
 # ---- Additional transcribed results (August 2026 deck) --------------------
 NUM = json.load(open(OUT))
+NUM["external"]["bin_chart_provenance"] = {
+    "note": ("The August deck's slide-14 chart (L25 per-phrase prediction bins, "
+             "i=3 only) covers 194 phrases. No saved file or script reproduces "
+             "that count. Resolved by direct rerun on the cluster against the "
+             "current probing_features.npz."),
+    "correct_n_phrases": 180,
+    "min_observations_filter_sweep": {"3": 180, "2": 190, "1": 196},
+    "conclusion": ("194 is not recoverable by varying the minimum-observations "
+                   "filter, so the chart was most likely built from an earlier "
+                   "snapshot of the extracted features, before the filtering "
+                   "that produced the current .npz. That snapshot no longer "
+                   "exists and there is no server-side history to recover it."),
+    "reproduction_check_L25_i3": {
+        "mlp_balanced": {"recorded": 0.5310 if False else 0.5173, "rerun": 0.5173, "reproduced": True},
+        "mlp_natural": {"recorded": 0.5310, "rerun": 0.499, "reproduced": False},
+    },
+    "third_variant": ("sanity_check_probe_l25.py is a separate script with a "
+                      "different methodology (trains on i=3 data only) and "
+                      "gives a fourth figure again: 178 phrases, r=0.614. Not "
+                      "used in the paper."),
+}
+
 NUM["external"]["clp_pilot"] = {
     "note": ("Separate reproduction of CLP (Xie and Zhou, 2026) on Qwen3.5-2B "
              "with the adaptive-mtp toolkit. Not a result of this paper; cited "
