@@ -89,10 +89,14 @@ When a language model is partway through a familiar multi-word expression, does 
 - **The CLP reproduction** is mentioned in the Conclusion: ~1.34x throughput, not beating a fixed-draft baseline, n=10 so it settles nothing. Framed as bounding the prize rather than as a result of this paper. Summary PDF in `sources/notes/`. CLP itself (Xie & Zhou, arXiv:2606.10935) is now cited, and also appears in Related Work as the closest existing use of the object our probe suggests — a cheap linear read of the hidden state that sets draft length per step.
 - **The judge was most likely GPT-5.6**, per the authors, but it was not logged and they are not certain. Stated with that hedge in both Appendix A.8 and Limitations. Still worth rerunning against a recorded model.
 
+### Settled (2026-09-19, by the author)
+
+- **The editorial center is confirmed as the dual claim**, with phenomenon and instrument sharing billing roughly 45/55: *the hidden state mid-phrase carries a usable, phrase-stable signal about what is coming, and how much of it you measure depends on the readout.* The author chose this over two alternatives — leading with the phenomenon and demoting the readout comparison to a methods caveat, or leading with instrument-dependence and treating phrase anticipation as the testbed. No restructuring needed; the draft already reflects this. Contribution 3 stays a claim rather than a caveat.
+
 ### Still open for the authors
 
-- Whether the editorial center is right. The brief was reconstructed from the deck, the July reports and the raw files, not from a live author interview — its read on what the paper is *for* is the agent's inference.
 - Whether to spend cluster time closing the two reproducibility gaps above (word-aligned targets; archived probe features) before submission.
+- The slide-14 bin-count discrepancy: the deck's chart covers 194 phrases while every saved file records 180 (`i=3_only`) or 203 (`all_i`). Sent to the project assistant to resolve. Until it is, the correlation we cite for L25 at `i=3` (0.517) cannot be matched to a phrase set with certainty, and the bin chart stays out of the paper.
 
 ## Interview status
 
