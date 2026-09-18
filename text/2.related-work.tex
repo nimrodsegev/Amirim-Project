@@ -80,7 +80,16 @@ multi-token prediction heads \citep{gloeckle-etal-2024-better} train the model
 to emit several tokens at once; and LayerSkip
 \citep{elhoushi-etal-2024-layerskip} exits early and self-speculates.
 \citet{aynetdinov-akbik-2025-babies} study when such lookahead ability emerges
-during training. These methods assume that useful anticipation exists; our
+during training.
+
+Closest to the use our probe suggests is
+CLP \citep{xie-zhou-2026-clp}, which trains a single small linear layer on the
+hidden state to predict how many drafted tokens can safely be accepted at each
+step, rather than always drafting a fixed number, and reports $1.14\times$ to
+$1.29\times$ speed-ups on Qwen2.5 without measurable quality loss. That is the
+same object as our probe --- a cheap read of the hidden state, used to decide
+how far ahead to commit --- pointed at a decoding decision rather than at an
+analysis question. These methods assume that useful anticipation exists; our
 contribution is to measure it directly, for one well-defined class of
 continuations, and to characterise when it is reliable. We do not implement a
-decoding method here, and we report no speed-ups.
+decoding method here, and we report no speed-ups of our own.

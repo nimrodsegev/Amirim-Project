@@ -45,7 +45,22 @@ agreement table.
   30) wherever hidden states had to be stored. The choice moves the reported
   patchscopes rate by 6–8 points; always state which was used.
 - **Not everything is reproducible here.** The probing experiments need
-  per-trial hidden states (`*_probing_features.npz`, tens of GB), which stay on
-  the compute cluster. Table 4 and the false-positive adjudication are
-  transcribed from the July 2026 run logs into the `external` block of
-  `processed/paper_numbers.json`, which names their source.
+  per-trial hidden states — `probing_features.npz` (1.28 GB) and
+  `generation_probing_features.npz` (3.02 GB) — which are intact on the compute
+  cluster but too large to distribute. Table 4 and the false-positive
+  adjudication are transcribed from the July 2026 run logs into the `external`
+  block of `processed/paper_numbers.json`, which names their source.
+- **The false-positive adjudication is not exactly reproducible.** It was run
+  through ChatGPT (most likely GPT-5.6; not logged). The prompt is in Appendix
+  A.8 of the paper. The judge-free split by model confidence, reported
+  alongside it, is reproducible and points the same way.
+- **One deck figure is deliberately absent.** The slide-14 chart (L25
+  per-phrase prediction bins, `i=3` only, four probe variants) cannot be
+  regenerated: `probe_bins_and_seeds.py` computed the per-phrase
+  `(avg_pred, actual_rate)` points in memory and saved only the correlations.
+  It is reproducible by dumping those rows and rerunning against
+  `probing_features.npz`. Note before doing so: the deck's bin counts sum to
+  194 phrases, while `probing_bins_seeds.json` records 180 for `i=3_only` at
+  L25 and 203 for `all_i` — so the chart and the saved correlation come from
+  runs with different phrase counts. Resolve that before putting the figure in
+  the paper.

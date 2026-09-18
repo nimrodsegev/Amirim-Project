@@ -86,7 +86,8 @@ When a language model is partway through a familiar multi-word expression, does 
 - **A judge-free replication of the false-positive result** was available and is now included: 40.0% of the 412 cases had the model itself confident (>0.7), 10.4% unsure (<0.3). This is the more reproducible of the two analyses and agrees with the adjudication.
 - **The L2 dip** under the patchscopes label is now reported in Appendix A.6 as an unresolved artifact (tiny positive class, no multi-seed check run), alongside the L1 surprise (76.6% balanced accuracy after one block).
 - **Feature files are intact on the cluster** (1.28 GB and 3.02 GB), so the probe results are reproducible there. Limitations updated to say so rather than implying they are lost.
-- **The CLP reproduction** is mentioned in one sentence in the Conclusion: ~1.34x throughput, not beating a fixed-draft baseline. Deliberately framed as bounding the prize rather than as a result of this paper. Summary PDF in `sources/notes/`. The CLP source paper is not cited because it was not identified.
+- **The CLP reproduction** is mentioned in the Conclusion: ~1.34x throughput, not beating a fixed-draft baseline, n=10 so it settles nothing. Framed as bounding the prize rather than as a result of this paper. Summary PDF in `sources/notes/`. CLP itself (Xie & Zhou, arXiv:2606.10935) is now cited, and also appears in Related Work as the closest existing use of the object our probe suggests — a cheap linear read of the hidden state that sets draft length per step.
+- **The judge was most likely GPT-5.6**, per the authors, but it was not logged and they are not certain. Stated with that hedge in both Appendix A.8 and Limitations. Still worth rerunning against a recorded model.
 
 ### Still open for the authors
 
