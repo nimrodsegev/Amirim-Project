@@ -1,0 +1,28 @@
+\begin{table}[t]
+\centering\small
+\begin{tabular}{rrrrrr}
+\toprule
+& \multicolumn{3}{c}{\textbf{Patchscopes label}} & \multicolumn{2}{c}{\textbf{Generation label}} \\
+\cmidrule(lr){2-4}\cmidrule(lr){5-6}
+\textbf{Layer} & pos.\ (\%) & bal.\ acc. & prec. & bal.\ acc. & prec. \\
+\midrule
+5 & 6.6 & 76.0 & 33.9 & 69.8 & 83.3 \\
+7 & 14.7 & 70.2 & 42.8 & 71.0 & 84.2 \\
+10 & 18.8 & 76.5 & 52.3 & 72.0 & 84.9 \\
+13 & 16.9 & 74.8 & 45.8 & 73.6 & 85.6 \\
+15 & 18.5 & 76.3 & 51.1 & 74.2 & 86.1 \\
+20 & 36.8 & 70.4 & 62.4 & 73.6 & 85.8 \\
+25 & 47.7 & 68.1 & 67.2 & 74.6 & 86.2 \\
+30 & 40.2 & 66.4 & 59.7 & 76.8 & 87.6 \\
+\bottomrule
+\end{tabular}
+\caption{Probes trained on the hidden state at the cut position to predict each
+readout's outcome, pooled over $i=2\ldots5$, split by phrase (80/20), training
+set class-balanced by downsampling, evaluated on the natural test distribution.
+The generation label has a fixed positive rate of 69.1\% at every
+layer; the patchscopes label does not, which is why its raw accuracy is not
+comparable across layers. Balanced accuracy for the patchscopes label peaks in
+the middle of the model, whereas for the generation label it rises
+monotonically with depth.}
+\label{tab:probes}
+\end{table}

@@ -1,0 +1,4 @@
+interface:
+  display_name: "NLP Paper Writing"
+  short_description: "Draft and revise NLP/LLM papers with evidence-aware workflows"
+  default_prompt: "Help me draft or revise this NLP/LLM paper using the repository brief, sources, and editing conventions."

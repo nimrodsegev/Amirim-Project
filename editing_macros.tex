@@ -1,0 +1,38 @@
+% Visible collaboration macros. Keep this file in review builds.
+\usepackage{xcolor}
+\usepackage[normalem]{ulem}
+
+\newcommand{\draftcomment}[3]{{\textcolor{#3}{[\textsc{#1}: #2]}}}
+\newcommand{\resolved}[1]{}
+\newcommand{\opennote}[1]{\draftcomment{open}{#1}{teal}}
+\newcommand{\placeholder}[1]{{\textcolor{red}{\textbf{[#1]}}}}
+
+% Nimrod Segev
+\newcommand{\nimrod}[1]{\draftcomment{nimrod}{#1}{blue}}
+\newcommand{\nimroda}[1]{\textcolor{blue}{[#1]}}
+\newcommand{\nimrods}[1]{\nimrod{\sout{#1}}}
+\newcommand{\nimrodr}[2]{\nimrods{#1}\nimroda{#2}}
+
+% Yuval Reif
+\newcommand{\yuval}[1]{\draftcomment{yuval}{#1}{violet}}
+\newcommand{\yuvala}[1]{\textcolor{violet}{[#1]}}
+\newcommand{\yuvals}[1]{\yuval{\sout{#1}}}
+\newcommand{\yuvalr}[2]{\yuvals{#1}\yuvala{#2}}
+
+% Roy Schwartz
+\newcommand{\roy}[1]{\draftcomment{roy}{#1}{teal}}
+\newcommand{\roya}[1]{\textcolor{teal}{[#1]}}
+\newcommand{\roys}[1]{\roy{\sout{#1}}}
+\newcommand{\royr}[2]{\roys{#1}\roya{#2}}
+
+% Agent-proposed changes remain visible until an author accepts them.
+\newcommand{\unapprovedcomment}[1]{\draftcomment{agent}{#1}{orange}}
+\newcommand{\ma}[1]{\textcolor{orange}{[#1]}}
+\newcommand{\ms}[1]{\unapprovedcomment{\sout{#1}}}
+\newcommand{\mr}[2]{\ms{#1}\ma{#2}}
+
+% For a clean local reading copy, uncomment only these display overrides.
+% Do not commit a submission build with unresolved edits or comments.
+% \renewcommand{\draftcomment}[3]{}
+% \renewcommand{\ma}[1]{#1}
+% \renewcommand{\ms}[1]{}

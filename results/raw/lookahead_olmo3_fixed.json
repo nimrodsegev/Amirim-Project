@@ -1,0 +1,133 @@
+{
+  "overall": {
+    "1": {
+      "tested": 1112,
+      "success": 792,
+      "early": 399,
+      "middle": 262,
+      "late": 131
+    },
+    "2": {
+      "tested": 1112,
+      "success": 449,
+      "early": 218,
+      "middle": 125,
+      "late": 106
+    },
+    "3": {
+      "tested": 1037,
+      "success": 208,
+      "early": 113,
+      "middle": 58,
+      "late": 37
+    },
+    "4": {
+      "tested": 669,
+      "success": 79,
+      "early": 41,
+      "middle": 21,
+      "late": 17
+    },
+    "5": {
+      "tested": 363,
+      "success": 36,
+      "early": 16,
+      "middle": 10,
+      "late": 10
+    },
+    "6": {
+      "tested": 185,
+      "success": 11,
+      "early": 5,
+      "middle": 6,
+      "late": 0
+    },
+    "7": {
+      "tested": 100,
+      "success": 7,
+      "early": 5,
+      "middle": 2,
+      "late": 0
+    },
+    "8": {
+      "tested": 51,
+      "success": 0,
+      "early": 0,
+      "middle": 0,
+      "late": 0
+    },
+    "9": {
+      "tested": 26,
+      "success": 5,
+      "early": 2,
+      "middle": 3,
+      "late": 0
+    },
+    "10": {
+      "tested": 15,
+      "success": 1,
+      "early": 1,
+      "middle": 0,
+      "late": 0
+    },
+    "11": {
+      "tested": 11,
+      "success": 1,
+      "early": 0,
+      "middle": 1,
+      "late": 0
+    },
+    "12": {
+      "tested": 5,
+      "success": 1,
+      "early": 1,
+      "middle": 0,
+      "late": 0
+    },
+    "13": {
+      "tested": 4,
+      "success": 0,
+      "early": 0,
+      "middle": 0,
+      "late": 0
+    },
+    "14": {
+      "tested": 4,
+      "success": 1,
+      "early": 1,
+      "middle": 0,
+      "late": 0
+    },
+    "15": {
+      "tested": 3,
+      "success": 0,
+      "early": 0,
+      "middle": 0,
+      "late": 0
+    },
+    "16": {
+      "tested": 3,
+      "success": 0,
+      "early": 0,
+      "middle": 0,
+      "late": 0
+    },
+    "17": {
+      "tested": 3,
+      "success": 0,
+      "early": 0,
+      "middle": 0,
+      "late": 0
+    },
+    "18": {
+      "tested": 2,
+      "success": 0,
+      "early": 0,
+      "middle": 0,
+      "late": 0
+    }
+  },
+  "model": "allenai/Olmo-3-1025-7B",
+  "buffer": 3,
+  "has_bos": false
+}

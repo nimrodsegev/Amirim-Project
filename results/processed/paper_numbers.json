@@ -1,0 +1,1251 @@
+{
+  "dataset": {
+    "phrases_total": 1164,
+    "phrases_by_category_source": {
+      "building": 127,
+      "idiom": 852,
+      "movie": 185
+    },
+    "context_instances": 9955,
+    "phrases_with_at_least_one_context": 1096,
+    "phrases_with_10_contexts": 925,
+    "context_instances_by_category": {
+      "building": 1217,
+      "idiom": 7230,
+      "movie": 1508
+    },
+    "phrases_with_context_by_category": {
+      "building": 125,
+      "idiom": 802,
+      "movie": 169
+    }
+  },
+  "isolated": {
+    "patchscopes_olmo2_32L": {
+      "1": [
+        1014,
+        1164,
+        87.1
+      ],
+      "2": [
+        643,
+        1112,
+        57.8
+      ],
+      "3": [
+        320,
+        1037,
+        30.9
+      ],
+      "4": [
+        130,
+        669,
+        19.4
+      ],
+      "5": [
+        60,
+        363,
+        16.5
+      ],
+      "6": [
+        20,
+        185,
+        10.8
+      ],
+      "7": [
+        10,
+        100,
+        10.0
+      ],
+      "8": [
+        4,
+        51,
+        7.8
+      ],
+      "9": [
+        4,
+        26,
+        15.4
+      ],
+      "10": [
+        3,
+        15,
+        20.0
+      ],
+      "11": [
+        0,
+        11,
+        0.0
+      ],
+      "12": [
+        1,
+        5,
+        20.0
+      ],
+      "13": [
+        0,
+        4,
+        0.0
+      ],
+      "14": [
+        1,
+        4,
+        25.0
+      ],
+      "15": [
+        0,
+        3,
+        0.0
+      ],
+      "16": [
+        0,
+        3,
+        0.0
+      ],
+      "17": [
+        0,
+        3,
+        0.0
+      ],
+      "18": [
+        0,
+        2,
+        0.0
+      ]
+    },
+    "patchscopes_olmo2_32L_5slot_prompt": {
+      "1": [
+        1022,
+        1164,
+        87.8
+      ],
+      "2": [
+        631,
+        1112,
+        56.7
+      ],
+      "3": [
+        284,
+        1037,
+        27.4
+      ],
+      "4": [
+        106,
+        669,
+        15.8
+      ],
+      "5": [
+        45,
+        363,
+        12.4
+      ],
+      "6": [
+        12,
+        185,
+        6.5
+      ],
+      "7": [
+        6,
+        100,
+        6.0
+      ],
+      "8": [
+        4,
+        51,
+        7.8
+      ],
+      "9": [
+        3,
+        26,
+        11.5
+      ],
+      "10": [
+        3,
+        15,
+        20.0
+      ],
+      "11": [
+        1,
+        11,
+        9.1
+      ],
+      "12": [
+        1,
+        5,
+        20.0
+      ],
+      "13": [
+        0,
+        4,
+        0.0
+      ],
+      "14": [
+        1,
+        4,
+        25.0
+      ],
+      "15": [
+        0,
+        3,
+        0.0
+      ],
+      "16": [
+        0,
+        3,
+        0.0
+      ],
+      "17": [
+        0,
+        3,
+        0.0
+      ],
+      "18": [
+        0,
+        2,
+        0.0
+      ]
+    },
+    "patchscopes_olmo3_32L": {
+      "1": [
+        792,
+        1112,
+        71.2
+      ],
+      "2": [
+        449,
+        1112,
+        40.4
+      ],
+      "3": [
+        208,
+        1037,
+        20.1
+      ],
+      "4": [
+        79,
+        669,
+        11.8
+      ],
+      "5": [
+        36,
+        363,
+        9.9
+      ],
+      "6": [
+        11,
+        185,
+        5.9
+      ],
+      "7": [
+        7,
+        100,
+        7.0
+      ],
+      "8": [
+        0,
+        51,
+        0.0
+      ],
+      "9": [
+        5,
+        26,
+        19.2
+      ],
+      "10": [
+        1,
+        15,
+        6.7
+      ],
+      "11": [
+        1,
+        11,
+        9.1
+      ],
+      "12": [
+        1,
+        5,
+        20.0
+      ],
+      "13": [
+        0,
+        4,
+        0.0
+      ],
+      "14": [
+        1,
+        4,
+        25.0
+      ],
+      "15": [
+        0,
+        3,
+        0.0
+      ],
+      "16": [
+        0,
+        3,
+        0.0
+      ],
+      "17": [
+        0,
+        3,
+        0.0
+      ],
+      "18": [
+        0,
+        2,
+        0.0
+      ]
+    },
+    "generation_olmo2": {
+      "1": [
+        954,
+        1112,
+        85.8
+      ],
+      "2": [
+        658,
+        1112,
+        59.2
+      ],
+      "3": [
+        324,
+        1037,
+        31.2
+      ],
+      "4": [
+        138,
+        669,
+        20.6
+      ],
+      "5": [
+        64,
+        363,
+        17.6
+      ],
+      "6": [
+        29,
+        185,
+        15.7
+      ],
+      "7": [
+        15,
+        100,
+        15.0
+      ],
+      "8": [
+        8,
+        51,
+        15.7
+      ],
+      "9": [
+        5,
+        26,
+        19.2
+      ],
+      "10": [
+        2,
+        15,
+        13.3
+      ],
+      "11": [
+        1,
+        11,
+        9.1
+      ],
+      "12": [
+        1,
+        5,
+        20.0
+      ],
+      "13": [
+        1,
+        4,
+        25.0
+      ],
+      "14": [
+        1,
+        4,
+        25.0
+      ],
+      "15": [
+        1,
+        3,
+        33.3
+      ],
+      "16": [
+        1,
+        3,
+        33.3
+      ],
+      "17": [
+        0,
+        3,
+        0.0
+      ],
+      "18": [
+        0,
+        2,
+        0.0
+      ]
+    }
+  },
+  "in_context": {
+    "patchscopes_olmo2_32L": {
+      "1": [
+        8856,
+        9148,
+        96.8
+      ],
+      "2": [
+        7278,
+        9148,
+        79.6
+      ],
+      "3": [
+        5464,
+        8529,
+        64.1
+      ],
+      "4": [
+        2413,
+        4677,
+        51.6
+      ],
+      "5": [
+        1108,
+        2386,
+        46.4
+      ],
+      "6": [
+        445,
+        1123,
+        39.6
+      ],
+      "7": [
+        178,
+        530,
+        33.6
+      ],
+      "8": [
+        83,
+        312,
+        26.6
+      ],
+      "9": [
+        70,
+        150,
+        46.7
+      ],
+      "10": [
+        64,
+        96,
+        66.7
+      ],
+      "11": [
+        26,
+        46,
+        56.5
+      ],
+      "12": [
+        15,
+        21,
+        71.4
+      ],
+      "13": [
+        11,
+        20,
+        55.0
+      ],
+      "14": [
+        4,
+        20,
+        20.0
+      ],
+      "15": [
+        0,
+        10,
+        0.0
+      ],
+      "16": [
+        0,
+        10,
+        0.0
+      ],
+      "17": [
+        0,
+        10,
+        0.0
+      ],
+      "18": [
+        0,
+        10,
+        0.0
+      ]
+    },
+    "patchscopes_olmo3_32L": {
+      "1": [
+        8789,
+        9148,
+        96.1
+      ],
+      "2": [
+        6530,
+        9148,
+        71.4
+      ],
+      "3": [
+        4506,
+        8529,
+        52.8
+      ],
+      "4": [
+        1821,
+        4677,
+        38.9
+      ],
+      "5": [
+        786,
+        2386,
+        32.9
+      ],
+      "6": [
+        342,
+        1123,
+        30.5
+      ],
+      "7": [
+        140,
+        530,
+        26.4
+      ],
+      "8": [
+        44,
+        312,
+        14.1
+      ],
+      "9": [
+        59,
+        150,
+        39.3
+      ],
+      "10": [
+        49,
+        96,
+        51.0
+      ],
+      "11": [
+        12,
+        46,
+        26.1
+      ],
+      "12": [
+        11,
+        21,
+        52.4
+      ],
+      "13": [
+        6,
+        20,
+        30.0
+      ],
+      "14": [
+        8,
+        20,
+        40.0
+      ],
+      "15": [
+        0,
+        10,
+        0.0
+      ],
+      "16": [
+        0,
+        10,
+        0.0
+      ],
+      "17": [
+        10,
+        10,
+        100.0
+      ],
+      "18": [
+        10,
+        10,
+        100.0
+      ]
+    },
+    "generation_olmo2": {
+      "1": [
+        8713,
+        9148,
+        95.2
+      ],
+      "2": [
+        7680,
+        9148,
+        84.0
+      ],
+      "3": [
+        5530,
+        8529,
+        64.8
+      ],
+      "4": [
+        2600,
+        4677,
+        55.6
+      ],
+      "5": [
+        1280,
+        2386,
+        53.6
+      ],
+      "6": [
+        549,
+        1123,
+        48.9
+      ],
+      "7": [
+        240,
+        530,
+        45.3
+      ],
+      "8": [
+        130,
+        312,
+        41.7
+      ],
+      "9": [
+        84,
+        150,
+        56.0
+      ],
+      "10": [
+        49,
+        96,
+        51.0
+      ],
+      "11": [
+        29,
+        46,
+        63.0
+      ],
+      "12": [
+        18,
+        21,
+        85.7
+      ],
+      "13": [
+        10,
+        20,
+        50.0
+      ],
+      "14": [
+        4,
+        20,
+        20.0
+      ],
+      "15": [
+        4,
+        10,
+        40.0
+      ],
+      "16": [
+        4,
+        10,
+        40.0
+      ],
+      "17": [
+        4,
+        10,
+        40.0
+      ],
+      "18": [
+        4,
+        10,
+        40.0
+      ]
+    }
+  },
+  "agreement_32L": {
+    "2": {
+      "n": 9148,
+      "both": 6757,
+      "patchscopes_only": 521,
+      "generation_only": 923,
+      "neither": 947,
+      "agreement_pct": 84.2
+    },
+    "1": {
+      "n": 9148,
+      "both": 8584,
+      "patchscopes_only": 272,
+      "generation_only": 129,
+      "neither": 163,
+      "agreement_pct": 95.6
+    },
+    "3": {
+      "n": 8529,
+      "both": 4681,
+      "patchscopes_only": 783,
+      "generation_only": 849,
+      "neither": 2216,
+      "agreement_pct": 80.9
+    },
+    "4": {
+      "n": 4677,
+      "both": 1968,
+      "patchscopes_only": 445,
+      "generation_only": 632,
+      "neither": 1632,
+      "agreement_pct": 77.0
+    },
+    "5": {
+      "n": 2386,
+      "both": 933,
+      "patchscopes_only": 175,
+      "generation_only": 347,
+      "neither": 931,
+      "agreement_pct": 78.1
+    },
+    "6": {
+      "n": 1123,
+      "both": 351,
+      "patchscopes_only": 94,
+      "generation_only": 198,
+      "neither": 480,
+      "agreement_pct": 74.0
+    },
+    "7": {
+      "n": 530,
+      "both": 125,
+      "patchscopes_only": 53,
+      "generation_only": 115,
+      "neither": 237,
+      "agreement_pct": 68.3
+    },
+    "8": {
+      "n": 312,
+      "both": 63,
+      "patchscopes_only": 20,
+      "generation_only": 67,
+      "neither": 162,
+      "agreement_pct": 72.1
+    },
+    "9": {
+      "n": 150,
+      "both": 55,
+      "patchscopes_only": 15,
+      "generation_only": 29,
+      "neither": 51,
+      "agreement_pct": 70.7
+    },
+    "10": {
+      "n": 96,
+      "both": 41,
+      "patchscopes_only": 23,
+      "generation_only": 8,
+      "neither": 24,
+      "agreement_pct": 67.7
+    },
+    "11": {
+      "n": 46,
+      "both": 21,
+      "patchscopes_only": 5,
+      "generation_only": 8,
+      "neither": 12,
+      "agreement_pct": 71.7
+    },
+    "14": {
+      "n": 20,
+      "both": 2,
+      "patchscopes_only": 2,
+      "generation_only": 2,
+      "neither": 14,
+      "agreement_pct": 80.0
+    },
+    "13": {
+      "n": 20,
+      "both": 4,
+      "patchscopes_only": 7,
+      "generation_only": 6,
+      "neither": 3,
+      "agreement_pct": 35.0
+    },
+    "12": {
+      "n": 21,
+      "both": 12,
+      "patchscopes_only": 3,
+      "generation_only": 6,
+      "neither": 0,
+      "agreement_pct": 57.1
+    },
+    "16": {
+      "n": 10,
+      "both": 0,
+      "patchscopes_only": 0,
+      "generation_only": 4,
+      "neither": 6,
+      "agreement_pct": 60.0
+    },
+    "15": {
+      "n": 10,
+      "both": 0,
+      "patchscopes_only": 0,
+      "generation_only": 4,
+      "neither": 6,
+      "agreement_pct": 60.0
+    },
+    "17": {
+      "n": 10,
+      "both": 0,
+      "patchscopes_only": 0,
+      "generation_only": 4,
+      "neither": 6,
+      "agreement_pct": 60.0
+    },
+    "18": {
+      "n": 10,
+      "both": 0,
+      "patchscopes_only": 0,
+      "generation_only": 4,
+      "neither": 6,
+      "agreement_pct": 60.0
+    }
+  },
+  "agreement_32L_pooled_i2_5": {
+    "n": 24740,
+    "both": 14339,
+    "patchscopes_only": 1924,
+    "generation_only": 2751,
+    "neither": 5726,
+    "agreement_pct": 81.1,
+    "patchscopes_pct": 65.7,
+    "generation_pct": 69.1
+  },
+  "context_duplication": {
+    "instances": 9955,
+    "unique_phrase_context_pairs": 5498,
+    "duplicate_instances": 4457,
+    "duplicate_pct": 44.8,
+    "phrases_with_duplicates": 1025,
+    "unique_context_count_hist_for_10_slot_phrases": {
+      "2": 1,
+      "3": 1,
+      "4": 21,
+      "5": 734,
+      "6": 60,
+      "7": 45,
+      "8": 38,
+      "9": 13,
+      "10": 12
+    },
+    "note": "The context collector resumed from an earlier five-context run and re-added the same contexts instead of topping up with new ones, so most phrases hold five distinct contexts recorded twice. Aggregate instance rates are essentially unchanged (see per_phrase_consistency_i3), but the effective sample size is about half the instance count, and any per-phrase count over raw instances is quantised to even values."
+  },
+  "per_phrase_consistency_i3": {
+    "patchscopes_32L": {
+      "phrases_tested": 951,
+      "distinct_instances": 4651,
+      "instance_rate_distinct_pct": 63.2,
+      "phrases_with_at_least_5_distinct_contexts": 803,
+      "pooled_rate": 0.637,
+      "observed_pct": {
+        "at_least_90": 37.4,
+        "at_most_20": 22.5,
+        "between_40_and_60": 20.0
+      },
+      "binomial_null_pct": {
+        "at_least_90": 9.5,
+        "at_most_20": 5.4,
+        "between_40_and_60": 49.5
+      },
+      "per_phrase_rate_histogram_deciles": {
+        "3": 13,
+        "9": 300,
+        "0": 104,
+        "8": 128,
+        "4": 71,
+        "6": 90,
+        "2": 65,
+        "1": 16,
+        "7": 6,
+        "5": 10
+      }
+    },
+    "generation": {
+      "phrases_tested": 951,
+      "distinct_instances": 4651,
+      "instance_rate_distinct_pct": 64.5,
+      "phrases_with_at_least_5_distinct_contexts": 803,
+      "pooled_rate": 0.645,
+      "observed_pct": {
+        "at_least_90": 31.5,
+        "at_most_20": 18.3,
+        "between_40_and_60": 27.3
+      },
+      "binomial_null_pct": {
+        "at_least_90": 10.1,
+        "at_most_20": 5.0,
+        "between_40_and_60": 48.5
+      },
+      "per_phrase_rate_histogram_deciles": {
+        "8": 137,
+        "6": 133,
+        "9": 253,
+        "4": 86,
+        "0": 62,
+        "2": 81,
+        "7": 13,
+        "5": 15,
+        "1": 12,
+        "3": 11
+      }
+    }
+  },
+  "category_pooled_i2_5": {
+    "patchscopes_32L": {
+      "building": {
+        "n": 1409,
+        "success_pct": 56.8
+      },
+      "idiom": {
+        "n": 20371,
+        "success_pct": 65.9
+      },
+      "movie": {
+        "n": 2960,
+        "success_pct": 68.6
+      }
+    },
+    "generation": {
+      "building": {
+        "n": 1409,
+        "success_pct": 75.3
+      },
+      "idiom": {
+        "n": 20371,
+        "success_pct": 66.4
+      },
+      "movie": {
+        "n": 2960,
+        "success_pct": 84.5
+      }
+    }
+  },
+  "first_successful_layer": {
+    "n_successes": 26015,
+    "median": 16,
+    "pct_at_or_before_L10": 41.9,
+    "histogram": {
+      "1": 613,
+      "2": 505,
+      "3": 904,
+      "4": 902,
+      "5": 1742,
+      "6": 1627,
+      "7": 1770,
+      "8": 1111,
+      "9": 1052,
+      "10": 672,
+      "11": 291,
+      "12": 280,
+      "13": 185,
+      "14": 183,
+      "15": 321,
+      "16": 861,
+      "17": 1068,
+      "18": 2172,
+      "19": 1078,
+      "20": 1325,
+      "21": 1683,
+      "22": 1275,
+      "23": 1094,
+      "24": 730,
+      "25": 612,
+      "26": 455,
+      "27": 371,
+      "28": 300,
+      "29": 250,
+      "30": 245,
+      "31": 189,
+      "32": 149
+    }
+  },
+  "probe_phrase_correlation": {
+    "source": "results/raw/correlation_per_i.json (balanced MLP, patchscopes label)",
+    "by_layer_i3": {
+      "5": 0.413,
+      "7": 0.551,
+      "10": 0.621,
+      "13": 0.584,
+      "15": 0.603,
+      "20": 0.556,
+      "25": 0.517,
+      "30": 0.48
+    },
+    "n_phrases_i3": 180
+  },
+  "external": {
+    "note": "Probe metrics require data/{generation_,}probing_features.npz (hidden states, produced on the cluster and not stored in this repo). Values below are transcribed from the July 2026 analysis reports and the August 2026 summary deck.",
+    "layers_probed": [
+      5,
+      7,
+      10,
+      13,
+      15,
+      20,
+      25,
+      30
+    ],
+    "patchscopes_label_probe": {
+      "pos_rate_pct": {
+        "5": 6.6,
+        "7": 14.7,
+        "10": 18.8,
+        "13": 16.9,
+        "15": 18.5,
+        "20": 36.8,
+        "25": 47.7,
+        "30": 40.2
+      },
+      "accuracy_pct": {
+        "5": 89.6,
+        "7": 82.7,
+        "10": 82.3,
+        "13": 81.1,
+        "15": 82.0,
+        "20": 72.4,
+        "25": 68.2,
+        "30": 67.6
+      },
+      "majority_baseline_pct": {
+        "5": 93.4,
+        "7": 85.3,
+        "10": 81.2,
+        "13": 83.1,
+        "15": 81.5,
+        "20": 63.2,
+        "25": 52.3,
+        "30": 59.8
+      },
+      "balanced_accuracy_pct": {
+        "5": 76.0,
+        "7": 70.2,
+        "10": 76.5,
+        "13": 74.8,
+        "15": 76.3,
+        "20": 70.4,
+        "25": 68.1,
+        "30": 66.4
+      },
+      "precision_pct": {
+        "5": 33.9,
+        "7": 42.8,
+        "10": 52.3,
+        "13": 45.8,
+        "15": 51.1,
+        "20": 62.4,
+        "25": 67.2,
+        "30": 59.7
+      },
+      "auc_roc": {
+        "5": 0.89,
+        "7": 0.82,
+        "10": 0.85,
+        "13": 0.85,
+        "15": 0.87,
+        "20": 0.78,
+        "25": 0.74,
+        "30": 0.74
+      }
+    },
+    "generation_label_probe": {
+      "pos_rate_pct": 69.1,
+      "accuracy_pct": {
+        "5": 70.4,
+        "7": 71.5,
+        "10": 72.4,
+        "13": 74.3,
+        "15": 74.8,
+        "20": 74.0,
+        "25": 75.3,
+        "30": 77.5
+      },
+      "balanced_accuracy_pct": {
+        "5": 69.8,
+        "7": 71.0,
+        "10": 72.0,
+        "13": 73.6,
+        "15": 74.2,
+        "20": 73.6,
+        "25": 74.6,
+        "30": 76.8
+      },
+      "precision_pct": {
+        "5": 83.3,
+        "7": 84.2,
+        "10": 84.9,
+        "13": 85.6,
+        "15": 86.1,
+        "20": 85.8,
+        "25": 86.2,
+        "30": 87.6
+      },
+      "auc_roc": {
+        "5": 0.76,
+        "7": 0.78,
+        "10": 0.8,
+        "13": 0.81,
+        "15": 0.81,
+        "20": 0.8,
+        "25": 0.81,
+        "30": 0.83
+      },
+      "early_layers_balanced_accuracy_pct": {
+        "0": 58.6,
+        "1": 65.1,
+        "2": 66.5,
+        "5": 69.8
+      },
+      "early_layers_precision_pct": {
+        "0": 75.4,
+        "1": 80.6,
+        "2": 80.9,
+        "5": 83.3
+      },
+      "held_out_category_balanced_accuracy_pct": {
+        "none": {
+          "13": 73.6,
+          "25": 74.6,
+          "30": 76.8
+        },
+        "building": {
+          "13": 69.1,
+          "25": 62.6,
+          "30": 63.4
+        },
+        "idiom": {
+          "13": 68.7,
+          "25": 68.9,
+          "30": 72.3
+        },
+        "movie": {
+          "13": 72.4,
+          "25": 72.7,
+          "30": 73.5
+        }
+      }
+    },
+    "patchscopes_per_layer_success_pct": {
+      "2": {
+        "5": 14.9,
+        "7": 24.5,
+        "10": 29.8,
+        "13": 27.1,
+        "15": 28.5,
+        "20": 51.0,
+        "25": 62.2,
+        "30": 59.2
+      },
+      "3": {
+        "5": 7.7,
+        "7": 14.3,
+        "10": 18.3,
+        "13": 16.9,
+        "15": 18.6,
+        "20": 38.2,
+        "25": 48.1,
+        "30": 39.1
+      },
+      "4": {
+        "5": 4.3,
+        "7": 9.2,
+        "10": 12.0,
+        "13": 10.7,
+        "15": 12.8,
+        "20": 25.0,
+        "25": 34.7,
+        "30": 25.7
+      },
+      "5": {
+        "5": 2.3,
+        "7": 5.5,
+        "10": 9.4,
+        "13": 8.8,
+        "15": 9.1,
+        "20": 21.8,
+        "25": 29.4,
+        "30": 20.8
+      },
+      "L0_L1_L2_pooled_i2_5": {
+        "0": 0.7,
+        "1": 0.8,
+        "2": 1.6,
+        "any_of_3": 1.9
+      }
+    },
+    "patchscopes_8L_union_in_context_pct": {
+      "2": 73.2,
+      "3": 57.5,
+      "4": 43.9,
+      "5": 38.7
+    },
+    "agreement_8L_pooled_i2_5": {
+      "agreement_pct": 78.7,
+      "generation_only_pct": 15.7,
+      "patchscopes_only_pct": 5.6,
+      "n": 24740
+    },
+    "generation_confidence": {
+      "mean_when_success": 0.878,
+      "mean_when_failure": 0.447,
+      "by_probe_outcome_L25": {
+        "true_positive": {
+          "n": 2491,
+          "mean": 0.904,
+          "median": 0.95
+        },
+        "false_negative": {
+          "n": 864,
+          "mean": 0.791,
+          "median": 0.824
+        },
+        "false_positive": {
+          "n": 412,
+          "mean": 0.599,
+          "median": 0.636
+        },
+        "true_negative": {
+          "n": 1091,
+          "mean": 0.414,
+          "median": 0.394
+        }
+      }
+    },
+    "false_positive_llm_judgement": {
+      "n": 412,
+      "valid_alternate_pct": 62.9,
+      "partially_right_pct": 17.5,
+      "unrelated_pct": 19.7
+    },
+    "qwen25_14b_generation_pct": {
+      "isolated": {
+        "1": 82.1,
+        "2": 54.3,
+        "3": 28.4,
+        "4": 18.8,
+        "5": 17.4,
+        "6": 11.8,
+        "7": 13.9,
+        "8": 15.4
+      },
+      "in_context": {
+        "2": 84.8,
+        "3": 66.2,
+        "4": 57.4,
+        "5": 54.7
+      }
+    }
+  }
+}

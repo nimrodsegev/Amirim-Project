@@ -1,0 +1,74 @@
+\section{Experimental Setup}
+\label{sec:setup}
+
+\input{tables/dataset}
+
+\subsection{Phrases}
+
+We assemble $1{,}164$ fixed multi-word expressions of three kinds
+(Table~\ref{tab:dataset}). \textbf{Idioms} ($852$) come from
+MAGPIE \citep{haagsma-etal-2020-magpie} and
+LIdioms \citep{moussallem-etal-2018-lidioms} together with two smaller
+lists distributed with the same release.\footnote{\nimrod{The release also
+labels $81$ items \texttt{EPIC} and $95$ across two \texttt{ep\_*} splits; we
+should identify and cite their source before submission.}} \textbf{Landmarks}
+($127$) are drawn from a curated list of well-known buildings and sites, and
+\textbf{film titles} ($185$) are the multi-word entries of the IMDb Top 250.
+
+The three kinds are chosen to vary the reason a continuation is predictable.
+An idiom is fixed by convention, a landmark name by reference, and a film title
+by citation --- but all three should be frequent in pretraining text, which is
+what makes them a favourable test case. Phrases too short to admit a lookahead
+position of at least $2$ are excluded.
+
+\subsection{Natural contexts}
+
+Fixed expressions in isolation are an artificial stimulus: the model sees a
+bare phrase with no indication that a phrase is what it is looking at. We
+therefore also collect natural occurrences. Streaming
+FineWeb-Edu \citep{penedo-etal-2024-fineweb}, we search for surface occurrences
+of each phrase and keep up to ten per phrase, each with up to $150$ tokens of
+preceding text. For phrases that are predominantly capitalised --- most
+landmarks and titles --- we require the occurrence to preserve at least $70\%$
+of the original capitalisation, which prevents a sentence about sunrise from
+being collected as an instance of the film \textit{Before Sunrise}.
+
+This yields $9{,}955$ (phrase, context) instances covering $1{,}096$ of the
+$1{,}164$ phrases, of which $925$ reach the full ten slots. Because the
+collector resumed from an earlier five-context run and re-added the contexts it
+already held rather than topping up with new ones, $44.8\%$ of these instances
+are repeats: $734$ of the $925$ ten-slot phrases hold five distinct contexts
+recorded twice, and there are $5{,}498$ distinct (phrase, context) pairs in
+total. Decoding is greedy, so a repeat reproduces its original outcome exactly.
+Aggregate rates over instances are therefore essentially unchanged --- $64.8\%$
+versus $64.5\%$ at $i=3$ for the generation readout --- but the effective sample
+size is roughly half the instance count, and any analysis that counts successes
+\emph{per phrase} must deduplicate first. We report instance-level rates over
+the full set for comparability with the per-layer and probing analyses, which
+were run on it, and compute all per-phrase statistics (\S\ref{sec:stability})
+over distinct contexts only. Each instance
+contributes one trial per admissible lookahead distance, for a total of $27{,}098$
+trials, $24{,}740$ of them at $i \in \{2,3,4,5\}$. Instance counts fall with $i$
+because longer lookaheads require longer phrases: $9{,}148$ trials at $i=2$,
+$8{,}529$ at $i=3$, $4{,}677$ at $i=4$ and $2{,}386$ at $i=5$.
+
+Because idioms dominate the phrase set and tend to appear often in web text,
+they also dominate the instance set ($20{,}371$ of $24{,}740$ pooled trials).
+Aggregate rates over instances are therefore close to idiom rates, and we report
+per-category results separately in \S\ref{sec:disagreement}.
+
+\subsection{Models}
+
+Our main model is OLMo-2-7B \citep{olmo-2025-olmo2} in \texttt{bfloat16}, a
+$32$-layer decoder-only model chosen because its training data is public, which
+makes the assumption that these phrases were seen in pretraining checkable in
+principle. We replicate the central measurements on OLMo-3-7B and, for the
+generation readout, on Qwen2.5-14B \citep{qwen-2024-qwen25}
+(Appendix~\ref{app:details}).
+
+For the Patchscopes readout we sweep all $32$ layers where the analysis permits
+it. The probing experiments (\S\ref{sec:probe}) require storing hidden states
+for every trial, so they use a fixed subset of eight layers
+$\{5, 7, 10, 13, 15, 20, 25, 30\}$. \S\ref{sec:disagreement} shows that this
+difference is not cosmetic, and we are explicit throughout about which layer set
+a given number reflects.

@@ -1,14 +1,58 @@
-\documentclass{article}
-\usepackage{graphicx} % Required for inserting images
+\documentclass[11pt]{article}
 
-\title{Amirim-Project}
-\author{nimrod.segev }
-\date{September 2026}
+% Change review to final for the camera-ready version.
+\usepackage[review]{acl}
+\usepackage{times}
+\usepackage{latexsym}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{microtype}
+\usepackage{inconsolata}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{makecell}
+\usepackage{enumitem}
+\input{editing_macros}
+
+\title{Do Language Models Recognize a Phrase Before Reading It?}
+\author{Nimrod Segev \and
+  Yuval Reif \and
+  Roy Schwartz}
 
 \begin{document}
-
 \maketitle
+\begin{abstract}
+Language models emit one token per forward pass, yet some continuations are
+effectively fixed several tokens in advance. We ask whether a model's hidden
+state, partway through a familiar multi-word expression, already encodes the
+rest of it. Interrupting OLMo-2-7B at a controlled \emph{lookahead distance} $i$
+across $1{,}164$ idioms, landmark names and film titles, in isolation and in
+$9{,}955$ naturally occurring contexts, we find that it does: the model produces
+the final three tokens of a phrase in $64.8\%$ of in-context instances and the
+final five in $53.6\%$, against $31.2\%$ and $17.6\%$ for the same phrases
+presented alone. The ability is a stable property of the phrase rather than of
+the occasion --- across a phrase's natural contexts, success is far more
+bimodal than independent per-context variation would produce --- and it is
+legible from the representation itself:
+a small probe on a single hidden state predicts real completion at $76.8\%$
+balanced accuracy and $87.6\%$ precision. We also compare two ways of reading
+these states. Run on identical instances, Patchscopes and ordinary generation
+agree on only $81.1\%$ of them, disagree in both directions, rank the phrase
+categories differently, and, used as probe labels, locate the relevant
+information in different parts of the network. Phrase-level anticipation is
+real, stable and decodable; how much of it one measures depends on the
+instrument.
+\end{abstract}
 
-\section{Introduction}
+\input{text/1.introduction}
+\input{text/2.related-work}
+\input{text/3.method}
+\input{text/4.experimental-setup}
+\input{text/5.results}
+\input{text/998.limitations}
+\input{text/999.conclusion}
 
+\bibliography{anthology-1,anthology-2,custom}
+
+\input{text/999.appendix}
 \end{document}

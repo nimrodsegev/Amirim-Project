@@ -1,0 +1,67 @@
+\section{Measuring Phrase Anticipation}
+\label{sec:method}
+
+\subsection{Lookahead distance}
+
+Let a phrase tokenize as $t_1 \ldots t_n$. We interrupt the model at position
+$p$ and define the \emph{lookahead distance} $i = n - p$ as the number of phrase
+tokens that remain unread. The target is the decoded string of those $i$ tokens.
+A single phrase therefore yields several trials, one per position, and $i$ is
+the difficulty axis throughout: larger $i$ means the model must account for more
+unseen material.
+
+Every phrase is processed with its full left context --- a BOS token, then,
+where applicable, the natural text preceding the phrase --- so the state at
+position $p$ is the state the model would really have at that point. We test
+$i \geq 2$ in the main experiments. The case $i=1$ reduces to ordinary
+next-token prediction and is reported only for reference.
+
+\subsection{Two readouts}
+\label{sec:readouts}
+
+We ask whether the remaining tokens are recoverable from the model at position
+$p$ in two ways. Both take the same input and differ only in what is done with
+it.
+
+\paragraph{Patchscopes readout.}
+Following \citet{ghandeharioun-etal-2024-patchscopes}, we take the hidden state
+$h^{\ell}_p$ at layer $\ell$ and position $p$, and substitute it for the token
+embedding of \texttt{X} in the prompt \texttt{"Repeat this: X"}. We then decode
+greedily for $i+3$ tokens. The readout succeeds at layer $\ell$ if the target
+string occurs in the output, case-insensitively. Unless stated otherwise we
+report the union over layers: the readout succeeds if \emph{any} probed layer
+succeeds. This is a deliberately generous criterion, and \S\ref{sec:disagreement}
+shows that how many layers enter the union materially changes the result.
+
+\paragraph{Generation readout.}
+We take the same prefix --- context plus the first $p$ phrase tokens --- and let
+the model generate greedily for $i+3$ tokens, with no intervention of any kind.
+The readout succeeds under the same string-containment criterion.
+
+The two readouts answer different questions. The Patchscopes readout asks what a
+single vector, removed from its context, can be made to express. The generation
+readout asks what the model, with all of its machinery and its real context,
+actually produces. Neither is ground truth for the other. We treat them as two
+instruments and, in \S\ref{sec:disagreement}, measure how far they agree.
+
+\subsection{Success criterion}
+\label{sec:criterion}
+
+A trial succeeds if the target string appears as a case-insensitive substring of
+the generated continuation. The budget of $i+3$ tokens allows the model to
+overshoot slightly --- a trailing clause after the phrase does not cost it the
+trial --- while remaining tight enough that a success reflects the phrase
+rather than a long ramble that happens to contain it.\footnote{An earlier
+version of this work used a fixed five-token budget, which mechanically forced
+zero successes at $i \geq 6$. The reported $i \geq 6$ rates here are the
+corrected ones.}
+
+The criterion is lenient in one direction and strict in the other, and both
+matter for interpreting the numbers. It is lenient because it accepts any
+output containing the target, without requiring that the model have produced the
+phrase for the right reason. It is strict because it requires the exact wording:
+\textit{he who laughs last laughs \underline{best}} is scored as a failure
+against the target \textit{laughs loudest}, although it is the more common form
+of the idiom. \S\ref{sec:falsepos} quantifies how often this strictness
+misclassifies a correct completion, and Appendix~\ref{app:details} lists further
+artifacts of scoring at the token level.

@@ -1,0 +1,76 @@
+\section*{Limitations}
+\label{sec:limitations}
+
+\paragraph{Scoring is at the token level, not the word level.}
+The target is the decoded string of the final $i$ tokens, which for some phrases
+begins mid-word: at $i=2$ in \textit{Sistine Chapel} the target is
+\textit{istine Chapel}, and in \textit{Pulp Fiction} it is \textit{ulp Fiction}.
+The criterion is applied identically to both readouts, so comparisons between
+them are unaffected, but absolute rates for phrases with unusual tokenization
+are not directly interpretable as ``the model produced the phrase''. Rerunning
+with word-aligned cut points would make the absolute numbers cleaner.
+
+\paragraph{Exact matching both over- and under-counts.}
+Substring containment credits any output that includes the target, without
+requiring that the model produced it for the right reason, and penalises
+accepted variants of the same expression (\S\ref{sec:falsepos}). The
+adjudication in \S\ref{sec:falsepos} suggests the net bias is conservative, but
+it rests on a single LLM judge with no human validation and no inter-annotator
+agreement, and should not be treated as a measured correction.
+
+\paragraph{One model family carries most of the weight.}
+All layer-level and probing results are from OLMo-2-7B. We replicate the
+lookahead curves on OLMo-3-7B and the generation readout on Qwen2.5-14B
+(Appendix~\ref{app:details}), and the qualitative pattern holds, but we have not
+established that the layer localisation or the probe's profile transfers. The
+Qwen2.5-14B result is worth flagging in its own right: at roughly twice the
+parameters it does not clearly outperform OLMo-2-7B on this task, which suggests
+that phrase anticipation is not simply a function of general model capability.
+
+\paragraph{Contexts are duplicated in the collected set.}
+Of the $9{,}955$ (phrase, context) instances, $44.8\%$ are repeats of a context
+already present for the same phrase, an artifact of how the collection was
+resumed (\S\ref{sec:setup}). Aggregate rates barely move under deduplication and
+per-phrase analyses are computed over distinct contexts only, but the effective
+sample size behind every instance-level number is closer to $5{,}498$ than to
+$9{,}955$. Any confidence interval computed from the instance count would be too
+narrow, which is one reason we report no significance tests. The per-layer and
+probing analyses were run over the duplicated set and were not recomputed.
+
+\paragraph{The phrase set is narrow and English-only.}
+We deliberately chose frequent, fixed English expressions as a favourable case.
+Nothing here speaks to compositional continuations, to rarer expressions, or to
+other languages, and the three categories are unbalanced: idioms are $82\%$ of
+pooled instances, so aggregate rates are close to idiom rates.
+
+\paragraph{Layer budgets differ between analyses.}
+The Patchscopes union is over $32$ layers where the analysis permits it and over
+eight where hidden states had to be stored. \S\ref{sec:disagreement} shows this
+choice changes the apparent gap between readouts by several points. We report
+the budget with every number, but the eight-layer results are not directly
+comparable to the $32$-layer ones.
+
+\paragraph{Probe results are not reproducible from the released artifacts.}
+The probing experiments require per-trial hidden states, which are too large to
+distribute and remain on the compute cluster. The probe numbers in
+Table~\ref{tab:probes} are therefore reported from the run logs rather than
+recomputed from this repository's results files, unlike every other number in
+the paper.
+
+\paragraph{No efficiency claim is tested.}
+The motivation in \S\ref{sec:intro} is that anticipation could be exploited to
+skip computation, and the probe's precision is high enough to make that worth
+investigating. We did not implement any such decoding scheme and report no
+latency or throughput measurement. Whether a probe of this kind is cheap enough
+to pay for itself is an open question.
+
+\section*{Ethics Statement}
+
+This work analyses publicly available language models on publicly available
+text. The phrase sets are drawn from published idiom corpora and public lists of
+landmarks and film titles; the contexts are sampled from FineWeb-Edu, a filtered
+web corpus whose documents we did not inspect individually and which may contain
+the biases of web text. We do not release any model, and the analysis does not
+involve human subjects or personal data. The efficiency direction this work
+motivates, if pursued, would reduce inference cost; we make no claim to have
+demonstrated that reduction here.

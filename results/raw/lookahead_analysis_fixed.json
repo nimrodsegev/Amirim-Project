@@ -1,0 +1,412 @@
+{
+  "per_dataset": {
+    "Famous Buildings": {
+      "1": {
+        "tested": 127,
+        "success": 84,
+        "early": 59,
+        "middle": 17,
+        "late": 8
+      },
+      "2": {
+        "tested": 97,
+        "success": 35,
+        "early": 20,
+        "middle": 6,
+        "late": 9
+      },
+      "3": {
+        "tested": 64,
+        "success": 13,
+        "early": 9,
+        "middle": 3,
+        "late": 1
+      },
+      "4": {
+        "tested": 27,
+        "success": 2,
+        "early": 1,
+        "middle": 1,
+        "late": 0
+      },
+      "5": {
+        "tested": 7,
+        "success": 1,
+        "early": 0,
+        "middle": 0,
+        "late": 1
+      },
+      "6": {
+        "tested": 3,
+        "success": 0,
+        "early": 0,
+        "middle": 0,
+        "late": 0
+      },
+      "7": {
+        "tested": 1,
+        "success": 0,
+        "early": 0,
+        "middle": 0,
+        "late": 0
+      }
+    },
+    "Idioms": {
+      "1": {
+        "tested": 852,
+        "success": 789,
+        "early": 356,
+        "middle": 275,
+        "late": 158
+      },
+      "2": {
+        "tested": 852,
+        "success": 534,
+        "early": 261,
+        "middle": 150,
+        "late": 123
+      },
+      "3": {
+        "tested": 852,
+        "success": 268,
+        "early": 136,
+        "middle": 88,
+        "late": 44
+      },
+      "4": {
+        "tested": 553,
+        "success": 104,
+        "early": 47,
+        "middle": 37,
+        "late": 20
+      },
+      "5": {
+        "tested": 293,
+        "success": 44,
+        "early": 22,
+        "middle": 15,
+        "late": 7
+      },
+      "6": {
+        "tested": 141,
+        "success": 16,
+        "early": 8,
+        "middle": 4,
+        "late": 4
+      },
+      "7": {
+        "tested": 72,
+        "success": 6,
+        "early": 5,
+        "middle": 1,
+        "late": 0
+      },
+      "8": {
+        "tested": 34,
+        "success": 3,
+        "early": 3,
+        "middle": 0,
+        "late": 0
+      },
+      "9": {
+        "tested": 12,
+        "success": 2,
+        "early": 2,
+        "middle": 0,
+        "late": 0
+      },
+      "10": {
+        "tested": 5,
+        "success": 1,
+        "early": 0,
+        "middle": 1,
+        "late": 0
+      },
+      "11": {
+        "tested": 3,
+        "success": 0,
+        "early": 0,
+        "middle": 0,
+        "late": 0
+      },
+      "12": {
+        "tested": 1,
+        "success": 1,
+        "early": 1,
+        "middle": 0,
+        "late": 0
+      },
+      "13": {
+        "tested": 1,
+        "success": 0,
+        "early": 0,
+        "middle": 0,
+        "late": 0
+      },
+      "14": {
+        "tested": 1,
+        "success": 0,
+        "early": 0,
+        "middle": 0,
+        "late": 0
+      }
+    },
+    "IMDB Movies": {
+      "1": {
+        "tested": 185,
+        "success": 141,
+        "early": 82,
+        "middle": 29,
+        "late": 30
+      },
+      "2": {
+        "tested": 163,
+        "success": 74,
+        "early": 47,
+        "middle": 10,
+        "late": 17
+      },
+      "3": {
+        "tested": 121,
+        "success": 39,
+        "early": 22,
+        "middle": 10,
+        "late": 7
+      },
+      "4": {
+        "tested": 89,
+        "success": 24,
+        "early": 13,
+        "middle": 6,
+        "late": 5
+      },
+      "5": {
+        "tested": 63,
+        "success": 15,
+        "early": 6,
+        "middle": 4,
+        "late": 5
+      },
+      "6": {
+        "tested": 41,
+        "success": 4,
+        "early": 3,
+        "middle": 0,
+        "late": 1
+      },
+      "7": {
+        "tested": 27,
+        "success": 4,
+        "early": 3,
+        "middle": 1,
+        "late": 0
+      },
+      "8": {
+        "tested": 17,
+        "success": 1,
+        "early": 0,
+        "middle": 1,
+        "late": 0
+      },
+      "9": {
+        "tested": 14,
+        "success": 2,
+        "early": 1,
+        "middle": 1,
+        "late": 0
+      },
+      "10": {
+        "tested": 10,
+        "success": 2,
+        "early": 1,
+        "middle": 1,
+        "late": 0
+      },
+      "11": {
+        "tested": 8,
+        "success": 0,
+        "early": 0,
+        "middle": 0,
+        "late": 0
+      },
+      "12": {
+        "tested": 4,
+        "success": 0,
+        "early": 0,
+        "middle": 0,
+        "late": 0
+      },
+      "13": {
+        "tested": 3,
+        "success": 0,
+        "early": 0,
+        "middle": 0,
+        "late": 0
+      },
+      "14": {
+        "tested": 3,
+        "success": 1,
+        "early": 0,
+        "middle": 1,
+        "late": 0
+      },
+      "15": {
+        "tested": 3,
+        "success": 0,
+        "early": 0,
+        "middle": 0,
+        "late": 0
+      },
+      "16": {
+        "tested": 3,
+        "success": 0,
+        "early": 0,
+        "middle": 0,
+        "late": 0
+      },
+      "17": {
+        "tested": 3,
+        "success": 0,
+        "early": 0,
+        "middle": 0,
+        "late": 0
+      },
+      "18": {
+        "tested": 2,
+        "success": 0,
+        "early": 0,
+        "middle": 0,
+        "late": 0
+      }
+    }
+  },
+  "overall": {
+    "1": {
+      "tested": 1164,
+      "success": 1014,
+      "early": 497,
+      "middle": 321,
+      "late": 196
+    },
+    "2": {
+      "tested": 1112,
+      "success": 643,
+      "early": 328,
+      "middle": 166,
+      "late": 149
+    },
+    "3": {
+      "tested": 1037,
+      "success": 320,
+      "early": 167,
+      "middle": 101,
+      "late": 52
+    },
+    "4": {
+      "tested": 669,
+      "success": 130,
+      "early": 61,
+      "middle": 44,
+      "late": 25
+    },
+    "5": {
+      "tested": 363,
+      "success": 60,
+      "early": 28,
+      "middle": 19,
+      "late": 13
+    },
+    "6": {
+      "tested": 185,
+      "success": 20,
+      "early": 11,
+      "middle": 4,
+      "late": 5
+    },
+    "7": {
+      "tested": 100,
+      "success": 10,
+      "early": 8,
+      "middle": 2,
+      "late": 0
+    },
+    "8": {
+      "tested": 51,
+      "success": 4,
+      "early": 3,
+      "middle": 1,
+      "late": 0
+    },
+    "9": {
+      "tested": 26,
+      "success": 4,
+      "early": 3,
+      "middle": 1,
+      "late": 0
+    },
+    "10": {
+      "tested": 15,
+      "success": 3,
+      "early": 1,
+      "middle": 2,
+      "late": 0
+    },
+    "11": {
+      "tested": 11,
+      "success": 0,
+      "early": 0,
+      "middle": 0,
+      "late": 0
+    },
+    "12": {
+      "tested": 5,
+      "success": 1,
+      "early": 1,
+      "middle": 0,
+      "late": 0
+    },
+    "13": {
+      "tested": 4,
+      "success": 0,
+      "early": 0,
+      "middle": 0,
+      "late": 0
+    },
+    "14": {
+      "tested": 4,
+      "success": 1,
+      "early": 0,
+      "middle": 1,
+      "late": 0
+    },
+    "15": {
+      "tested": 3,
+      "success": 0,
+      "early": 0,
+      "middle": 0,
+      "late": 0
+    },
+    "16": {
+      "tested": 3,
+      "success": 0,
+      "early": 0,
+      "middle": 0,
+      "late": 0
+    },
+    "17": {
+      "tested": 3,
+      "success": 0,
+      "early": 0,
+      "middle": 0,
+      "late": 0
+    },
+    "18": {
+      "tested": 2,
+      "success": 0,
+      "early": 0,
+      "middle": 0,
+      "late": 0
+    }
+  },
+  "buffer": 3
+}

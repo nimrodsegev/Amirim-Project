@@ -1,0 +1,21 @@
+\begin{table}[t]
+\centering\small
+\begin{tabular}{rrrrrrr}
+\toprule
+$i$ & $n$ & both & \makecell{ps.\\only} & \makecell{gen.\\only} & neither & \makecell{agree\\(\%)} \\
+\midrule
+2 & 9,148 & 6,757 & 521 & 923 & 947 & 84.2 \\
+3 & 8,529 & 4,681 & 783 & 849 & 2,216 & 80.9 \\
+4 & 4,677 & 1,968 & 445 & 632 & 1,632 & 77.0 \\
+5 & 2,386 & 933 & 175 & 347 & 931 & 78.1 \\
+\midrule
+2--5 & 24,740 & 14,339 & 1,924 & 2,751 & 5,726 & 81.1 \\
+\bottomrule
+\end{tabular}
+\caption{Patchscopes (32-layer union) and generation on \emph{identical}
+(phrase, context, $i$) instances. The two readouts disagree on
+18.9\% of instances, and the disagreement runs in both
+directions: 1,924 instances are recovered only by
+patchscopes and 2,751 only by generation.}
+\label{tab:agreement}
+\end{table}

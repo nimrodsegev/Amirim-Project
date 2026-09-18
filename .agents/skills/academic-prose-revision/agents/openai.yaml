@@ -1,0 +1,4 @@
+interface:
+  display_name: "Academic Prose Revision"
+  short_description: "Polish academic prose without flattening the author voice"
+  default_prompt: "Revise this academic prose for concision, coherence, flow, and a natural technical voice while preserving its claims and detail."

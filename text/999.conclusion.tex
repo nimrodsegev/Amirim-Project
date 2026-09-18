@@ -1,0 +1,27 @@
+\section{Conclusion}
+\label{sec:conclusion}
+
+We asked whether a language model's internal state, partway through a familiar
+multi-word expression, already encodes the rest. For fixed expressions in
+natural text the answer is yes, and at a useful range: OLMo-2-7B completes such
+phrases three tokens early in roughly two thirds of instances and five tokens
+early in more than half. The ability is a stable property of the phrase rather
+than of the occasion --- given ten natural contexts, a phrase tends either to
+work in almost all of them or in almost none --- and it is legible from the
+representation itself, well enough that a small probe reading a single hidden
+vector predicts real completion at $87.6\%$ precision.
+
+The second finding is a caution about how the first was obtained. Patchscopes
+and ordinary generation, run on identical instances, agree on only four fifths
+of them and disagree in both directions; they rank the phrase categories
+differently, and probes trained on their labels locate the relevant information
+in different parts of the network. Neither instrument is wrong, but neither is a
+neutral window onto what the model knows. Claims of the form \emph{the model
+already knows $X$} should carry the readout that produced them.
+
+The practical thread we have not pulled is efficiency. A signal that is stable
+per phrase, available from mid-network states, and precise enough to act on is
+the kind of signal a decoding scheme could use to commit several tokens at once
+rather than paying full depth for each. Whether an extractor can be made cheap
+enough to be worth it, and whether the phrases it fires on are frequent enough
+to matter, are questions this work motivates but does not answer.

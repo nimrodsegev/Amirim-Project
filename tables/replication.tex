@@ -1,0 +1,27 @@
+\begin{table}[t]
+\centering\small
+\begin{tabular}{llrrrr}
+\toprule
+& & \multicolumn{4}{c}{$i$} \\
+\cmidrule(lr){3-6}
+\textbf{Model} & \textbf{Readout} & 2 & 3 & 4 & 5 \\
+\midrule
+\multicolumn{6}{l}{\textit{Phrase in isolation}} \\
+OLMo-2-7B & patchscopes & 57.8 & 30.9 & 19.4 & 16.5 \\
+OLMo-3-7B & patchscopes & 40.4 & 20.1 & 11.8 & 9.9 \\
+OLMo-2-7B & generation & 59.2 & 31.2 & 20.6 & 17.6 \\
+Qwen2.5-14B & generation & 54.3 & 28.4 & 18.8 & 17.4 \\
+\midrule
+\multicolumn{6}{l}{\textit{Phrase in natural context}} \\
+OLMo-2-7B & patchscopes & 79.6 & 64.1 & 51.6 & 46.4 \\
+OLMo-3-7B & patchscopes & 71.4 & 52.8 & 38.9 & 32.9 \\
+OLMo-2-7B & generation & 84.0 & 64.8 & 55.6 & 53.6 \\
+Qwen2.5-14B & generation & 84.8 & 66.2 & 57.4 & 54.7 \\
+\bottomrule
+\end{tabular}
+\caption{Recovery rate (\%) across models, on the same phrases, contexts and cut
+points. Patchscopes rows are the union over all 32 layers. Qwen2.5-14B, at
+roughly twice the parameters of OLMo-2-7B, is slightly behind it in isolation
+and slightly ahead of it in context.}
+\label{tab:replication}
+\end{table}

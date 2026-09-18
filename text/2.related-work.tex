@@ -1,0 +1,64 @@
+\section{Related Work}
+\label{sec:related}
+
+\paragraph{Representations of units larger than a token.}
+The closest antecedent to this work is \citet{kaplan-etal-2025-tokens}, who show
+that when a word is split into several subword tokens, early attention
+aggregates the pieces into the final subtoken and feed-forward layers then write
+a whole-word representation into that position. They read these states out with
+Patchscopes and find that the model can regenerate words for which no single
+vocabulary token exists, which they interpret as a latent lexicon broader than
+the tokenizer's vocabulary. Their unit is a word the model has finished reading;
+ours is a phrase it has not. The two questions share a method but not a claim:
+consolidating evidence already received is a weaker property than anticipating
+evidence not yet received. \citet{reif-etal-2026-vocab} build on the same
+representational picture to reshape model vocabularies, and
+\citet{artzy-schwartz-2024-attend} give complementary evidence that attention
+gathers information early and later layers operate on the consolidated state.
+
+\paragraph{Idioms and memorised sequences.}
+\citet{haviv-etal-2023-understanding} study how transformers recall memorised
+idiom completions, locating an early-layer stage that promotes the memorised
+continuation and a later stage that refines it. Their focus is the mechanism of
+recall for a single target token; we measure how far ahead recall extends and
+how it varies across phrases and contexts. Our idiom set is drawn from
+MAGPIE \citep{haagsma-etal-2020-magpie} and
+LIdioms \citep{moussallem-etal-2018-lidioms}.
+
+\paragraph{Reading hidden states.}
+The logit lens \citep{nostalgebraist-2020-logitlens} projects an intermediate
+state through the unembedding to ask what token it would predict.
+Patchscopes \citep{ghandeharioun-etal-2024-patchscopes} generalises this by
+injecting the state into an arbitrary prompt and letting the model verbalise it,
+which removes the constraint that the answer be a single vocabulary item and
+makes multi-token readouts possible. Both are inference-time interventions on a
+representation, and both raise the question of whether what is extracted is what
+the model would otherwise have used. We address that question directly by
+running Patchscopes and ordinary generation on identical inputs
+(\S\ref{sec:disagreement}); to our knowledge this comparison has not been
+reported at scale.
+
+\paragraph{Probing internal states for future correctness.}
+\citet{orgad-etal-2025-llms} show that LLM hidden states encode substantially
+more about the truthfulness of a forthcoming answer than the output
+distribution reveals, that this signal is concentrated in particular tokens, and
+that probes trained on it generalise poorly across datasets. Our probe is the
+same shape of object applied to a different target --- not whether an answer
+will be true, but whether a phrase will be completed --- and we find a
+comparable pattern, including the limited cross-category generalisation reported
+in Appendix~\ref{app:details}. \citet{gekhman-etal-2024-fine} similarly treat a
+model's pre-existing knowledge of an item as a measurable quantity that predicts
+downstream behaviour.
+
+\paragraph{Exploiting anticipation for efficiency.}
+If a model's state already determines several upcoming tokens, that redundancy
+can be spent. Speculative decoding \citep{leviathan-etal-2023-fast} drafts
+several tokens with a cheaper process and verifies them with the target model;
+multi-token prediction heads \citep{gloeckle-etal-2024-better} train the model
+to emit several tokens at once; and LayerSkip
+\citep{elhoushi-etal-2024-layerskip} exits early and self-speculates.
+\citet{aynetdinov-akbik-2025-babies} study when such lookahead ability emerges
+during training. These methods assume that useful anticipation exists; our
+contribution is to measure it directly, for one well-defined class of
+continuations, and to characterise when it is reliable. We do not implement a
+decoding method here, and we report no speed-ups.

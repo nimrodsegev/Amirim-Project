@@ -1,0 +1,132 @@
+{
+  "overall": {
+    "1": {
+      "tested": 1164,
+      "success": 1022,
+      "early": 509,
+      "middle": 347,
+      "late": 166
+    },
+    "2": {
+      "tested": 1112,
+      "success": 631,
+      "early": 317,
+      "middle": 195,
+      "late": 119
+    },
+    "3": {
+      "tested": 1037,
+      "success": 284,
+      "early": 147,
+      "middle": 97,
+      "late": 40
+    },
+    "4": {
+      "tested": 669,
+      "success": 106,
+      "early": 48,
+      "middle": 45,
+      "late": 13
+    },
+    "5": {
+      "tested": 363,
+      "success": 45,
+      "early": 22,
+      "middle": 16,
+      "late": 7
+    },
+    "6": {
+      "tested": 185,
+      "success": 12,
+      "early": 6,
+      "middle": 4,
+      "late": 2
+    },
+    "7": {
+      "tested": 100,
+      "success": 6,
+      "early": 3,
+      "middle": 2,
+      "late": 1
+    },
+    "8": {
+      "tested": 51,
+      "success": 4,
+      "early": 2,
+      "middle": 1,
+      "late": 1
+    },
+    "9": {
+      "tested": 26,
+      "success": 3,
+      "early": 2,
+      "middle": 1,
+      "late": 0
+    },
+    "10": {
+      "tested": 15,
+      "success": 3,
+      "early": 2,
+      "middle": 1,
+      "late": 0
+    },
+    "11": {
+      "tested": 11,
+      "success": 1,
+      "early": 1,
+      "middle": 0,
+      "late": 0
+    },
+    "12": {
+      "tested": 5,
+      "success": 1,
+      "early": 1,
+      "middle": 0,
+      "late": 0
+    },
+    "13": {
+      "tested": 4,
+      "success": 0,
+      "early": 0,
+      "middle": 0,
+      "late": 0
+    },
+    "14": {
+      "tested": 4,
+      "success": 1,
+      "early": 1,
+      "middle": 0,
+      "late": 0
+    },
+    "15": {
+      "tested": 3,
+      "success": 0,
+      "early": 0,
+      "middle": 0,
+      "late": 0
+    },
+    "16": {
+      "tested": 3,
+      "success": 0,
+      "early": 0,
+      "middle": 0,
+      "late": 0
+    },
+    "17": {
+      "tested": 3,
+      "success": 0,
+      "early": 0,
+      "middle": 0,
+      "late": 0
+    },
+    "18": {
+      "tested": 2,
+      "success": 0,
+      "early": 0,
+      "middle": 0,
+      "late": 0
+    }
+  },
+  "prompt": "Repeat this: X X X X X",
+  "buffer": 3
+}

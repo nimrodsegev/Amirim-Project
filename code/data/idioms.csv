@@ -1,0 +1,853 @@
+idiom,id,source,prompt_comp_ind,similarity_ind,frequent_target_ind,hard_to_guess
+for crying out loud,1a817c02cff2bb96da5e,MAGPIE,True,False,True,False
+turn a blind eye,b05e010ca3576fbf6e81,LIdiom,False,False,True,True
+get to grips with,3fc547c5c6ff82414ed4,MAGPIE,True,False,False,False
+grind to a halt,a4a685a759bf64fcfcf8,MAGPIE,False,False,True,True
+let bygones be bygones,ca6709254d9ba146d986,EPIC,False,True,True,False
+every man for himself,27642042881772d30f95,MAGPIE,False,False,False,True
+sign of the times,990ab4d0131058f4f13e,MAGPIE,False,False,True,True
+at the end of the day,0b3366f10125330ca394,MAGPIE,False,False,False,True
+come to terms with,5f2ffb8c0f006f7746eb,MAGPIE,False,False,False,True
+with a view to,09dce6abba8508a64397,MAGPIE,False,False,False,True
+in the long run,5d25e1171453e85f7d96,MAGPIE,False,False,False,True
+keep a low profile,b6be25f2b85dea2d254c,MAGPIE,False,False,True,True
+tell it like it is,4acb44a069ed9bc2a831,MAGPIE,True,False,False,False
+sing the praises of,c45c1d6680632578dbd3,MAGPIE,False,False,False,True
+rub someone up the wrong way,c930865d79b437870993,MAGPIE,True,False,False,False
+in the driving seat,32bfaa1f8fb724d8ae97,MAGPIE,False,False,True,True
+fall by the wayside,0c374594354590de27a0,MAGPIE,False,False,True,True
+to the tune of,4c3dbe176acf00189fb5,MAGPIE,False,False,False,True
+take someone's word for it,0ec7c2c44c99bab42621,MAGPIE,True,False,False,False
+on the spur of the moment,b95de4af1d17bd263f0d,MAGPIE,True,False,True,False
+the grass is always greener,0166aa76890a6ece5fdf,MAGPIE,True,False,True,False
+from rags to riches,6b21b733d7aa4954cac4,MAGPIE,False,False,True,True
+in no uncertain terms,d3052b26b53aaad3c90d,MAGPIE,False,False,True,True
+read between the lines,eb1b300b7c7d58778ca3,MAGPIE,False,False,True,True
+lead someone up the garden path,7bfad6e4117edf01d68c,MAGPIE,False,False,True,True
+for the time being,2a019b7355b41dc9f097,MAGPIE,False,False,False,True
+take a dim view of,b639ad40ce0307a30b08,MAGPIE,False,False,False,True
+all in a day's work,b838ad09763730dc0e6e,MAGPIE,True,False,False,False
+at a snail's pace,52e1ebc80b48320067c2,MAGPIE,True,False,True,False
+go hand in hand,a48a096e34f8774a66dc,MAGPIE,False,True,True,False
+play hard to get,716e8a32a73975adaea6,MAGPIE,False,False,False,True
+grin like a Cheshire cat,2aeb79786a95d20461c7,MAGPIE,True,False,True,False
+at a loose end,b41525a6b7d777f72f2d,MAGPIE,False,False,False,True
+come to think of it,dd84d27597f61440c12d,MAGPIE,True,False,False,False
+to all intents and purposes,6b603ad365892231dff4,MAGPIE,True,False,True,False
+back to square one,c9087fd2f6295eaf7333,LIdiom,True,False,False,False
+kill the goose that lays the golden eggs,0ded6af647f3aa65a14c,MAGPIE,True,False,True,False
+fall on deaf ears,32216885c332f4e447be,MAGPIE,False,False,True,True
+by hook or by crook,62c5541aea4e3084a65f,MAGPIE,False,False,True,True
+go from strength to strength,a36c081069f23384768b,MAGPIE,True,True,True,False
+in this day and age,117f3e4a0ffb00a06afd,MAGPIE,False,False,True,True
+fight tooth and nail,aa6b153e3f11bf8639f5,MAGPIE,True,False,True,False
+wipe the floor with,534162182a90b5af2fde,MAGPIE,False,False,False,True
+come to grips with,54d253d1af128c8cd5fe,MAGPIE,True,False,False,False
+pull out all the stops,7d181d0a7668b58772cd,MAGPIE,False,False,True,True
+keep a lid on,e6ecbf95cd7c909f3113,MAGPIE,False,False,False,True
+few and far between,59ff987cd4430ad78e2f,MAGPIE,False,False,False,True
+great minds think alike,ccc418bda431d1c37951,EPIC,False,False,True,True
+all hell broke loose,2fab6adbd1b70093bca0,MAGPIE,False,False,True,True
+get the better of,987ec9dd838f79f8cfb6,MAGPIE,False,False,False,True
+high as a kite,1bb338cac86341ca6f2c,MAGPIE,False,False,True,True
+make head or tail of,31f8322d4e2a29eeff66,MAGPIE,False,False,False,True
+as luck would have it,ce9bf82a51dd14dbf62c,MAGPIE,False,False,False,True
+err on the side of,4a5ee885048576e59eaf,MAGPIE,False,False,False,True
+your guess is as good as mine,f5a39276811f680fc96e,LIdiom,False,False,False,True
+bring the house down,b3223a3d9c891fcba965,MAGPIE,False,False,False,True
+follow in someone's footsteps,fc3e8d5b117f04b237ec,MAGPIE,False,False,True,True
+set the wheels in motion,fb650756bf91ad70bfc1,MAGPIE,False,False,True,True
+sign on the dotted line,2bd4b2ed267ef8c1ccc1,MAGPIE,True,False,False,False
+pour cold water on,fea9b476fc440987de84,MAGPIE,False,False,False,True
+break the back of,ec9fe9aeaeda04919ef5,MAGPIE,False,False,False,True
+for the hell of it,89bd1bfc8849bb7d84e0,MAGPIE,True,False,False,False
+hold the purse strings,01799e512519c20314aa,MAGPIE,False,False,True,True
+fall between two stools,26b730a9168a5f6c82b6,LIdiom,False,False,True,True
+smoke like a chimney,6c3326f37f4e521ac647,MAGPIE,False,False,True,True
+cuckoo in the nest,4ca351211744d609aed9,MAGPIE,False,False,True,True
+beat swords into ploughshares,cde00cafd988c36b84eb,MAGPIE,False,False,True,True
+add insult to injury,a0d5de17ffc82adc8dd3,LIdiom,False,False,True,True
+as the crow flies,0cc86b16139afdff68b9,MAGPIE,False,False,True,True
+"been there, done that",336098fe3d00927069be,MAGPIE,False,False,False,True
+pay through the nose,fdcf7c5afcfff007eb6e,MAGPIE,False,False,True,True
+the die is cast,f6e66e45b7c47a1c84ec,MAGPIE,False,False,True,True
+from the cradle to the grave,571a3c0ee8a1fdd084f9,MAGPIE,False,False,True,True
+take the bull by the horns,b2ccdd714f4522712be1,MAGPIE,False,False,True,True
+over my dead body,2747f3cfaeab88c67d3b,LIdiom,True,False,True,False
+at the drop of a hat,e80d747c76fd2c8266cf,LIdiom,True,False,True,False
+grin and bear it,9313b923c96159ebf91a,MAGPIE,False,False,False,True
+let your hair down,c5bdd29e54aa4256709a,MAGPIE,False,False,False,True
+put a sock in it,dcacb7b61ea62cca501c,MAGPIE,False,False,False,True
+when push comes to shove,8ebb6f78b7c255eec5ea,MAGPIE,False,False,True,True
+call a spade a spade,fcf5202476e75d39bf58,MAGPIE,False,True,True,False
+easier said than done,30b4d6f0fc8829e4c406,EPIC,False,False,False,True
+stick out like a sore thumb,f6f53ca079d2abda656e,MAGPIE,True,False,True,False
+between the devil and the deep blue sea,d4c0b8dd5f37815ea908,MAGPIE,True,False,True,False
+in one ear and out the other,c04ce7209ab9421794de,MAGPIE,False,False,False,True
+keep your fingers crossed,488979b77550dfe9d919,LIdiom,False,False,True,True
+knock someone's socks off,fcea005ed0f077e0c9c0,MAGPIE,False,False,False,True
+you can't have your cake and eat it,2cee633c10c88125d4bd,MAGPIE,True,False,False,False
+the icing on the cake,572a0442021364e6b0cd,LIdiom,False,False,True,True
+no two ways about it,b3d37448337eff965ae1,MAGPIE,True,False,False,False
+within an ace of,70d50d309a044f0505e5,MAGPIE,False,False,False,True
+through thick and thin,13fc3b1dde73b1452e9e,EPIC,False,False,False,True
+take it or leave it,c1969f373888ffef97d2,MAGPIE,True,True,False,False
+till the cows come home,332c37a9dcad73bf7c5c,MAGPIE,False,False,False,True
+get in on the ground floor,41036a92064f1d4aa7d5,MAGPIE,False,False,True,True
+kill two birds with one stone,3fd1972eb08b289602be,LIdiom,True,False,True,False
+put your oar in,b8002c958ee9f0ec8751,MAGPIE,False,False,False,True
+under lock and key,98b348166fc72eedd789,MAGPIE,False,False,True,True
+keep the wolf from the door,7a8bab8237ea81982f3e,MAGPIE,False,False,True,True
+hit the nail on the head,618e0e225bd4bfee8c8e,LIdiom,False,False,True,True
+blood is thicker than water,a93d3e73d8c121bf4962,EPIC,False,False,True,True
+in the lap of luxury,ffed93737a6994edacae,MAGPIE,False,False,True,True
+in black and white,9b38d56ed436a1b137fb,MAGPIE,True,False,True,False
+come rain or shine,8621acd89f75e026dcc4,EPIC,False,False,True,True
+by no stretch of the imagination,60bdee0e5675cb857418,MAGPIE,True,False,True,False
+stand up and be counted,1de36d6192dc36666c8b,MAGPIE,False,False,True,True
+look on the bright side,4662c7aa152752f825f8,MAGPIE,True,False,False,False
+fall on stony ground,5ab8f62fd52e75795845,MAGPIE,False,False,True,True
+when the chips are down,215cd38171d46517430f,MAGPIE,False,False,False,True
+come hell or high water,1ca4a3ccccbc68dbeabc,EPIC,False,False,True,True
+bite off more than you can chew,c3d4dd8c8a8f18818e39,LIdiom,False,False,True,True
+have no truck with,341dffc0283f07e521e1,MAGPIE,False,False,False,True
+throw down the gauntlet,37e5a12235dd7cfefa51,MAGPIE,False,False,True,True
+run something up the flagpole,4b1d982b25ff432f6c85,MAGPIE,False,False,True,True
+rake over old coals,34debfd41aedee2669ff,MAGPIE,False,False,True,True
+make a mountain out of a molehill,61cdaa2f98fa1083023f,MAGPIE,False,False,True,True
+the rest is history,5f6ed7310dee98f09067,MAGPIE,False,False,True,True
+leave no stone unturned,5e73cccab6ea7a0ecece,ep_as_part_of_a_sentence,False,False,True,True
+at sixes and sevens,06e223df430144dc8e3c,EPIC,False,False,True,True
+put a damper on,06f54a44099868a49939,MAGPIE,False,False,False,True
+throw cold water on,526b37dbcdd95a7845f9,MAGPIE,False,False,False,True
+there's no such thing as a free lunch,3692f4cc06d20249d1ae,ep_by_itself,False,False,True,True
+out of thin air,94481aa89cae10ce6e58,MAGPIE,False,False,True,True
+make a clean break,ad45cb354b748574ed49,MAGPIE,False,False,True,True
+when all is said and done,371bb90088e6f3cb6740,MAGPIE,True,False,False,False
+back to the drawing board,d79ef730c20d6422726b,LIdiom,True,False,True,False
+play fast and loose,6b1ed1691c22bc9c45ff,MAGPIE,False,False,True,True
+draw the short straw,cd1f2e10f148dbcfb6f8,LIdiom,False,False,True,True
+make short work of,43f8cec7d7c698f77cf0,MAGPIE,False,False,False,True
+pull a rabbit out of a hat,95d15abb5e08c7201e21,MAGPIE,False,False,True,True
+wipe the slate clean,895355fc03b44c97bed2,MAGPIE,False,False,True,True
+all things being equal,2c00b9e8c6499a82e341,MAGPIE,False,False,True,True
+nudge nudge wink wink,94c78677a3c2e7b79af3,MAGPIE,True,True,True,False
+set your sights on,430d345159ad32472462,MAGPIE,False,False,False,True
+dressed to the nines,8aca44c291ab59b31624,MAGPIE,False,False,True,True
+fall off the back of a lorry,cef519cd929b5afd52f2,MAGPIE,False,False,True,True
+flat as a pancake,4657101b1fc80745da59,MAGPIE,False,False,True,True
+wouldn't hurt a fly,5873ccc025c5278ef48b,MAGPIE,False,False,True,True
+see eye to eye,1af640b245e46f66ac59,LIdiom,False,True,True,False
+in the wink of an eye,985df4ddc7dc1266408f,MAGPIE,True,False,True,False
+curiosity killed the cat,09cc1c6738d26691404f,EPIC,False,False,True,True
+no smoke without fire,6ba2dbf32b612a71a093,MAGPIE,False,False,False,True
+chickens come home to roost,7c95d4ab9d90dbc42c18,MAGPIE,False,False,True,True
+put words in someone's mouth,4c9d986b90f3ac9d73ee,MAGPIE,True,False,True,False
+put your best foot forward,3da13349a6358371a2f9,MAGPIE,True,False,True,False
+wither on the vine,8cc7cae8e09a1859337c,MAGPIE,False,False,True,True
+better late than never,fbf0710f8a58a16a59f3,EPIC,False,False,False,True
+in the nick of time,7ac9d001068576cd9e79,EPIC,True,False,False,False
+put your foot down,49b4429cc85503b3df1c,MAGPIE,False,False,False,True
+keep your options open,2caf366b55fbfafd2086,MAGPIE,False,False,True,True
+plain as a pikestaff,8c758787d03d47dd3037,MAGPIE,False,False,True,True
+move heaven and earth,90532875e699893e41c1,MAGPIE,True,False,True,False
+take a leaf out of someone's book,0fe7f23004064265b3a8,MAGPIE,False,False,True,True
+pull a fast one,87fce07be858d7e964a1,MAGPIE,False,False,False,True
+look before you leap,a07bf6dd19cacb26f74a,LIdiom,False,False,True,True
+burn the midnight oil,bfbdf4f82d79c2174901,MAGPIE,False,False,True,True
+only time will tell,8ce34ed5a5d03be85e9e,MAGPIE,True,False,False,False
+rest on your laurels,c2f354c995438b16b492,MAGPIE,False,False,True,True
+look the other way,6bd8504fb394dbe85524,MAGPIE,False,False,False,True
+stand the test of time,8db4a1aa823af21e2e46,MAGPIE,False,False,False,True
+bark up the wrong tree,f96bf73614e55b023145,MAGPIE,False,False,True,True
+jack of all trades,a6ada2c70966a938cdb4,LIdiom,False,False,True,True
+friends in high places,5625cd17db0255cd0639,MAGPIE,False,False,True,True
+come up smelling of roses,1a3141e768ef20384359,MAGPIE,False,False,True,True
+separate the wheat from the chaff,23251447de26ae2b622e,MAGPIE,False,False,True,True
+put the cart before the horse,b99f0e0506466d6d934e,LIdiom,False,False,True,True
+take the wind out of someone's sails,43304f682ac94b57013e,LIdiom,False,False,True,True
+take the rough with the smooth,5f3d51768b58f4f8cc74,MAGPIE,False,False,True,True
+you scratch my back and I'll scratch yours,9282d44f3192dbb8d1a2,MAGPIE,False,False,False,True
+between a rock and a hard place,089e21d78b6aef12bf11,MAGPIE,False,False,True,True
+every trick in the book,2320a12cccf678f2142b,MAGPIE,False,False,True,True
+fly in the face of,06097c95e96826784376,MAGPIE,False,False,False,True
+dead as a doornail,b9bf3faa366ea862e771,MAGPIE,False,False,True,True
+to the nth degree,5323a758021d5591cc84,MAGPIE,False,False,True,True
+from pillar to post,0f126ea14a16cf7852fb,MAGPIE,False,False,True,True
+have your work cut out,79b4309cda1a550db9ac,MAGPIE,True,False,False,False
+every nook and cranny,f8f1a59233df2cb5fe7a,MAGPIE,False,False,True,True
+everything but the kitchen sink,c4b3e76bcd672bf0479b,MAGPIE,False,False,True,True
+too clever by half,a5b0e31cf267988c2698,MAGPIE,False,False,True,True
+better the devil you know,ea9bdd2e8107750fab2e,MAGPIE,False,True,False,False
+make light work of,783dc6cd72f0dfd103e1,MAGPIE,False,False,False,True
+turn over a new leaf,0e3f82f8b0d7a061d741,MAGPIE,False,False,True,True
+public enemy number one,19daa8fdf7f4af414e33,MAGPIE,False,False,False,True
+"out of sight, out of mind",027e6c779deba400714f,LIdiom,False,False,True,True
+beggars can't be choosers,fceea99c4bb9b86b9908,MAGPIE,False,False,True,True
+keep a straight face,da39ce86744e1570c0df,MAGPIE,False,False,True,True
+like a bat out of hell,d73640b9ebdb9d115c3f,MAGPIE,False,False,True,True
+neither fish nor fowl,a395e3fa20895096eb5f,LIdiom,False,False,True,True
+in the blink of an eye,2c52f2c811deb1ff4f38,LIdiom,True,False,True,False
+by a long shot,48e0bde32296d02a6c57,MAGPIE,False,False,True,True
+all bets are off,ce2fefff2deaa0b29840,MAGPIE,False,False,False,True
+no time like the present,2eacdfbe9028d444d6d1,MAGPIE,False,False,False,True
+in the fast lane,aad500a8848894c98171,LIdiom,False,False,True,True
+start off on the wrong foot,e7a5c59d968720b69d1d,MAGPIE,False,False,True,True
+throw the book at,fafe85afb6b4fb2e2255,MAGPIE,False,False,False,True
+don't hold your breath,b5bb529609d02ae538d3,MAGPIE,True,False,True,False
+it takes two to tango,d427dfcb691843e95437,ep_by_itself,False,False,True,True
+add fuel to the fire,d3defffb19469b37a6b5,MAGPIE,False,False,False,True
+sick as a parrot,b0117bc748d35fe2dc73,MAGPIE,False,False,True,True
+by leaps and bounds,a458108913a795b2dba4,MAGPIE,False,False,True,True
+once in a blue moon,ac72594c1851fb40c2bf,LIdiom,False,False,True,True
+get your teeth into,2a35a6916515b42f0ef6,MAGPIE,False,False,False,True
+throw caution to the wind,b692387736c040c6eaf9,ep_as_part_of_a_sentence,False,False,True,True
+throw your weight around,860664d6cdbaae735373,MAGPIE,False,False,False,True
+batten down the hatches,433c46dc359775d95b8a,MAGPIE,False,False,True,True
+flog a dead horse,c496610992928cb4994a,MAGPIE,False,False,True,True
+wake up and smell the coffee,5e7f85fe31d6faf4620d,MAGPIE,False,False,True,True
+press the panic button,f6c7afc5aec6eecfb19c,MAGPIE,True,False,True,False
+come in from the cold,07c5869a8dbeaa06e940,MAGPIE,False,False,True,True
+dead to the world,3a8ec177ea7f5b153eda,EPIC,False,False,False,True
+bite someone's head off,e7764ab58be5317eaef4,MAGPIE,False,False,False,True
+think outside the box,b40a4de090e49d13c316,MAGPIE,False,False,True,True
+burn the candle at both ends,8b6a2d36ad53e06dafeb,MAGPIE,True,False,True,False
+cut the Gordian knot,b400a067bbe6be030651,MAGPIE,False,False,True,True
+leave someone in the lurch,b34a750e512842c82ff6,MAGPIE,False,False,True,True
+throw good money after bad,e66fd2dc98e36991d221,MAGPIE,False,False,True,True
+you can't teach an old dog new tricks,7e67fda8a438d62fe33f,MAGPIE,False,False,True,True
+pass the time of day,b929a2021f8c03cc8283,MAGPIE,False,False,False,True
+away with the fairies,deb5c29b49f01a5dd331,MAGPIE,False,False,True,True
+prick up your ears,24afafdc885470fc97ae,MAGPIE,False,False,True,True
+give someone a bloody nose,4d10df2f185a83b2249f,MAGPIE,False,False,True,True
+cast pearls before swine,df97e489f4461d277b38,MAGPIE,False,False,True,True
+rub someone the wrong way,d1ee70e683b1258c905b,MAGPIE,True,False,False,False
+have a mountain to climb,7e90fc7a0c5d68543f85,MAGPIE,True,False,True,False
+put the kibosh on,b6d94b3b35f77598199f,MAGPIE,False,False,False,True
+what goes around comes around,0f240e302591b8ed40fd,MAGPIE,False,True,False,False
+by the seat of your pants,a8a540d74b3f4fb2a172,MAGPIE,False,False,True,True
+never the twain shall meet,7ca267ced385e1a3234e,MAGPIE,False,False,True,True
+"once bitten, twice shy",e6251398fe233daa98be,LIdiom,False,False,True,True
+the buck stops here,efe7a0171be26a16c7a8,MAGPIE,False,False,False,True
+two heads are better than one,65f90f9a2cc68f75720a,MAGPIE,False,True,False,False
+get on like a house on fire,1f82bc741c83e7cc3fa2,MAGPIE,True,False,False,False
+put the cat among the pigeons,db7d2a5913309936c304,MAGPIE,False,False,True,True
+keep your powder dry,a8a40e633f5d4c2ac22e,MAGPIE,False,False,True,True
+bring home the bacon,64b2a726242fb9dadb82,MAGPIE,False,False,True,True
+send someone to Coventry,0fb3fa0e6159957adeb5,MAGPIE,False,False,True,True
+shoot from the hip,9d4a5ce0fa7b9c7376b1,MAGPIE,False,False,True,True
+keep your chin up,cbc85b3db3e72598e289,MAGPIE,False,False,False,True
+put up or shut up,b89e4e6a1013f2b5f9a5,MAGPIE,False,True,False,False
+hold all the aces,807dc9ef803740e7485f,MAGPIE,False,False,True,True
+don't give up the day job,30a535a456e01d3bef22,MAGPIE,False,False,True,True
+on a silver platter,db72114a7a14941f5056,MAGPIE,False,False,True,True
+give as good as you get,10c2df5cb5fa6b048e29,MAGPIE,False,True,False,False
+nothing to write home about,f44d26c0ee983cbbc1da,MAGPIE,True,False,False,False
+take a shine to,7d376e36a1e67ed9d62a,MAGPIE,False,False,False,True
+get a handle on,59f57db095b387fedbf1,MAGPIE,False,False,False,True
+you could have knocked me down with a feather,ad52b90fcdb92ea11d76,MAGPIE,False,False,True,True
+get down to brass tacks,9921ae606ebe81f97125,MAGPIE,False,False,True,True
+better safe than sorry,d1fd09d41335f4f47041,MAGPIE,False,False,False,True
+put your cards on the table,23000dd558641e622155,MAGPIE,True,False,True,False
+no rest for the wicked,5a5f9eb32c3314b8cb5d,MAGPIE,False,False,True,True
+push the panic button,64a562d2122238b8fd34,MAGPIE,True,False,True,False
+go down like a lead balloon,ea72c62265c88443d76d,MAGPIE,False,False,True,True
+in the driver's seat,fc3f345a57a36b353de3,MAGPIE,False,False,True,True
+asleep at the wheel,6cafb5c3e48bd411a2b7,MAGPIE,False,False,True,True
+the ball is in someone's court,98f17a4c40a2d3ca378e,MAGPIE,False,False,True,True
+eat your heart out,a31b906c9db9022c9c86,MAGPIE,False,False,False,True
+not to be sneezed at,0b4d94dd33540b3e9d5d,MAGPIE,False,False,False,True
+straight from the horse's mouth,86bef329d8cdfec11b39,MAGPIE,False,False,True,True
+draw a bead on,345ffe8270b4af4b9907,MAGPIE,False,False,False,True
+dog in the manger,259830c0852e70a77a42,MAGPIE,False,False,True,True
+sweep someone off their feet,3b9a32229f865de17da5,MAGPIE,False,False,True,True
+jump down someone's throat,6c0d431a6666c7744f56,MAGPIE,True,False,True,False
+not just a pretty face,38507a91bcb1d6d47796,MAGPIE,False,False,True,True
+do the right thing,0cff9d7d81ebdfcee3d3,MAGPIE,False,False,True,True
+beat the daylights out of,13cf949a8d7f922cc28a,MAGPIE,True,False,False,False
+put the moves on,f64eaaecf3b0efb56324,MAGPIE,False,False,False,True
+let the genie out of the bottle,2f69c3bbca27a5705fa2,MAGPIE,False,False,True,True
+let the cat out of the bag,7c8a05a9f2eed4c22233,LIdiom,False,False,True,True
+get your skates on,87f77def8fda3afab25b,MAGPIE,False,False,False,True
+close but no cigar,64cc65ad7169b623e60b,MAGPIE,False,False,True,True
+snap someone's head off,1b6db5d4792b39ff4943,MAGPIE,False,False,False,True
+still waters run deep,e059e198db90a7396ce4,MAGPIE,False,False,True,True
+too many cooks spoil the broth,1e912f58f6038f4eb55d,LIdiom,False,False,True,True
+take the gilt off the gingerbread,991ca3d4244520757cc3,MAGPIE,False,False,True,True
+shuffle off this mortal coil,ac9940bfad29507e768f,MAGPIE,False,False,True,True
+throw the baby out with the bathwater,12896838053594bea09a,LIdiom,False,False,True,True
+"in for a penny, in for a pound",93400baa3d267f717ddc,MAGPIE,False,False,True,True
+not to put too fine a point on it,333f01d5a8cb60f025e4,MAGPIE,True,False,False,False
+give someone a piece of your mind,209f0cd3f99a7cdd51b6,MAGPIE,False,False,True,True
+from the horse's mouth,b1e1a562d7ae859ea21a,LIdiom,False,False,True,True
+come down the pike,3de4e47c293764a7a1f3,MAGPIE,False,False,True,True
+keep your nose to the grindstone,931b6395504656f78167,MAGPIE,False,False,True,True
+thumb your nose at,fafad5aa25d39f442e54,MAGPIE,False,False,False,True
+fish in troubled waters,6441445987c9b95cd3aa,MAGPIE,False,False,True,True
+a little bird told me,d17f7709d96b392a3a9c,MAGPIE,True,False,False,False
+"day in, day out",7537827c4228a03e07ca,MAGPIE,False,False,False,True
+dead as a dodo,b9bf3faa366ea862e771,MAGPIE,False,False,True,True
+go the extra mile,6518cba9dcb70bee87f0,MAGPIE,False,False,True,True
+start off on the right foot,3631f3bad4d2b3d0a5a5,MAGPIE,False,False,True,True
+time and tide wait for no man,3ce76109951889560bc5,MAGPIE,False,False,True,True
+warm the cockles of someone's heart,1c739b5db4ed670c4e77,MAGPIE,False,False,True,True
+get your feet wet,0876e28aebc8c4daeb9d,MAGPIE,False,False,True,True
+kick against the pricks,bd029251356f6ef338b9,MAGPIE,False,False,True,True
+by the skin of your teeth,70b96edc5528fc91dd65,ep_as_part_of_a_sentence,False,False,True,True
+not bat an eye,376c8a2775179a899e5d,MAGPIE,False,False,True,True
+get a rise out of,697aa9d4accacc393b94,MAGPIE,True,False,False,False
+keep your head above water,95d05564eb55b7952cca,MAGPIE,False,False,True,True
+make a night of it,7bca55d0569a8868b468,MAGPIE,False,False,False,True
+draw a line in the sand,ab42afb92b955e746d9b,MAGPIE,False,False,True,True
+blow the lid off,f5c15b25049ff5b80acb,MAGPIE,False,False,False,True
+it's all Greek to me,789eddfb2d3be2b73d43,MAGPIE,False,False,False,True
+dot the i's and cross the t's,15a66d8fb3197924e870,MAGPIE,False,False,False,True
+haul someone over the coals,c9ae2a5bdd53936fc93f,MAGPIE,False,False,True,True
+separate the sheep from the goats,b9c5b515a7090581dedc,MAGPIE,False,True,True,False
+put your heads together,f409ce218536077ce11c,MAGPIE,False,False,False,True
+speak of the devil,a84e918d4015f8ce9329,LIdiom,False,False,True,True
+have a tiger by the tail,e9e7bfab026f4a666568,MAGPIE,False,False,True,True
+spare the rod and spoil the child,72c40c97f49dec8b87e9,MAGPIE,False,False,True,True
+"waste not, want not",1b5f0113485b0ee2e48f,ep_by_itself,False,True,False,False
+it never rains but it pours,f91a6b6f8e77509f161a,MAGPIE,False,False,True,True
+rain cats and dogs,512c484c106ff9b7e7d7,MAGPIE,True,False,True,False
+bury your head in the sand,b11030f1c4271461b8d1,MAGPIE,False,False,True,True
+make money hand over fist,8017cf592cbe87bec97f,MAGPIE,False,False,True,True
+have a bun in the oven,38f1cd8ac3dbc67a273b,MAGPIE,False,False,True,True
+throw your hat in the ring,3af8d7fcbb75f70cdcb5,MAGPIE,False,False,True,True
+put the screws on,781a03079e897e1d1ecb,MAGPIE,False,False,False,True
+kill the fatted calf,e3224e7f4f540c761c31,MAGPIE,False,False,True,True
+there's no fool like an old fool,fdfdce9727145775dae7,MAGPIE,False,True,True,False
+all dressed up and nowhere to go,cbadca84f90d7a014dab,MAGPIE,True,False,False,False
+keep your nose clean,529402b562c58e07866f,MAGPIE,False,False,True,True
+a dime a dozen,c2015e1f9bdc62d11028,ep_as_part_of_a_sentence,False,False,True,True
+get your act together,84722bfe11ae35b70e2a,ep_by_itself,False,False,False,True
+give someone the benefit of the doubt,13b3dd3fac7fb3279c9e,ep_as_part_of_a_sentence,False,False,True,True
+go back to the drawing board,3200064346a6ddc8c832,ep_as_part_of_a_sentence,True,False,True,False
+it's not rocket science,764e5d0dea94bb7f4084,ep_by_itself,True,False,True,False
+let someone off the hook,1b3524f68e542f379413,ep_as_part_of_a_sentence,False,False,True,True
+make a long story short,625f220581246f0ad6a8,LIdiom,False,False,True,True
+"no pain, no gain",b53e3ffc985cbc9e8313,ep_by_itself,False,False,True,True
+so far so good,4ae69c19be59b583252e,EPIC,True,False,False,False
+the best of both worlds,e6e093d55d0e993a36ce,EPIC,True,False,True,False
+to get bent out of shape,6a0719afa3f95caef9c6,ep_as_part_of_a_sentence,True,False,True,False
+to make matters worse,804f6bcf2181e9f6e4d5,ep_as_part_of_a_sentence,True,False,True,False
+we'll cross that bridge when we come to it,6ccece788318b4b198b6,ep_by_itself,False,True,False,False
+a bird in the hand is worth two in the bush,6550146dc8cdb29dc8a2,ep_by_itself,False,False,True,True
+a penny saved is a penny earned,4f33502664b7f75d0838,ep_by_itself,False,False,True,True
+a picture is worth 1000 words,7b360aa51a43f554af29,ep_by_itself,True,False,False,False
+actions speak louder than words,7954f7879ff6a5e40518,LIdiom,False,False,False,True
+barking up the wrong tree,9c5325d49e601ed33890,ep_as_part_of_a_sentence,False,False,True,True
+birds of a feather flock together,3e6d04ea6b5aeefee604,LIdiom,False,False,False,True
+comparing apples to oranges,3c4e0673315d414c0064,ep_as_part_of_a_sentence,False,False,True,True
+costs an arm and a leg,7080c39b4a4923d8902a,ep_as_part_of_a_sentence,True,False,True,False
+do something at the drop of a hat,d39e29b64ddbaf17c8d0,ep_as_part_of_a_sentence,True,False,True,False
+do unto others as you would have them do unto you,d0436cb09e8d9a49b7f3,ep_by_itself,True,True,False,False
+don't count your chickens before they hatch,ef157db9716f88380f32,ep_by_itself,False,False,True,True
+don't cry over spilt milk,1767fceea0aa8de087b6,LIdiom,False,False,True,True
+don't give up your day job,e0753e12e1be9c898d3f,ep_by_itself,True,False,True,False
+don't put all your eggs in one basket,9a6859a45c51e614b2d6,LIdiom,True,False,True,False
+every cloud has a silver lining,22b7b3cb25accb951028,EPIC,True,False,True,False
+get a taste of your own medicine,366cebab0b9689683f2c,ep_as_part_of_a_sentence,False,False,True,True
+give someone the cold shoulder,34b5b1a077ad6c8ff853,ep_as_part_of_a_sentence,False,False,True,True
+go on a wild goose chase,8144019a5e1d9ec4520b,ep_as_part_of_a_sentence,False,False,True,True
+good things come to those who wait,a8489ba6004dd0061e23,ep_by_itself,False,False,True,True
+he has bigger fish to fry,b6379b1482b6b7e30412,ep_by_itself,True,False,True,False
+he's a chip off the old block,b81ccc41f3afebffa06b,ep_by_itself,False,False,True,True
+it ain't over till the fat lady sings,377033aadf40006ecc33,ep_by_itself,False,False,True,True
+it takes one to know one,7617cc51f4a484b14625,ep_by_itself,True,True,False,False
+it's a piece of cake,b5a87b6ba158e6f4d165,ep_by_itself,False,False,True,True
+it's raining cats and dogs,ec8ad2f9bc8d63dbf4c7,ep_by_itself,True,False,True,False
+saving for a rainy day,539a1223e66c9c32bb35,ep_as_part_of_a_sentence,True,False,False,False
+slow and steady wins the race,5a3d5893f40fc1699329,ep_by_itself,False,False,True,True
+take a rain check,190ffaae7eb1724b346a,ep_as_part_of_a_sentence,False,False,True,True
+take it with a grain of salt,e09e1efdf23b0ef75753,ep_as_part_of_a_sentence,True,False,True,False
+the ball is in your court,164825b40ad28db6271e,LIdiom,False,False,True,True
+the best thing since sliced bread,2238962e727cfaf6b612,ep_as_part_of_a_sentence,True,False,True,False
+the devil is in the details,2d07e7afd92747ddeb72,ep_by_itself,False,False,True,True
+the early bird gets the worm,3abcc5c171d403a2ed5c,LIdiom,False,False,True,True
+the elephant in the room,8edc3eacddfb77dd4c5e,ep_as_part_of_a_sentence,False,False,True,True
+the whole nine yards,81b4dc666522937a122c,ep_as_part_of_a_sentence,False,False,True,True
+there are other fish in the sea,40598d698a884d45650d,ep_by_itself,False,False,True,True
+there's a method to his madness,fe447e144bf7477965c3,ep_by_itself,False,False,True,True
+you can't have your cake and eat it too,573e38fbfd8140794be2,ep_by_itself,False,False,False,True
+you can't judge a book by its cover,28a317fbf514dc30faf0,ep_by_itself,False,False,True,True
+a little learning is a dangerous thing,0c595f0e50803b33771e,ep_by_itself,True,False,True,False
+a snowball's chance in hell,d90ac45801b46c08fe35,ep_as_part_of_a_sentence,False,False,True,True
+a storm in a teacup,3b1c6b21ea56444a3641,EPIC,False,False,True,True
+an apple a day keeps the doctor away,1589c464d8ec7078a728,ep_by_itself,False,False,False,True
+an ounce of prevention is worth a pound of cure,018179c93aa86f335425,ep_by_itself,False,False,True,True
+calm before the storm,1ff91b59c3bc831a6861,LIdiom,False,False,True,True
+don't beat a dead horse,d5266a430d6e3153539a,ep_by_itself,False,False,True,True
+every dog has his day,990298de85e3b0624a45,LIdiom,True,False,False,False
+have your head in the clouds,720f8c6cb2ba57316b0f,ep_as_part_of_a_sentence,False,False,True,True
+he who laughs last laughs loudest,85f430d7a50d5e9eb127,ep_by_itself,False,False,True,True
+hear something straight from the horse's mouth,a10a3e815186c262b794,ep_as_part_of_a_sentence,False,False,True,True
+he's off his rocker,b9512da341490bbeced1,ep_by_itself,False,False,True,True
+it is always darkest before the dawn,0cbf6944e4c334c783d7,ep_by_itself,True,False,True,False
+know which way the wind is blowing,d4a80c2ea6fb93affff7,ep_as_part_of_a_sentence,True,False,True,False
+like two peas in a pod,b058551e0733fb014fb7,ep_as_part_of_a_sentence,True,False,True,False
+make hay while the sun shines,d4a2da3943cc93861e33,EPIC,False,False,True,True
+shape up or ship out,499b0365270e39e6ae3e,ep_by_itself,False,False,False,True
+that ship has sailed,9f7f384b1f96e30d99b1,ep_by_itself,False,False,True,True
+the pot calling the kettle black,8c9ec3c12f388d2f525b,ep_as_part_of_a_sentence,False,False,True,True
+there are clouds on the horizon,0a407502dc070b477dd6,ep_by_itself,True,False,True,False
+those who live in glass houses shouldn't throw stones,447e05be6a5d3a771a53,ep_by_itself,False,False,True,True
+we see eye to eye,41aad5d0ebaaf882d66b,ep_by_itself,True,True,True,False
+when it rains it pours,70107fcb0b4b1b9566c7,ep_by_itself,False,False,True,True
+you can catch more flies with honey than you can with vinegar,3f645bde25c1a473ea74,ep_by_itself,False,False,True,True
+"you can lead a horse to water, but you can't make him drink",70fa00626c983d8496b1,ep_by_itself,False,False,True,True
+you can't make an omelet without breaking some eggs,916cddfb0e5daf74dc36,ep_by_itself,False,False,True,True
+keep up the good work,7028e618fdeb4559f5ed,EPIC,False,False,False,True
+not in a million years,baa79bf3e0266919d7af,EPIC,True,False,True,False
+between life and death,9ba83e4acba606dc4c8a,EPIC,True,False,True,False
+for love nor money,2548643dfb2311bcc529,EPIC,False,False,True,True
+just what the doctor ordered,b876742c599aed2a61a8,EPIC,False,False,True,True
+in the cold light of day,047adf9025f3e7f0a3c1,EPIC,False,False,False,True
+in the wake of,a8b58c0aa5e6504676bf,EPIC,False,False,False,True
+the letter of the law,7797deab3f10939cec12,EPIC,False,False,True,True
+the men in grey suits,7ce86436bed81d1de83e,EPIC,True,False,True,False
+the spirit of the law,5177eda6bc7969a07437,EPIC,False,False,True,True
+middle of the road,786020a73cec8d550948,EPIC,False,False,True,True
+caught in the crossfire,4739d05e01d224335a21,EPIC,False,False,True,True
+a breath of fresh air,e0cd19afcdbe6948d7e0,EPIC,True,False,True,False
+a clean bill of health,f3761a7d42d2320609a0,EPIC,False,False,True,True
+a new lease of life,052d85b90636dccf1c5c,EPIC,True,False,True,False
+in the heat of the moment,04df2d60675b3b2799c7,EPIC,False,False,True,True
+a fate worse than death,7e63d6f90e0c5c183d28,EPIC,True,False,True,False
+a fish out of water,bb1484aa9de733f15c95,EPIC,False,False,True,True
+a flash in the pan,0765383e5f9e1ab30f8f,EPIC,False,False,True,True
+a fly on the wall,3ff7618ea104746f9790,EPIC,False,False,True,True
+a foot in the door,bd8d7dcd2aadddd3ec3d,EPIC,False,False,True,True
+a safe pair of hands,c27f89ad15148ea98450,EPIC,False,False,True,True
+a sight for sore eyes,d06cba4bffd01d5f7d87,EPIC,True,False,True,False
+a slap on the wrist,c51cc8fffe240b66593c,EPIC,False,False,True,True
+absence makes the heart grow fonder,2913b15c8aa4e5583026,EPIC,False,False,True,True
+as high as a kite,47f0aea93d315b22d94b,EPIC,False,False,True,True
+stranger things have happened,4190b82d5a3c6c528685,EPIC,False,False,True,True
+it's a small world,13663ccdeef4d7a9496d,LIdiom,False,False,False,True
+give credit where credit is due,60a119d699760c7ad4f7,LIdiom,False,False,False,True
+the straw that broke the camel's back,1aea43ee62345a12c66e,LIdiom,True,False,False,False
+you reap what you sow,0a1af2e834b829720eee,LIdiom,False,False,True,True
+turn a deaf ear,2a2032541c9c1c3ce629,LIdiom,False,False,True,True
+finding a needle in a haystack,bdf8f306a8c9aefe80b9,LIdiom,False,False,True,True
+see light at the end of the tunnel,60cbd980d62885699401,LIdiom,False,False,True,True
+don't look a gift horse in the mouth,d842371c78d3e8a81831,LIdiom,False,False,True,True
+make hair stand on end,1ec362439a1c7e649d90,LIdiom,False,False,False,True
+taste of your own medicine,6a5240a1e75e41e2d173,LIdiom,False,False,True,True
+a fish rots from the head down,bcb792e6d71a67eb6d4f,LIdiom,False,False,False,True
+know like the back of your hand,92e44a4766bf1610baf2,LIdiom,False,False,True,True
+have finger in too many pies,f1a855368737fdc308a0,LIdiom,False,False,True,True
+no pain no gain,96400dbb6b5c7699506a,LIdiom,False,False,True,True
+there's no smoke without fire,c0095561ca8bbcbf046f,LIdiom,False,False,False,True
+its raining cats and dogs,f0bcf0caab38719ad819,LIdiom,True,False,True,False
+have two pennies to rub together,06f3990348405865191e,LIdiom,False,False,False,True
+be glad to see the back of,8cda047c8e3c6e611060,LIdiom,False,False,False,True
+to rub salt in the wound,6e68f56940f467ee300d,LIdiom,False,False,True,True
+crème de la crème,10b641f5b432c3e2f6ec,LIdiom,False,True,True,False
+in an extremely blissful state,d4d078d30b1e82824424,LIdiom,False,False,True,True
+don't count your chickens before they've hatched,43fc72ac0e34ab7dbee2,LIdiom,False,False,True,True
+feeling a bit under the weather,75901512fe8bb18c0d4f,LIdiom,False,False,True,True
+talking to a brick wall,28053b21e625b340930f,LIdiom,True,False,True,False
+packed (in) like sardines,63c545db4e92cc540e0d,LIdiom,False,False,True,True
+to be at the end of one's rope,f9956b614010ed7a34d9,LIdiom,False,False,True,True
+hard work never hurt anyone,8e1560d79751a823fba2,LIdiom,False,False,False,True
+the odd one out,8cbdc65cbc829b9d1a8e,LIdiom,False,False,False,True
+having to start all over again,f5f0efe9c067c898a45f,LIdiom,True,False,False,False
+that's the heart of the matter,0909615095f194f214ef,LIdiom,False,False,True,True
+"to have your cake and eat it, too",023a18e7892c97b2b20d,LIdiom,True,False,False,False
+hear it on the grapevine,e2437888ec44d42ceab5,LIdiom,False,False,True,True
+to place the cherry on top,0a022e848739e26f0ec3,LIdiom,True,False,False,False
+make a bad situation even worse,bf6145a9239d9fb6faf8,LIdiom,True,False,True,False
+caught with one's hand in the cookie jar,b28a2c759c6ea9d994f3,LIdiom,True,False,True,False
+by hook or crook,e26274a508e3fbe26288,LIdiom,False,False,True,True
+wouldn't be caught dead,8ac256c2a80ba831f8c8,LIdiom,False,False,True,True
+don't toot your own horn,19f44f8ba9145d0b79a9,LIdiom,False,False,True,True
+snake in the grass,46906c8c00e76cd768d9,LIdiom,False,False,True,True
+rome wasn't built in a day,f858efbec3281487574f,LIdiom,False,False,False,True
+to paint the town red,19b4c87f38ccc3e45aa9,LIdiom,False,False,True,True
+the shoemaker's son always goes barefoot,9b52fce1f1a4b594ecd4,LIdiom,False,False,True,True
+savings set aside for future use,b0b093ff7efa980550c5,LIdiom,True,False,False,False
+misfortunes never come singly,62d80d451982679302e9,LIdiom,False,False,True,True
+tough nut to crack,9adcdea5601a51f59e46,LIdiom,False,False,True,True
+cross that bridge when you come to it,65f648c3eacedf48e9f1,LIdiom,False,True,False,False
+not playing with a full deck,e8fda5ccf6b6d5cde3a3,LIdiom,False,False,True,True
+a person who really talks too much,e889f8dc4c4be91a10bc,LIdiom,True,False,False,False
+the apple doesn't fall far from the tree,34daef3324ebe8a83c5d,LIdiom,False,False,True,True
+for a very long time,1593088ee3e32f639385,LIdiom,True,False,False,False
+it's greek to me,c69288248ea9d011332c,LIdiom,False,False,False,True
+to be green with envy,1ab19f2652e23c548ed7,LIdiom,False,False,True,True
+the ends justifies the means,98025c6ccbf6135086de,LIdiom,False,False,False,True
+walk on thin ice,b47cabbf0c227d5c44af,LIdiom,False,False,True,True
+beat a dead horse,92f9953aaa4b985dbf3a,LIdiom,False,False,True,True
+three sheets to the wind,9461b95a44ea2c621545,LIdiom,False,False,True,True
+to bite the dust,6b2daa1df5d87f95a642,LIdiom,False,False,True,True
+lose one's train of thought,c0b3f194dcf60ee0414b,LIdiom,True,False,True,False
+throw a spanner in the works,f7d4e3ddd2a316b080a8,LIdiom,False,False,True,True
+can't judge a book by its cover,236fbe7b8bdf89961c11,LIdiom,False,False,True,True
+on the pig's back,221f4cb7abcfa83099dc,LIdiom,False,False,False,True
+have an ax to grind,644bb1f8e18710c3f7c0,LIdiom,False,False,True,True
+pull the wool over one's eyes,5d12f03b47980d17469b,LIdiom,False,False,True,True
+come a long way,6191f9cebbfb10cfc020,LIdiom,False,False,False,True
+a bitter pill to swallow,b6b44548cbc4d08dd0af,LIdiom,True,False,True,False
+cry over spilt milk,1c1c139e9dd5271efe98,LIdiom,False,False,True,True
+virtually impossible to find,9abedad0ec3344ac3830,LIdiom,False,False,False,True
+"united we stand, divided we fall",88253840aac7b1cb1485,LIdiom,False,False,True,True
+pull the cat's tail,5b0c5d712424f99ae938,LIdiom,False,False,True,True
+tomorrow is another day,75be89b396d093a9eedb,LIdiom,False,False,False,True
+all that glitters is not gold,100c7cbc6cea09a3b9f7,LIdiom,True,False,True,False
+off the beaten track,fe84139f13c00ae4a06f,EPIC,False,False,True,True
+head for the hills,22798fdd1aba4969ede7,MAGPIE,False,False,True,True
+bring up the rear,d954bbd5498efcf88fdf,MAGPIE,False,False,True,True
+make your blood boil,ddc7986197f6ae97d28f,MAGPIE,False,False,True,True
+put the boot in,86542bd17170f5cb0b8f,MAGPIE,False,False,False,True
+paint the town red,62f8ddd5088ea69fba36,MAGPIE,False,False,True,True
+in the short run,06ae627cabea20781631,MAGPIE,False,False,False,True
+lay down the law,78f19ba3a6b89d302d6c,MAGPIE,False,False,True,True
+put the wind up,77ef9a38901c54c44f7b,MAGPIE,False,False,False,True
+cog in the machine,8cba0bd402266a395044,MAGPIE,False,False,True,True
+quick as a flash,214246a5883515dce3e7,MAGPIE,False,False,True,True
+in the final analysis,c75199ddc38ec1f61f2b,MAGPIE,False,False,True,True
+beat about the bush,4f8e9ec2bd52ef4d962f,MAGPIE,False,False,True,True
+foam at the mouth,26142d687e2268e48c53,MAGPIE,False,False,True,True
+sit on the fence,1a9e45b1115d65b2b03b,MAGPIE,False,False,True,True
+stand someone in good stead,5d226b1150d0937a6882,MAGPIE,False,False,True,True
+on the face of it,ce926079fdc28705d061,MAGPIE,False,False,False,True
+pick up the pieces,cbe593d82f5bff0f8bca,MAGPIE,False,False,True,True
+economical with the truth,b3adbeb24c32937d6d29,MAGPIE,False,False,True,True
+blow hot and cold,2b9e7e888594d43c63f7,MAGPIE,False,False,True,True
+ahead of the curve,663cc0979d9afd50ae8b,MAGPIE,False,False,True,True
+dyed in the wool,3c466f2673ad5d1396e5,MAGPIE,False,False,True,True
+licence to print money,acf3bf823588430d6f4c,MAGPIE,False,False,True,True
+water under the bridge,6c7aa98ae692598c0cb8,LIdiom,False,False,True,True
+the joke is on someone,cc3a7003432eeb01dc6b,MAGPIE,False,False,False,True
+state of the art,e2495c956e0f2d9a3a4c,EPIC,False,False,True,True
+wet behind the ears,0fb2b03eff836057c30b,EPIC,False,False,True,True
+rise to the occasion,b3742f3bc9229e463c8c,MAGPIE,False,False,True,True
+keep your pecker up,94e119ba7791f833cb7d,MAGPIE,False,False,False,True
+turn something on its head,ee5abeb22835bb4f09ae,MAGPIE,False,False,True,True
+as the actress said to the bishop,6431e244c14403954acb,MAGPIE,False,False,True,True
+hair of the dog,a284c633153a526843fd,MAGPIE,False,False,True,True
+step on someone's toes,1cc91c4e2a20ba74a472,MAGPIE,False,False,True,True
+eat like a horse,472f60cd4c74ea354634,MAGPIE,False,False,True,True
+wide of the mark,23443c2221479c8dcd41,MAGPIE,False,False,True,True
+pie in the sky,14ceec27c6d44912231b,EPIC,False,False,True,True
+do a number on,ef741a0ffd8a1b0028dc,MAGPIE,False,False,False,True
+from the word go,a939204e965da0c27622,MAGPIE,False,False,False,True
+too big for your boots,a1bed898cc6c3d671097,MAGPIE,False,False,True,True
+cast your mind back,ed381f5f122e7561007e,MAGPIE,False,False,False,True
+sure as eggs is eggs,66f067c2b7d54cb01ad3,MAGPIE,False,True,True,False
+boys will be boys,b09656e7ca98aa5e73a8,MAGPIE,False,True,True,False
+jump on the bandwagon,74530d7be7631a5ea527,ep_as_part_of_a_sentence,False,False,True,True
+kick up a fuss,c8e24cddcfcfce316e67,MAGPIE,False,False,True,True
+any port in a storm,bcb6afb3f70fb359924a,MAGPIE,False,False,True,True
+nine times out of ten,646d40f2d3a848ee30c2,EPIC,False,True,False,False
+stick your neck out,7e793f2f257758ee2255,MAGPIE,False,False,False,True
+go down the wrong way,a85ead6df8f59de86b12,MAGPIE,False,False,False,True
+talk out of turn,7382553f45a85e2f6a5c,MAGPIE,False,False,True,True
+in the family way,d98a2cba2386837517fd,EPIC,False,False,False,True
+work like a charm,5c7c1bcb954970a49054,MAGPIE,False,False,True,True
+come to a head,ee866ff8cfd96993ac0e,MAGPIE,False,False,True,True
+saved by the bell,8d549a9467e079e34d2e,MAGPIE,False,False,True,True
+deaf as a post,db8e5290587d7e84176a,MAGPIE,False,False,True,True
+put a foot wrong,9b3c2eaa0aa33995ae0e,MAGPIE,False,False,True,True
+fit as a fiddle,615dcd9db1cdfbd8be2b,EPIC,False,False,True,True
+the ayes have it,e5d3b641eb02be010f75,MAGPIE,False,False,False,True
+that makes two of us,ccad013322aa6168cbe3,EPIC,False,False,False,True
+strike while the iron is hot,7e1b4cea95e751e05242,MAGPIE,False,False,True,True
+flash in the pan,f087666a2215ca779d44,MAGPIE,False,False,True,True
+rise from the ashes,83b748fda673ec29c500,MAGPIE,False,False,True,True
+have a screw loose,9f36add5c1e311bb10b1,MAGPIE,False,False,True,True
+get away with murder,0edeb880cb9f567668b2,MAGPIE,False,False,True,True
+breathe down someone's neck,09964cb508233766effa,MAGPIE,False,False,True,True
+easy on the eye,9bd2094344c2d7f5aa3c,MAGPIE,False,False,True,True
+slip through the net,c231102bdb482eb61278,MAGPIE,False,False,True,True
+neck of the woods,a457a9de72e18d54c496,MAGPIE,False,False,True,True
+hot under the collar,e68116ccbd18cf27aa72,MAGPIE,False,False,True,True
+play into someone's hands,f5e8ad2fb75f243e79fd,MAGPIE,False,False,True,True
+come out in the wash,091f19e4a9e2ccb5e132,MAGPIE,False,False,True,True
+light at the end of the tunnel,5a2763ea630f97842f79,MAGPIE,False,False,True,True
+weak at the knees,2a40385992b5c0252727,EPIC,False,False,True,True
+power behind the throne,51d7eaa3d1cc96df7f4d,MAGPIE,False,False,True,True
+as good as new,f1959f8a49b48fcfa8e8,MAGPIE,False,False,False,True
+bang for the buck,a684ca3f861cba1de9bd,MAGPIE,False,False,True,True
+let's be having you,2518bb3ed7666e33d708,MAGPIE,False,True,False,False
+at a loss for words,75a8b361b397af90e7b1,MAGPIE,False,False,False,True
+run out of gas,03bfd97997b10a036a2e,MAGPIE,False,False,True,True
+place in the sun,4dc527bba4301ae2b14b,MAGPIE,False,False,True,True
+drive someone up the wall,a85df31b195f10fa4a39,MAGPIE,False,False,True,True
+have an eye for,aefee130431c600b66ed,MAGPIE,False,False,False,True
+do someone's head in,7c32e71a986b0a7de83b,MAGPIE,False,False,False,True
+grist to the mill,b985c208926760f8b43f,MAGPIE,False,False,False,True
+dead in the water,1db66019188e9410902e,MAGPIE,False,False,True,True
+sleep like a log,b0684152834e9618b6f1,MAGPIE,False,False,True,True
+slip of the pen,ef3abe9c2aab03c85543,MAGPIE,False,False,True,True
+not a pretty sight,8a8c4daa3b0eb53b0266,MAGPIE,False,False,True,True
+paper over the cracks,08605ddbc5a33c6ef32f,MAGPIE,False,False,True,True
+swear like a trooper,e693e7ab2ff7961d392d,MAGPIE,False,False,True,True
+bounce off the walls,db6728a58a06bd9e5f34,MAGPIE,False,False,True,True
+think the world of,a535579cd1463fe39335,MAGPIE,False,False,False,True
+broad in the beam,4863c635338dce310498,MAGPIE,False,False,True,True
+different strokes for different folks,92ee5876f3937c058e3c,MAGPIE,False,False,True,True
+ride for a fall,7a3b0c4157e415201b04,MAGPIE,False,False,True,True
+reach for the stars,7673e7de73644550006f,MAGPIE,False,False,True,True
+armed to the teeth,f9bb1b9145306a69b196,EPIC,False,False,True,True
+throw in the towel,716eda4cfc206eb4e024,MAGPIE,False,False,True,True
+see the light of day,6356b0795edd59b11c47,MAGPIE,False,False,False,True
+easy as falling off a log,ff57c3123e63c4f09818,MAGPIE,False,False,True,True
+shut the door on,f3a9ce2cb5ab4538cfa7,MAGPIE,False,False,False,True
+cock of the walk,403f18d5e5019af00a93,MAGPIE,False,False,True,True
+straight from the shoulder,ca4cddc99717fdf792c1,MAGPIE,False,False,True,True
+make a pig's ear of,f51d8b4976b08105c613,MAGPIE,False,False,False,True
+share and share alike,f39f3120e22f5beba267,MAGPIE,False,False,True,True
+laugh all the way to the bank,49a49896a40844755c3f,MAGPIE,False,False,True,True
+have a foot in both camps,986accac0d454e27f563,MAGPIE,False,False,True,True
+swim against the tide,40189275f06a56c9979b,MAGPIE,False,False,True,True
+let sleeping dogs lie,e549a0d42ee18ff72252,LIdiom,False,False,True,True
+sail under false colours,22aff9efeb5a8872a90b,MAGPIE,False,False,True,True
+laugh like a drain,9bd0db35275d7ee3c18e,MAGPIE,False,False,True,True
+slap on the wrist,5ab04c1b32c96ff22753,LIdiom,False,False,True,True
+fight fire with fire,bc450b7e77187a3faaa2,MAGPIE,False,True,False,False
+make a meal of,d26922f5b00c5724b1c6,MAGPIE,False,False,False,True
+lay a finger on,2a20aa73f1f362236a74,MAGPIE,False,False,False,True
+go round in circles,416f6d9ba5681d5a7889,MAGPIE,False,False,True,True
+jobs for the boys,72604c9e05d855e29b98,MAGPIE,False,False,True,True
+live and let live,fbad821f8ddd6576891c,MAGPIE,False,True,True,False
+make a monkey of someone,5df1b1639c719ad59647,MAGPIE,False,False,False,True
+everything in the garden is rosy,07d2cb823d8eae06052c,MAGPIE,False,False,True,True
+you pays your money and you takes your choice,a0e23c66bbfc9d0b9f94,MAGPIE,False,False,True,True
+one in the eye for,1b0bc8643079211e382c,MAGPIE,False,False,False,True
+birds of a feather,8fe0fa8981be2bc10214,MAGPIE,False,False,True,True
+make a virtue of necessity,953a7d721749351572a7,MAGPIE,False,False,True,True
+play to the gallery,b6ab9b2e75560ecf51bb,MAGPIE,False,False,True,True
+sell like hot cakes,293177c7bbcd8b7cc036,MAGPIE,False,False,True,True
+drop someone a line,a673fccf2d4be9b8725a,MAGPIE,False,False,False,True
+smell of the lamp,a37e8baa767601a70e75,MAGPIE,False,False,True,True
+hang by a thread,6ce7a05e2bf4bd5eb9f5,MAGPIE,False,False,True,True
+mutton dressed as lamb,bd6eabefdbefd7025dcb,MAGPIE,False,False,True,True
+I'll eat my hat,70a97fb043f15c282886,MAGPIE,False,False,True,True
+upset the apple cart,3a904fa7e35796fb77a7,MAGPIE,False,False,True,True
+the whole shooting match,447740faf8ee85aa3857,MAGPIE,False,False,True,True
+put someone in mind of,b3bd8fd789331ce3a113,MAGPIE,False,False,False,True
+poor as a church mouse,59b35f8924ccb3226ebd,MAGPIE,False,False,True,True
+on the horns of a dilemma,93e5bd13d39bb694afc1,EPIC,False,False,True,True
+tough as old boots,ddab0c75326c2590454a,MAGPIE,False,False,True,True
+kiss and make up,606acf397fd8cf98a4a6,MAGPIE,False,False,False,True
+on your high horse,56900dbbafd92bb8d073,MAGPIE,False,False,True,True
+one good turn deserves another,2018fb30712ee9e45ba0,LIdiom,False,True,False,False
+rise through the ranks,5231d5440aa5a7b35e33,MAGPIE,False,False,True,True
+joined at the hip,16ef85014d02faf79b9a,MAGPIE,False,False,True,True
+long in the tooth,58cc2568f8954a90ef3d,EPIC,False,False,True,True
+build castles in the air,2cef7dee4c4260bed6b8,MAGPIE,False,False,True,True
+put your foot in it,70afd10af233128ea9a3,MAGPIE,False,False,False,True
+turn the other cheek,a4dbbc58d90b725760fc,MAGPIE,False,False,True,True
+sick as a dog,b0117bc748d35fe2dc73,MAGPIE,False,False,True,True
+sail close to the wind,c51a6155cb9241999c87,MAGPIE,False,False,True,True
+kick over the traces,f80c0bc9c97e8814c0e2,MAGPIE,False,False,True,True
+fit to be tied,d854814e8a0ec903e08c,MAGPIE,False,False,True,True
+gone with the wind,1e8f6f8fbc1a28edef84,MAGPIE,False,False,True,True
+throw someone to the wolves,71bdc21c1cb803a24db0,MAGPIE,False,False,True,True
+clean as a whistle,33215c3ee9320267096c,MAGPIE,False,False,True,True
+up hill and down dale,b0f6782d8e3e4c6a34aa,MAGPIE,False,False,True,True
+pour oil on troubled waters,555830107163a842259d,MAGPIE,False,False,True,True
+see a man about a dog,de82f53b64d49596b8a0,MAGPIE,False,False,True,True
+keep body and soul together,c8de325fb3c9bcdd3433,MAGPIE,False,False,False,True
+fly off the handle,335e31eaa4f067a5a415,MAGPIE,False,False,True,True
+the world and his wife,bec46581c149676c1316,MAGPIE,True,False,True,False
+snug as a bug in a rug,762686b529d7a4c346a1,LIdiom,False,False,True,True
+a penny for your thoughts,745e94d29de416e691e3,ep_by_itself,False,False,True,True
+be left holding the baby,8ed9810ef84420b990c9,MAGPIE,False,False,True,True
+have other fish to fry,298287dcc4c069b8bfd5,MAGPIE,False,False,True,True
+nutty as a fruitcake,6df34e4f3be73508a438,MAGPIE,False,False,True,True
+par for the course,c0bdc39984e84daa557c,MAGPIE,False,False,False,True
+strain at the leash,0ceb6fd699cddff6b7d9,MAGPIE,False,False,True,True
+poor little rich girl,e9f35a5c716afcb2edd1,MAGPIE,False,False,True,True
+man of the cloth,2d8572f0db0a7d7102cc,MAGPIE,False,False,True,True
+sweat like a pig,b1f03efd983c583d3c3e,MAGPIE,False,False,True,True
+like peas in a pod,0b8564a439a626c3de76,MAGPIE,False,False,True,True
+make heavy weather of,d0029f64a5002aafba22,MAGPIE,False,False,False,True
+drunk as a lord,9688c52ff892f7736697,MAGPIE,False,False,True,True
+like a bear with a sore head,70634a23a34282e4a9d2,MAGPIE,False,False,True,True
+kick up your heels,67a2f2baf59708bac8fa,MAGPIE,False,False,True,True
+pushing up the daisies,97e186b790b7015764a1,MAGPIE,False,False,True,True
+to beat the band,4f4d675f9ffb0a3ca9d4,MAGPIE,False,False,True,True
+before you can say Jack Robinson,2d1111502fd2e3cf4acc,MAGPIE,False,False,True,True
+talk nineteen to the dozen,3f54f37b1fbb22034b86,MAGPIE,False,False,True,True
+stick in your craw,a7ec657dc52c6c3fcb5e,MAGPIE,False,False,True,True
+fit like a glove,46fe7450ecf95e5c8bb9,MAGPIE,False,False,True,True
+eat someone out of house and home,a7a44213379650adb6aa,MAGPIE,False,False,False,True
+discretion is the better part of valour,4112a313605efd7af246,MAGPIE,False,False,True,True
+all over bar the shouting,6444f3f0c92c8c0b6184,MAGPIE,False,False,True,True
+cut your coat according to your cloth,61fae7ed7d48b232ba15,MAGPIE,False,False,True,True
+reds under the bed,72cbee44c9e5ace565fb,MAGPIE,False,False,True,True
+hit the right note,f4f681b26fff9c802723,MAGPIE,False,False,True,True
+silent as the grave,3678e522117aa83f81a0,MAGPIE,False,False,True,True
+not miss a trick,42de90f1b7eb9fe5af34,MAGPIE,False,False,True,True
+long time no see,0dc9b6a539266e9d133f,MAGPIE,False,False,False,True
+champ at the bit,98978fdd2101576e032d,MAGPIE,False,False,True,True
+push the boat out,a0ed2fad100fef52f700,MAGPIE,False,False,False,True
+talk of the devil,878cf562a865d828dfc2,MAGPIE,False,False,True,True
+charity begins at home,03c0aad63ce4acdded5c,EPIC,False,False,False,True
+have someone's guts for garters,9be640d07c486b56789a,MAGPIE,False,False,True,True
+"hook, line, and sinker",574e33c760901c5b6881,MAGPIE,False,False,True,True
+not worth the candle,0062e73a0fd48b4e098a,MAGPIE,False,False,True,True
+right up your street,0284ddf57c70d4ae4294,MAGPIE,False,False,True,True
+cut from the same cloth,b6999ae41e6278385adf,MAGPIE,False,False,True,True
+get your hands dirty,481934334c2db0f72621,MAGPIE,False,False,True,True
+tread on someone's toes,119537ea873e28bf3325,MAGPIE,False,False,True,True
+"like father, like son",15f8f2cbc841e0322ec1,MAGPIE,False,True,True,False
+stick to your guns,5e0f65f628e555515e29,MAGPIE,False,False,True,True
+bite the big one,2ebac74a762d0ae9bce8,MAGPIE,False,False,False,True
+not know you are born,09af20581f1ce0abd12c,MAGPIE,False,False,True,True
+stubborn as a mule,86294ca913f2aaca906a,MAGPIE,False,False,True,True
+turn up like a bad penny,039181320c3ef39e56a7,MAGPIE,False,False,True,True
+cruising for a bruising,56c4924fbf8e3bbb7b78,MAGPIE,False,False,True,True
+prop up the bar,d314c28efbb0284e1a76,MAGPIE,False,False,True,True
+run before you can walk,904181118c025aa9ea5d,MAGPIE,False,False,True,True
+hit the ground running,9e0ef09fd83bdebc642b,MAGPIE,False,False,True,True
+lie through your teeth,9bcc23f7e56719183c00,MAGPIE,False,False,True,True
+tell tales out of school,07b384f6cf497bace79f,MAGPIE,False,False,True,True
+rough around the edges,85f901ed1116fc963643,MAGPIE,False,False,True,True
+cast the first stone,ab06b3cc5e77b4b653a7,MAGPIE,False,False,True,True
+up a gum tree,27fa521920efd161cda1,MAGPIE,False,False,True,True
+an Englishman's home is his castle,b44568e5bdfc20599801,MAGPIE,False,False,True,True
+run into the sand,d48750698f789670e5e3,LIdiom,False,False,True,True
+keep your eyes peeled,c1c9db76e5a609fd5248,MAGPIE,False,False,True,True
+make bricks without straw,190444e9d6673c57c140,MAGPIE,False,False,True,True
+every dog has its day,d249fe202aac89a579c1,MAGPIE,True,False,False,False
+bring someone to book,b1837c6259d4ea5343b1,MAGPIE,False,False,True,True
+ask for the moon,cfbf722c88cfecaa27f8,MAGPIE,False,False,True,True
+die on the vine,2189eefd5e092c3b1146,MAGPIE,False,False,True,True
+work your fingers to the bone,e4f4a7d4ae98cf6ea73d,MAGPIE,False,False,True,True
+rob Peter to pay Paul,e68647d64b4a2a7e0346,MAGPIE,False,False,True,True
+whistle in the dark,65fb3b9a88baf067033c,MAGPIE,False,False,True,True
+drink like a fish,5c63d6dd7039d8844df3,MAGPIE,False,False,True,True
+thin as a rake,01c791f41792f43f3f93,MAGPIE,False,False,True,True
+come with the territory,756b200f67b4740932e5,MAGPIE,False,False,True,True
+come out of your shell,2c7dc046b7f605738969,MAGPIE,False,False,True,True
+handsome is as handsome does,6bd5115fb0cd82048240,MAGPIE,False,False,False,True
+full of the joys of spring,e097066628503540cb69,MAGPIE,False,False,True,True
+use a sledgehammer to crack a nut,ce439e835b69e3379a85,MAGPIE,False,False,True,True
+roll up your sleeves,6b04562e8ed26fbbc996,MAGPIE,False,False,True,True
+have the hots for,c533f71a71a6b10694d7,MAGPIE,False,False,False,True
+hit someone for six,771feac0aa44aa153375,MAGPIE,False,False,False,True
+too many chiefs and not enough Indians,847b9bdf588a57c665c9,MAGPIE,False,False,True,True
+"more haste, less speed",5e4ea6118e1c1126266f,MAGPIE,False,False,True,True
+shipshape and Bristol fashion,f661d6372893792b3c92,MAGPIE,False,False,True,True
+put your shoulder to the wheel,99853a02556d58d852c7,MAGPIE,False,False,True,True
+come to a pretty pass,819f261473ef6fdcc689,MAGPIE,False,False,True,True
+swim with the tide,8057afa2b73279f0064b,MAGPIE,False,False,True,True
+carry a torch for,7fa1b149852aad7e8fc1,MAGPIE,False,False,False,True
+could eat a horse,507a6d8f14deb3e8042b,MAGPIE,False,False,True,True
+roll with the punches,9ddcc83c5437af02cd0a,MAGPIE,False,False,True,True
+fire in the belly,a9bbbf96f9ef8e590d43,MAGPIE,False,False,True,True
+beard the lion in his den,64bf757b1f6f16c54c2e,MAGPIE,False,False,True,True
+no peace for the wicked,402b38f7df77e025549e,MAGPIE,False,False,True,True
+lock the stable door after the horse has bolted,6b3d94433c765a116fba,MAGPIE,False,False,True,True
+let someone down gently,296cd6194d7f46307e22,MAGPIE,False,False,True,True
+something nasty in the woodshed,469a61aff636886aa323,MAGPIE,False,False,True,True
+see which way the cat jumps,7df043fd44ef9a74cc39,MAGPIE,False,False,True,True
+blow your own trumpet,99b761eee2fbe9a0a411,MAGPIE,False,False,True,True
+from stem to stern,ba2a24bd983617ecdb04,MAGPIE,False,False,True,True
+have someone by the short and curlies,d30adaf766c07f52cb6f,MAGPIE,False,False,True,True
+keep your eye on the ball,1ddb3e4a4fad40807839,LIdiom,False,False,True,True
+knock someone's block off,e2639e7ad541a0a9d679,MAGPIE,False,False,False,True
+quiet as a mouse,1dd4fb49eba4e35ba140,MAGPIE,False,False,True,True
+spread yourself too thin,aaa436131d86a9822131,MAGPIE,False,False,False,True
+practise what you preach,3f376b69595247248292,MAGPIE,False,False,True,True
+ring off the hook,05f4ddc76be5277ef83b,MAGPIE,False,False,True,True
+a blessing in disguise,c45721580eff7493fc7e,EPIC,False,False,True,True
+beat around the bush,279be6b1b69464d7675a,LIdiom,False,False,True,True
+call it a day,4e2dc2865919c303f726,ep_as_part_of_a_sentence,False,False,False,True
+cut somebody some slack,9e9fb4e5b87f0e0dcc76,ep_as_part_of_a_sentence,False,False,True,True
+get out of hand,1cc6c3204bd3b8245895,ep_as_part_of_a_sentence,False,False,True,True
+get something out of your system,d80261d64187cf0f9fc2,ep_as_part_of_a_sentence,False,False,False,True
+that's the last straw,a87ac8b07ae0c8424bc0,ep_by_itself,False,False,True,True
+time flies when you're having fun,0bd79fe6aadad4cfb7f8,ep_by_itself,True,False,True,False
+wrap your head around something,ce21d6a9e4e8d8ca3223,ep_as_part_of_a_sentence,False,False,False,True
+you can say that again,d46833a7753471e114c0,ep_by_itself,False,False,False,True
+put something on ice,ff060ea17cece2700d3d,ep_as_part_of_a_sentence,False,False,True,True
+rain on someone's parade,849d197bf06b41103f85,ep_as_part_of_a_sentence,False,False,True,True
+a stitch in time saves nine,699b46b76fe043660362,ep_by_itself,False,False,False,True
+as right as rain,a094be8bca3197f36067,ep_as_part_of_a_sentence,False,False,True,True
+bolt from the blue,3ae47277f0c9169d0995,EPIC,False,False,True,True
+fortune favours the bold,9a94ea230fa248290f6b,ep_by_itself,False,False,True,True
+get a second wind,d1b68c754e9c59c25925,ep_as_part_of_a_sentence,False,False,True,True
+get wind of something,b953c6c781ff0a00b149,ep_as_part_of_a_sentence,False,False,False,True
+go down in flames,143d3f3983c7d0c4b328,ep_as_part_of_a_sentence,False,False,True,True
+he's not playing with a full deck,81f84c0041b560e1c5e9,ep_by_itself,False,False,True,True
+he's sitting on the fence,1ad44a0b0fea2e9e8d80,ep_by_itself,False,False,True,True
+it is a poor workman who blames his tools,0319af384e69dc5c0956,ep_by_itself,False,False,True,True
+like riding a bicycle,904793fb016dde454d0e,ep_as_part_of_a_sentence,False,False,True,True
+out of the frying pan and into the fire,5293bbd39a73def2567c,ep_by_itself,False,False,False,True
+run like the wind,3114e61c9a41632b42cb,ep_as_part_of_a_sentence,False,False,True,True
+well begun is half done,234701228c6cad38d622,ep_by_itself,True,False,False,False
+bright as a button,aea2f76ae8d29467094d,EPIC,False,False,True,True
+pain in the neck,0c4717b63ff4eb1187b7,EPIC,False,False,True,True
+salt of the earth,3ea835837f815e458b63,EPIC,False,False,True,True
+in the best of health,27744b3d0ad3f01f3c55,EPIC,False,False,True,True
+in the eyes of the law,d5c9ca3236ae9a9ce45d,EPIC,False,False,True,True
+to a fine art,14d2b361b81a9e72895f,EPIC,False,False,True,True
+man in the street,e85e91279a39a4f95655,EPIC,False,False,True,True
+money for old rope,d31025fa5e8b7525fbd4,EPIC,False,False,True,True
+white as a sheet,564f4969deb2e22dddd0,EPIC,False,False,True,True
+cream of the crop,e9a2d7d78f7a19678b0d,EPIC,False,False,True,True
+a whole new ball game,36d1710d41c237fd0d72,EPIC,True,False,True,False
+an act of war,6142c3f4df5925d585a8,EPIC,False,False,True,True
+an arm and a leg,b1a82aa8b1e099d8e1c9,EPIC,True,False,True,False
+an eye for an eye,9c0788e2a30ed5f129b1,EPIC,True,True,True,False
+as poor as a church mouse,f36cc4349965bae69fca,EPIC,False,False,True,True
+cock and bull story,ca6b4bc392357de72ec4,EPIC,False,False,True,True
+icing on the cake,0cca489a96271b65f9c3,EPIC,False,False,True,True
+a load of cobblers,69a0c720c30fb8b524d8,EPIC,False,False,True,True
+a shot in the dark,10c54f3393cde022edb3,EPIC,False,False,True,True
+first come first served,cb12d86e31f30d46bfe5,EPIC,False,False,True,True
+hold on a second,959033c7d18fa04c225e,EPIC,False,False,False,True
+son of a gun,2949f615bd791e615701,EPIC,False,False,True,True
+put salt on his tail,e4acf0a4bf0502817067,LIdiom,False,False,True,True
+one card shy of a full deck,2334255cfe358a3ec42e,LIdiom,False,False,True,True
+be in seventh heaven,104e23aea33ccede6fb4,LIdiom,False,False,True,True
+pull someone's bacon out of the fire,5a4c486603ffc8ec12d1,LIdiom,False,False,False,True
+butterflies in my stomach,17393f74fdfb555cef7f,LIdiom,False,False,True,True
+look like a million dollars,4365c696fdfd6ed01df6,LIdiom,True,False,True,False
+be happy when a person leaves,0421dc9a24d66dc28293,LIdiom,False,False,True,True
+up a creek without a paddle,84ad608879020c047d49,LIdiom,False,False,True,True
+you can bet your life on that,8f3cfc98fdc90ec40fcc,LIdiom,False,False,False,True
+red in the face,b23059d518713894d32b,LIdiom,False,False,True,True
+hold your tongue back,8e6bcd9c2914285c1f6c,LIdiom,False,False,False,True
+land on one's feet,9da1bc9460c531267feb,LIdiom,False,False,True,True
+the forbidden fruit is the sweetest,c3771be18af0e9a1a632,LIdiom,False,False,True,True
+cut to the chase,7d39dd1a7afc164e1e9e,LIdiom,False,False,True,True
+talk the hind legs off a donkey,c8c00600d020afea9f39,LIdiom,False,False,True,True
+"east or west, home is best",784eb36c3eb581638a00,LIdiom,False,False,False,True
+don't wash your dirty laundry in public,3e6e64e1c0ed2d5ed3a3,LIdiom,False,False,True,True
+arm and a leg,f541b4b9217ea97cc909,LIdiom,False,False,True,True
+"made your bed, now lie",260ace6c7361d8835f48,LIdiom,False,False,True,True
+old chicken makes good soup,92fc3bde57733a7129bc,LIdiom,False,False,True,True
+tip of the iceberg,a30a20e94e2b0c5a6390,LIdiom,False,False,True,True
+cat got your tongue,8369899e9795f690fd20,LIdiom,False,False,True,True
+neither a borrower or a lender be,779be26b86317dc4da7d,LIdiom,False,False,False,True
+while there is life there is hope,8f1c5cf3bdfcdae8e80b,LIdiom,False,False,True,True
+bet your bottom dollar,7f23a47b98bd47b654d5,LIdiom,False,False,True,True
+dumb as a post,8158a8f6b4cc793eb39b,LIdiom,False,False,True,True
+all sizzle and no steak,6dfc22d426f6a92694d1,LIdiom,False,False,True,True
+all the way to egery and back,edcf8b59886a4ab25de4,LIdiom,False,False,False,True
+not a spark of decency,da69fb79706343a5e53a,LIdiom,False,False,True,True
+a skeleton in the closet,cde5466837125990ec70,LIdiom,False,False,True,True
+lose sleep over it,e7b4097972df8a12163c,LIdiom,False,False,False,True
+penny for your thoughts,7077eeeebf2ee14d7f6d,LIdiom,False,False,True,True
+picture paints a thousand words,b6edfa913ed5a3728def,LIdiom,False,False,False,True
+method to my madness,4b8b95f11d6efd660fbb,LIdiom,False,False,True,True
+a voice crying in the wilderness,9da9d43b78ec6feb746d,LIdiom,False,False,True,True
+cast in the same mould,8f62205fa58eff25bd86,LIdiom,False,False,True,True
+as old as the hills,50704ef4661ba7a07b59,LIdiom,False,False,True,True
+roll up one's sleeves,4302a2200b182757df39,LIdiom,False,False,True,True
+company in distress makes sorrow less,4673a154bc26b23495a6,LIdiom,False,False,False,True
+your belly button is bigger than your stomach,d6e438eb874b85635138,LIdiom,False,False,True,True
+no flying from fate,777bc78a647e843c486e,LIdiom,False,False,True,True
+speak off the cuff,dfa8921d0511a67b88ba,LIdiom,False,False,True,True
+a friend in need,df6d8f905d7cef4c5ad8,LIdiom,False,False,False,True
+a cold day in hell,8a890dbf2e38a48c2e39,LIdiom,False,False,True,True
+it doesn't hurt to ask,d7e3f5d478de483b2558,LIdiom,False,False,False,True
+whale of a time,b62b315afec0fd0e79ae,LIdiom,False,False,False,True
+elvis has left the building,e2f272621880216d7bcc,LIdiom,False,False,True,True

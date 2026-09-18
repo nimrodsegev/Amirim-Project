@@ -1,0 +1,90 @@
+\section{Introduction}
+\label{sec:intro}
+
+A decoder-only language model emits one token per forward pass, and pays the
+full depth of the network for each one. This is not obviously necessary. Some
+continuations are all but fixed by the time the model has read a few tokens:
+after \textit{the Empire}, in a sentence about New York, very little other than
+\textit{State Building} can follow. If the model's hidden state at
+\textit{Empire} already encodes \textit{State Building}, then the two forward
+passes that produce those tokens are, in an information-theoretic sense,
+re-deriving something the model had already computed.
+
+Recent interpretability work has shown that language models do build
+representations of units larger than a single token. \citet{kaplan-etal-2025-tokens}
+demonstrate an \emph{intrinsic detokenization} process: when a word is split
+into several subword tokens, information from the earlier pieces is aggregated
+into the last one, and the resulting state behaves like a representation of the
+whole word, even for words the tokenizer never emits as a unit. That result,
+however, concerns a unit the model has \emph{already finished reading}. It
+establishes that the model consolidates evidence backwards, not that it
+anticipates forwards. The question we ask here is the forward one, and it is
+the one with consequences for how models are run:
+
+\begin{quote}
+Given a partial phrase, does the model's internal representation already encode
+the rest, before it has read or generated any of it?
+\end{quote}
+
+We study this for \emph{fixed multi-word expressions} --- idioms, landmark
+names, and film titles --- because for these the continuation is well defined,
+and because their frequency in pretraining data makes them the most favourable
+case. If anticipation does not happen here, it is unlikely to happen anywhere.
+We index the question by \emph{lookahead distance} $i$: the number of phrase
+tokens still unread at the point where we interrupt the model. At $i=4$ in
+\textit{The Lord of the Rings}, the model has read only \textit{The}, and we ask
+whether \textit{Lord of the Rings} is recoverable from its state.
+
+Recoverable by what means, however, turns out to matter as much as the answer.
+We use two readouts on the same interrupted states. The first is
+Patchscopes \citep{ghandeharioun-etal-2024-patchscopes}: we lift the hidden
+state at the cut position and inject it into an unrelated prompt, and ask
+whether the model verbalises the remaining tokens. The second simply lets the
+model continue generating from the true prefix it has actually seen. The first
+asks what a vector contains; the second asks what the model does. Prior work
+treats a successful Patchscopes readout as evidence that the model ``knows''
+something, and we wanted to know how far that licence extends.
+
+Our findings are as follows. Phrase-level anticipation is real and substantial:
+in natural context, OLMo-2-7B produces the final two tokens of a familiar phrase
+in $84.0\%$ of instances, and the final five in $53.6\%$, against $59.2\%$ and
+$17.6\%$ for the same phrases in isolation (\S\ref{sec:lookahead}). It is a
+stable property of the phrase rather than of the occasion: per-phrase success at
+$i=3$ is far more bimodal than independent per-context variation would produce,
+with $31.5\%$ of phrases succeeding in at least $90\%$ of their contexts against
+a binomial expectation of $10.1\%$ (\S\ref{sec:stability}). And the signal is
+decodable: a small
+classifier reading the raw hidden state predicts whether the model will in fact
+complete the phrase at $76.8\%$ balanced accuracy and $87.6\%$ precision
+(\S\ref{sec:probe}).
+
+The two readouts, however, do not measure the same thing. Run on identical
+instances, they agree on only $81.1\%$ of them, and their disagreements run in
+both directions --- $1{,}924$ instances recovered only by Patchscopes against
+$2{,}751$ recovered only by generation (\S\ref{sec:disagreement}). They order
+the three phrase categories differently, and the two probes trained on their
+respective labels place the ``best'' layer in different parts of the network.
+We take this as a caution rather than a refutation: Patchscopes remains
+informative about representational content, but a claim of the form \emph{the
+model knows $X$ at layer $\ell$} is not readout-independent, and should say
+which instrument produced it.
+
+Concretely, we contribute:
+
+\begin{enumerate}[nosep,leftmargin=*]
+\item A lookahead-distance protocol for measuring phrase anticipation, applied
+      to $1{,}164$ fixed expressions both in isolation and in $9{,}955$
+      naturally occurring FineWeb-Edu contexts, with two independent readouts
+      run on identical instances (\S\ref{sec:method}).
+\item Evidence that anticipation of familiar phrases occurs several tokens
+      ahead, is greatly strengthened by natural context, and is a stable
+      property of the phrase (\S\ref{sec:lookahead}--\S\ref{sec:stability}).
+\item A direct comparison showing that the two readouts disagree substantially
+      and asymmetrically, and that conclusions about category difficulty and
+      layer localisation depend on which one is used
+      (\S\ref{sec:disagreement}).
+\item A hidden-state probe that predicts real completion success well above
+      chance from the first transformer layer onward, together with an
+      adjudication of its apparent errors showing that roughly four in five are
+      valid alternate phrasings rather than failures (\S\ref{sec:probe}).
+\end{enumerate}
