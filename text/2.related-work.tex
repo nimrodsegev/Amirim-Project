@@ -18,8 +18,9 @@ gathers information early and later layers operate on the consolidated state.
 
 \paragraph{Idioms and memorised sequences.}
 \citet{haviv-etal-2023-understanding} study how transformers recall memorised
-idiom completions, locating an early-layer stage that promotes the memorised
-continuation and a later stage that refines it. Their focus is the mechanism of
+idiom completions, and find the process to be two-stage: early layers promote
+the memorised token to the top of the output distribution, and upper layers
+raise the model's confidence in it. Their focus is the mechanism of
 recall for a single target token; we measure how far ahead recall extends and
 how it varies across phrases and contexts. Our idiom set is drawn from
 MAGPIE \citep{haagsma-etal-2020-magpie} and
@@ -79,8 +80,9 @@ several tokens with a cheaper process and verifies them with the target model;
 multi-token prediction heads \citep{gloeckle-etal-2024-better} train the model
 to emit several tokens at once; and LayerSkip
 \citep{elhoushi-etal-2024-layerskip} exits early and self-speculates.
-\citet{aynetdinov-akbik-2025-babies} study when such lookahead ability emerges
-during training.
+\citet{aynetdinov-akbik-2025-babies} show that a multi-token prediction
+objective helps even 130M-parameter models under severe data constraints,
+suggesting the capacity to train for lookahead is not confined to large models.
 
 Closest to the use our probe suggests is
 CLP \citep{xie-zhou-2026-clp}, which trains a single small linear layer on the

@@ -82,10 +82,11 @@ assert len(ctx) == len(gen)
 assert all(a["phrase"] == b["phrase"] for a, b in zip(ctx, gen))
 cont = collections.defaultdict(collections.Counter)
 for a, b in zip(ctx, gen):
-    for i in set(a["per_i"]) & set(b["per_i"]):
+    for i in sorted(set(a["per_i"]) & set(b["per_i"]), key=int):
         cont[int(i)][(bool(a["per_i"][i]["success"]), bool(b["per_i"][i]["success"]))] += 1
 agree = {}
-for i, c in cont.items():
+for i in sorted(cont):
+    c = cont[i]
     n = sum(c.values())
     agree[i] = {
         "n": n,
@@ -324,6 +325,33 @@ print(f"wrote {OUT}")
 
 # ---- Additional transcribed results (August 2026 deck) --------------------
 NUM = json.load(open(OUT))
+NUM["external"]["clp_pilot"] = {
+    "note": ("Separate reproduction of CLP (Xie and Zhou, 2026) on Qwen3.5-2B "
+             "with the adaptive-mtp toolkit. Not a result of this paper; cited "
+             "in the Conclusion only. Ten held-out prompts, the whole test set "
+             "available. Source: sources/notes/clp_reproduction_summary.pdf and "
+             "the project assistant's records."),
+    "test_prompts": 10,
+    "speedup_vs_autoregressive": {
+        "plain_autoregressive": 1.00, "entropy": 1.30, "max_probability": 1.37,
+        "margin": 1.35, "history": 1.42, "clp": 1.34,
+        "fixed_k4": 1.72, "fixed_k2": 1.57,
+    },
+    "tokens_per_second": {
+        "plain_autoregressive": 45.6, "entropy": 59.1, "max_probability": 62.4,
+        "margin": 61.7, "history": 64.9, "clp": 61.0,
+        "fixed_k4": 78.2, "fixed_k2": 71.5,
+    },
+    "mismatched_prompts_out_of_10": {"clp": 2, "fixed_k": 6},
+    "clp_paper_reported_speedup_range": [1.14, 1.29],
+    "correctness_caveat": ("Divergences from autoregressive output appeared for "
+                           "every drafting policy tested, including fixed-length "
+                           "ones with no adaptive logic, so the cause appears to "
+                           "be the model's interaction with the inference engine "
+                           "rather than any policy. Frequency scaled with how "
+                           "aggressively a policy drafted."),
+}
+
 NUM["external"]["layer_group_pooling"] = {
     "note": ("Deck slide 11. Grouping the eight probed layers into A={5,7}, "
              "B={10,13,15}, C={20,25,30} and asking, per phrase, which groups "

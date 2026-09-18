@@ -94,5 +94,5 @@ ax.text(50, 1.4, "Patchscopes asks what the vector contains; generation asks "
         fontsize=6.9, ha="center", color=GREY, style="italic")
 
 Path("figures").mkdir(exist_ok=True)
-fig.savefig("figures/protocol.pdf")
+fig.savefig("figures/protocol.pdf", metadata={"CreationDate": None})
 print("wrote figures/protocol.pdf")

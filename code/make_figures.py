@@ -20,7 +20,7 @@ IS = [2, 3, 4, 5]
 
 
 def save(fig, name):
-    fig.savefig(FIG / f"{name}.pdf")
+    fig.savefig(FIG / f"{name}.pdf", metadata={"CreationDate": None})
     plt.close(fig)
     print("  wrote figures/" + name + ".pdf")
 
