@@ -78,6 +78,16 @@ When a language model is partway through a familiar multi-word expression, does 
 - **Venue: ACL long paper.** Drives the 8-page main body and what goes to appendix.
 - **Context duplication corrected.** 44.8% of collected instances repeat a context (collector resumed from an earlier five-context run). This is a bug the deck predates. Aggregate rates are unaffected (64.8% → 64.5% at i=3), but it had inflated the per-phrase bimodality result, which is now computed over distinct contexts against a binomial null and is stronger for it. Documented in §4, Limitations, and `results/README.md`.
 
+### Settled (2026-09-19, from the project assistant's records)
+
+- **The LLM judge was ChatGPT, not Claude**, and the model version was not recorded. The prompt is now reproduced verbatim in Appendix A.8, and Limitations says the run is not exactly reproducible and should be repeated with a named model. An informal second pass by a different assistant is *not* reported, since it used no fixed rubric.
+- **Future Lens** (Pal et al., CoNLL 2023) was missing and is the closest prior work — it asks the same question in general form, using the same transplant technique that Patchscopes later generalised. Now cited in the Introduction, Related Work (its own paragraph) and Method, with an explicit statement of what we add: an externally-defined target, a repetition structure across contexts, and a comparison against the model's own behaviour rather than against its own predictions.
+- **Confidence is the geometric mean** of per-token probabilities, not the arithmetic mean. Corrected; medians added.
+- **A judge-free replication of the false-positive result** was available and is now included: 40.0% of the 412 cases had the model itself confident (>0.7), 10.4% unsure (<0.3). This is the more reproducible of the two analyses and agrees with the adjudication.
+- **The L2 dip** under the patchscopes label is now reported in Appendix A.6 as an unresolved artifact (tiny positive class, no multi-seed check run), alongside the L1 surprise (76.6% balanced accuracy after one block).
+- **Feature files are intact on the cluster** (1.28 GB and 3.02 GB), so the probe results are reproducible there. Limitations updated to say so rather than implying they are lost.
+- **The CLP reproduction** is mentioned in one sentence in the Conclusion: ~1.34x throughput, not beating a fixed-draft baseline. Deliberately framed as bounding the prize rather than as a result of this paper. Summary PDF in `sources/notes/`. The CLP source paper is not cited because it was not identified.
+
 ### Still open for the authors
 
 - Whether the editorial center is right. The brief was reconstructed from the deck, the July reports and the raw files, not from a live author interview — its read on what the paper is *for* is the agent's inference.

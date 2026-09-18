@@ -669,14 +669,6 @@
     }
   },
   "agreement_32L": {
-    "2": {
-      "n": 9148,
-      "both": 6757,
-      "patchscopes_only": 521,
-      "generation_only": 923,
-      "neither": 947,
-      "agreement_pct": 84.2
-    },
     "1": {
       "n": 9148,
       "both": 8584,
@@ -684,6 +676,14 @@
       "generation_only": 129,
       "neither": 163,
       "agreement_pct": 95.6
+    },
+    "2": {
+      "n": 9148,
+      "both": 6757,
+      "patchscopes_only": 521,
+      "generation_only": 923,
+      "neither": 947,
+      "agreement_pct": 84.2
     },
     "3": {
       "n": 8529,
@@ -693,14 +693,6 @@
       "neither": 2216,
       "agreement_pct": 80.9
     },
-    "5": {
-      "n": 2386,
-      "both": 933,
-      "patchscopes_only": 175,
-      "generation_only": 347,
-      "neither": 931,
-      "agreement_pct": 78.1
-    },
     "4": {
       "n": 4677,
       "both": 1968,
@@ -708,6 +700,14 @@
       "generation_only": 632,
       "neither": 1632,
       "agreement_pct": 77.0
+    },
+    "5": {
+      "n": 2386,
+      "both": 933,
+      "patchscopes_only": 175,
+      "generation_only": 347,
+      "neither": 931,
+      "agreement_pct": 78.1
     },
     "6": {
       "n": 1123,
@@ -765,14 +765,6 @@
       "neither": 0,
       "agreement_pct": 57.1
     },
-    "13": {
-      "n": 20,
-      "both": 4,
-      "patchscopes_only": 7,
-      "generation_only": 6,
-      "neither": 3,
-      "agreement_pct": 35.0
-    },
     "14": {
       "n": 20,
       "both": 2,
@@ -781,13 +773,13 @@
       "neither": 14,
       "agreement_pct": 80.0
     },
-    "17": {
-      "n": 10,
-      "both": 0,
-      "patchscopes_only": 0,
-      "generation_only": 4,
-      "neither": 6,
-      "agreement_pct": 60.0
+    "13": {
+      "n": 20,
+      "both": 4,
+      "patchscopes_only": 7,
+      "generation_only": 6,
+      "neither": 3,
+      "agreement_pct": 35.0
     },
     "15": {
       "n": 10,
@@ -798,6 +790,14 @@
       "agreement_pct": 60.0
     },
     "18": {
+      "n": 10,
+      "both": 0,
+      "patchscopes_only": 0,
+      "generation_only": 4,
+      "neither": 6,
+      "agreement_pct": 60.0
+    },
+    "17": {
       "n": 10,
       "both": 0,
       "patchscopes_only": 0,
@@ -998,6 +998,24 @@
       25,
       30
     ],
+    "probe_config": {
+      "architecture": "MLP, one hidden layer of 32 units",
+      "split": "GroupShuffleSplit by phrase, 80/20",
+      "class_balance": "majority class downsampled in the training set only",
+      "pooled_i": [
+        2,
+        3,
+        4,
+        5
+      ],
+      "seed": 42,
+      "analysis_layer_for_falsepos_and_confidence": 25,
+      "feature_files": {
+        "probing_features.npz": "1.28 GB",
+        "generation_probing_features.npz": "3.02 GB",
+        "status": "present on the compute cluster; too large to distribute, but the runs are reproducible from them"
+      }
+    },
     "patchscopes_label_probe": {
       "pos_rate_pct": {
         "5": 6.6,
@@ -1108,6 +1126,7 @@
         "2": 66.5,
         "5": 69.8
       },
+      "early_layers_note": "Monotone, with no irregularity at L2. The patchscopes-label probe on the same states dips at L2 (55.4%, down from 76.6% at L1); that dip is most likely instability from a positive class of 0.6-1.2%, but no multi-seed check was run to confirm it.",
       "early_layers_precision_pct": {
         "0": 75.4,
         "1": 80.6,
@@ -1208,8 +1227,11 @@
       "movie": 54.7
     },
     "generation_confidence": {
+      "definition": "Geometric mean of the probability the model assigned to each token it actually generated, over the steps needed to complete the phrase.",
       "mean_when_success": 0.878,
       "mean_when_failure": 0.447,
+      "median_when_success": 0.934,
+      "median_when_failure": 0.416,
       "by_probe_outcome_L25": {
         "true_positive": {
           "n": 2491,
@@ -1237,7 +1259,20 @@
       "n": 412,
       "valid_alternate_pct": 62.9,
       "partially_right_pct": 17.5,
-      "unrelated_pct": 19.7
+      "unrelated_pct": 19.7,
+      "counts": {
+        "valid_alternate": 259,
+        "partially_right": 72,
+        "unrelated": 81
+      },
+      "judge": "ChatGPT (web interface); the specific model version was not recorded at the time. The prompt is reproduced verbatim in the appendix. A separate informal pass by a different assistant reached a similar split but used no fixed rubric and is not reported."
+    },
+    "false_positive_by_model_confidence": {
+      "n": 412,
+      "model_confident_gt_0_7_pct": 40.0,
+      "model_unsure_lt_0_3_pct": 10.4,
+      "middle_pct": 49.6,
+      "note": "Independent of the LLM adjudication; splits the same 412 cases by the model's own confidence."
     },
     "qwen25_14b_generation_pct": {
       "isolated": {

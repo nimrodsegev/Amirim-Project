@@ -28,6 +28,9 @@ the kind of signal a decoding scheme could use to commit several tokens at once
 rather than paying full depth for each. We are pursuing that direction
 separately, as an adaptive multi-token prediction policy evaluated against an
 autoregressive baseline under exact verification; nothing in the present paper
-depends on its outcome. Whether an extractor of this kind can be made cheap
-enough to be worth its own cost, and whether the phrases it fires on are frequent
-enough to matter in ordinary text, remain open.
+depends on its outcome. An early pilot there is instructive about the size of
+the prize: a confidence-gated draft-length policy reached roughly $1.34\times$
+the throughput of plain autoregressive decoding, but did not beat a far simpler
+policy that always drafts a fixed number of tokens ahead. On that evidence the
+open question is not whether anticipation exists --- this paper says it does ---
+but whether reading it out adaptively is worth more than not bothering.

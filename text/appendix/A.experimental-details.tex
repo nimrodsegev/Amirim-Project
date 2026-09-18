@@ -78,6 +78,36 @@ single context checked at a single layer would give, and the duplicate-context
 issue of \S\ref{sec:setup} inflates them further. The ordering is the
 informative part, not the levels.
 
+\subsection{Probe configuration}
+
+Both probes use an MLP with a single hidden layer of $32$ units, trained on the
+standardised hidden state at the cut position. Data are pooled over
+$i \in \{2,3,4,5\}$ and split $80/20$ with \texttt{GroupShuffleSplit} grouped by
+phrase, so no phrase appears in both partitions; the majority class is
+downsampled in the training set only, and the test set is left at its natural
+distribution. All reported runs use seed $42$. The false-positive and
+confidence analyses of \S\ref{sec:falsepos} use the L25 probe.
+
+\subsection{The L2 irregularity under the Patchscopes label}
+
+Figure~\ref{fig:early} reports the generation-label probe at the earliest
+layers, where it climbs smoothly. The Patchscopes-label probe on the
+\emph{same} hidden states does not: it reaches $76.6\%$ balanced accuracy at L1,
+drops to $55.4\%$ at L2, and recovers to $76.0\%$ at L5. We do not think the dip
+is a property of layer 2. Patchscopes itself almost never succeeds this early
+--- $0.7\%$ at L0, $0.8\%$ at L1, $1.6\%$ at L2 --- so the positive class at
+these layers is $0.6$--$1.2\%$ of the data, or roughly $100$ to $250$ examples,
+and a single split can swing on sampling luck alone. The generation label, whose
+positive rate is a fixed $69.1\%$ at every layer, shows no such irregularity on
+the same states. We did not run a multi-seed check to confirm this, so we report
+it as an unresolved artifact rather than a finding.
+
+The L1 result is worth flagging in the other direction: $76.6\%$ balanced
+accuracy from the state after a single transformer block, on a label that
+Patchscopes itself can satisfy less than $1\%$ of the time at that depth. Some
+of what the probe reads is evidently available very early, whatever the
+transplant can or cannot verbalise there.
+
 \subsection{Probe generalisation to unseen categories}
 
 Training the generation-label probe on two phrase categories and testing on the
@@ -118,6 +148,44 @@ quality --- under a positive rate that moves from $6.6\%$ to $47.7\%$ across
 layers. On $F_1$ the generation-label probe only beats the trivial
 always-predict-success baseline ($81.7$) at L30 ($82.9$), because that baseline
 buys perfect recall for free on a $69.1\%$-positive test set.
+
+\subsection{False-positive adjudication prompt}
+\label{app:judge}
+
+The $412$ false positives of \S\ref{sec:falsepos} were adjudicated by presenting
+them to ChatGPT in a single batch. The model version was not recorded; this is a
+reproducibility gap and the run should be repeated with a named model. The
+prompt was:
+
+\begin{quote}\small
+I have 412 cases where a language model was supposed to complete a phrase (a
+well-known idiom, movie title, or landmark name) but its actual output didn't
+exactly match the target string. For each one, I have the target (the correct
+completion) and what the model actually generated. I want you to classify each
+case into exactly one of three categories:
+
+\textbf{Valid alternate} --- the model's answer means the same thing or is a
+genuinely acceptable variant (a synonym, a common alternate phrasing of the same
+idiom, a spelling variant, a grammatically different but equivalent form, or a
+very reasonable related answer like a sequel number).
+
+\textbf{Partially right} --- the model got some of it right but changed or
+dropped something meaningful, so it's not quite equivalent but clearly shows
+real knowledge of the target.
+
+\textbf{Unrelated} --- the model's output has no real connection to the target;
+it looks like genuine confusion.
+
+For each of the 412 lines below, respond with just the number and the category
+(e.g., ``1. Valid alternate''). At the end, give me a total count and percentage
+for each of the three categories.
+\end{quote}
+
+Each case was supplied on one line as
+\texttt{N. PHRASE: <phrase> | TARGET: <target> | GENERATED: <generated text>}.
+The rubric wording, in particular the instruction that a variant counts as
+valid, plainly invites a generous reading; the resulting split should be taken
+as an upper bound on how many of these are not real errors.
 
 \subsection{Reproducing the numbers}
 

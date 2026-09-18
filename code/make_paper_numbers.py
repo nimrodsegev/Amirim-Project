@@ -219,6 +219,19 @@ out["external"] = {
              "Values below are transcribed from the July 2026 analysis reports "
              "and the August 2026 summary deck."),
     "layers_probed": [5, 7, 10, 13, 15, 20, 25, 30],
+    "probe_config": {
+        "architecture": "MLP, one hidden layer of 32 units",
+        "split": "GroupShuffleSplit by phrase, 80/20",
+        "class_balance": "majority class downsampled in the training set only",
+        "pooled_i": [2, 3, 4, 5],
+        "seed": 42,
+        "analysis_layer_for_falsepos_and_confidence": 25,
+        "feature_files": {
+            "probing_features.npz": "1.28 GB", 
+            "generation_probing_features.npz": "3.02 GB",
+            "status": "present on the compute cluster; too large to distribute, but the runs are reproducible from them",
+        },
+    },
     "patchscopes_label_probe": {
         "pos_rate_pct":   {"5": 6.6, "7": 14.7, "10": 18.8, "13": 16.9, "15": 18.5, "20": 36.8, "25": 47.7, "30": 40.2},
         "accuracy_pct":   {"5": 89.6, "7": 82.7, "10": 82.3, "13": 81.1, "15": 82.0, "20": 72.4, "25": 68.2, "30": 67.6},
@@ -234,6 +247,12 @@ out["external"] = {
         "precision_pct":  {"5": 83.3, "7": 84.2, "10": 84.9, "13": 85.6, "15": 86.1, "20": 85.8, "25": 86.2, "30": 87.6},
         "auc_roc":        {"5": 0.76, "7": 0.78, "10": 0.80, "13": 0.81, "15": 0.81, "20": 0.80, "25": 0.81, "30": 0.83},
         "early_layers_balanced_accuracy_pct": {"0": 58.6, "1": 65.1, "2": 66.5, "5": 69.8},
+        "early_layers_note": ("Monotone, with no irregularity at L2. The "
+                              "patchscopes-label probe on the same states dips "
+                              "at L2 (55.4%, down from 76.6% at L1); that dip "
+                              "is most likely instability from a positive class "
+                              "of 0.6-1.2%, but no multi-seed check was run to "
+                              "confirm it."),
         "early_layers_precision_pct": {"0": 75.4, "1": 80.6, "2": 80.9, "5": 83.3},
         "held_out_category_balanced_accuracy_pct": {
             "none":     {"13": 73.6, "25": 74.6, "30": 76.8},
@@ -263,7 +282,11 @@ out["external"] = {
     },
     "category_8L_pooled_i2_5_pct": {"building": 47.2, "idiom": 57.4, "movie": 54.7},
     "generation_confidence": {
+        "definition": ("Geometric mean of the probability the model assigned to "
+                       "each token it actually generated, over the steps needed "
+                       "to complete the phrase."),
         "mean_when_success": 0.878, "mean_when_failure": 0.447,
+        "median_when_success": 0.934, "median_when_failure": 0.416,
         "by_probe_outcome_L25": {
             "true_positive":  {"n": 2491, "mean": 0.904, "median": 0.950},
             "false_negative": {"n": 864,  "mean": 0.791, "median": 0.824},
@@ -273,6 +296,19 @@ out["external"] = {
     },
     "false_positive_llm_judgement": {
         "n": 412, "valid_alternate_pct": 62.9, "partially_right_pct": 17.5, "unrelated_pct": 19.7,
+        "counts": {"valid_alternate": 259, "partially_right": 72, "unrelated": 81},
+        "judge": ("ChatGPT (web interface); the specific model version was not "
+                  "recorded at the time. The prompt is reproduced verbatim in "
+                  "the appendix. A separate informal pass by a different "
+                  "assistant reached a similar split but used no fixed rubric "
+                  "and is not reported."),
+    },
+    "false_positive_by_model_confidence": {
+        "n": 412,
+        "model_confident_gt_0_7_pct": 40.0,
+        "model_unsure_lt_0_3_pct": 10.4,
+        "middle_pct": 49.6,
+        "note": "Independent of the LLM adjudication; splits the same 412 cases by the model's own confidence.",
     },
     "qwen25_14b_generation_pct": {
         "isolated": {"1": 82.1, "2": 54.3, "3": 28.4, "4": 18.8, "5": 17.4, "6": 11.8, "7": 13.9, "8": 15.4},

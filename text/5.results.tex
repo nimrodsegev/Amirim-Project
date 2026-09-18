@@ -292,24 +292,36 @@ judge's adjudication of all $412$ probe false positives.}
 The probe's precision is bounded by the scoring criterion, not only by the
 model. We adjudicated all $412$ false positives of the generation-label probe at
 L25 --- cases where the probe predicted completion and exact-match scoring
-recorded a failure --- using an LLM judge asked whether the generated text means
-the same as the target. It labelled $62.9\%$ valid alternates, $17.5\%$
-partially correct and $19.7\%$ unrelated (Figure~\ref{fig:conf}, right).
+recorded a failure --- by presenting each (target, generated text) pair to
+ChatGPT with a three-way rubric and asking which category it fell into. The
+prompt is reproduced verbatim in Appendix~\ref{app:judge}. It labelled $259$
+cases ($62.9\%$) valid alternates, $72$ ($17.5\%$) partially correct and $81$
+($19.7\%$) unrelated (Figure~\ref{fig:conf}, right).
 Table~\ref{tab:falsepos} gives examples: \textit{laughs best} for
 \textit{laughs loudest}, \textit{plowshares} for \textit{ploughshares},
 \textit{beat around the bush} for \textit{beat about the bush} --- in each case
 the more common form of the expression, scored as a failure.
 
-Read cautiously --- this is a single unvalidated judge, and we report it as
-indicative rather than as a corrected accuracy --- it suggests that roughly four
+Read cautiously --- this is a single judge, with no human validation, no
+inter-annotator agreement, and, as we note in the Limitations, no record of
+which ChatGPT model version produced it --- the split suggests that roughly four
 in five of these apparent errors reflect the rigidity of exact matching rather
-than a model that did not know the phrase. The direction of the bias is
-consistent across our analyses: our reported rates are conservative.
+than a model that did not know the phrase. We report it as indicative of the
+direction of the bias, not as a corrected accuracy. That direction is consistent
+across our analyses: the rates we report are conservative.
+
+An independent split of the same $412$ cases by the model's own confidence
+points the same way. In $40.0\%$ of them the model was itself confident
+($>0.7$), which is the signature of a valid alternate; in only $10.4\%$ was it
+unsure ($<0.3$), the signature of real confusion. The remaining $49.6\%$ fall in
+between. This uses no judge at all, and agrees with the adjudication that most
+of these are not failures of knowledge.
 
 \paragraph{The model's own confidence tracks the real outcome.}
-Averaging the probability the model assigns to each token it generates, mean
-confidence is $0.878$ on successful completions and $0.447$ on failures --- a
-usable signal in its own right. Split by probe outcome at L25
+Taking the geometric mean of the probability the model assigns to each token it
+generates over the steps needed to complete the phrase, mean confidence is
+$0.878$ on successful completions and $0.447$ on failures (medians $0.934$ and
+$0.416$) --- a usable signal in its own right. Split by probe outcome at L25
 (Figure~\ref{fig:conf}, left), confidence follows the true label rather than the
 probe's guess: true positives average $0.904$ and false negatives $0.791$, while
 false positives average $0.599$ and true negatives $0.414$. The ordering is by

@@ -37,7 +37,8 @@ $p$ in two ways. Both take the same input and differ only in what is done with
 it.
 
 \paragraph{Patchscopes readout.}
-Following \citet{ghandeharioun-etal-2024-patchscopes}, we take the hidden state
+Following \citet{ghandeharioun-etal-2024-patchscopes}, and ultimately the causal
+intervention of \citet{pal-etal-2023-future}, we take the hidden state
 $h^{\ell}_p$ at layer $\ell$ and position $p$, and substitute it for the token
 embedding of \texttt{X} in the prompt \texttt{"Repeat this: X"}. We then decode
 greedily for $i+3$ tokens. The readout succeeds at layer $\ell$ if the target

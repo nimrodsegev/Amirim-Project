@@ -26,10 +26,23 @@ Given a partial phrase, does the model's internal representation already encode
 the rest, before it has read or generated any of it?
 \end{quote}
 
-We study this for \emph{fixed multi-word expressions} --- idioms, landmark
-names, and film titles --- because for these the continuation is well defined,
-and because their frequency in pretraining data makes them the most favourable
-case. If anticipation does not happen here, it is unlikely to happen anywhere.
+A general form of this question is already answered in the affirmative.
+\citet{pal-etal-2023-future} show that tokens two or more positions ahead can be
+recovered from a single hidden state, by transplanting it into a fresh context
+and reading what the model produces. What their setup cannot easily ask is
+whether the anticipated material is \emph{a unit} --- their reference is
+whatever the model itself would have emitted next, so there is no target
+independent of the model's own behaviour to hold fixed across occasions, or to
+check the model's behaviour against.
+
+We therefore study \emph{fixed multi-word expressions} --- idioms, landmark
+names, and film titles. For these the continuation is defined by the phrase
+rather than by the model, which makes three things possible: a lookahead
+distance that counts something meaningful, a repetition structure that lets us
+ask whether anticipation is a property of the phrase or of the occasion, and a
+comparison between what a transplanted state yields and what the model actually
+writes. Their frequency in pretraining text also makes them the most favourable
+case; if anticipation does not happen here, it is unlikely to happen anywhere.
 We index the question by \emph{lookahead distance} $i$: the number of phrase
 tokens still unread at the point where we interrupt the model. At $i=4$ in
 \textit{The Lord of the Rings}, the model has read only \textit{The}, and we ask
@@ -76,10 +89,11 @@ which instrument produced it.
 Concretely, we contribute:
 
 \begin{enumerate}[nosep,leftmargin=*]
-\item A lookahead-distance protocol for measuring phrase anticipation, applied
-      to $1{,}164$ fixed expressions both in isolation and in $9{,}955$
-      naturally occurring FineWeb-Edu contexts, with two independent readouts
-      run on identical instances (\S\ref{sec:method}).
+\item A phrase-level instantiation of the future-anticipation question, in
+      which the target is fixed by the expression rather than by the model:
+      $1{,}164$ expressions, in isolation and in $9{,}955$ naturally occurring
+      FineWeb-Edu contexts, read out two independent ways on identical
+      instances (\S\ref{sec:method}).
 \item Evidence that anticipation of familiar phrases occurs several tokens
       ahead, is greatly strengthened by natural context, and is a stable
       property of the phrase (\S\ref{sec:lookahead}--\S\ref{sec:stability}).

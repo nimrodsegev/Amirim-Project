@@ -25,18 +25,40 @@ how it varies across phrases and contexts. Our idiom set is drawn from
 MAGPIE \citep{haagsma-etal-2020-magpie} and
 LIdioms \citep{moussallem-etal-2018-lidioms}.
 
+\paragraph{Anticipating future tokens from one hidden state.}
+Our question was posed, in a more general form, by Future
+Lens \citep{pal-etal-2023-future}: given the hidden state of a single token at
+position $t$, can the tokens at positions $\geq t+2$ be recovered? They answer
+it with linear approximation and with causal intervention --- transplanting the
+state into a different context and reading what the model then produces --- and
+report better than $48\%$ accuracy at some layers of GPT-J-6B. That transplant
+is the technique Patchscopes later generalised, and our Patchscopes readout is a
+direct descendant of it.
+
+We differ in what is being anticipated and in what the anticipation is checked
+against. Future Lens targets the model's own subsequent predictions on running
+text, so the reference is whatever the model would have emitted. We target
+\emph{fixed multi-word expressions}, so the continuation is defined externally,
+by the phrase, and is the same string regardless of what the model does. That
+buys three things: a lookahead distance that is meaningful rather than arbitrary
+(the tokens remaining in a known unit), a per-phrase repetition structure that
+lets us ask whether anticipation is stable across occasions
+(\S\ref{sec:stability}), and a second readout --- the model's actual continuation
+in its real context --- that can be compared against the transplant on matched
+instances (\S\ref{sec:disagreement}). Future Lens compares two \emph{decoding}
+methods against the model's output; we compare a decoding method against the
+model's behaviour, and find they disagree in ways that change conclusions.
+
 \paragraph{Reading hidden states.}
 The logit lens \citep{nostalgebraist-2020-logitlens} projects an intermediate
 state through the unembedding to ask what token it would predict.
-Patchscopes \citep{ghandeharioun-etal-2024-patchscopes} generalises this by
-injecting the state into an arbitrary prompt and letting the model verbalise it,
-which removes the constraint that the answer be a single vocabulary item and
-makes multi-token readouts possible. Both are inference-time interventions on a
-representation, and both raise the question of whether what is extracted is what
-the model would otherwise have used. We address that question directly by
-running Patchscopes and ordinary generation on identical inputs
-(\S\ref{sec:disagreement}); to our knowledge this comparison has not been
-reported at scale.
+Patchscopes \citep{ghandeharioun-etal-2024-patchscopes} generalises both it and
+the Future Lens intervention by injecting the state into an arbitrary prompt and
+letting the model verbalise it, which removes the constraint that the answer be
+a single vocabulary item and makes multi-token readouts possible. All of these
+are inference-time interventions on a representation, and all raise the question
+of whether what is extracted is what the model would otherwise have used. We
+address that question directly in \S\ref{sec:disagreement}.
 
 \paragraph{Probing internal states for future correctness.}
 \citet{orgad-etal-2025-llms} show that LLM hidden states encode substantially

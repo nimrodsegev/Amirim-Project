@@ -15,8 +15,13 @@ Substring containment credits any output that includes the target, without
 requiring that the model produced it for the right reason, and penalises
 accepted variants of the same expression (\S\ref{sec:falsepos}). The
 adjudication in \S\ref{sec:falsepos} suggests the net bias is conservative, but
-it rests on a single LLM judge with no human validation and no inter-annotator
-agreement, and should not be treated as a measured correction.
+it rests on a single judge with no human validation and no inter-annotator
+agreement, and the specific ChatGPT model version used was not recorded at the
+time, so that run is not exactly reproducible. The prompt is in
+Appendix~\ref{app:judge} and the analysis should be rerun with a named model
+before the number is relied on. The confidence-based split in
+\S\ref{sec:falsepos}, which uses no judge, is the more reproducible of the two
+and points the same way.
 
 \paragraph{One model family carries most of the weight.}
 All layer-level and probing results are from OLMo-2-7B. We replicate the
@@ -55,11 +60,12 @@ comparison across every analysis would require storing hidden states for all
 $32$ layers at every trial.
 
 \paragraph{Probe results are not reproducible from the released artifacts.}
-The probing experiments require per-trial hidden states, which are too large to
-distribute and remain on the compute cluster. The probe numbers in
-Table~\ref{tab:probes} are therefore reported from the run logs rather than
-recomputed from this repository's results files, unlike every other number in
-the paper.
+The probing experiments require per-trial hidden states --- $1.28$\,GB for the
+Patchscopes labels and $3.02$\,GB for the generation labels --- which are too
+large to distribute and remain on the compute cluster. They are intact, so the
+runs can be reproduced there, but the probe numbers in Table~\ref{tab:probes}
+are reported from the run logs rather than recomputed from this repository's
+result files, unlike every other number in the paper.
 
 \paragraph{No efficiency claim is tested.}
 The motivation in \S\ref{sec:intro} is that anticipation could be exploited to
