@@ -4,10 +4,11 @@
 We asked whether a model's internal state, partway through a familiar phrase,
 already holds enough to recover the rest. For fixed expressions in natural text
 it often does, and at a useful range: OLMo-2-7B recovers the remaining tokens
-at $i=3$ in roughly two thirds of instances and at $i=5$ in more than half. Recovery clusters strongly by phrase:
-across a phrase's natural contexts, success sits at the extremes far more than an
-independent-context model at a common rate would produce. It is also legible from the representation itself, well enough that a small probe reading a single hidden
-vector predicts whether the phrase will be completed, at $87.6\%$ precision.
+at $i=3$ in roughly two thirds of instances and at $i=5$ in more than half. Which phrase it is matters far more
+than which sentence it sits in: a phrase tends to be recovered in nearly all of
+its contexts or in nearly none. The signal is legible from the state itself,
+well enough that a small probe reading a single hidden vector predicts whether
+the phrase will be completed, at $87.6\%$ precision.
 
 The second finding is a caution about how the first was obtained. The two
 readouts agree on most instances, but where they part they part in one
@@ -15,7 +16,7 @@ direction: generation recovers continuations Patchscopes misses about three
 times as often as the reverse. A Patchscopes rate is therefore better read as a
 floor than as an estimate, and part of even that gap is a choice rather than a
 finding, since widening the sweep from eight layers to all $32$ recovers six to
-eight points. What does not wash out is where the signal appears to live. Train
+eight points. What survives is where the signal appears to live. Train
 the same probe on one readout's labels and it peaks in the middle of the
 network; train it on the other's and it peaks at the last layer. Neither
 instrument is wrong; neither is a neutral window onto what the model knows.
