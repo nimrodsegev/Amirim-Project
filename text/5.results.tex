@@ -6,19 +6,18 @@
 
 \input{tables/main_results}
 
-\begin{figure*}[t]
+\begin{figure}[t]
 \centering
-\includegraphics[width=\textwidth]{figures/context_vs_isolation}
-\caption{Recovery rate against lookahead distance. \textbf{(a)} Phrases in
-isolation, out to $i=8$; the two readouts are within a few points of each other
-throughout, and both decay steeply. The number of phrases long enough to test
-falls with $i$, from $1{,}112$ at $i=2$ to $51$ at $i=8$. \textbf{(b)} The same
-phrases in natural context. Context lifts the generation readout by $25$--$36$
-points. The two Patchscopes curves are one measurement under two layer budgets
-and differ by $6$--$8$ points, which is most of the apparent gap to generation
-(\S\ref{sec:disagreement}).}
+\includegraphics[width=\columnwidth]{figures/context_vs_isolation}
+\caption{Recovery rate against lookahead distance, for both readouts, with and
+without natural context. Presented alone the two readouts are nearly
+indistinguishable; in context both rise sharply and generation pulls ahead of
+Patchscopes. Context is worth $25$--$36$ points to generation and $15$--$27$ to
+Patchscopes. The Patchscopes gain is a conservative estimate: the isolated
+measurement sweeps all $32$ layers while the in-context one uses the eight
+probed layers (\S\ref{sec:setup}).}
 \label{fig:context}
-\end{figure*}
+\end{figure}
 
 Table~\ref{tab:main} gives the central measurement. In natural context,
 OLMo-2-7B completes a familiar phrase two tokens early in $84.0\%$ of instances,
@@ -39,21 +38,21 @@ under which a model actually encounters these expressions, and measurements
 taken in isolation should be read as a lower bound.
 
 \paragraph{In isolation the two readouts nearly coincide.}
-Figure~\ref{fig:context}a shows the isolated condition out to $i=8$. Recovery
-falls steeply --- $87.1\%$ at $i=1$, $57.8\%$ at $i=2$, $30.9\%$ at $i=3$ --- and
-the two readouts stay within a few points of each other across the whole range.
-Whatever separates them later (\S\ref{sec:disagreement}) does not appear when
-the phrase stands alone, which is itself a clue: the disagreement is something
-context creates, not a constant property of the instruments.
+The lower pair of curves in Figure~\ref{fig:context} is the isolated condition,
+and the two readouts track each other within a point or two at every distance:
+$57.8\%$ against $59.2\%$ at $i=2$, $16.5\%$ against $17.6\%$ at $i=5$. Whatever
+separates them in context (\S\ref{sec:disagreement}) does not appear when the
+phrase stands alone --- itself a clue that the disagreement is something context
+creates rather than a fixed property of the instruments.
 
 \paragraph{Successes persist beyond the range we analyse.}
-We restrict the main analysis to $i \leq 5$ because sample sizes fall steeply
-beyond that --- $185$ phrases at $i=6$ and $51$ at $i=8$ in the isolated
-condition. The effect does not stop there: in context, generation recovers
-$48.9\%$ of the $1{,}123$ trials at $i=6$ and $41.7\%$ of the $312$ at $i=8$.
-We draw no conclusions from the sparse tail, but we note it because an earlier
-version of this work reported zero successes at $i \geq 6$; that was an artifact
-of a fixed generation budget (\S\ref{sec:criterion}), not a property of the
+We cap the analysis at $i=5$ because sample sizes fall steeply beyond it: $185$
+phrases at $i=6$ and $51$ at $i=8$ in the isolated condition. The effect does
+not stop there --- in context, generation recovers $48.9\%$ of the $1{,}123$
+trials at $i=6$ and $41.7\%$ of the $312$ at $i=8$ --- but we draw no
+conclusions from so sparse a tail. We report it only because an earlier version
+of this work found zero successes at $i \geq 6$, which was an artifact of a
+fixed generation budget (\S\ref{sec:criterion}) rather than a property of the
 model.
 
 \subsection{Anticipation is a property of the phrase}

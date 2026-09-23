@@ -25,9 +25,9 @@ unseen material.
 
 Every phrase is processed with its full left context --- a BOS token, then,
 where applicable, the natural text preceding the phrase --- so the state at
-position $p$ is the state the model would really have at that point. We test
-$i \geq 2$ in the main experiments. The case $i=1$ reduces to ordinary
-next-token prediction and is reported only for reference.
+position $p$ is the state the model would really have at that point. We analyse
+$i \geq 2$ throughout; $i=1$ reduces to ordinary next-token prediction and is
+not of interest here.
 
 \subsection{Two readouts}
 \label{sec:readouts}

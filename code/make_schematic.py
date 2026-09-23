@@ -1,4 +1,4 @@
-"""Protocol schematic: lookahead distance and the two readouts."""
+"""Protocol and motivation schematics."""
 from pathlib import Path
 import matplotlib
 matplotlib.use("Agg")
@@ -10,145 +10,147 @@ plt.rcParams.update({"font.family": "serif", "font.size": 7.4,
                      "savefig.pad_inches": 0.02})
 PS, GEN, GREY, CUT = "#3a6ea5", "#c1671a", "#8a8a8a", "#b03a3a"
 INK = "#1c1c1c"
+Path("figures").mkdir(exist_ok=True)
 
-fig, ax = plt.subplots(figsize=(7.0, 2.35))
-ax.set_xlim(0, 100); ax.set_ylim(0, 34); ax.axis("off")
+# ----------------------------------------------------------------- protocol
+fig, ax = plt.subplots(figsize=(7.0, 2.1))
+ax.set_xlim(0, 100); ax.set_ylim(0, 30); ax.axis("off")
 
 
-def box(x, y, w, h, text, fc="white", ec=GREY, fs=7.4, weight="normal",
-        tc=INK, style="round,pad=0.1,rounding_size=0.6", lw=0.8):
-    ax.add_patch(FancyBboxPatch((x, y), w, h, boxstyle=style,
-                                facecolor=fc, edgecolor=ec, linewidth=lw))
+def box(x, y, w, h, text, fc="white", ec="#d5d5d5", fs=7.2, weight="normal",
+        tc=INK, lw=0.75, ls="-"):
+    ax.add_patch(FancyBboxPatch((x, y), w, h,
+                                boxstyle="round,pad=0.1,rounding_size=0.55",
+                                facecolor=fc, edgecolor=ec, linewidth=lw,
+                                linestyle=ls))
     ax.text(x + w / 2, y + h / 2, text, ha="center", va="center",
             fontsize=fs, color=tc, fontweight=weight)
 
 
-def arrow(x1, y1, x2, y2, color=GREY, style="-|>", lw=0.9, ls="-", rad=0.0):
-    ax.add_patch(FancyArrowPatch((x1, y1), (x2, y2), arrowstyle=style,
-                                 mutation_scale=8, color=color, lw=lw,
-                                 linestyle=ls, shrinkA=1, shrinkB=1,
-                                 connectionstyle=f"arc3,rad={rad}"))
+def arrow(x1, y1, x2, y2, color=GREY, lw=0.9):
+    ax.add_patch(FancyArrowPatch((x1, y1), (x2, y2), arrowstyle="-|>",
+                                 mutation_scale=7.5, color=color, lw=lw,
+                                 shrinkA=1.5, shrinkB=1.5))
 
 
-# ---- input sequence -------------------------------------------------------
-ax.text(1, 30.6, "context from FineWeb-Edu", fontsize=6.8, color=GREY, style="italic")
-box(1, 24.5, 20, 5, "...films such as", fc="#f2f2f2", ec="#d8d8d8")
+# --- the input strip -------------------------------------------------------
+ax.text(1, 27.6, "context from FineWeb-Edu", fontsize=6.3, color=GREY,
+        style="italic")
+box(1, 21.4, 17.5, 4.6, "\u2026films such as", fc="#f4f4f4", ec="#e2e2e2",
+    tc=GREY, fs=7.0)
 
-toks = ["The", "Lord", "of", "the", "Rings"]
-x0, w, gap = 23, 8.4, 1.0
-read_n = 2   # "The Lord" has been read; cut after it
+toks, TW, TG, TX = ["The", "Lord", "of", "the", "Rings"], 7.4, 0.9, 20.2
 for k, t in enumerate(toks):
-    x = x0 + k * (w + gap)
-    is_read = k < read_n
-    box(x, 24.5, w, 5, t,
-        fc="#e8eef6" if is_read else "white",
-        ec=PS if is_read else "#d8d8d8",
-        tc=INK if is_read else GREY,
-        weight="bold" if is_read else "normal")
+    x = TX + k * (TW + TG)
+    read = k < 2
+    box(x, 21.4, TW, 4.6, t,
+        fc="#e7eef7" if read else "white",
+        ec=PS if read else "#dcdcdc",
+        tc=INK if read else GREY,
+        weight="bold" if read else "normal")
 
-cut_x = x0 + read_n * (w + gap) - gap / 2
-ax.plot([cut_x, cut_x], [23.2, 31.2], color=CUT, lw=1.3, ls=(0, (3, 2)))
-ax.text(cut_x - 0.8, 31.6, "cut", fontsize=6.8, color=CUT, ha="right", weight="bold")
+cut_x = TX + 2 * (TW + TG) - TG / 2
+ax.plot([cut_x, cut_x], [20.0, 27.4], color=CUT, lw=1.2, ls=(0, (2.6, 1.8)))
+ax.text(cut_x - 0.9, 27.9, "cut", fontsize=6.3, color=CUT, ha="right",
+        weight="bold")
 
-# brace over the unread tokens
-unread_l = x0 + read_n * (w + gap)
-unread_r = x0 + len(toks) * (w + gap) - gap
-ax.annotate("", xy=(unread_l, 23.0), xytext=(unread_r, 23.0),
-            arrowprops=dict(arrowstyle="-", color=INK, lw=0.8,
-                            connectionstyle="bar,fraction=0.18"))
-ax.text((unread_l + unread_r) / 2, 19.6,
-        r"target: $i=3$ tokens still unread", fontsize=7.2, ha="center", color=INK)
+ur = TX + 5 * (TW + TG) - TG
+ax.plot([cut_x + 0.6, ur], [19.8] * 2, color="#bdbdbd", lw=0.75)
+for xe in (cut_x + 0.6, ur):
+    ax.plot([xe, xe], [19.8, 18.9], color="#bdbdbd", lw=0.75)
+ax.text((cut_x + ur) / 2, 17.2, "target: the $i=3$ unread tokens",
+        fontsize=6.5, ha="center", va="center", color=INK)
 
-# the state we read
-ax.plot([cut_x - w / 2 - gap / 2, cut_x - w / 2 - gap / 2], [24.3, 17.6],
-        color=PS, lw=0.9)
-ax.text(cut_x - w / 2 - gap / 2 - 1.2, 21.0, r"$h^{\ell}_p$", fontsize=8,
-        color=PS, ha="right", va="center")
+# the state we lift, and where it goes
+hx = cut_x - TW / 2 - TG / 2
+ax.plot([hx, hx], [21.2, 13.2], color=PS, lw=0.9)
+ax.text(hx - 1.3, 17.6, "$h^{\\ell}_p$", fontsize=8.2, color=PS, ha="right",
+        va="center")
+ax.plot([16, 62], [13.2, 13.2], color="#c6c6c6", lw=0.8)
+arrow(16, 13.2, 16, 10.4, color=PS)
+arrow(62, 13.2, 62, 10.4, color=GEN)
 
-# ---- the two readouts -----------------------------------------------------
-box(3, 7.4, 42, 7.2, "", fc="#fbfbfb", ec="#e2e2e2")
-ax.text(4.8, 12.9, "Readout 1: Patchscopes", fontsize=7.4, color=PS, weight="bold")
-box(4.8, 8.2, 21, 3.6, 'Repeat this: [$h^{\\ell}_p$]', fc="white", ec=PS)
-arrow(26.4, 10.0, 30.0, 10.0, color=PS)
-box(30.2, 8.2, 13.6, 3.6, '"of the Rings"', fc="white", ec="#d8d8d8")
+# --- the two readouts ------------------------------------------------------
+ax.text(1, 9.0, "1", fontsize=6.4, color="white", ha="center", va="center",
+        weight="bold",
+        bbox=dict(boxstyle="circle,pad=0.22", fc=PS, ec="none"))
+ax.text(4.0, 9.0, "Patchscopes", fontsize=7.3, color=PS, weight="bold",
+        va="center")
+box(1, 2.4, 25.5, 4.6, "Repeat this: [$h^{\\ell}_p$]", ec=PS)
+arrow(27.2, 4.7, 31.0, 4.7, color=PS)
+box(31.4, 2.4, 15.0, 4.6, "\u201cof the Rings\u201d", ec="#dcdcdc")
 
-box(52, 7.4, 45, 7.2, "", fc="#fbfbfb", ec="#e2e2e2")
-ax.text(53.8, 12.9, "Readout 2: generation", fontsize=7.4, color=GEN, weight="bold")
-box(53.8, 8.2, 24, 3.6, "...films such as The Lord", fc="white", ec=GEN)
-arrow(78.4, 10.0, 82.0, 10.0, color=GEN)
-box(82.2, 8.2, 13.6, 3.6, '"of the Rings"', fc="white", ec="#d8d8d8")
+ax.text(52, 9.0, "2", fontsize=6.4, color="white", ha="center", va="center",
+        weight="bold",
+        bbox=dict(boxstyle="circle,pad=0.22", fc=GEN, ec="none"))
+ax.text(55.0, 9.0, "generation", fontsize=7.3, color=GEN, weight="bold",
+        va="center")
+box(52, 2.4, 28.0, 4.6, "\u2026films such as The Lord", ec=GEN)
+arrow(80.7, 4.7, 84.5, 4.7, color=GEN)
+box(84.9, 2.4, 15.0, 4.6, "\u201cof the Rings\u201d", ec="#dcdcdc")
 
-jx = cut_x - w / 2 - gap / 2
-ax.plot([jx, jx], [17.6, 16.3], color=PS, lw=0.9)
-ax.plot([20, jx], [17.6, 17.6], color=PS, lw=0.9)
-ax.plot([jx, 70], [17.6, 17.6], color=GEN, lw=0.9)
-arrow(20, 17.6, 20, 14.9, color=PS)
-arrow(70, 17.6, 70, 14.9, color=GEN)
+ax.text(49.2, 5.8, "", ha="center")
+ax.plot([49.2, 49.2], [1.2, 10.4], color="#e4e4e4", lw=0.7)
 
-# ---- verdict --------------------------------------------------------------
-ax.text(50, 4.4, "success $=$ the target string appears in the output "
-                 "(case-insensitive, budget $i+3$ tokens)",
-        fontsize=7.0, ha="center", color=INK)
-ax.text(50, 1.4, "Patchscopes asks what the vector contains; generation asks "
-                 "what the model does with it.",
-        fontsize=6.9, ha="center", color=GREY, style="italic")
+ax.text(1, 0.0, "success $=$ the target string appears in the output, "
+                "case-insensitively, within $i+3$ generated tokens",
+        fontsize=6.4, color=GREY, ha="left")
 
-Path("figures").mkdir(exist_ok=True)
 fig.savefig("figures/protocol.pdf", metadata={"CreationDate": None})
+plt.close(fig)
 print("wrote figures/protocol.pdf")
 
-
 # ---------------------------------------------------------------- motivation
-# Slide 3: the cost argument. Full-depth decoding of a five-token phrase
-# against a hypothetical read-ahead that skips most of it.
-fig, ax = plt.subplots(figsize=(3.3, 2.0))
-ax.set_xlim(0, 100); ax.set_ylim(0, 52); ax.axis("off")
+# Slide 3: the cost argument, as two stacked rows of layer columns.
+fig, ax = plt.subplots(figsize=(3.3, 2.2))
+ax.set_xlim(0, 100); ax.set_ylim(0, 64); ax.axis("off")
 TOKS = ["The", "Lord", "of", "the", "Rings"]
-BW, GAP, X0, BARH = 14.5, 2.2, 6.0, 12.0
+CW, GAP, X0, COLH = 10.4, 2.6, 2.0, 14.0
+LIGHT_PS, LIGHT_GEN = "#dce6f2", "#f7e6d6"
 
 
-def unit(x, base, tok, n_layers, color):
-    """Token box with a depth bar beneath it."""
-    h = BARH * (n_layers / 32.0)
-    ax.add_patch(FancyBboxPatch((x, base + BARH + 1.0), BW, 5.4,
-                                boxstyle="round,pad=0.1,rounding_size=0.5",
-                                facecolor="white", edgecolor="#d8d8d8", linewidth=0.7))
-    ax.text(x + BW / 2, base + BARH + 3.7, tok, ha="center", va="center",
-            fontsize=6.6, color=INK)
-    ax.add_patch(FancyBboxPatch((x, base), BW, h,
-                                boxstyle="round,pad=0.04,rounding_size=0.3",
-                                facecolor=color, edgecolor="none", alpha=.88))
-    ax.text(x + BW / 2, base + h - 2.4, str(n_layers), ha="center", va="center",
-            fontsize=5.8, color="white", fontweight="bold")
+def column(x, base, tok, n_layers, edge, fill):
+    h = COLH * (n_layers / 32.0)
+    ax.text(x + CW / 2, base + COLH + 3.2, tok, ha="center", va="center",
+            fontsize=6.7, color=INK)
+    ax.add_patch(FancyBboxPatch((x, base), CW, h,
+                                boxstyle="round,pad=0.05,rounding_size=0.4",
+                                facecolor=fill, edgecolor=edge, linewidth=0.7))
+    ax.plot([x + 0.6, x + CW - 0.6], [base + h - 0.8] * 2, color=edge, lw=1.1)
+    ax.text(x + CW / 2, base - 3.2, str(n_layers), ha="center", va="center",
+            fontsize=5.8, color=GREY)
 
+
+SPAN = 5 * CW + 4 * GAP           # width of a full five-token row
+TOTX = X0 + SPAN + 5.0            # left edge of the running-total label
 
 # --- row 1: every token pays full depth
-B1 = 29
-ax.text(0.5, B1 + BARH + 8.6, "one token at a time", fontsize=6.9,
-        color=INK, weight="bold")
-ax.text(99, B1 + BARH + 8.6, "160 layer-passes", fontsize=7.0, color=INK,
-        ha="right", weight="bold")
+B1 = 38
+ax.text(X0, B1 + COLH + 9.0, "one token at a time", ha="left", va="center",
+        fontsize=6.9, color=INK, weight="bold")
 for k, t in enumerate(TOKS):
-    unit(X0 + k * (BW + GAP), B1, t, 32, PS)
+    column(X0 + k * (CW + GAP), B1, t, 32, PS, LIGHT_PS)
+ax.text(TOTX, B1 + COLH / 2, "160\nlayer-passes", ha="left", va="center",
+        fontsize=7.0, color=INK, weight="bold", linespacing=1.3)
 
-# --- row 2: read the rest out of the state at 'Lord'
-B2 = 3
-ax.text(0.5, B2 + BARH + 8.6, "if the rest is already encoded", fontsize=6.9,
-        color=GEN, weight="bold")
-ax.text(99, B2 + BARH + 8.6, "45 layer-passes", fontsize=7.0, color=GEN,
-        ha="right", weight="bold")
+# --- row 2: the rest read out of the state at 'Lord'
+B2 = 7
+ax.text(X0, B2 + COLH + 9.0, "if the rest is already encoded", ha="left",
+        va="center", fontsize=6.9, color=GEN, weight="bold")
 for k, (t, L) in enumerate(zip(TOKS[:2], [32, 13])):
-    unit(X0 + k * (BW + GAP), B2, t, L, GEN)
-rx = X0 + 2 * (BW + GAP)
-rw = BW * 3 + GAP * 2
-ax.add_patch(FancyBboxPatch((rx, B2 + 1.4), rw, BARH + 4.0,
-                            boxstyle="round,pad=0.1,rounding_size=0.6",
-                            facecolor="#fbf4ee", edgecolor=GEN,
-                            linewidth=0.8, linestyle=(0, (2.5, 1.8))))
-ax.text(rx + rw / 2, B2 + 10.6, "\u201cof the Rings\u201d", ha="center", va="center",
-        fontsize=6.8, color=INK)
-ax.text(rx + rw / 2, B2 + 6.0, "read from the hidden state", ha="center",
-        va="center", fontsize=6.0, color=GEN, style="italic")
+    column(X0 + k * (CW + GAP), B2, t, L, GEN, LIGHT_GEN)
+rx = X0 + 2 * (CW + GAP)
+rw = 3 * CW + 2 * GAP
+ax.add_patch(FancyBboxPatch((rx, B2), rw, COLH,
+                            boxstyle="round,pad=0.05,rounding_size=0.5",
+                            facecolor="none", edgecolor=GEN,
+                            linewidth=0.75, linestyle=(0, (2.6, 2.0))))
+ax.text(rx + rw / 2, B2 + COLH * 0.62, "\u201cof the Rings\u201d",
+        ha="center", va="center", fontsize=6.6, color=INK)
+ax.text(rx + rw / 2, B2 + COLH * 0.26, "read from the state",
+        ha="center", va="center", fontsize=5.6, color=GEN, style="italic")
+ax.text(TOTX, B2 + COLH / 2, "45\nlayer-passes", ha="left", va="center",
+        fontsize=7.0, color=GEN, weight="bold", linespacing=1.3)
 
 fig.savefig("figures/motivation.pdf", metadata={"CreationDate": None})
 plt.close(fig)

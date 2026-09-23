@@ -25,41 +25,28 @@ def save(fig, name):
     print("  wrote figures/" + name + ".pdf")
 
 
-# Fig 1: (a) decay with lookahead distance, isolated; (b) what context adds
-ALLI = [str(i) for i in range(1, 9)]
-iso_p_all = NUM["isolated"]["patchscopes_olmo2_32L"]
-iso_g_all = NUM["isolated"]["generation_olmo2"]
-fig, (axA, axB) = plt.subplots(1, 2, figsize=(6.6, 2.15))
+# Fig 1: what natural context adds, for both readouts, over i = 2..5
+iso_p = NUM["isolated"]["patchscopes_olmo2_32L"]
+iso_g = NUM["isolated"]["generation_olmo2"]
+ctx_g = NUM["in_context"]["generation_olmo2"]
+ctx_p8 = NUM["external"]["patchscopes_8L_union_in_context_pct"]
 
-xs = range(len(ALLI))
-axA.plot(xs, [iso_p_all[i][2] for i in ALLI], "s-", ms=3.2, color=C["ps"],
-         label="patchscopes")
-axA.plot(xs, [iso_g_all[i][2] for i in ALLI], "o-", ms=3.2, color=C["gen"],
-         label="generation")
-axA.set_xticks(list(xs)); axA.set_xticklabels(ALLI)
-axA.set_xlabel("lookahead distance $i$")
-axA.set_ylabel("recovery rate (%)"); axA.set_ylim(0, 100)
-axA.set_title("(a) phrase alone", fontsize=7.6, loc="left")
-axA.grid(axis="y", lw=.4, alpha=.3); axA.set_axisbelow(True)
-axA.legend(frameon=False, loc="upper right")
-
-x2 = range(len(IS))
-ctx_g = [NUM["in_context"]["generation_olmo2"][str(i)][2] for i in IS]
-ctx_p8 = [NUM["external"]["patchscopes_8L_union_in_context_pct"][str(i)] for i in IS]
-ctx_p32 = [NUM["in_context"]["patchscopes_olmo2_32L"][str(i)][2] for i in IS]
-iso_g = [iso_g_all[str(i)][2] for i in IS]
-axB.plot(x2, ctx_g, "o-", ms=3.2, color=C["gen"], label="generation, in context")
-axB.plot(x2, iso_g, "o--", ms=3.2, color=C["gen"], alpha=.45,
-         label="generation, alone")
-axB.plot(x2, ctx_p8, "s-", ms=3.2, color=C["ps"], label="patchscopes (8L), in context")
-axB.plot(x2, ctx_p32, "s:", ms=3.2, color=C["ps"], alpha=.6,
-         label="patchscopes (32L), in context")
-axB.set_xticks(list(x2)); axB.set_xticklabels(IS)
-axB.set_xlabel("lookahead distance $i$")
-axB.set_ylim(0, 100)
-axB.set_title("(b) phrase in natural context", fontsize=7.6, loc="left")
-axB.grid(axis="y", lw=.4, alpha=.3); axB.set_axisbelow(True)
-axB.legend(frameon=False, loc="upper right", fontsize=5.8)
+fig, ax = plt.subplots(figsize=(3.3, 2.15))
+xs = range(len(IS))
+ax.plot(xs, [ctx_g[str(i)][2] for i in IS], "o-", ms=3.4, color=C["gen"],
+        label="generation, in context")
+ax.plot(xs, [ctx_p8[str(i)] for i in IS], "s-", ms=3.4, color=C["ps"],
+        label="patchscopes, in context")
+ax.plot(xs, [iso_g[str(i)][2] for i in IS], "o--", ms=3.4, color=C["gen"],
+        alpha=.5, label="generation, alone")
+ax.plot(xs, [iso_p[str(i)][2] for i in IS], "s--", ms=3.4, color=C["ps"],
+        alpha=.5, label="patchscopes, alone")
+ax.set_xticks(list(xs)); ax.set_xticklabels([f"${i}$" for i in IS])
+ax.set_xlabel("lookahead distance $i$")
+ax.set_ylabel("recovery rate (%)")
+ax.set_ylim(0, 100)
+ax.grid(axis="y", lw=.4, alpha=.3); ax.set_axisbelow(True)
+ax.legend(frameon=False, fontsize=6.1, loc="upper right")
 save(fig, "context_vs_isolation")
 
 # Fig 2: per-phrase consistency on distinct contexts, vs binomial null.
