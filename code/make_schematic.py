@@ -139,16 +139,22 @@ ax.text(X0, B2 + COLH + 9.0, "if the rest is already encoded", ha="left",
         va="center", fontsize=6.9, color=GEN, weight="bold")
 for k, (t, L) in enumerate(zip(TOKS[:2], [32, 13])):
     column(X0 + k * (CW + GAP), B2, t, L, GEN, LIGHT_GEN)
-rx = X0 + 2 * (CW + GAP)
-rw = 3 * CW + 2 * GAP
+rx = X0 + 2 * (CW + GAP) + 7.5      # extra gap: the skip arrow lives here
+rw = (X0 + SPAN) - rx
 ax.add_patch(FancyBboxPatch((rx, B2), rw, COLH,
                             boxstyle="round,pad=0.05,rounding_size=0.5",
                             facecolor="none", edgecolor=GEN,
                             linewidth=0.75, linestyle=(0, (2.6, 2.0))))
-ax.text(rx + rw / 2, B2 + COLH * 0.62, "\u201cof the Rings\u201d",
-        ha="center", va="center", fontsize=6.6, color=INK)
-ax.text(rx + rw / 2, B2 + COLH * 0.26, "read from the state",
-        ha="center", va="center", fontsize=5.6, color=GEN, style="italic")
+ax.text(rx + rw / 2, B2 + COLH / 2, "\u201cof the Rings\u201d",
+        ha="center", va="center", fontsize=6.9, color=INK)
+lord_r = X0 + (CW + GAP) + CW        # right edge of the 13-layer column
+ax.add_patch(FancyArrowPatch((lord_r + 0.5, B2 + 2.6), (rx - 0.4, B2 + 3.0),
+                             arrowstyle="-|>", mutation_scale=8.5,
+                             color=GEN, lw=1.0, shrinkA=0, shrinkB=0,
+                             connectionstyle="arc3,rad=-0.55"))
+ax.text((lord_r + rx) / 2, B2 - 3.2, "skip", ha="center", va="center",
+        fontsize=5.8, color=GEN, style="italic")
+
 ax.text(TOTX, B2 + COLH / 2, "45\nlayer-passes", ha="left", va="center",
         fontsize=7.0, color=GEN, weight="bold", linespacing=1.3)
 
