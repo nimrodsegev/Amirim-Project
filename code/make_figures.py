@@ -110,7 +110,7 @@ ax.legend(frameon=False)
 save(fig, "patchscopes_by_layer")
 
 # Fig 4: the two probes, balanced accuracy by layer
-fig, ax = plt.subplots(figsize=(3.2, 2.0))
+fig, ax = plt.subplots(figsize=(3.2, 2.25))
 ps = NUM["external"]["patchscopes_label_probe"]["balanced_accuracy_pct"]
 ge = NUM["external"]["generation_label_probe"]["balanced_accuracy_pct"]
 base = NUM["external"]["patchscopes_label_probe"]["majority_baseline_pct"]
@@ -119,11 +119,12 @@ ax.plot(L, [ge[str(l)] for l in L], "o-", ms=3, color=C["gen"], label="generatio
 ax.plot(L, [base[str(l)] for l in L], "^--", ms=2.6, color=C["grey"], alpha=.75,
         label="majority-class baseline (raw acc.)")
 ax.axhline(50, ls=":", lw=.8, color=C["grey"])
-ax.text(30.4, 51.5, "chance", ha="right", fontsize=6, color=C["grey"])
+ax.text(5.4, 52.2, "chance", ha="left", fontsize=6, color=C["grey"])
 ax.set_xlabel("layer"); ax.set_ylabel("balanced accuracy (%)")
 ax.set_xticks(L); ax.set_ylim(40, 100)
 ax.grid(axis="y", lw=.4, alpha=.3); ax.set_axisbelow(True)
-ax.legend(frameon=False, loc="lower left", fontsize=6.2)
+ax.legend(frameon=False, fontsize=6.2, ncol=2, loc="upper center",
+          bbox_to_anchor=(0.5, -0.26), handlelength=1.6, columnspacing=1.4)
 save(fig, "probe_balanced_accuracy")
 
 # Fig 5: first successful layer distribution

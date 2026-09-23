@@ -102,8 +102,8 @@ print("wrote figures/protocol.pdf")
 
 # ---------------------------------------------------------------- motivation
 # Slide 3: the cost argument, as two stacked rows of layer columns.
-fig, ax = plt.subplots(figsize=(3.3, 2.2))
-ax.set_xlim(0, 100); ax.set_ylim(0, 64); ax.axis("off")
+fig, ax = plt.subplots(figsize=(3.3, 2.45))
+ax.set_xlim(0, 100); ax.set_ylim(0, 72); ax.axis("off")
 TOKS = ["The", "Lord", "of", "the", "Rings"]
 CW, GAP, X0, COLH = 10.4, 2.6, 2.0, 14.0
 LIGHT_PS, LIGHT_GEN = "#dce6f2", "#f7e6d6"
@@ -122,10 +122,10 @@ def column(x, base, tok, n_layers, edge, fill):
 
 
 SPAN = 5 * CW + 4 * GAP           # width of a full five-token row
-TOTX = X0 + SPAN + 5.0            # left edge of the running-total label
+TOTX = X0 + SPAN + 7.5            # left edge of the running-total label
 
 # --- row 1: every token pays full depth
-B1 = 38
+B1 = 45
 ax.text(X0, B1 + COLH + 9.0, "one token at a time", ha="left", va="center",
         fontsize=6.9, color=INK, weight="bold")
 for k, t in enumerate(TOKS):
