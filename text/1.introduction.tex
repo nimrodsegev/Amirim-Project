@@ -41,12 +41,12 @@ A general form of this question is already answered in the affirmative.
 \citet{pal-etal-2023-future} show that tokens two or more positions ahead can be
 recovered from a single hidden state, by transplanting it into a fresh context
 and reading what the model produces. What their setup cannot easily ask is
-whether the anticipated material is \emph{a unit} --- their reference is
+whether the anticipated material is \emph{a unit}: their reference is
 whatever the model itself would have emitted next, so there is no target
 independent of the model's own behaviour to hold fixed across occasions, or to
 check the model's behaviour against.
 
-We therefore study \emph{fixed multi-word expressions} --- idioms, landmark
+We therefore study \emph{fixed multi-word expressions}: idioms, landmark
 names, and film titles. For these the continuation is defined by the phrase
 rather than by the model, which makes three things possible: a lookahead
 distance that counts something meaningful, a repetition structure that lets us
@@ -75,7 +75,7 @@ in $84.0\%$ of instances and the final five in $53.6\%$, against $59.2\%$ and
 $17.6\%$ for the same phrases in isolation (\S\ref{sec:lookahead}). It is a
 property of the phrase rather than of the occasion: per-phrase success is far
 more bimodal than independent per-context variation would produce
-(\S\ref{sec:stability}). And it is decodable --- a small classifier reading the
+(\S\ref{sec:stability}). And it is decodable. A small classifier reading the
 raw hidden state predicts whether the model will in fact complete the phrase, at
 $76.8\%$ balanced accuracy and $87.6\%$ precision (\S\ref{sec:probe}).
 

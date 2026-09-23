@@ -23,7 +23,7 @@ well-known proper names.
 
 The three kinds are chosen to vary the reason a continuation is predictable.
 An idiom is fixed by convention, a landmark name by reference, and a film title
-by citation --- but all three should be frequent in pretraining text, which is
+by citation, but all three should be frequent in pretraining text, which is
 what makes them a favourable test case. Phrases too short to admit a lookahead
 position of at least $2$ are excluded.
 
@@ -36,8 +36,9 @@ from FineWeb-Edu \citep{penedo-etal-2024-fineweb}, we search for surface
 occurrences of each phrase and keep up to ten per phrase, each with up to $150$
 tokens of preceding text. This gives two parallel views of the same expressions:
 \textit{Empire \underline{\hspace{1.2em}}} on its own, and \textit{he went to
-NYC to see the Empire \underline{\hspace{1.2em}}}. For phrases that are predominantly capitalised --- most
-landmarks and titles --- we require the occurrence to preserve at least $70\%$
+NYC to see the Empire \underline{\hspace{1.2em}}}. For phrases that are predominantly capitalised
+(most landmarks and titles), we require the occurrence to preserve at least
+$70\%$
 of the original capitalisation, which prevents a sentence about sunrise from
 being collected as an instance of the film \textit{Before Sunrise}.
 
@@ -70,8 +71,8 @@ generation, on Qwen2.5-14B \citep{qwen-2024-qwen25} (Appendix~\ref{app:details})
 
 Our primary Patchscopes readout takes the union over eight layers,
 $\{5, 7, 10, 13, 15, 20, 25, 30\}$. This is the layer set on which the
-per-layer, per-category and probing analyses were run --- storing hidden states
-for all $32$ layers at every trial was not feasible --- so using it throughout
+per-layer, per-category and probing analyses were run; storing hidden states
+for all $32$ layers at every trial was not feasible, so using it throughout
 keeps those results mutually comparable. Where a wider sweep is available we
 report it alongside: \S\ref{sec:disagreement} quantifies what the budget costs,
 which is six to eight points of Patchscopes recovery, and we state which layer

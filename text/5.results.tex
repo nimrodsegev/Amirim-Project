@@ -31,8 +31,8 @@ The same phrases presented alone, with no surrounding text, are recovered far
 less often: $59.2\%$ at $i=2$ falling to $17.6\%$ at $i=5$ (Figure~\ref{fig:context}).
 The gap widens with distance, from $24.8$ points at $i=2$ to $36.0$ points at
 $i=5$, and the Patchscopes readout shows the same pattern. This is the expected
-direction --- context supplies both topical evidence and the signal that a fixed
-expression is under way --- but its size matters for interpreting prior
+direction, since context supplies both topical evidence and the signal that a
+fixed expression is under way, but its size matters for interpreting prior
 results. A bare phrase is a poor proxy for the condition
 under which a model actually encounters these expressions, and measurements
 taken in isolation should be read as a lower bound.
@@ -42,15 +42,15 @@ The lower pair of curves in Figure~\ref{fig:context} is the isolated condition,
 and the two readouts track each other within a point or two at every distance:
 $57.8\%$ against $59.2\%$ at $i=2$, $16.5\%$ against $17.6\%$ at $i=5$. Whatever
 separates them in context (\S\ref{sec:disagreement}) does not appear when the
-phrase stands alone --- itself a clue that the disagreement is something context
+phrase stands alone, itself a clue that the disagreement is something context
 creates rather than a fixed property of the instruments.
 
 \paragraph{Successes persist beyond the range we analyse.}
 We cap the analysis at $i=5$ because sample sizes fall steeply beyond it: $185$
 phrases at $i=6$ and $51$ at $i=8$ in the isolated condition. The effect does
-not stop there --- in context, generation recovers $48.9\%$ of the $1{,}123$
-trials at $i=6$ and $41.7\%$ of the $312$ at $i=8$ --- but we draw no
-conclusions from so sparse a tail. We report it only because an earlier version
+not stop there: in context, generation recovers $48.9\%$ of the $1{,}123$ trials
+at $i=6$ and $41.7\%$ of the $312$ at $i=8$. We draw no conclusions from so
+sparse a tail. We report it only because an earlier version
 of this work found zero successes at $i \geq 6$, which was an artifact of a
 fixed generation budget (\S\ref{sec:criterion}) rather than a property of the
 model.
@@ -66,9 +66,9 @@ is recovered at $i=3$, generation readout, over the $803$ phrases with at least
 five distinct contexts. Grey is the binomial distribution expected if every
 context were an independent draw at the pooled rate $p=0.64$. The two extreme
 bins are kept separate because most phrases have exactly five distinct contexts.
-The observed distribution puts mass at both ends --- $7.7\%$ of phrases fail
-everywhere and $31.5\%$ succeed everywhere --- where the null puts $0.3\%$ and
-$10.1\%$; the null instead piles up in the middle, where the observed
+The observed distribution puts mass at both ends, where the null has almost
+none: $7.7\%$ of phrases fail everywhere and $31.5\%$ succeed everywhere,
+against $0.3\%$ and $10.1\%$ under the null; the null instead piles up in the middle, where the observed
 distribution is thin.}
 \label{fig:consistency}
 \end{figure}
@@ -102,7 +102,7 @@ Recording Patchscopes success at each probed layer separately gives the same
 shape at every distance: recovery is low early, rises through the middle of the
 network, peaks at L25 and falls back at L30 (Appendix~\ref{app:details}). The
 late decline may be the last layers specialising toward the actual next token
-rather than maintaining a transferable representation --- consistent with the
+rather than maintaining a transferable representation, consistent with the
 decline \citet{kaplan-etal-2025-tokens} report for words, though we do not
 establish it. Over all $32$ layers the median first successful layer is L16 and
 $41.9\%$ of successes appear at or before L10, so phrase information becomes
@@ -117,20 +117,20 @@ readable gradually and, for a large minority, early.
 
 So far we have reported both readouts as if they were interchangeable
 measurements of one underlying quantity. They are not. Table~\ref{tab:agreement}
-compares them on identical instances --- same phrase, same context, same cut
-point, same success criterion --- and they agree on $78.7\%$ of the $24{,}740$
+compares them on identical instances (same phrase, same context, same cut
+point, same success criterion), and they agree on $78.7\%$ of the $24{,}740$
 pooled trials.
 
 The residual $21.3\%$ is the informative part. It is lopsided: generation
 recovers a continuation that Patchscopes misses in $15.7\%$ of instances, while
-Patchscopes recovers one that generation misses in only $5.6\%$ --- roughly a
+Patchscopes recovers one that generation misses in only $5.6\%$, roughly a
 three-to-one asymmetry. Read on its own, that says Patchscopes undercounts what
 the model can do.
 
 The two failure directions are qualitatively different, and neither is simply an
 instrument defect (Table~\ref{tab:disagree}). Where Patchscopes succeeds and
-generation does not, the state does contain the phrase --- the patchscope
-verbalises it --- yet the real context steers the model elsewhere: given
+generation does not, the state does contain the phrase, since the
+patchscope verbalises it, yet the real context steers the model elsewhere: given
 \textit{Why should one person be brought up}, it writes \textit{a wealthy
 family, with every opportunity} rather than \textit{in the lap of luxury}. That
 is a different continuation, not a wrong one, and a reminder that our criterion
@@ -159,7 +159,7 @@ moves them by six to eight points.
 
 \paragraph{Category difficulty is readout-dependent.}
 Table~\ref{tab:categories} breaks the pooled rates down by phrase kind, and the
-two readouts do not merely differ in level --- they reverse an ordering. Under
+two readouts do not merely differ in level; they reverse an ordering. Under
 Patchscopes, idioms are the \emph{easiest} category at $57.4\%$, ahead of film
 titles ($54.7\%$) and landmarks ($47.2\%$). Under generation, idioms are the
 \emph{hardest} at $66.4\%$, well behind film titles ($84.5\%$) and landmarks
@@ -209,9 +209,9 @@ tokens in question.
 \paragraph{The signal is learned, not a base rate.}
 Because $69.1\%$ of instances are positive, a probe could score respectably by
 guessing. Balanced accuracy corrects for that by construction, and running the
-same probe on the earliest layers gives a clean gradient: $58.6\%$ at L0 --- the
-raw embedding --- rising through $65.1\%$ at L1 and $66.5\%$ at L2 to $69.8\%$
-at L5 (Appendix~\ref{app:details}). A base-rate artifact would be flat; this
+same probe on the earliest layers gives a clean gradient: $58.6\%$ at L0, the raw
+embedding, rising through $65.1\%$ at L1 and $66.5\%$ at L2 to $69.8\%$ at
+L5 (Appendix~\ref{app:details}). A base-rate artifact would be flat; this
 climbs as computation accumulates. That L0 is already above chance does suggest
 part of the signal is lexical identity of the cut token rather than context.
 
@@ -222,7 +222,7 @@ identity. Comparing each held-out phrase's mean predicted probability with its
 true success rate, the correlation peaks mid-network at $r=0.62$ (L10) and falls
 away at both ends, to $0.41$ at L5 and $0.48$ at L30
 (Appendix~\ref{app:details}). Phrase identity is thus most decodable in the
-middle layers --- and that peak sits several layers earlier than the one
+middle layers, and that peak sits several layers earlier than the one
 maximising balanced accuracy, another case of two measurements naming different
 ``best'' layers.
 
@@ -243,8 +243,8 @@ layer being probed, but the divergence is itself the point.
 
 The probe's precision is bounded by the scoring criterion, not only by the
 model. We adjudicated all $412$ false positives of the generation-label probe at
-L25 --- cases where the probe predicted completion and exact-match scoring
-recorded a failure --- by presenting each (target, generated text) pair to
+L25, cases where the probe predicted completion and exact-match scoring
+recorded a failure, by presenting each (target, generated text) pair to
 ChatGPT with a three-way rubric (Appendix~\ref{app:judge}). It labelled $259$
 cases ($62.9\%$) valid alternates, $72$ ($17.5\%$) partially correct and $81$
 ($19.7\%$) unrelated. Typical cases are \textit{laughs best} for \textit{laughs
@@ -264,7 +264,7 @@ in only $10.4\%$ unsure ($<0.3$).
 Taking the geometric mean of the probability the model assigns to each token it
 generates, confidence averages $0.878$ on successful completions and $0.447$ on
 failures. Split by probe outcome at L25 it follows the true label rather than
-the probe's guess --- true positives average $0.904$ and false negatives
-$0.791$, against $0.599$ for false positives and $0.414$ for true negatives
+the probe's guess: true positives average $0.904$ and false negatives $0.791$,
+against $0.599$ for false positives and $0.414$ for true negatives
 (Appendix~\ref{app:details}). Where the probe is wrong, the model is not, which
 suggests the two signals are complementary and worth combining.

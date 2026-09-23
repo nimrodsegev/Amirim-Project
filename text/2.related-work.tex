@@ -30,8 +30,8 @@ LIdioms \citep{moussallem-etal-2018-lidioms}.
 Our question was posed, in a more general form, by Future
 Lens \citep{pal-etal-2023-future}: given the hidden state of a single token at
 position $t$, can the tokens at positions $\geq t+2$ be recovered? They answer
-it with linear approximation and with causal intervention --- transplanting the
-state into a different context and reading what the model then produces --- and
+it with linear approximation and with causal intervention (transplanting the
+state into a different context and reading what the model then produces), and
 report better than $48\%$ accuracy at some layers of GPT-J-6B. That transplant
 is the technique Patchscopes later generalised, and our Patchscopes readout is a
 direct descendant of it.
@@ -42,8 +42,8 @@ is whatever the model would have emitted. We target \emph{fixed multi-word
 expressions}, so the continuation is defined externally and is the same string
 regardless of what the model does. That buys a lookahead distance which counts
 the tokens remaining in a known unit, a repetition structure across occurrences
-of the same phrase (\S\ref{sec:stability}), and a second readout --- the model's
-real continuation --- to compare the transplant against on matched instances
+of the same phrase (\S\ref{sec:stability}), and a second readout, the model's
+real continuation, to compare the transplant against on matched instances
 (\S\ref{sec:disagreement}). Future Lens compares two \emph{decoding} methods
 against the model's output; we compare a decoding method against the model's
 behaviour, and find they disagree in ways that change conclusions.
@@ -64,8 +64,8 @@ address that question directly in \S\ref{sec:disagreement}.
 truthfulness of a forthcoming answer than the output distribution reveals, that
 the signal concentrates in particular tokens, and that probes trained on it
 generalise poorly across datasets. Our probe is the same object aimed at a
-different target --- not whether an answer will be true but whether a phrase
-will be completed --- and shows a comparable pattern, including the limited
+different target (not whether an answer will be true but whether a phrase will
+be completed), and shows a comparable pattern, including the limited
 cross-category transfer in Appendix~\ref{app:details}. In a similar spirit,
 \citet{gekhman-etal-2024-fine} treat a model's pre-existing knowledge of an item
 as a measurable quantity predicting downstream behaviour.
@@ -84,7 +84,7 @@ suggesting the capacity to train for lookahead is not confined to large models.
 Closest to the use our probe suggests is CLP \citep{xie-zhou-2026-clp}, which
 trains one small linear layer on the hidden state to set how many drafted tokens
 to accept at each step, reporting $1.14\times$--$1.29\times$ on Qwen2.5 without
-measurable quality loss --- the same object as our probe, aimed at a decoding
+measurable quality loss: the same object as our probe, aimed at a decoding
 decision rather than an analysis question. All of these methods assume useful
 anticipation exists; we measure it directly, for one well-defined class of
 continuations, and characterise when it is reliable. We implement no decoding

@@ -16,8 +16,8 @@ requiring that the model produced it for the right reason, and penalises
 accepted variants of the same expression (\S\ref{sec:falsepos}). The
 adjudication in \S\ref{sec:falsepos} suggests the net bias is conservative, but
 it rests on a single judge with no human validation and no inter-annotator
-agreement, and the ChatGPT version used was not logged at the time --- it was
-most likely GPT-5.6, but we cannot confirm it --- so that run is not exactly
+agreement, and the ChatGPT version used was not logged at the time
+(most likely GPT-5.6, though we cannot confirm it), so that run is not exactly
 reproducible. The prompt is in
 Appendix~\ref{app:judge} and the analysis should be rerun with a named model
 before the number is relied on. The confidence-based split in
@@ -61,8 +61,8 @@ comparison across every analysis would require storing hidden states for all
 $32$ layers at every trial.
 
 \paragraph{Probe results are not reproducible from the released artifacts.}
-The probing experiments require per-trial hidden states --- $1.28$\,GB for the
-Patchscopes labels and $3.02$\,GB for the generation labels --- which are too
+The probing experiments require per-trial hidden states, $1.28$\,GB for the
+Patchscopes labels and $3.02$\,GB for the generation labels, which are too
 large to distribute and remain on the compute cluster. They are intact, so the
 runs can be reproduced there, but the probe numbers in Table~\ref{tab:probes}
 are reported from the run logs rather than recomputed from this repository's

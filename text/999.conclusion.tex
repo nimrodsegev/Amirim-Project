@@ -6,18 +6,17 @@ multi-word expression, already encodes the rest. For fixed expressions in
 natural text the answer is yes, and at a useful range: OLMo-2-7B completes such
 phrases three tokens early in roughly two thirds of instances and five tokens
 early in more than half. The ability is a stable property of the phrase rather
-than of the occasion --- across a phrase's natural contexts, success clusters at
-the extremes far more than independent per-context variation would produce ---
-and it is legible from the
-representation itself, well enough that a small probe reading a single hidden
+than of the occasion: across a phrase's natural contexts, success clusters at
+the extremes far more than independent per-context variation would produce. It
+is also legible from the representation itself, well enough that a small probe reading a single hidden
 vector predicts real completion at $87.6\%$ precision.
 
 The second finding is a caution about how the first was obtained. Patchscopes
 and ordinary generation, run on identical instances, agree on only $78.7\%$ of
 them, reverse the ranking of the phrase categories, and, used as probe labels,
 locate the relevant information in different parts of the network. Part of that
-gap is a budget we chose --- widening the sweep from eight layers to all $32$
-recovers six to eight points --- but the disagreement itself survives the widest
+gap is a budget we chose, since widening the sweep from eight layers to all $32$
+recovers six to eight points, but the disagreement itself survives the widest
 sweep we can run. Neither instrument is wrong; neither is a neutral window onto
 what the model knows. Claims of the form \emph{the model already knows $X$}
 should carry the readout that produced them, and the budget it was given.
@@ -31,9 +30,9 @@ against an autoregressive baseline; nothing in the present paper depends on its
 outcome. An early pilot there is instructive about the size of
 the prize: reproducing CLP \citep{xie-zhou-2026-clp}, a learned linear read of
 the hidden state that sets the draft length per step, on a different model, we
-measured roughly $1.34\times$ the throughput of plain autoregressive decoding
---- but a policy that simply drafts a fixed number of tokens at every step was
-faster still, at $1.72\times$, while diverging from the autoregressive output
+measured roughly $1.34\times$ the throughput of plain autoregressive decoding.
+A policy that simply drafts a fixed number of tokens at every step was faster
+still, at $1.72\times$, while diverging from the autoregressive output
 more often.\footnote{Three caveats on that pilot. Our figure exceeds the
 $1.14\times$--$1.29\times$ Xie and Zhou report, which we take to reflect
 differences in model, hardware and workload rather than a stronger
@@ -41,9 +40,9 @@ implementation. We observed occasional divergences from autoregressive output
 under \emph{every} drafting policy we tried, including fixed-length ones with no
 adaptive logic at all, which points at this model's interaction with the
 inference engine rather than at any policy. And those divergences were more
-common for the more aggressive fixed-length policies --- six of ten prompts,
-against two for CLP --- so the fixed-length speed advantage is not free.}
+common for the more aggressive fixed-length policies (six of ten prompts,
+against two for CLP), so the fixed-length speed advantage is not free.}
 Ten held-out prompts settle nothing either way. What the pilot does suggest is
-that the open question is not whether anticipation exists --- this paper says it
-does --- but whether reading it out adaptively buys enough over drafting blindly
-to pay for itself.
+that the open question is not whether anticipation exists, which this paper settles,
+but whether reading it out adaptively buys enough over drafting blindly to pay
+for itself.

@@ -23,8 +23,8 @@ A single phrase therefore yields several trials, one per position, and $i$ is
 the difficulty axis throughout: larger $i$ means the model must account for more
 unseen material.
 
-Every phrase is processed with its full left context --- a BOS token, then,
-where applicable, the natural text preceding the phrase --- so the state at
+Every phrase is processed with its full left context (a BOS token, then,
+where applicable, the natural text preceding the phrase), so the state at
 position $p$ is the state the model would really have at that point. We analyse
 $i \geq 2$ throughout; $i=1$ reduces to ordinary next-token prediction and is
 not of interest here.
@@ -48,7 +48,7 @@ succeeds. This is a deliberately generous criterion, and \S\ref{sec:disagreement
 shows that how many layers enter the union materially changes the result.
 
 \paragraph{Generation readout.}
-We take the same prefix --- context plus the first $p$ phrase tokens --- and let
+We take the same prefix, context plus the first $p$ phrase tokens, and let
 the model generate greedily for $i+3$ tokens, with no intervention of any kind.
 The readout succeeds under the same string-containment criterion.
 
@@ -62,8 +62,8 @@ measure how far they agree (\S\ref{sec:disagreement}).
 
 A trial succeeds if the target string appears as a case-insensitive substring of
 the generated continuation. The budget of $i+3$ tokens allows the model to
-overshoot slightly --- a trailing clause after the phrase does not cost it the
-trial --- while remaining tight enough that a success reflects the phrase
+overshoot slightly (a trailing clause after the phrase does not cost it the
+trial) while remaining tight enough that a success reflects the phrase
 rather than a long ramble that happens to contain it.\footnote{An earlier
 version of this work used a fixed five-token budget, which mechanically forced
 zero successes at $i \geq 6$. The reported $i \geq 6$ rates here are the
@@ -72,7 +72,7 @@ corrected ones.}
 The criterion is lenient in one direction and strict in the other. Lenient,
 because it accepts any output containing the target without asking whether the
 model produced it for the right reason; strict, because it demands the exact
-wording --- \textit{he who laughs last laughs \underline{best}} scores as a
+wording: \textit{he who laughs last laughs \underline{best}} scores as a
 failure against \textit{laughs loudest}, though it is the more common form.
 \S\ref{sec:falsepos} quantifies how often that strictness misclassifies a
 correct completion.
