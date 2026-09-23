@@ -11,8 +11,8 @@
 \includegraphics[width=\textwidth]{figures/context_vs_isolation}
 \caption{Recovery rate against lookahead distance. \textbf{(a)} Phrases in
 isolation, out to $i=8$; the two readouts are within a few points of each other
-throughout, and both decay steeply. Sample sizes ($n$, below the axis) shrink
-with $i$ because longer lookaheads require longer phrases. \textbf{(b)} The same
+throughout, and both decay steeply. The number of phrases long enough to test
+falls with $i$, from $1{,}112$ at $i=2$ to $51$ at $i=8$. \textbf{(b)} The same
 phrases in natural context. Context lifts the generation readout by $25$--$36$
 points. The two Patchscopes curves are one measurement under two layer budgets
 and differ by $6$--$8$ points, which is most of the apparent gap to generation
@@ -101,34 +101,17 @@ representation could carry.
 \subsection{Where in the model the phrase becomes readable}
 \label{sec:layers}
 
-\begin{figure}[t]
-\centering
-\includegraphics[width=\columnwidth]{figures/patchscopes_by_layer}
-\caption{Patchscopes success by layer and lookahead distance, in context, over
-the eight probed layers. Recovery rises through the network, peaks at L25, and
-falls at L30 at every distance.}
-\label{fig:bylayer}
-\end{figure}
-
-Recording Patchscopes success separately at each of the eight probed layers
-(Figure~\ref{fig:bylayer}) gives a consistent shape across all four distances:
-recovery is low in the early layers, rises through the middle of the network,
-peaks at L25 --- $62.2\%$ at $i=2$, $48.1\%$ at $i=3$ --- and then falls back at
-L30, to $59.2\%$ and $39.1\%$. The decline in the last layers appears at every
-$i$ and in every category.
-
-One explanation is that the last layers specialise toward producing the actual
-next token rather than maintaining a transferable representation, so a state
-lifted from L30 transfers worse than one from L25. This is a hypothesis
-consistent with our data and with the late-layer decline
-\citet{kaplan-etal-2025-tokens} report for words, not something we establish: a
-state a patchscope cannot verbalise may still carry the information in a form
-the rest of the network can use.
-
-Taking the union over all $32$ layers rather than eight, the median first
-successful layer is L16, and $41.9\%$ of successes first appear at or before
-L10 (Appendix~\ref{app:details}). Phrase information thus becomes readable
-gradually and, for a large minority of cases, quite early.
+Recording Patchscopes success at each probed layer separately gives the same
+shape at every distance: recovery is low early, rises through the middle of the
+network, peaks at L25 and falls back at L30
+(Figure~\ref{fig:bylayer}, Appendix~\ref{app:details}). One explanation is that
+the last layers specialise toward producing the actual next token rather than
+maintaining a transferable representation, so a state lifted from L30 transfers
+worse than one from L25 --- a hypothesis consistent with our data and with the
+late-layer decline \citet{kaplan-etal-2025-tokens} report for words, not
+something we establish. Over all $32$ layers the median first successful layer
+is L16, and $41.9\%$ of successes first appear at or before L10: phrase
+information becomes readable gradually, and for a large minority quite early.
 
 \subsection{The two readouts disagree}
 \label{sec:disagreement}
@@ -228,50 +211,25 @@ positive call from this probe is right roughly seven times in eight, and it is
 made from a single hidden vector, before the model has produced any of the
 tokens in question.
 
-\begin{figure}[t]
-\centering
-\includegraphics[width=\columnwidth]{figures/probe_early_layers}
-\caption{The generation-label probe at the earliest layers, against its best
-layer. At L0 --- the raw embedding, before any contextual processing --- the
-probe is barely above chance on balanced accuracy; it climbs steadily as
-computation accumulates. A base-rate artifact would be flat.}
-\label{fig:early}
-\end{figure}
-
-\begin{figure}[t]
-\centering
-\includegraphics[width=\columnwidth]{figures/probe_phrase_correlation}
-\caption{Correlation between the probe's mean predicted probability for a phrase
-and that phrase's true success rate, by layer. The probe's confidence tracks
-which phrase it is looking at, most strongly in the middle of the network.}
-\label{fig:corr}
-\end{figure}
-
 \paragraph{The signal is learned, not a base rate.}
 Because $69.1\%$ of instances are positive, a probe could score respectably by
-guessing. Two checks argue against that reading. First, balanced accuracy
-corrects for the base rate by construction, and the probe clears $50\%$
-everywhere. Second, running the same probe on the earliest layers gives a clean
-gradient (Figure~\ref{fig:early}): $58.6\%$ balanced accuracy at L0 --- the raw
-embedding, before any contextual processing --- rising to $65.1\%$ at L1,
-$66.5\%$ at L2 and $69.8\%$ at L5. A base-rate artifact would be flat across
-layers; this climbs as computation accumulates. We note nonetheless that
-$58.6\%$ at L0 is above chance, which suggests some of the signal is carried by
-the lexical identity of the cut token rather than by contextual processing.
+guessing. Balanced accuracy corrects for that by construction, and running the
+same probe on the earliest layers gives a clean gradient: $58.6\%$ at L0 --- the
+raw embedding --- rising through $65.1\%$ at L1 and $66.5\%$ at L2 to $69.8\%$
+at L5 (Appendix~\ref{app:details}). A base-rate artifact would be flat; this
+climbs as computation accumulates. That L0 is already above chance does suggest
+part of the signal is lexical identity of the cut token rather than context.
 
 \paragraph{The probe tracks which phrase it is looking at.}
-Balanced accuracy pools over instances and so cannot distinguish a probe that
-has learned a general notion of difficulty from one that has learned
-phrase identity. As a direct check, for each held-out phrase we compare the
-probe's mean predicted probability across that phrase's contexts with the
-phrase's true success rate. The correlation peaks in the middle of the network
-at $r=0.62$ (L10), with $0.60$ at L15 and $0.58$ at L13, and falls away at both
-ends, to $0.41$ at L5 and $0.48$ at L30 (Figure~\ref{fig:corr}). Phrase identity
-is therefore most decodable in the middle layers --- after tokens have been
-assembled into a phrase-level representation, but before the late layers begin
-reshaping the state toward the next token. This peak sits several layers earlier
-than the one that maximises the probe's balanced accuracy, another instance of
-different measurements naming different ``best'' layers.
+Balanced accuracy pools over instances, so it cannot separate a probe that has
+learned a general notion of difficulty from one that has learned phrase
+identity. Comparing each held-out phrase's mean predicted probability with its
+true success rate, the correlation peaks mid-network at $r=0.62$ (L10) and falls
+away at both ends, to $0.41$ at L5 and $0.48$ at L30
+(Appendix~\ref{app:details}). Phrase identity is thus most decodable in the
+middle layers --- and that peak sits several layers earlier than the one
+maximising balanced accuracy, another case of two measurements naming different
+``best'' layers.
 
 \paragraph{The label changes where the ``best'' layer is.}
 Training the identical architecture on the Patchscopes label instead produces a
@@ -288,49 +246,30 @@ layer being probed, but the divergence is itself the point.
 \subsection{Most apparent errors are valid alternates}
 \label{sec:falsepos}
 
-\begin{figure*}[t]
-\centering
-\includegraphics[width=\textwidth]{figures/confidence_and_falsepos}
-\caption{\textbf{Left:} the model's own mean confidence in the tokens it
-generated, split by the four probe outcomes at L25. Confidence follows the true
-outcome, not the probe's guess --- both real-success groups sit far above both
-real-failure groups, including where the probe was wrong. \textbf{Right:} an LLM
-judge's adjudication of all $412$ probe false positives.}
-\label{fig:conf}
-\end{figure*}
-
 The probe's precision is bounded by the scoring criterion, not only by the
 model. We adjudicated all $412$ false positives of the generation-label probe at
 L25 --- cases where the probe predicted completion and exact-match scoring
 recorded a failure --- by presenting each (target, generated text) pair to
-ChatGPT with a three-way rubric and asking which category it fell into. The
-prompt is reproduced verbatim in Appendix~\ref{app:judge}. It labelled $259$
+ChatGPT with a three-way rubric (Appendix~\ref{app:judge}). It labelled $259$
 cases ($62.9\%$) valid alternates, $72$ ($17.5\%$) partially correct and $81$
-($19.7\%$) unrelated (Figure~\ref{fig:conf}, right).
-Typical cases are \textit{laughs best} for \textit{laughs loudest},
-\textit{plowshares} for \textit{ploughshares}, and \textit{beat around the bush}
-for \textit{beat about the bush} --- in each case the more common form of the
-expression, scored as a failure. Appendix~\ref{app:details} gives a fuller
-sample, including the cases the judge called unrelated.
+($19.7\%$) unrelated. Typical cases are \textit{laughs best} for \textit{laughs
+loudest} and \textit{beat around the bush} for \textit{beat about the bush}: the
+more common form of the expression, scored as a failure.
 
 This is a single judge, with no human validation and no record of which ChatGPT
 version produced it, so we report it as indicative of the direction of the bias
-rather than as a corrected accuracy. Read that way, it says roughly four in five
-of these apparent errors reflect the rigidity of exact matching rather than a
-model that did not know the phrase --- which makes our reported rates
-conservative.
-
-An independent split of the same $412$ cases by the model's own confidence
-agrees, and uses no judge at all: in $40.0\%$ the model was itself confident
-($>0.7$), the signature of a valid alternate, and in only $10.4\%$ was it unsure
-($<0.3$), the signature of real confusion.
+rather than as a corrected accuracy. Read that way, roughly four in five of
+these apparent errors reflect the rigidity of exact matching rather than a model
+that did not know the phrase, which makes our reported rates conservative. An
+independent split of the same cases by the model's own confidence agrees and
+uses no judge at all: in $40.0\%$ the model was itself confident ($>0.7$), and
+in only $10.4\%$ unsure ($<0.3$).
 
 \paragraph{The model's own confidence tracks the real outcome.}
 Taking the geometric mean of the probability the model assigns to each token it
 generates, confidence averages $0.878$ on successful completions and $0.447$ on
-failures --- a usable signal in its own right. Split by probe outcome at L25
-(Figure~\ref{fig:conf}, left), it follows the true label rather than the probe's
-guess: true positives average $0.904$ and false negatives $0.791$, against
-$0.599$ for false positives and $0.414$ for true negatives. Where the probe is
-wrong, the model is not, which suggests the two signals are complementary and
-worth combining.
+failures. Split by probe outcome at L25 it follows the true label rather than
+the probe's guess --- true positives average $0.904$ and false negatives
+$0.791$, against $0.599$ for false positives and $0.414$ for true negatives
+(Appendix~\ref{app:details}). Where the probe is wrong, the model is not, which
+suggests the two signals are complementary and worth combining.

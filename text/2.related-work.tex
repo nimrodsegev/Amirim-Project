@@ -60,16 +60,15 @@ of whether what is extracted is what the model would otherwise have used. We
 address that question directly in \S\ref{sec:disagreement}.
 
 \paragraph{Probing internal states for future correctness.}
-\citet{orgad-etal-2025-llms} show that LLM hidden states encode substantially
-more about the truthfulness of a forthcoming answer than the output
-distribution reveals, that this signal is concentrated in particular tokens, and
-that probes trained on it generalise poorly across datasets. Our probe is the
-same shape of object applied to a different target --- not whether an answer
-will be true, but whether a phrase will be completed --- and we find a
-comparable pattern, including the limited cross-category generalisation reported
-in Appendix~\ref{app:details}. In a similar spirit,
+\citet{orgad-etal-2025-llms} show that hidden states encode more about the
+truthfulness of a forthcoming answer than the output distribution reveals, that
+the signal concentrates in particular tokens, and that probes trained on it
+generalise poorly across datasets. Our probe is the same object aimed at a
+different target --- not whether an answer will be true but whether a phrase
+will be completed --- and shows a comparable pattern, including the limited
+cross-category transfer in Appendix~\ref{app:details}. In a similar spirit,
 \citet{gekhman-etal-2024-fine} treat a model's pre-existing knowledge of an item
-as a measurable quantity that predicts downstream behaviour.
+as a measurable quantity predicting downstream behaviour.
 
 \paragraph{Exploiting anticipation for efficiency.}
 If a model's state already determines several upcoming tokens, that redundancy
@@ -82,14 +81,11 @@ to emit several tokens at once; and LayerSkip
 objective helps even 130M-parameter models under severe data constraints,
 suggesting the capacity to train for lookahead is not confined to large models.
 
-Closest to the use our probe suggests is
-CLP \citep{xie-zhou-2026-clp}, which trains a single small linear layer on the
-hidden state to predict how many drafted tokens can safely be accepted at each
-step, rather than always drafting a fixed number, and reports $1.14\times$ to
-$1.29\times$ speed-ups on Qwen2.5 without measurable quality loss. That is the
-same object as our probe --- a cheap read of the hidden state, used to decide
-how far ahead to commit --- pointed at a decoding decision rather than at an
-analysis question. These methods assume that useful anticipation exists; our
-contribution is to measure it directly, for one well-defined class of
-continuations, and to characterise when it is reliable. We do not implement a
-decoding method here, and we report no speed-ups of our own.
+Closest to the use our probe suggests is CLP \citep{xie-zhou-2026-clp}, which
+trains one small linear layer on the hidden state to set how many drafted tokens
+to accept at each step, reporting $1.14\times$--$1.29\times$ on Qwen2.5 without
+measurable quality loss --- the same object as our probe, aimed at a decoding
+decision rather than an analysis question. All of these methods assume useful
+anticipation exists; we measure it directly, for one well-defined class of
+continuations, and characterise when it is reliable. We implement no decoding
+method here and report no speed-ups of our own.

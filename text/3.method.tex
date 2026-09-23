@@ -52,11 +52,10 @@ We take the same prefix --- context plus the first $p$ phrase tokens --- and let
 the model generate greedily for $i+3$ tokens, with no intervention of any kind.
 The readout succeeds under the same string-containment criterion.
 
-The two readouts answer different questions. The Patchscopes readout asks what a
-single vector, removed from its context, can be made to express. The generation
-readout asks what the model, with all of its machinery and its real context,
-actually produces. Neither is ground truth for the other. We treat them as two
-instruments and, in \S\ref{sec:disagreement}, measure how far they agree.
+Neither readout is ground truth for the other: the first asks what a single
+vector, removed from its context, can be made to express; the second what the
+model actually does with that context. We treat them as two instruments and
+measure how far they agree (\S\ref{sec:disagreement}).
 
 \subsection{Success criterion}
 \label{sec:criterion}
@@ -70,12 +69,10 @@ version of this work used a fixed five-token budget, which mechanically forced
 zero successes at $i \geq 6$. The reported $i \geq 6$ rates here are the
 corrected ones.}
 
-The criterion is lenient in one direction and strict in the other, and both
-matter for interpreting the numbers. It is lenient because it accepts any
-output containing the target, without requiring that the model have produced the
-phrase for the right reason. It is strict because it requires the exact wording:
-\textit{he who laughs last laughs \underline{best}} is scored as a failure
-against the target \textit{laughs loudest}, although it is the more common form
-of the idiom. \S\ref{sec:falsepos} quantifies how often this strictness
-misclassifies a correct completion, and Appendix~\ref{app:details} lists further
-artifacts of scoring at the token level.
+The criterion is lenient in one direction and strict in the other. Lenient,
+because it accepts any output containing the target without asking whether the
+model produced it for the right reason; strict, because it demands the exact
+wording --- \textit{he who laughs last laughs \underline{best}} scores as a
+failure against \textit{laughs loudest}, though it is the more common form.
+\S\ref{sec:falsepos} quantifies how often that strictness misclassifies a
+correct completion.

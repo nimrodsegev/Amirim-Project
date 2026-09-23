@@ -43,6 +43,21 @@ is consistently below OLMo-2-7B, and Qwen2.5-14B, at roughly twice the
 parameters, trails OLMo-2-7B in isolation and leads it by one to two points in
 context.
 
+\subsection{Patchscopes success by layer}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{figures/patchscopes_by_layer}
+\caption{Patchscopes success by layer and lookahead distance, in context, over
+the eight probed layers. Recovery rises through the network, peaks at L25, and
+falls at L30 at every distance.}
+\label{fig:bylayer}
+\end{figure}
+
+Figure~\ref{fig:bylayer} gives the per-layer detail behind \S\ref{sec:layers}:
+$62.2\%$ at $i=2$ and $48.1\%$ at $i=3$ at the L25 peak, falling to $59.2\%$ and
+$39.1\%$ by L30. The shape is the same at every distance.
+
 \subsection{Depth of first recovery}
 
 \begin{figure}[t]
@@ -108,6 +123,31 @@ Patchscopes itself can satisfy less than $1\%$ of the time at that depth. Some
 of what the probe reads is evidently available very early, whatever the
 transplant can or cannot verbalise there.
 
+\subsection{The probe at the earliest layers}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{figures/probe_early_layers}
+\caption{The generation-label probe at the earliest layers, against its best
+layer. At L0 --- the raw embedding, before any contextual processing --- the
+probe is barely above chance on balanced accuracy; it climbs steadily as
+computation accumulates. A base-rate artifact would be flat.}
+\label{fig:early}
+\end{figure}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{figures/probe_phrase_correlation}
+\caption{Correlation between the probe's mean predicted probability for a phrase
+and that phrase's true success rate, by layer. The probe's confidence tracks
+which phrase it is looking at, most strongly in the middle of the network.}
+\label{fig:corr}
+\end{figure}
+
+Figure~\ref{fig:early} shows the gradient behind the base-rate control of
+\S\ref{sec:probe}, and Figure~\ref{fig:corr} the per-layer correlation between
+probe confidence and true phrase difficulty.
+
 \subsection{Probe generalisation to unseen categories}
 
 Training the generation-label probe on two phrase categories and testing on the
@@ -155,6 +195,24 @@ quality --- under a positive rate that moves from $6.6\%$ to $47.7\%$ across
 layers. On $F_1$ the generation-label probe only beats the trivial
 always-predict-success baseline ($81.7$) at L30 ($82.9$), because that baseline
 buys perfect recall for free on a $69.1\%$-positive test set.
+
+\subsection{Confidence and the false positives}
+
+\begin{figure*}[t]
+\centering
+\includegraphics[width=\textwidth]{figures/confidence_and_falsepos}
+\caption{\textbf{Left:} the model's own mean confidence in the tokens it
+generated, split by the four probe outcomes at L25. Confidence follows the true
+outcome, not the probe's guess --- both real-success groups sit far above both
+real-failure groups, including where the probe was wrong. \textbf{Right:} the
+judge's adjudication of all $412$ probe false positives.}
+\label{fig:conf}
+\end{figure*}
+
+Figure~\ref{fig:conf} gives the two analyses behind \S\ref{sec:falsepos}: the
+model's own confidence split by probe outcome, and the judge's adjudication of
+the $412$ false positives. Confidence separates the real outcomes far more
+cleanly than it separates the probe's correct calls from its mistakes.
 
 \subsection{False-positive examples}
 

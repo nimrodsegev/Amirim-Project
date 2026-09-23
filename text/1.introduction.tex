@@ -71,48 +71,24 @@ something; we ask how far that licence extends.
 
 Our findings are as follows. Phrase-level anticipation is real and substantial:
 in natural context, OLMo-2-7B produces the final two tokens of a familiar phrase
-in $84.0\%$ of instances, and the final five in $53.6\%$, against $59.2\%$ and
+in $84.0\%$ of instances and the final five in $53.6\%$, against $59.2\%$ and
 $17.6\%$ for the same phrases in isolation (\S\ref{sec:lookahead}). It is a
-stable property of the phrase rather than of the occasion: per-phrase success at
-$i=3$ is far more bimodal than independent per-context variation would produce,
-with $31.5\%$ of phrases succeeding in at least $90\%$ of their contexts against
-a binomial expectation of $10.1\%$ (\S\ref{sec:stability}). And the signal is decodable: a small classifier
-reading the raw hidden state predicts whether the model will in fact complete
-the phrase, at $76.8\%$ balanced accuracy and $87.6\%$ precision
-(\S\ref{sec:probe}).
+property of the phrase rather than of the occasion: per-phrase success is far
+more bimodal than independent per-context variation would produce
+(\S\ref{sec:stability}). And it is decodable --- a small classifier reading the
+raw hidden state predicts whether the model will in fact complete the phrase, at
+$76.8\%$ balanced accuracy and $87.6\%$ precision (\S\ref{sec:probe}).
 
 The two readouts, however, do not measure the same thing. Run on identical
-instances, they agree on only $78.7\%$ of them, and generation recovers
-continuations that Patchscopes misses about three times as often as the reverse
-(\S\ref{sec:disagreement}). They also reverse the ranking of the phrase types
---- idioms are the easiest under Patchscopes and the hardest under generation
---- and the two probes trained on their respective labels place the ``best''
-layer in different parts of the network. Some of the asymmetry is an artifact of
-how many layers the Patchscopes union is taken over, and we quantify how much;
-the disagreement that remains is not, and survives the widest sweep we can run.
-We take this as a caution rather than a refutation: Patchscopes remains
-informative about representational content, but a claim of the form \emph{the
-model knows $X$ at layer $\ell$} is not readout-independent, and should say
-which instrument produced it.
-
-Concretely, we contribute:
-
-\begin{enumerate}[nosep,leftmargin=*]
-\item A phrase-level instantiation of the future-anticipation question, in
-      which the target is fixed by the expression rather than by the model:
-      $1{,}164$ expressions, in isolation and in $9{,}955$ naturally occurring
-      FineWeb-Edu contexts, read out two independent ways on identical
-      instances (\S\ref{sec:method}).
-\item Evidence that anticipation of familiar phrases occurs several tokens
-      ahead, is greatly strengthened by natural context, and is a stable
-      property of the phrase (\S\ref{sec:lookahead}--\S\ref{sec:stability}).
-\item A direct comparison showing that the two readouts disagree substantially
-      and asymmetrically, that conclusions about category difficulty and layer
-      localisation depend on which one is used, and that a sizeable part of the
-      apparent gap between them is set by the layer budget rather than by the
-      model (\S\ref{sec:disagreement}).
-\item A hidden-state probe that predicts real completion success well above
-      chance from the first transformer layer onward, together with an
-      adjudication of its apparent errors showing that roughly four in five are
-      valid alternate phrasings rather than failures (\S\ref{sec:probe}).
-\end{enumerate}
+instances they agree on only $78.7\%$ of them, with generation recovering
+continuations Patchscopes misses about three times as often as the reverse; they
+reverse the ranking of the phrase types, idioms being easiest under Patchscopes
+and hardest under generation; and the two probes trained on their respective
+labels place the ``best'' layer in different parts of the network
+(\S\ref{sec:disagreement}). Some of the asymmetry is an artifact of how many
+layers the Patchscopes union is taken over, and we quantify how much; the
+disagreement that remains is not, and survives the widest sweep we can run. We
+take this as a caution rather than a refutation: Patchscopes remains informative
+about representational content, but a claim of the form \emph{the model knows
+$X$ at layer $\ell$} is not readout-independent, and should say which instrument
+produced it, and over how many layers.
