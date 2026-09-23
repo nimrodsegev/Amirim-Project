@@ -56,19 +56,17 @@ trials, $24{,}740$ of them at $i \in \{2,3,4,5\}$. Instance counts fall with $i$
 because longer lookaheads require longer phrases: $9{,}148$ trials at $i=2$,
 $8{,}529$ at $i=3$, $4{,}677$ at $i=4$ and $2{,}386$ at $i=5$.
 
-Because idioms dominate the phrase set and tend to appear often in web text,
-they also dominate the instance set ($20{,}371$ of $24{,}740$ pooled trials).
-Aggregate rates over instances are therefore close to idiom rates, and we report
-per-category results separately in \S\ref{sec:disagreement}.
+Idioms dominate both the phrase set and the instance set ($20{,}371$ of
+$24{,}740$ pooled trials), so aggregate rates run close to idiom rates; we
+report per-category results separately in \S\ref{sec:disagreement}.
 
 \subsection{Models}
 
 Our main model is OLMo-2-7B \citep{olmo-2025-olmo2} in \texttt{bfloat16}, a
 $32$-layer decoder-only model chosen because its training data is public, which
 makes the assumption that these phrases were seen in pretraining checkable in
-principle. We replicate the central measurements on OLMo-3-7B and, for the
-generation readout, on Qwen2.5-14B \citep{qwen-2024-qwen25}
-(Appendix~\ref{app:details}).
+principle. We replicate the central measurements on OLMo-3-7B and, for
+generation, on Qwen2.5-14B \citep{qwen-2024-qwen25} (Appendix~\ref{app:details}).
 
 Our primary Patchscopes readout takes the union over eight layers,
 $\{5, 7, 10, 13, 15, 20, 25, 30\}$. This is the layer set on which the

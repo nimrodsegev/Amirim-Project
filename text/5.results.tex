@@ -98,20 +98,16 @@ This is what makes the probing question in \S\ref{sec:probe} worth asking: a
 signal that is stable per phrase is a signal that something in the
 representation could carry.
 
-\subsection{Where in the model the phrase becomes readable}
-\label{sec:layers}
-
+\paragraph{Where in the model it becomes readable.}
 Recording Patchscopes success at each probed layer separately gives the same
 shape at every distance: recovery is low early, rises through the middle of the
-network, peaks at L25 and falls back at L30
-(Figure~\ref{fig:bylayer}, Appendix~\ref{app:details}). One explanation is that
-the last layers specialise toward producing the actual next token rather than
-maintaining a transferable representation, so a state lifted from L30 transfers
-worse than one from L25 --- a hypothesis consistent with our data and with the
-late-layer decline \citet{kaplan-etal-2025-tokens} report for words, not
-something we establish. Over all $32$ layers the median first successful layer
-is L16, and $41.9\%$ of successes first appear at or before L10: phrase
-information becomes readable gradually, and for a large minority quite early.
+network, peaks at L25 and falls back at L30 (Appendix~\ref{app:details}). The
+late decline may be the last layers specialising toward the actual next token
+rather than maintaining a transferable representation --- consistent with the
+decline \citet{kaplan-etal-2025-tokens} report for words, though we do not
+establish it. Over all $32$ layers the median first successful layer is L16 and
+$41.9\%$ of successes appear at or before L10, so phrase information becomes
+readable gradually and, for a large minority, early.
 
 \subsection{The two readouts disagree}
 \label{sec:disagreement}
