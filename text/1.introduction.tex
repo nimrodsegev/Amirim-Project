@@ -6,9 +6,11 @@
 \includegraphics[width=\columnwidth]{figures/motivation}
 \caption{Why anticipation would be worth having. Emitting \textit{The Lord of
 the Rings} one token at a time costs five full passes through a 32-layer model.
-If the remainder were already recoverable from the state at \textit{Lord}, most
-of that work would be redundant. Whether it is recoverable is the question of
-this paper; we do not implement the shortcut.}
+If the remainder were recoverable from the state at \textit{Lord}, most of that
+work would be redundant. The lower row is hypothetical: the exit layer is
+illustrative, and recoverability alone would not make such a shortcut safe or
+cheap. Whether the remainder is recoverable at all is this paper's question; we
+do not implement a decoding scheme.}
 \label{fig:motivation}
 \end{figure}
 
@@ -33,8 +35,9 @@ anticipates forwards. Our question is the forward one, and it is the one with
 consequences for how models are run:
 
 \begin{quote}
-Given a partial phrase, does the model's internal representation already encode
-the rest, before it has read or generated any of it?
+Given a partial phrase, does the model's internal representation already carry
+enough information to recover the rest, before it has read or generated any of
+it?
 \end{quote}
 
 A general form of this question is already answered in the affirmative.
@@ -72,9 +75,9 @@ something; we ask how far that licence extends.
 Our findings are as follows. Phrase-level anticipation is real and substantial:
 in natural context, OLMo-2-7B produces the final two tokens of a familiar phrase
 in $84.0\%$ of instances and the final five in $53.6\%$, against $59.2\%$ and
-$17.6\%$ for the same phrases in isolation (\S\ref{sec:lookahead}). It is a
-property of the phrase rather than of the occasion: per-phrase success is far
-more bimodal than independent per-context variation would produce
+$17.6\%$ for the same phrases in isolation (\S\ref{sec:lookahead}). It varies far more across phrases than
+across occasions: per-phrase success is much more bimodal than an
+independent-context model at a common rate would produce
 (\S\ref{sec:stability}). And it is decodable. A small classifier reading the
 raw hidden state predicts whether the model will in fact complete the phrase, at
 $76.8\%$ balanced accuracy and $87.6\%$ precision (\S\ref{sec:probe}).

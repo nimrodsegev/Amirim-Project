@@ -30,7 +30,8 @@ next-token prediction.
 The same phrases presented alone, with no surrounding text, are recovered far
 less often: $59.2\%$ at $i=2$ falling to $17.6\%$ at $i=5$ (Figure~\ref{fig:context}).
 The gap widens with distance, from $24.8$ points at $i=2$ to $36.0$ points at
-$i=5$, and the Patchscopes readout shows the same pattern. This is the expected
+$i=5$, and the Patchscopes readout shows the same pattern, gaining $21.8$ to
+$33.2$ points. This is the expected
 direction, since context supplies both topical evidence and the signal that a
 fixed expression is under way, but its size matters for interpreting prior
 results. A bare phrase is a poor proxy for the condition
@@ -55,7 +56,7 @@ of this work found zero successes at $i \geq 6$, which was an artifact of a
 fixed generation budget (\S\ref{sec:criterion}) rather than a property of the
 model.
 
-\subsection{Anticipation is a property of the phrase}
+\subsection{Recovery varies systematically by phrase}
 \label{sec:stability}
 
 \begin{figure}[t]
@@ -68,7 +69,7 @@ context were an independent draw at the pooled rate $p=0.64$. The two extreme
 bins are kept separate because most phrases have exactly five distinct contexts.
 The observed distribution puts mass at both ends, where the null has almost
 none: $7.7\%$ of phrases fail everywhere and $31.5\%$ succeed everywhere,
-against $0.3\%$ and $10.1\%$ under the null; the null instead piles up in the middle, where the observed
+against $0.5\%$ and $10.1\%$ under the null; the null instead piles up in the middle, where the observed
 distribution is thin.}
 \label{fig:consistency}
 \end{figure}
@@ -83,19 +84,25 @@ For each of the $803$ phrases with at least five distinct contexts
 (\S\ref{sec:setup}) we compute the share of its contexts that succeed, and
 compare the resulting distribution against the binomial null in which every
 context is an independent draw at the pooled rate $p = 0.645$
-(Figure~\ref{fig:consistency}). The two differ sharply. $31.5\%$ of phrases
-succeed in at least $90\%$ of their contexts where the null predicts $10.1\%$,
-and $18.3\%$ succeed in at most $20\%$ where the null predicts $5.0\%$;
-conversely only $27.3\%$ fall in the $40$--$60\%$ band that holds $48.5\%$ of
-the null's mass. The Patchscopes readout is more extreme still, at $37.4\%$ and
-$22.5\%$ against nulls of $9.5\%$ and $5.4\%$.
+(Figure~\ref{fig:consistency}). The two differ sharply. $31.5\%$ of phrases are
+recovered in \emph{every} context, where the null predicts $10.1\%$, and
+$7.7\%$ in none at all, where it predicts $0.5\%$. The null instead concentrates
+in the middle, putting $56.0\%$ of its mass in the two central bins against
+$32.3\%$ observed. The Patchscopes readout is more extreme still, with $37.4\%$
+of phrases recovered in at least $90\%$ of their contexts against a null of
+$9.5\%$.
 
-We read this as evidence that what varies is the phrase, not the occasion. Some
-expressions are reliably available to the model ahead of time and others are
-reliably not, and context modulates that availability rather than creating it.
-This is what makes the probing question in \S\ref{sec:probe} worth asking: a
-signal that is stable per phrase is a signal that something in the
-representation could carry.
+What this rules out is the picture in which every context is an independent
+draw at a common rate: the between-phrase spread is far larger than that model
+allows. Some expressions are recovered across most of their occurrences and
+others across almost none. It does not establish that the phrase \emph{itself}
+is what varies, since we have not separated phrase identity from its
+correlates: pretraining frequency, length, tokenization, category, or how
+similar a phrase's contexts happen to be (\S\ref{sec:limitations}). What it does
+establish is that the variation lives at the phrase level rather than the
+occasion level, which is what makes the probing question in \S\ref{sec:probe}
+worth asking: a signal that is consistent within a phrase is one that something
+in the representation could carry.
 
 \paragraph{Where in the model it becomes readable.}
 Recording Patchscopes success at each probed layer separately gives the same
@@ -127,8 +134,10 @@ Patchscopes recovers one that generation misses in only $5.6\%$, roughly a
 three-to-one asymmetry. Read on its own, that says Patchscopes undercounts what
 the model can do.
 
-The two failure directions are qualitatively different, and neither is simply an
-instrument defect (Table~\ref{tab:disagree}). Where Patchscopes succeeds and
+The two failure directions look qualitatively different, and neither is simply
+an instrument defect. The examples in Table~\ref{tab:disagree} are illustrative
+rather than a systematic sample, so what follows is a reading of them, not a
+measured property of the disagreement. Where Patchscopes succeeds and
 generation does not, the state does contain the phrase, since the
 patchscope verbalises it, yet the real context steers the model elsewhere: given
 \textit{Why should one person be brought up}, it writes \textit{a wealthy
@@ -163,10 +172,11 @@ two readouts do not merely differ in level; they reverse an ordering. Under
 Patchscopes, idioms are the \emph{easiest} category at $57.4\%$, ahead of film
 titles ($54.7\%$) and landmarks ($47.2\%$). Under generation, idioms are the
 \emph{hardest} at $66.4\%$, well behind film titles ($84.5\%$) and landmarks
-($75.3\%$). The reversal is consistent with the scoring artifact of
-\S\ref{sec:falsepos}: idioms have accepted variants, so exact-match scoring
-penalises them most under the readout that produces the most fluent
-continuations. Under the wider $32$-layer sweep idioms move to the middle of the
+($75.3\%$). One explanation, which we have not tested, is the
+scoring artifact of \S\ref{sec:falsepos}: idioms have accepted variants, so
+exact-match scoring would penalise them most under the readout that produces
+the most fluent continuations. Confirming that would need the adjudication
+repeated per category. Under the wider $32$-layer sweep idioms move to the middle of the
 Patchscopes ranking rather than the top, so the reversal weakens to a
 re-ordering, but the categories are still ranked differently by the two
 instruments.
@@ -188,7 +198,7 @@ moves from $93.4\%$ at L5 to $52.3\%$ at L25 as the positive rate shifts, which
 is why raw accuracy on that label cannot be compared across layers and balanced
 accuracy is used instead. The label then determines the shape: predicting
 Patchscopes success peaks in the middle layers, while predicting real completion
-rises monotonically to L30.}
+trends upward to a maximum at L30.}
 \label{fig:probes}
 \end{figure}
 
@@ -198,8 +208,9 @@ hidden state at the cut position to predict whether the readout succeeds, poolin
 $i \in \{2,3,4,5\}$ and splitting by phrase so that no test phrase is seen in
 training (Appendix~\ref{app:details}).
 
-Predicting \emph{real completion} works well. Balanced accuracy rises
-monotonically with depth, from $69.8\%$ at L5 to $76.8\%$ at L30, and precision
+Predicting \emph{real completion} works well. Balanced accuracy trends
+upward with depth, from $69.8\%$ at L5 to a maximum of $76.8\%$ at L30 with a
+small dip at L20, and precision
 is high and nearly flat at $83.3\%$ to $87.6\%$ (full metrics in
 Appendix~\ref{app:details}). A
 positive call from this probe is right roughly seven times in eight, and it is
@@ -215,17 +226,6 @@ L5 (Appendix~\ref{app:details}). A base-rate artifact would be flat; this
 climbs as computation accumulates. That L0 is already above chance does suggest
 part of the signal is lexical identity of the cut token rather than context.
 
-\paragraph{The probe tracks which phrase it is looking at.}
-Balanced accuracy pools over instances, so it cannot separate a probe that has
-learned a general notion of difficulty from one that has learned phrase
-identity. Comparing each held-out phrase's mean predicted probability with its
-true success rate, the correlation peaks mid-network at $r=0.62$ (L10) and falls
-away at both ends, to $0.41$ at L5 and $0.48$ at L30
-(Appendix~\ref{app:details}). Phrase identity is thus most decodable in the
-middle layers, and that peak sits several layers earlier than the one
-maximising balanced accuracy, another case of two measurements naming different
-``best'' layers.
-
 \paragraph{The label changes where the ``best'' layer is.}
 Training the identical architecture on the Patchscopes label instead produces a
 different profile: balanced accuracy peaks in the middle of the network
@@ -237,6 +237,15 @@ A reader interested in \emph{where in the model phrase information lives} would
 draw opposite conclusions from the two probes. We read the generation-label
 probe as the more trustworthy of the two, since its label does not depend on the
 layer being probed, but the divergence is itself the point.
+
+The same mid-network peak appears when we ask whether the Patchscopes-label
+probe tracks phrase identity rather than a general notion of difficulty.
+Comparing each held-out phrase's mean predicted probability with its true
+success rate, the correlation peaks at $r=0.62$ (L10) and falls away at both
+ends, to $0.41$ at L5 and $0.48$ at L30 (Appendix~\ref{app:details}). We have
+not run the equivalent analysis on the generation-label features, so this says
+where \emph{Patchscopes} success becomes phrase-predictable, not where the model's
+own behaviour does.
 
 \subsection{Most apparent errors are valid alternates}
 \label{sec:falsepos}

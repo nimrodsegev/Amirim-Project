@@ -135,8 +135,8 @@ ax.text(TOTX, B1 + COLH / 2, "160\nlayer-passes", ha="left", va="center",
 
 # --- row 2: the rest read out of the state at 'Lord'
 B2 = 7
-ax.text(X0, B2 + COLH + 9.0, "if the rest is already encoded", ha="left",
-        va="center", fontsize=6.9, color=GEN, weight="bold")
+ax.text(X0, B2 + COLH + 9.0, "hypothetical: if the rest were recoverable",
+        ha="left", va="center", fontsize=6.9, color=GEN, weight="bold")
 for k, (t, L) in enumerate(zip(TOKS[:2], [32, 13])):
     column(X0 + k * (CW + GAP), B2, t, L, GEN, LIGHT_GEN)
 rx = X0 + 2 * (CW + GAP) + 7.5      # extra gap: the skip arrow lives here

@@ -19,8 +19,10 @@ OLMo-2-7B & generation & 84.0 & 64.8 & 55.6 & 53.6 \\
 Qwen2.5-14B & generation & 84.8 & 66.2 & 57.4 & 54.7 \\
 \bottomrule
 \end{tabular}
-\caption{Recovery rate (\%) across models, on the same phrases, contexts and cut
-points. Patchscopes rows are the union over all 32 layers. Qwen2.5-14B, at
+\caption{Recovery rate (\%) across models, on the same phrase strings and
+contexts. Each model uses its own tokenizer, so $i$ counts model-specific tokens
+and the cut points need not coincide across rows. Patchscopes rows are the union
+over all 32 layers. Qwen2.5-14B, at
 roughly twice the parameters of OLMo-2-7B, is slightly behind it in isolation
 and slightly ahead of it in context.}
 \label{tab:replication}

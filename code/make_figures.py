@@ -29,13 +29,13 @@ def save(fig, name):
 iso_p = NUM["isolated"]["patchscopes_olmo2_32L"]
 iso_g = NUM["isolated"]["generation_olmo2"]
 ctx_g = NUM["in_context"]["generation_olmo2"]
-ctx_p8 = NUM["external"]["patchscopes_8L_union_in_context_pct"]
+ctx_p32 = NUM["in_context"]["patchscopes_olmo2_32L"]
 
 fig, ax = plt.subplots(figsize=(3.3, 2.15))
 xs = range(len(IS))
 ax.plot(xs, [ctx_g[str(i)][2] for i in IS], "o-", ms=3.4, color=C["gen"],
         label="generation, in context")
-ax.plot(xs, [ctx_p8[str(i)] for i in IS], "s-", ms=3.4, color=C["ps"],
+ax.plot(xs, [ctx_p32[str(i)][2] for i in IS], "s-", ms=3.4, color=C["ps"],
         label="patchscopes, in context")
 ax.plot(xs, [iso_g[str(i)][2] for i in IS], "o--", ms=3.4, color=C["gen"],
         alpha=.5, label="generation, alone")
@@ -120,7 +120,7 @@ ax.plot(L, [base[str(l)] for l in L], "^--", ms=2.6, color=C["grey"], alpha=.75,
         label="majority-class baseline (raw acc.)")
 ax.axhline(50, ls=":", lw=.8, color=C["grey"])
 ax.text(5.4, 52.2, "chance", ha="left", fontsize=6, color=C["grey"])
-ax.set_xlabel("layer"); ax.set_ylabel("balanced accuracy (%)")
+ax.set_xlabel("layer"); ax.set_ylabel("%")
 ax.set_xticks(L); ax.set_ylim(40, 100)
 ax.grid(axis="y", lw=.4, alpha=.3); ax.set_axisbelow(True)
 ax.legend(frameon=False, fontsize=6.2, ncol=2, loc="upper center",

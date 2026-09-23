@@ -2,13 +2,13 @@
 \label{sec:conclusion}
 
 We asked whether a language model's internal state, partway through a familiar
-multi-word expression, already encodes the rest. For fixed expressions in
-natural text the answer is yes, and at a useful range: OLMo-2-7B completes such
-phrases three tokens early in roughly two thirds of instances and five tokens
-early in more than half. The ability is a stable property of the phrase rather
-than of the occasion: across a phrase's natural contexts, success clusters at
-the extremes far more than independent per-context variation would produce. It
-is also legible from the representation itself, well enough that a small probe reading a single hidden
+multi-word expression, already carries enough information to recover the rest.
+For fixed expressions in natural text it often does, and at a useful range:
+OLMo-2-7B produces the remaining tokens three early in roughly two thirds of
+instances and five early in more than half. Recovery varies far more across
+phrases than across occasions: within a phrase's natural contexts, success
+clusters at the extremes far more than an independent-context model at a common
+rate would produce. It is also legible from the representation itself, well enough that a small probe reading a single hidden
 vector predicts real completion at $87.6\%$ precision.
 
 The second finding is a caution about how the first was obtained. Patchscopes
@@ -21,28 +21,12 @@ sweep we can run. Neither instrument is wrong; neither is a neutral window onto
 what the model knows. Claims of the form \emph{the model already knows $X$}
 should carry the readout that produced them, and the budget it was given.
 
-The practical thread we have not pulled is efficiency. A signal that is stable
-per phrase, available from mid-network states, and precise enough to act on is
-the kind of signal a decoding scheme could use to commit several tokens at once
-rather than paying full depth for each. We are pursuing that direction
-separately, as an adaptive multi-token prediction policy checked token by token
-against an autoregressive baseline; nothing in the present paper depends on its
-outcome. An early pilot there is instructive about the size of
-the prize: reproducing CLP \citep{xie-zhou-2026-clp}, a learned linear read of
-the hidden state that sets the draft length per step, on a different model, we
-measured roughly $1.34\times$ the throughput of plain autoregressive decoding.
-A policy that simply drafts a fixed number of tokens at every step was faster
-still, at $1.72\times$, while diverging from the autoregressive output
-more often.\footnote{Three caveats on that pilot. Our figure exceeds the
-$1.14\times$--$1.29\times$ Xie and Zhou report, which we take to reflect
-differences in model, hardware and workload rather than a stronger
-implementation. We observed occasional divergences from autoregressive output
-under \emph{every} drafting policy we tried, including fixed-length ones with no
-adaptive logic at all, which points at this model's interaction with the
-inference engine rather than at any policy. And those divergences were more
-common for the more aggressive fixed-length policies (six of ten prompts,
-against two for CLP), so the fixed-length speed advantage is not free.}
-Ten held-out prompts settle nothing either way. What the pilot does suggest is
-that the open question is not whether anticipation exists, which this paper settles,
-but whether reading it out adaptively buys enough over drafting blindly to pay
-for itself.
+The practical thread we have not pulled is efficiency. A signal that is
+consistent within a phrase, available from mid-network states, and precise
+enough to act on is the kind of signal a decoding scheme could use to commit
+several tokens at once rather than paying full depth for each. We are pursuing
+that separately, and an early pilot reproducing CLP \citep{xie-zhou-2026-clp} on
+a different model is reported in Appendix~\ref{app:details}; it does not bear on
+anything claimed here. What this paper settles is narrower than the efficiency
+question and prior to it: for familiar fixed expressions in English, under two
+named readouts, the continuation is often recoverable well before it is read.

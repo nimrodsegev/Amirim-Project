@@ -43,11 +43,41 @@ $9{,}955$. Any confidence interval computed from the instance count would be too
 narrow, which is one reason we report no significance tests. The per-layer and
 probing analyses were run over the duplicated set and were not recomputed.
 
+\paragraph{There is no frequency-matched control.}
+We show that familiar fixed expressions are often completed early, but
+autoregressive models are trained to continue text, so a high rate on its own
+does not isolate anything specific to fixed expressions. We did not run a
+control set of frequent compositional spans matched for next-token
+predictability, so we cannot say whether these rates exceed what equally
+predictable non-fixed continuations would give.
+
+\paragraph{Pretraining frequency is assumed, not measured.}
+We chose these expressions because they should be frequent in pretraining text,
+and chose OLMo-2 partly because its training data is public, but we never
+counted them. Frequency is a plausible common cause of several results at once:
+the between-phrase spread of \S\ref{sec:stability}, the category differences,
+and which phrases become recoverable early. Correlating recovery against corpus
+counts is the single analysis that would do most to separate phrase identity
+from exposure, and it remains undone.
+
+\paragraph{The probe rests on one split.}
+The probe numbers come from a single phrase-level split at seed 42, on the
+feature set that still contains duplicated contexts (\S\ref{sec:setup}).
+Grouping by phrase prevents a phrase from appearing in both partitions, but
+duplicates still overweight some examples and make the nominal counts larger
+than the effective ones. We report no confidence intervals anywhere in the
+paper; the right unit for resampling is the phrase rather than the instance,
+and a phrase-clustered bootstrap over the central comparisons is the obvious
+next step. Differences of one or two points, such as those between models in
+Appendix~\ref{app:details}, should not be read as meaningful.
+
 \paragraph{The phrase set is narrow and English-only.}
 We deliberately chose frequent, fixed English expressions as a favourable case.
 Nothing here speaks to compositional continuations, to rarer expressions, or to
 other languages, and the three categories are unbalanced: idioms are $82\%$ of
-pooled instances, so aggregate rates are close to idiom rates.
+pooled trials, so aggregate rates are close to idiom rates. The landmark and
+film-title lists are convenience samples from public web pages rather than
+curated resources.
 
 \paragraph{The Patchscopes readout is sampled, not exhaustive.}
 Our primary measurement unions eight of the model's $32$ layers, chosen so that
@@ -81,7 +111,9 @@ This work analyses publicly available language models on publicly available
 text. The phrase sets are drawn from published idiom corpora and public lists of
 landmarks and film titles; the contexts are sampled from FineWeb-Edu, a filtered
 web corpus whose documents we did not inspect individually and which may contain
-the biases of web text. We do not release any model, and the analysis does not
-involve human subjects or personal data. The efficiency direction this work
+the biases of web text. We do not release any model and the analysis does not involve human subjects.
+We did not set out to collect or analyse personal information, but the
+underlying web corpus was not inspected document by document and may contain
+incidental personal data. The efficiency direction this work
 motivates, if pursued, would reduce inference cost; we make no claim to have
 demonstrated that reduction here.

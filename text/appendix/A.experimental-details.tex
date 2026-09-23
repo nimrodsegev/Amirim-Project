@@ -14,8 +14,9 @@ Positions are enumerated from the first phrase token to the second-to-last; the
 BOS and the final phrase token are never cut points.
 
 For the Patchscopes readout, the states for all probed layers are stacked into
-one batch and decoded in a single \texttt{generate} call, so the layer sweep
-costs one generation pass rather than one per layer. Decoding is greedy
+one batch and decoded in a single \texttt{generate} call. This is one call, not
+one sequence's worth of computation: the sweep still decodes one sequence per
+layer. Decoding is greedy
 throughout, for both readouts, with \texttt{max\_new\_tokens} $= i+3$.
 
 \subsection{Patchscope prompt ablation}
@@ -34,8 +35,11 @@ long $i$ is not a shortage of output positions.
 \input{tables/replication}
 
 Table~\ref{tab:replication} repeats the central measurement on OLMo-3-7B
-(both readouts share the OLMo-2 protocol; note that this tokenizer does not
-prepend a BOS token) and on Qwen2.5-14B (generation readout only). The
+(\texttt{allenai/Olmo-3-1025-7B}; both readouts share the OLMo-2 protocol, but
+note that this tokenizer does not prepend a BOS token) and on Qwen2.5-14B
+(\texttt{Qwen/Qwen2.5-14B}, generation readout only). OLMo-2-7B is
+\texttt{allenai/OLMo-2-1124-7B}. All three are base checkpoints, not
+instruction-tuned. The
 qualitative picture is stable across all three: anticipation several tokens
 ahead, a large context effect, and a monotone decline with $i$. The absolute
 levels differ, and not in the direction model scale would predict: OLMo-3-7B
@@ -89,9 +93,9 @@ than appearing and disappearing.
 
 This is a deliberately generous criterion (any of up to ten contexts, at any
 layer in the group, counts), so the absolute numbers are much higher than a
-single context checked at a single layer would give, and the duplicate-context
-issue of \S\ref{sec:setup} inflates them further. The ordering is the
-informative part, not the levels.
+single context checked at a single layer would give. Duplicated contexts do not
+add to them: an exact repeat cannot turn a failure into a success or create a
+new group membership. The ordering is the informative part, not the levels.
 
 \subsection{Probe configuration}
 
@@ -259,6 +263,28 @@ Each case was supplied on one line as
 The rubric wording, in particular the instruction that a variant counts as
 valid, plainly invites a generous reading; the resulting split should be taken
 as an upper bound on how many of these are not real errors.
+
+\subsection{An efficiency pilot}
+
+Separately from this paper we reproduced CLP \citep{xie-zhou-2026-clp}, a
+learned linear read of the hidden state that sets how many drafted tokens to
+accept at each step, on Qwen3.5-2B. It reached roughly $1.34\times$ the
+throughput of plain autoregressive decoding; a policy that simply drafts a fixed
+number of tokens at every step was faster still, at $1.72\times$. The test set
+was ten held-out prompts, the entire set available to us, so this settles
+nothing.
+
+Three caveats. Our figure exceeds the $1.14\times$--$1.29\times$ Xie and Zhou
+report, which we take to reflect differences in model, hardware and workload
+rather than a stronger implementation. We observed occasional divergences from
+autoregressive output under \emph{every} drafting policy we tried, including
+fixed-length ones with no adaptive logic at all, which points at this model's
+interaction with the inference engine rather than at any policy. And those
+divergences were more common for the more aggressive fixed-length policies
+(six of ten prompts, against two for CLP), so the fixed-length speed advantage
+is not free. None of this is evidence for or against the claims in the main
+text; we report it because it bounds how much the anticipation we measure might
+be worth in practice.
 
 \subsection{Reproducing the numbers}
 

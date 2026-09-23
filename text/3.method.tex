@@ -7,8 +7,11 @@
 \caption{The protocol. We interrupt the model inside a known phrase, leaving $i$
 tokens unread, and ask whether those tokens are recoverable from that point by
 two different means: injecting the hidden state into an unrelated prompt
-(Patchscopes), or simply letting the model continue from the prefix it has
-actually seen (generation). Both are scored identically.}
+(Patchscopes), or letting the model continue from the prefix it has actually
+seen (generation). Both are scored identically. In both, only the first token is
+produced from the state shown; decoding then continues autoregressively, so a
+multi-token recovery does not imply that every token was separately encoded in
+$h^{\ell}_p$.}
 \label{fig:protocol}
 \end{figure*}
 
@@ -52,10 +55,22 @@ We take the same prefix, context plus the first $p$ phrase tokens, and let
 the model generate greedily for $i+3$ tokens, with no intervention of any kind.
 The readout succeeds under the same string-containment criterion.
 
-Neither readout is ground truth for the other: the first asks what a single
-vector, removed from its context, can be made to express; the second what the
-model actually does with that context. We treat them as two instruments and
-measure how far they agree (\S\ref{sec:disagreement}).
+Neither readout is ground truth for the other, and they are not two decoders of
+the same object. Patchscopes intervenes on a single hidden state and asks what
+that vector can be made to express; generation runs the full model on the
+matched prefix and asks what it does. The comparison is therefore between
+representational extractability and behaviour, and we treat them as two
+instruments rather than two views (\S\ref{sec:disagreement}).
+
+One consequence is worth stating before any results. Both readouts decode
+autoregressively, so a recovered target of several tokens does not show that
+each of those tokens is separately encoded in the cut-position state: after the
+first generated token, the rest may follow from what has already been emitted.
+What a success shows is that the state carries enough information to elicit the
+continuation under that readout. We use \emph{recognition} and
+\emph{anticipation} in that operational sense throughout: a phrase is
+recognized at distance $i$ when a named readout recovers its remaining $i$
+tokens under the matching criterion below.
 
 \subsection{Success criterion}
 \label{sec:criterion}

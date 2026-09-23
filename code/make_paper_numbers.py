@@ -179,6 +179,45 @@ out["per_phrase_consistency_i3"] = {
     "generation": consistency(gen),
 }
 
+
+def consistency_bins(recs, min_ctx=5):
+    """The six bins used in the figure, observed and under the binomial null."""
+    by = collections.defaultdict(dict)
+    for base, r in zip(ctx, recs):
+        if "3" in r["per_i"]:
+            by[base["phrase"]][base["context_before"]] = bool(r["per_i"]["3"]["success"])
+    sel = {p: list(d.values()) for p, d in by.items() if len(d) >= min_ctx}
+    n = len(sel)
+    pool = sum(sum(v) for v in sel.values()) / sum(len(v) for v in sel.values())
+
+    def which(f):
+        if f <= 0: return 0
+        if f >= 1: return 5
+        return 1 if f <= .25 else 2 if f <= .50 else 3 if f <= .75 else 4
+
+    obs = [0] * 6
+    exp = [0.0] * 6
+    for v in sel.values():
+        m = len(v)
+        obs[which(sum(v) / m)] += 1
+        for k in range(m + 1):
+            exp[which(k / m)] += math.comb(m, k) * pool ** k * (1 - pool) ** (m - k)
+    labels = ["none", "1-25", "25-50", "50-75", "75-99", "all"]
+    return {
+        "n_phrases": n,
+        "labels": labels,
+        "observed_pct": {l: round(100 * o / n, 1) for l, o in zip(labels, obs)},
+        "null_pct": {l: round(100 * e / n, 1) for l, e in zip(labels, exp)},
+        "central_two_bins_observed_pct": round(100 * (obs[2] + obs[3]) / n, 1),
+        "central_two_bins_null_pct": round(100 * (exp[2] + exp[3]) / n, 1),
+    }
+
+
+out["per_phrase_consistency_bins_i3"] = {
+    "generation": consistency_bins(gen),
+    "patchscopes_32L": consistency_bins(ctx),
+}
+
 # ---- Category breakdown, pooled i=2-5 -------------------------------------
 cats = {}
 for label, recs in (("patchscopes_32L", ctx), ("generation", gen)):

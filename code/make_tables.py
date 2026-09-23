@@ -153,8 +153,8 @@ set class-balanced by downsampling, evaluated on the natural test distribution.
 The generation label has a fixed positive rate of {ge['pos_rate_pct']}\% at every
 layer; the patchscopes label does not, which is why its raw accuracy is not
 comparable across layers. Balanced accuracy for the patchscopes label peaks in
-the middle of the model, whereas for the generation label it rises
-monotonically with depth.}}
+the middle of the model, whereas for the generation label it trends upward with
+depth, dipping slightly at L20 and peaking at L30.}}
 \label{{tab:probes}}
 \end{{table}}""")
 
@@ -173,13 +173,14 @@ write("categories", r"""\begin{table}[t]
 \toprule
 & & \multicolumn{2}{c}{\textbf{Recovery (\%)}} & \\
 \cmidrule(lr){3-4}
-\textbf{Category} & \textbf{Inst.} & patchscopes & generation & \small{(32L)} \\
+\textbf{Category} & \textbf{Trials} & patchscopes & generation & \small{(32L)} \\
 \midrule
 """ + "\n".join(rows) + r"""
 \bottomrule
 \end{tabular}
 \caption{Recovery by phrase category, pooled over $i=2\ldots5$, in natural
-context. The two readouts reverse the ordering of idioms: under Patchscopes
+context. \textbf{Trials} counts (phrase, context, $i$) triples, not the
+(phrase, context) instances of Table~\ref{tab:dataset}. The two readouts reverse the ordering of idioms: under Patchscopes
 idioms are the \emph{easiest} category, under generation the hardest. The final
 column repeats the Patchscopes measurement over all 32 layers, under which
 idioms fall to the middle of the ranking; the reversal against generation is
@@ -223,8 +224,10 @@ write("replication", r"""\begin{table}[t]
       + f"OLMo-2-7B & generation & {cells(ctxn['generation_olmo2'], IS)} \\\\\n"
       + f"Qwen2.5-14B & generation & {qcells(q['in_context'], IS)} \\\\\n" + r"""\bottomrule
 \end{tabular}
-\caption{Recovery rate (\%) across models, on the same phrases, contexts and cut
-points. Patchscopes rows are the union over all 32 layers. Qwen2.5-14B, at
+\caption{Recovery rate (\%) across models, on the same phrase strings and
+contexts. Each model uses its own tokenizer, so $i$ counts model-specific tokens
+and the cut points need not coincide across rows. Patchscopes rows are the union
+over all 32 layers. Qwen2.5-14B, at
 roughly twice the parameters of OLMo-2-7B, is slightly behind it in isolation
 and slightly ahead of it in context.}
 \label{tab:replication}
