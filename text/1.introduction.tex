@@ -75,9 +75,9 @@ something; we ask how far that licence extends.
 Our findings are as follows. Phrase-level anticipation is real and substantial:
 in natural context, OLMo-2-7B produces the final two tokens of a familiar phrase
 in $84.0\%$ of instances and the final five in $53.6\%$, against $59.2\%$ and
-$17.6\%$ for the same phrases in isolation (\S\ref{sec:lookahead}). It varies far more across phrases than
-across occasions: per-phrase success is much more bimodal than an
-independent-context model at a common rate would produce
+$17.6\%$ for the same phrases in isolation (\S\ref{sec:lookahead}). Recovery clusters strongly by phrase:
+outcomes across a phrase's contexts are far more extreme than an
+independent-context model at a common rate predicts
 (\S\ref{sec:stability}). And it is decodable. A small classifier reading the
 raw hidden state predicts whether the model will in fact complete the phrase, at
 $76.8\%$ balanced accuracy and $87.6\%$ precision (\S\ref{sec:probe}).

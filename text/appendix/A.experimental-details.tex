@@ -81,15 +81,13 @@ which samples only L5 and L7 below L10.
 
 \subsection{Pooling across layer groups}
 
-The per-layer view of \S\ref{sec:stability} asks where recovery happens; a
-complementary question is whether the early layers ever succeed \emph{alone}.
-Grouping the eight probed layers into $A=\{5,7\}$, $B=\{10,13,15\}$ and
-$C=\{20,25,30\}$, and asking for each phrase which groups contain at least one
-context at one layer that succeeded, $47.8\%$ of phrases succeed in all three
-groups, $17.3\%$ in $B$ and $C$ but not $A$, and $33.7\%$ in $C$ only. These
-three patterns cover $98.8\%$ of phrases: almost no phrase succeeds in the early
-layers without also succeeding later. Recovery accumulates with depth rather
-than appearing and disappearing.
+A complementary question to where recovery happens is whether the early layers
+ever succeed \emph{alone}. Grouping the eight probed layers into
+$A=\{5,7\}$, $B=\{10,13,15\}$ and $C=\{20,25,30\}$ and asking which groups
+contain at least one succeeding context for each phrase, $47.8\%$ succeed in
+all three, $17.3\%$ in $B$ and $C$ only, and $33.7\%$ in $C$ only. These cover
+$98.8\%$ of phrases: almost none succeeds early without also succeeding later,
+so recovery accumulates with depth rather than appearing and disappearing.
 
 This is a deliberately generous criterion (any of up to ten contexts, at any
 layer in the group, counts), so the absolute numbers are much higher than a
@@ -109,23 +107,20 @@ confidence analyses of \S\ref{sec:falsepos} use the L25 probe.
 
 \subsection{The L2 irregularity under the Patchscopes label}
 
-Figure~\ref{fig:early} reports the generation-label probe at the earliest
-layers, where it climbs smoothly. The Patchscopes-label probe on the
-\emph{same} hidden states does not: it reaches $76.6\%$ balanced accuracy at L1,
-drops to $55.4\%$ at L2, and recovers to $76.0\%$ at L5. We do not think the dip
-is a property of layer 2. Patchscopes itself almost never succeeds this early
-($0.7\%$ at L0, $0.8\%$ at L1, $1.6\%$ at L2), so the positive class at
-these layers is $0.6$--$1.2\%$ of the data, or roughly $100$ to $250$ examples,
-and a single split can swing on sampling luck alone. The generation label, whose
-positive rate is a fixed $69.1\%$ at every layer, shows no such irregularity on
-the same states. We did not run a multi-seed check to confirm this, so we report
-it as an unresolved artifact rather than a finding.
+The generation-label probe climbs smoothly through the earliest layers
+(Figure~\ref{fig:early}); the Patchscopes-label probe on the \emph{same}
+states does not, reaching $76.6\%$ balanced accuracy at L1, dropping to
+$55.4\%$ at L2 and recovering to $76.0\%$ at L5. We doubt the dip is a property
+of layer 2: Patchscopes itself almost never succeeds this early ($0.7\%$,
+$0.8\%$ and $1.6\%$ at L0, L1 and L2), so the positive class is
+$0.6$--$1.2\%$ of the data, roughly $100$ to $250$ examples, and one split can
+swing on luck. The generation label, whose positive rate is a fixed $69.1\%$ at
+every layer, shows no such irregularity on the same states. No multi-seed check
+was run, so we report it as an unresolved artifact rather than a finding.
 
-The L1 result is worth flagging in the other direction: $76.6\%$ balanced
-accuracy from the state after a single transformer block, on a label that
-Patchscopes itself can satisfy less than $1\%$ of the time at that depth. Some
-of what the probe reads is evidently available very early, whatever the
-transplant can or cannot verbalise there.
+L1 is worth flagging in the other direction: $76.6\%$ balanced accuracy after a
+single transformer block, on a label Patchscopes can satisfy less than $1\%$ of
+the time at that depth.
 
 \subsection{The probe at the earliest layers}
 
@@ -168,14 +163,13 @@ but the transfer is imperfect, a pattern also reported by
 
 \subsection{Per-phrase correlation: robustness}
 
-Figure~\ref{fig:corr} reports the correlation between probe confidence and true
-phrase difficulty for the balanced MLP probe at $i=3$ over $180$ test phrases.
-The shape is not an artifact of that particular probe. Across the four
-combinations of classifier (logistic, MLP) and training regime (natural,
-class-balanced), at L13 the correlation ranges from $0.444$ to $0.584$ on $i=3$
-and $0.432$ to $0.564$ pooled, with the MLP consistently ahead of logistic
-regression and balanced training consistently ahead of natural. At L25 the same
-ordering holds at lower values, $0.381$ to $0.531$.\footnote{Re-running this
+Figure~\ref{fig:corr} uses the balanced MLP probe at $i=3$ over $180$ test
+phrases, but the shape is not specific to it. Across the four combinations of
+classifier (logistic, MLP) and training regime (natural, class-balanced), the
+L13 correlation ranges from $0.444$ to $0.584$ on $i=3$ and $0.432$ to $0.564$
+pooled, the MLP consistently ahead of logistic regression and balanced training
+ahead of natural; L25 preserves the ordering at lower values, $0.381$ to
+$0.531$.\footnote{Re-running this
 sweep reproduced the balanced MLP value at L25 to four decimal places
 ($0.5173$), but returned $0.499$ for the natural-training MLP against the
 $0.531$ recorded at the time, most likely package-version drift. We report the
@@ -270,29 +264,26 @@ Separately from this paper we reproduced CLP \citep{xie-zhou-2026-clp}, a
 learned linear read of the hidden state that sets how many drafted tokens to
 accept at each step, on Qwen3.5-2B. It reached roughly $1.34\times$ the
 throughput of plain autoregressive decoding; a policy that simply drafts a fixed
-number of tokens at every step was faster still, at $1.72\times$. The test set
-was ten held-out prompts, the entire set available to us, so this settles
-nothing.
+number of tokens every step was faster still, at $1.72\times$. The test set was
+ten held-out prompts, all that were available, so it settles nothing.
 
 Three caveats. Our figure exceeds the $1.14\times$--$1.29\times$ Xie and Zhou
 report, which we take to reflect differences in model, hardware and workload
-rather than a stronger implementation. We observed occasional divergences from
-autoregressive output under \emph{every} drafting policy we tried, including
-fixed-length ones with no adaptive logic at all, which points at this model's
-interaction with the inference engine rather than at any policy. And those
-divergences were more common for the more aggressive fixed-length policies
-(six of ten prompts, against two for CLP), so the fixed-length speed advantage
-is not free. None of this is evidence for or against the claims in the main
-text; we report it because it bounds how much the anticipation we measure might
-be worth in practice.
+rather than a better implementation. Divergences from autoregressive output
+appeared under \emph{every} drafting policy we tried, including fixed-length
+ones with no adaptive logic, pointing at this model's interaction with the
+inference engine rather than at any policy. And they were more common for the
+aggressive fixed-length policies (six of ten prompts against two for CLP), so
+the fixed-length speed advantage is not free. We report the pilot only because
+it bounds how much the anticipation we measure might be worth in practice.
 
 \subsection{Reproducing the numbers}
 
 Every number in the main text except Table~\ref{tab:probes} and the
-adjudication of \S\ref{sec:falsepos} is recomputed from the files in
-\texttt{results/raw/} by \texttt{code/make\_paper\_numbers.py}, which writes
-\texttt{results/processed/paper\_numbers.json}; the tables and figures are
-generated from that file by \texttt{code/make\_tables.py} and
-\texttt{code/make\_figures.py}. The experiment scripts are in
-\texttt{code/phrase\_recognition/}. Per-trial hidden states, which the probing
-experiments require, are not distributed.
+adjudication of \S\ref{sec:falsepos} is recomputed from \texttt{results/raw/}
+by \texttt{code/make\_paper\_numbers.py}, which writes
+\texttt{results/processed/paper\_numbers.json}; tables and figures are built
+from that file by \texttt{code/make\_tables.py} and
+\texttt{code/make\_figures.py}. Experiment scripts are in
+\texttt{code/phrase\_recognition/}. Per-trial hidden states are not
+distributed.
