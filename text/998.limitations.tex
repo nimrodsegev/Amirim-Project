@@ -14,8 +14,11 @@ with word-aligned cut points would make the absolute numbers cleaner.
 Substring containment credits any output that includes the target, without
 requiring that the model produced it for the right reason, and penalises
 accepted variants of the same expression (\S\ref{sec:falsepos}). The
-adjudication in \S\ref{sec:falsepos} suggests the net bias is conservative, but
-it rests on a single judge with no human validation and no inter-annotator
+adjudication in \S\ref{sec:falsepos} shows that exact matching rejects many
+plausible alternatives within one probe-selected subset; it does not determine
+the net bias in the overall recovery rates, since it examines neither a
+representative sample of failures nor any successes. It also rests on a single
+judge with no human validation and no inter-annotator
 agreement, and the ChatGPT version used was not logged at the time
 (most likely GPT-5.6, though we cannot confirm it), so that run is not exactly
 reproducible. The prompt is in

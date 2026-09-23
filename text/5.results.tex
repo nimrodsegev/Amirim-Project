@@ -10,12 +10,11 @@
 \centering
 \includegraphics[width=\columnwidth]{figures/context_vs_isolation}
 \caption{Recovery rate against lookahead distance, for both readouts, with and
-without natural context. Presented alone the two readouts are nearly
-indistinguishable; in context both rise sharply and generation pulls ahead of
-Patchscopes. Context is worth $25$--$36$ points to generation and $15$--$27$ to
-Patchscopes. The Patchscopes gain is a conservative estimate: the isolated
-measurement sweeps all $32$ layers while the in-context one uses the eight
-probed layers (\S\ref{sec:setup}).}
+without natural context. Both Patchscopes curves sweep all $32$ layers, so the
+context comparison is like for like; the eight-layer budget used elsewhere in
+the paper appears in Table~\ref{tab:main}. Presented alone the two readouts are
+nearly indistinguishable. In context both rise sharply, by $25$--$36$ points for
+generation and $22$--$33$ for Patchscopes, and generation pulls slightly ahead.}
 \label{fig:context}
 \end{figure}
 
@@ -99,10 +98,13 @@ others across almost none. It does not establish that the phrase \emph{itself}
 is what varies, since we have not separated phrase identity from its
 correlates: pretraining frequency, length, tokenization, category, or how
 similar a phrase's contexts happen to be (\S\ref{sec:limitations}). What it does
-establish is that the variation lives at the phrase level rather than the
-occasion level, which is what makes the probing question in \S\ref{sec:probe}
-worth asking: a signal that is consistent within a phrase is one that something
-in the representation could carry.
+establish is that outcomes cluster strongly by phrase: contexts carrying the
+same expression behave far more alike than a common-rate independent model
+predicts. Whether that clustering is caused by phrase identity itself or by
+correlated properties we did not measure is open. Either way it is what makes
+the probing question in \S\ref{sec:probe} worth asking: a signal that is
+consistent within a phrase is one that something in the representation could
+carry.
 
 \paragraph{Where in the model it becomes readable.}
 Recording Patchscopes success at each probed layer separately gives the same
@@ -264,9 +266,11 @@ This is a single judge, with no human validation and no record of which ChatGPT
 version produced it, so we report it as indicative of the direction of the bias
 rather than as a corrected accuracy. Read that way, roughly four in five of
 these apparent errors reflect the rigidity of exact matching rather than a model
-that did not know the phrase, which makes our reported rates conservative. An
-independent split of the same cases by the model's own confidence agrees and
-uses no judge at all: in $40.0\%$ the model was itself confident ($>0.7$), and
+that did not know the phrase. These cases were selected by the probe, not
+sampled from all exact-match failures, so this demonstrates a limitation of
+exact matching within that subset; it does not establish the direction or size
+of any bias in the recovery rates of \S\ref{sec:lookahead}. An independent split
+of the same cases by the model's own confidence agrees and uses no judge at all: in $40.0\%$ the model was itself confident ($>0.7$), and
 in only $10.4\%$ unsure ($<0.3$).
 
 \paragraph{The model's own confidence tracks the real outcome.}

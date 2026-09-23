@@ -5,10 +5,9 @@ We asked whether a language model's internal state, partway through a familiar
 multi-word expression, already carries enough information to recover the rest.
 For fixed expressions in natural text it often does, and at a useful range:
 OLMo-2-7B produces the remaining tokens three early in roughly two thirds of
-instances and five early in more than half. Recovery varies far more across
-phrases than across occasions: within a phrase's natural contexts, success
-clusters at the extremes far more than an independent-context model at a common
-rate would produce. It is also legible from the representation itself, well enough that a small probe reading a single hidden
+instances and five early in more than half. Recovery clusters strongly by phrase: across a
+phrase's natural contexts, success sits at the extremes far more often than an
+independent-context model at a common rate would produce. It is also legible from the representation itself, well enough that a small probe reading a single hidden
 vector predicts real completion at $87.6\%$ precision.
 
 The second finding is a caution about how the first was obtained. Patchscopes
@@ -23,7 +22,8 @@ should carry the readout that produced them, and the budget it was given.
 
 The practical thread we have not pulled is efficiency. A signal that is
 consistent within a phrase, available from mid-network states, and precise
-enough to act on is the kind of signal a decoding scheme could use to commit
+enough to be worth testing as a control signal is the kind of signal a decoding
+scheme could use to commit
 several tokens at once rather than paying full depth for each. We are pursuing
 that separately, and an early pilot reproducing CLP \citep{xie-zhou-2026-clp} on
 a different model is reported in Appendix~\ref{app:details}; it does not bear on
