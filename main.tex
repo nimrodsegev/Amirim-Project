@@ -18,6 +18,9 @@
 \usepackage{booktabs}
 \usepackage{makecell}
 \usepackage{enumitem}
+% xurl loads after hyperref (pulled in by acl.sty) and lets long file
+% paths break anywhere, which the narrow justified columns need.
+\usepackage{xurl}
 \definecolor{hit}{HTML}{1B7F4B}
 \input{editing_macros}
 
@@ -56,9 +59,9 @@ these states. Run on identical instances, Patchscopes and ordinary generation
 agree on only $78.7\%$ of them, reverse the ranking of the phrase categories,
 and, used as probe labels, locate the relevant information in different parts of
 the network; widening the Patchscopes layer sweep closes part of the gap but not
-the disagreement. Phrase-level anticipation is
-real, stable and decodable; how much of it one measures depends on the
-instrument.
+the disagreement. Phrase continuations are often
+recoverable and predictable from hidden states, but the measured prevalence and
+the apparent layer localisation both depend strongly on the readout.
 \end{abstract}
 
 \input{text/1.introduction}

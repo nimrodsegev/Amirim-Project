@@ -28,14 +28,15 @@ next-token prediction.
 \paragraph{Isolation understates the effect.}
 The same phrases presented alone, with no surrounding text, are recovered far
 less often: $59.2\%$ at $i=2$ falling to $17.6\%$ at $i=5$ (Figure~\ref{fig:context}).
-The gap widens with distance, from $24.8$ points at $i=2$ to $36.0$ points at
-$i=5$, and the Patchscopes readout shows the same pattern, gaining $21.8$ to
-$33.2$ points. This is the expected
+The generation gap widens with distance, from $24.8$ points at $i=2$ to $36.0$
+at $i=5$. Patchscopes benefits substantially too, by $21.8$ to $33.2$ points,
+though not in a steadily widening way. This is the expected
 direction, since context supplies both topical evidence and the signal that a
 fixed expression is under way, but its size matters for interpreting prior
 results. A bare phrase is a poor proxy for the condition
-under which a model actually encounters these expressions, and measurements
-taken in isolation should be read as a lower bound.
+under which a model actually encounters these expressions: for these phrases
+and models, measuring in isolation substantially underestimates recovery in
+natural context.
 
 \paragraph{In isolation the two readouts nearly coincide.}
 The lower pair of curves in Figure~\ref{fig:context} is the isolated condition,
@@ -140,8 +141,8 @@ The two failure directions look qualitatively different, and neither is simply
 an instrument defect. The examples in Table~\ref{tab:disagree} are illustrative
 rather than a systematic sample, so what follows is a reading of them, not a
 measured property of the disagreement. Where Patchscopes succeeds and
-generation does not, the state does contain the phrase, since the
-patchscope verbalises it, yet the real context steers the model elsewhere: given
+generation does not, the intervention can elicit the phrase from the state
+while the real context steers generation elsewhere: given
 \textit{Why should one person be brought up}, it writes \textit{a wealthy
 family, with every opportunity} rather than \textit{in the lap of luxury}. That
 is a different continuation, not a wrong one, and a reminder that our criterion
@@ -279,5 +280,7 @@ generates, confidence averages $0.878$ on successful completions and $0.447$ on
 failures. Split by probe outcome at L25 it follows the true label rather than
 the probe's guess: true positives average $0.904$ and false negatives $0.791$,
 against $0.599$ for false positives and $0.414$ for true negatives
-(Appendix~\ref{app:details}). Where the probe is wrong, the model is not, which
-suggests the two signals are complementary and worth combining.
+(Appendix~\ref{app:details}). When probe prediction and generation outcome
+disagree, the model's confidence tracks the outcome more closely than the
+prediction, on average. Confidence and probe output may therefore be
+complementary signals, though we evaluate no combined decision rule.
