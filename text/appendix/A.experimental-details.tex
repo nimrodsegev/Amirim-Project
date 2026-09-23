@@ -278,9 +278,8 @@ anticipation we measure might be worth in practice.
 \subsection{Reproducing the numbers}
 
 All main-text numbers except Table~\ref{tab:probes} and the adjudication in
-\S\ref{sec:falsepos} are regenerated from \texttt{results/raw/} by the scripts
-in \texttt{code/}: \texttt{make\_paper\_numbers.py} writes
-\texttt{paper\_numbers.json}, from which \texttt{make\_tables.py} and
-\texttt{make\_figures.py} build every table and figure. Experiment scripts are
-in \texttt{phrase\_recognition/}; per-trial hidden states are not
-distributed.
+\S\ref{sec:falsepos} are regenerated from \texttt{results/raw/} by scripts
+under \texttt{code/}: one writes a processed JSON file, which the table and
+figure scripts then consume. The experiment scripts that produced the raw
+results sit alongside them. Per-trial hidden states are not distributed. The
+repository README gives the exact filenames and the commands to run them.
