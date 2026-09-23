@@ -64,9 +64,13 @@ model.
 \includegraphics[width=\columnwidth]{figures/per_phrase_consistency}
 \caption{Share of its own distinct contexts in which each phrase's continuation
 is recovered at $i=3$, generation readout, over the $803$ phrases with at least
-five distinct contexts. The dashed line is the binomial distribution expected if
-every context were an independent draw at the pooled rate $p=0.64$. The observed
-distribution puts mass at both extremes, where the null has almost none.}
+five distinct contexts. Grey is the binomial distribution expected if every
+context were an independent draw at the pooled rate $p=0.64$. The two extreme
+bins are kept separate because most phrases have exactly five distinct contexts.
+The observed distribution puts mass at both ends --- $7.7\%$ of phrases fail
+everywhere and $31.5\%$ succeed everywhere --- where the null puts $0.3\%$ and
+$10.1\%$; the null instead piles up in the middle, where the observed
+distribution is thin.}
 \label{fig:consistency}
 \end{figure}
 
@@ -113,14 +117,13 @@ peaks at L25 --- $62.2\%$ at $i=2$, $48.1\%$ at $i=3$ --- and then falls back at
 L30, to $59.2\%$ and $39.1\%$. The decline in the last layers appears at every
 $i$ and in every category.
 
-One explanation is that the final layers specialise toward producing the actual
-next token for the real input rather than maintaining a general, transferable
-representation, so a state lifted from L30 and pasted into an unrelated prompt
-transfers less well than one lifted from L25. We note that this is a hypothesis
-consistent with our data and with the late-layer decline reported by
-\citet{kaplan-etal-2025-tokens} for word-level retrieval, not something these
-experiments establish; a state that a patchscope can no longer verbalise may
-still carry the information in a form the rest of the network can use.
+One explanation is that the last layers specialise toward producing the actual
+next token rather than maintaining a transferable representation, so a state
+lifted from L30 transfers worse than one from L25. This is a hypothesis
+consistent with our data and with the late-layer decline
+\citet{kaplan-etal-2025-tokens} report for words, not something we establish: a
+state a patchscope cannot verbalise may still carry the information in a form
+the rest of the network can use.
 
 Taking the union over all $32$ layers rather than eight, the median first
 successful layer is L16, and $41.9\%$ of successes first appear at or before
@@ -146,20 +149,17 @@ Patchscopes recovers one that generation misses in only $5.6\%$ --- roughly a
 three-to-one asymmetry. Read on its own, that says Patchscopes undercounts what
 the model can do.
 
-But the two failure directions are qualitatively different, and neither is
-simply an instrument defect (Table~\ref{tab:disagree}). Where Patchscopes
-succeeds and generation does not, the state does contain the phrase --- the
-patchscope verbalises it --- yet the real context steers the model elsewhere;
-given \textit{Why should one person be brought up}, the model writes \textit{a
-wealthy family, with every opportunity} instead of completing \textit{in the lap
-of luxury}. That is not a wrong continuation, merely a different one, and it is
-a reminder that our success criterion asks about a specific string rather than a
-good completion. Where generation succeeds and Patchscopes does not, the
-patchscope reaches for a neighbouring expression: for \textit{a bird in the hand
-is worth two in the bush} it returns \textit{worth more than one}, and for
-\textit{a snowball's chance in hell}, \textit{chance of a successful outcome}.
-Here the readout has recovered the sense and lost the wording --- which is
-itself informative about what the injected vector carries.
+The two failure directions are qualitatively different, and neither is simply an
+instrument defect (Table~\ref{tab:disagree}). Where Patchscopes succeeds and
+generation does not, the state does contain the phrase --- the patchscope
+verbalises it --- yet the real context steers the model elsewhere: given
+\textit{Why should one person be brought up}, it writes \textit{a wealthy
+family, with every opportunity} rather than \textit{in the lap of luxury}. That
+is a different continuation, not a wrong one, and a reminder that our criterion
+asks for a specific string rather than a good completion. Where generation
+succeeds and Patchscopes does not, the patchscope reaches for a neighbour: for
+\textit{a bird in the hand is worth two in the bush} it returns \textit{worth
+more than one}. There the readout recovered the sense and lost the wording.
 
 \paragraph{The asymmetry is partly a layer-budget artifact.}
 The comparison above gives Patchscopes eight layers. Sweeping all $32$ raises
@@ -174,9 +174,8 @@ $18.9\%$ of instances are classified differently, and $7.8\%$ are recovered only
 by Patchscopes. The two instruments are not nested, and no layer budget makes
 one a refinement of the other.
 
-We use the eight-layer readout as our primary measurement because it is the
-layer set on which every per-layer, per-category and probing analysis in this
-paper was run, so all of those results are mutually consistent. Readers
+We keep the eight-layer readout as our primary measurement because every
+per-layer, per-category and probing analysis was run on that layer set. Readers
 comparing our Patchscopes rates against other work should note that the budget
 moves them by six to eight points.
 
@@ -202,8 +201,6 @@ be reporting their instrument as much as their model.
 \subsection{The hidden state predicts real completion}
 \label{sec:probe}
 
-\input{tables/probes}
-
 \begin{figure}[t]
 \centering
 \includegraphics[width=\columnwidth]{figures/probe_balanced_accuracy}
@@ -225,7 +222,8 @@ training (Appendix~\ref{app:details}).
 
 Predicting \emph{real completion} works well. Balanced accuracy rises
 monotonically with depth, from $69.8\%$ at L5 to $76.8\%$ at L30, and precision
-is high and nearly flat at $83.3\%$ to $87.6\%$ (Table~\ref{tab:probes}). A
+is high and nearly flat at $83.3\%$ to $87.6\%$ (full metrics in
+Appendix~\ref{app:details}). A
 positive call from this probe is right roughly seven times in eight, and it is
 made from a single hidden vector, before the model has produced any of the
 tokens in question.
@@ -315,13 +313,12 @@ for \textit{beat about the bush} --- in each case the more common form of the
 expression, scored as a failure. Appendix~\ref{app:details} gives a fuller
 sample, including the cases the judge called unrelated.
 
-Read cautiously --- this is a single judge, with no human validation, no
-inter-annotator agreement, and, as we note in the Limitations, no record of
-which ChatGPT model version produced it --- the split suggests that roughly four
-in five of these apparent errors reflect the rigidity of exact matching rather
-than a model that did not know the phrase. We report it as indicative of the
-direction of the bias, not as a corrected accuracy. That direction is consistent
-across our analyses: the rates we report are conservative.
+This is a single judge, with no human validation and no record of which ChatGPT
+version produced it, so we report it as indicative of the direction of the bias
+rather than as a corrected accuracy. Read that way, it says roughly four in five
+of these apparent errors reflect the rigidity of exact matching rather than a
+model that did not know the phrase --- which makes our reported rates
+conservative.
 
 An independent split of the same $412$ cases by the model's own confidence
 agrees, and uses no judge at all: in $40.0\%$ the model was itself confident

@@ -145,7 +145,7 @@ ax.add_patch(FancyBboxPatch((rx, B2 + 1.4), rw, BARH + 4.0,
                             boxstyle="round,pad=0.1,rounding_size=0.6",
                             facecolor="#fbf4ee", edgecolor=GEN,
                             linewidth=0.8, linestyle=(0, (2.5, 1.8))))
-ax.text(rx + rw / 2, B2 + 10.6, "``of the Rings\'\'", ha="center", va="center",
+ax.text(rx + rw / 2, B2 + 10.6, "\u201cof the Rings\u201d", ha="center", va="center",
         fontsize=6.8, color=INK)
 ax.text(rx + rw / 2, B2 + 6.0, "read from the hidden state", ha="center",
         va="center", fontsize=6.0, color=GEN, style="italic")

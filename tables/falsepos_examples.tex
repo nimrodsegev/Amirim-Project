@@ -1,28 +1,28 @@
 \begin{table}[t]
 \centering\small
-\begin{tabular}{p{0.30\columnwidth}p{0.24\columnwidth}p{0.32\columnwidth}}
+\begin{tabular}{@{}p{0.36\columnwidth}p{0.26\columnwidth}p{0.30\columnwidth}@{}}
 \toprule
 \textbf{Phrase} & \textbf{Target} & \textbf{Model generated} \\
 \midrule
-\multicolumn{3}{l}{\textit{Valid alternate (62.9\%)}} \\[2pt]
-beat swords into ploughshares & ploughshares & ``plowshares'' \\[2pt]
-beat about the bush & about the bush & ``around the bush'' \\[2pt]
-he who laughs last laughs loudest & laughs loudest & ``laughs best'' \\[2pt]
-an Englishman's home is his castle & home is his castle & ``house is his castle'' \\
+\multicolumn{3}{@{}l}{\textit{Valid alternate (62.9\%)}} \\[2pt]
+beat swords into ploughshares & ploughshares & plowshares \\[2pt]
+beat about the bush & about the bush & around the bush \\[2pt]
+he who laughs last laughs loudest & laughs loudest & laughs best \\[2pt]
+an Englishman's home is his castle & home is his castle & house is his castle \\
 \midrule
-\multicolumn{3}{l}{\textit{Partially right (17.5\%)}} \\[2pt]
-start off on the right foot & the right foot & ``the wrong foot'' \\[2pt]
-pull a rabbit out of a hat & a hat & ``the hat'' \\
+\multicolumn{3}{@{}l}{\textit{Partially right (17.5\%)}} \\[2pt]
+start off on the right foot & the right foot & the \emph{wrong} foot \\[2pt]
+pull a rabbit out of a hat & a hat & \emph{the} hat \\
 \midrule
-\multicolumn{3}{l}{\textit{Unrelated (19.7\%)}} \\[2pt]
-fall between two stools & between two stools & ``between two schools'' \\[2pt]
-How to Train Your Dragon & Train Your Dragon & ``use the new \verb|"|with\verb|"|'' \\
+\multicolumn{3}{@{}l}{\textit{Unrelated (19.7\%)}} \\[2pt]
+fall between two stools & between two stools & between two schools \\[2pt]
+How to Train Your Dragon & Train Your Dragon & use the new \ldots \\
 \bottomrule
 \end{tabular}
 \caption{Probe false positives at L25 --- cases the probe predicted would
 succeed and exact-match scoring recorded as failures. Most are the model
 producing a legitimate variant of the expression rather than failing to know it,
 which is why we read the reported rates as conservative. Percentages are the
-LLM judge's labels over all $412$ such cases.}
+judge's labels over all $412$ such cases.}
 \label{tab:falsepos}
 \end{table}

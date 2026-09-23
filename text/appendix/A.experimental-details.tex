@@ -142,8 +142,10 @@ $0.806$ and $0.828$, so the split contributes little of the variation.
 
 \subsection{Full probe metrics}
 
-Table~\ref{tab:probes} reports balanced accuracy and precision, the two measures
-we rely on. For completeness, the generation-label probe's AUC-ROC rises from
+\input{tables/probes}
+
+Table~\ref{tab:probes} gives balanced accuracy and precision at every probed
+layer, the two measures we rely on. For completeness, the generation-label probe's AUC-ROC rises from
 $0.76$ (L5) to $0.83$ (L30) and its AUC-PR from $0.85$ to $0.91$ against a base
 rate of $0.69$, both monotone in depth. The patchscopes-label probe inverts this:
 AUC-ROC is highest at L5 ($0.89$) and lowest at L25 and L30 ($0.74$), the

@@ -1,20 +1,22 @@
 \begin{table}[t]
 \centering\small
-\begin{tabular}{lrrrl}
+\begin{tabular}{@{}lrrr@{}}
 \toprule
- & \multicolumn{1}{c}{\textbf{Phrases}} & \multicolumn{1}{c}{\textbf{w/ ctx.}} & \multicolumn{1}{c}{\textbf{Inst.}} & \textbf{Example} \\
+ & \textbf{Phrases} & \textbf{w/ ctx.} & \textbf{Inst.} \\
 \midrule
-Landmarks & 127 & 125 & 1,217 & \textit{the Great Wall of China} \\
-Idioms & 852 & 802 & 7,230 & \textit{the grass is always greener\ldots} \\
-Film titles & 185 & 169 & 1,508 & \textit{Harry Potter and the Goblet of Fire} \\
+Landmarks & 127 & 125 & 1,217 \\
+Idioms & 852 & 802 & 7,230 \\
+Film titles & 185 & 169 & 1,508 \\
 \midrule
-Total & 1,164 & 1,096 & 9,955 & \\
+Total & 1,164 & 1,096 & 9,955 \\
 \bottomrule
 \end{tabular}
-\caption{The phrase set. \textbf{Phrases} counts expressions long enough to
-admit at least one lookahead position; \textbf{w/ ctx.} counts those for which
-at least one natural occurrence was found in FineWeb-Edu; \textbf{Inst.} counts
-(phrase, context) pairs, of which 925 phrases
-contributed the full ten.}
+\caption{The phrase set: landmark names (\textit{the Great Wall of China}),
+idioms (\textit{the grass is always greener\ldots}) and film titles
+(\textit{Harry Potter and the Goblet of Fire}). \textbf{Phrases} counts
+expressions long enough to admit at least one lookahead position;
+\textbf{w/ ctx.} those for which a natural occurrence was found in
+FineWeb-Edu; \textbf{Inst.} the resulting (phrase, context) pairs, of which
+925 phrases contributed the full ten.}
 \label{tab:dataset}
 \end{table}

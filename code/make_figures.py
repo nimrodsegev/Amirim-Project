@@ -36,13 +36,8 @@ axA.plot(xs, [iso_p_all[i][2] for i in ALLI], "s-", ms=3.2, color=C["ps"],
          label="patchscopes")
 axA.plot(xs, [iso_g_all[i][2] for i in ALLI], "o-", ms=3.2, color=C["gen"],
          label="generation")
-for j, i in enumerate(ALLI):
-    axA.annotate(f"{iso_g_all[i][1]:,}", (j, -13.5), fontsize=5.2, color=C["grey"],
-                 ha="center", annotation_clip=False)
-axA.annotate("$n$", (-0.85, -13.5), fontsize=5.6, color=C["grey"], ha="center",
-             annotation_clip=False)
 axA.set_xticks(list(xs)); axA.set_xticklabels(ALLI)
-axA.set_xlabel("lookahead distance $i$", labelpad=14)
+axA.set_xlabel("lookahead distance $i$")
 axA.set_ylabel("recovery rate (%)"); axA.set_ylim(0, 100)
 axA.set_title("(a) phrase alone", fontsize=7.6, loc="left")
 axA.grid(axis="y", lw=.4, alpha=.3); axA.set_axisbelow(True)
@@ -60,14 +55,16 @@ axB.plot(x2, ctx_p8, "s-", ms=3.2, color=C["ps"], label="patchscopes (8L), in co
 axB.plot(x2, ctx_p32, "s:", ms=3.2, color=C["ps"], alpha=.6,
          label="patchscopes (32L), in context")
 axB.set_xticks(list(x2)); axB.set_xticklabels(IS)
-axB.set_xlabel("lookahead distance $i$", labelpad=14)
+axB.set_xlabel("lookahead distance $i$")
 axB.set_ylim(0, 100)
 axB.set_title("(b) phrase in natural context", fontsize=7.6, loc="left")
 axB.grid(axis="y", lw=.4, alpha=.3); axB.set_axisbelow(True)
 axB.legend(frameon=False, loc="upper right", fontsize=5.8)
 save(fig, "context_vs_isolation")
 
-# Fig 2: per-phrase consistency on distinct contexts, vs binomial null
+# Fig 2: per-phrase consistency on distinct contexts, vs binomial null.
+# Bins separate the two extremes explicitly: most phrases have exactly five
+# distinct contexts, so a uniform decile grid would alias badly.
 import collections, math
 ctx = json.load(open(RAW / "lookahead_with_context_full.json"))
 gen = json.load(open(RAW / "generation_truth_context.json"))["per_phrase"]
@@ -78,27 +75,38 @@ for base, r in zip(ctx, gen):
 sel = {p_: list(d.values()) for p_, d in by.items() if len(d) >= 5}
 n = len(sel)
 pool = sum(sum(v) for v in sel.values()) / sum(len(v) for v in sel.values())
-edges = [i / 10 for i in range(11)]
-obs = [0.0] * 10
-exp = [0.0] * 10
+
+LABELS = ["none", "1-25%", "25-50%", "50-75%", "75-99%", "all"]
+
+
+def which(frac):
+    if frac <= 0: return 0
+    if frac >= 1: return 5
+    if frac <= .25: return 1
+    if frac <= .50: return 2
+    if frac <= .75: return 3
+    return 4
+
+
+obs = [0.0] * 6
+exp = [0.0] * 6
 for v in sel.values():
     m = len(v)
-    obs[min(int(sum(v) / m * 10), 9)] += 1
+    obs[which(sum(v) / m)] += 1
     for k in range(m + 1):
-        pk = math.comb(m, k) * pool ** k * (1 - pool) ** (m - k)
-        exp[min(int(k / m * 10), 9)] += pk
+        exp[which(k / m)] += math.comb(m, k) * pool ** k * (1 - pool) ** (m - k)
+
 fig, ax = plt.subplots(figsize=(3.2, 2.0))
-xs = [i + .5 for i in range(10)]
-ax.bar(xs, [100 * o / n for o in obs], width=.85, color=C["gen"], label="observed")
-ax.step([i for i in range(11)], [100 * e / n for e in exp] + [100 * exp[-1] / n],
-        where="post", color=C["grey"], lw=1.2, ls="--",
-        label=f"binomial null ($p={pool:.2f}$)")
-ax.set_xticks(range(0, 11, 2))
-ax.set_xticklabels([f"{10*i}%" for i in range(0, 11, 2)])
+xs = range(6)
+w = .38
+ax.bar([x - w / 2 for x in xs], [100 * o / n for o in obs], width=w,
+       color=C["gen"], label="observed")
+ax.bar([x + w / 2 for x in xs], [100 * e / n for e in exp], width=w,
+       color="#b9b9b9", label=f"binomial null ($p={pool:.2f}$)")
+ax.set_xticks(list(xs)); ax.set_xticklabels(LABELS, fontsize=6.4)
 ax.set_xlabel("share of a phrase's contexts recovered")
 ax.set_ylabel("% of phrases")
-ax.set_ylim(0, 39)
-ax.legend(frameon=False, loc="upper left")
+ax.legend(frameon=False, fontsize=6.4)
 ax.grid(axis="y", lw=.4, alpha=.3); ax.set_axisbelow(True)
 save(fig, "per_phrase_consistency")
 
@@ -124,11 +132,11 @@ ax.plot(L, [ge[str(l)] for l in L], "o-", ms=3, color=C["gen"], label="generatio
 ax.plot(L, [base[str(l)] for l in L], "^--", ms=2.6, color=C["grey"], alpha=.75,
         label="majority-class baseline (raw acc.)")
 ax.axhline(50, ls=":", lw=.8, color=C["grey"])
-ax.text(30, 51, "chance", ha="right", fontsize=6, color=C["grey"])
+ax.text(30.4, 51.5, "chance", ha="right", fontsize=6, color=C["grey"])
 ax.set_xlabel("layer"); ax.set_ylabel("balanced accuracy (%)")
-ax.set_xticks(L); ax.set_ylim(45, 85)
+ax.set_xticks(L); ax.set_ylim(40, 100)
 ax.grid(axis="y", lw=.4, alpha=.3); ax.set_axisbelow(True)
-ax.legend(frameon=False, loc="lower right")
+ax.legend(frameon=False, loc="lower left", fontsize=6.2)
 save(fig, "probe_balanced_accuracy")
 
 # Fig 5: first successful layer distribution

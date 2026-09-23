@@ -16,28 +16,29 @@ def write(name, body):
 # ---- Table 1: dataset ------------------------------------------------------
 d = N["dataset"]
 rows = []
-for cat, label, ex in (("building", "Landmarks", "the Great Wall of China"),
-                       ("idiom", "Idioms", "the grass is always greener\\ldots"),
-                       ("movie", "Film titles", "Harry Potter and the Goblet of Fire")):
-    rows.append(f"{label} & {d['phrases_by_category_source'][cat]} & "
-                f"{d['phrases_with_context_by_category'][cat]} & "
-                f"{d['context_instances_by_category'][cat]:,} & \\textit{{{ex}}} \\\\")
+for cat, label in (("building", "Landmarks"), ("idiom", "Idioms"),
+                   ("movie", "Film titles")):
+    rows.append(f"{label} & {d['phrases_by_category_source'][cat]:,} & "
+                f"{d['phrases_with_context_by_category'][cat]:,} & "
+                f"{d['context_instances_by_category'][cat]:,} \\\\")
 write("dataset", r"""\begin{table}[t]
 \centering\small
-\begin{tabular}{lrrrl}
+\begin{tabular}{@{}lrrr@{}}
 \toprule
- & \multicolumn{1}{c}{\textbf{Phrases}} & \multicolumn{1}{c}{\textbf{w/ ctx.}} & \multicolumn{1}{c}{\textbf{Inst.}} & \textbf{Example} \\
+ & \textbf{Phrases} & \textbf{w/ ctx.} & \textbf{Inst.} \\
 \midrule
 """ + "\n".join(rows) + rf"""
 \midrule
-Total & {d['phrases_total']:,} & {d['phrases_with_at_least_one_context']:,} & {d['context_instances']:,} & \\
+Total & {d['phrases_total']:,} & {d['phrases_with_at_least_one_context']:,} & {d['context_instances']:,} \\
 \bottomrule
 \end{{tabular}}
-\caption{{The phrase set. \textbf{{Phrases}} counts expressions long enough to
-admit at least one lookahead position; \textbf{{w/ ctx.}} counts those for which
-at least one natural occurrence was found in FineWeb-Edu; \textbf{{Inst.}} counts
-(phrase, context) pairs, of which {d['phrases_with_10_contexts']:,} phrases
-contributed the full ten.}}
+\caption{{The phrase set: landmark names (\textit{{the Great Wall of China}}),
+idioms (\textit{{the grass is always greener\ldots}}) and film titles
+(\textit{{Harry Potter and the Goblet of Fire}}). \textbf{{Phrases}} counts
+expressions long enough to admit at least one lookahead position;
+\textbf{{w/ ctx.}} those for which a natural occurrence was found in
+FineWeb-Edu; \textbf{{Inst.}} the resulting (phrase, context) pairs, of which
+{d['phrases_with_10_contexts']:,} phrases contributed the full ten.}}
 \label{{tab:dataset}}
 \end{{table}}""")
 
@@ -107,7 +108,7 @@ write("agreement", r"""\begin{table}[t]
 & $n$ & both & \makecell{ps.\\only} & \makecell{gen.\\only} & neither & agree \\
 \midrule
 \multicolumn{7}{l}{\textit{Eight probed layers, pooled $i=2\ldots5$}} \\
-""" + f"\\quad & {p8['n']:,} & {p8['both_pct']:.1f} & {p8['patchscopes_only_pct']:.1f} & "
+""" + f"\\quad pooled & {p8['n']:,} & {p8['both_pct']:.1f} & {p8['patchscopes_only_pct']:.1f} & "
       f"{p8['generation_only_pct']:.1f} & {p8['neither_pct']:.1f} & {p8['agreement_pct']:.1f} \\\\\n"
       + r"""\midrule
 \multicolumn{7}{l}{\textit{All 32 layers, by lookahead distance}} \\

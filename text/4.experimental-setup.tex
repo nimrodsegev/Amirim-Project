@@ -44,17 +44,13 @@ being collected as an instance of the film \textit{Before Sunrise}.
 This yields $9{,}955$ (phrase, context) instances covering $1{,}096$ of the
 $1{,}164$ phrases, of which $925$ reach the full ten slots. Because the
 collector resumed from an earlier five-context run and re-added the contexts it
-already held rather than topping up with new ones, $44.8\%$ of these instances
-are repeats: $734$ of the $925$ ten-slot phrases hold five distinct contexts
-recorded twice, and there are $5{,}498$ distinct (phrase, context) pairs in
-total. Decoding is greedy, so a repeat reproduces its original outcome exactly.
-Aggregate rates over instances are therefore essentially unchanged --- $64.8\%$
-versus $64.5\%$ at $i=3$ for the generation readout --- but the effective sample
-size is roughly half the instance count, and any analysis that counts successes
-\emph{per phrase} must deduplicate first. We report instance-level rates over
-the full set for comparability with the per-layer and probing analyses, which
-were run on it, and compute all per-phrase statistics (\S\ref{sec:stability})
-over distinct contexts only. Each instance
+already held, $44.8\%$ of these instances are repeats, leaving $5{,}498$
+distinct pairs. Decoding is greedy, so a repeat reproduces its outcome exactly:
+aggregate rates are essentially unchanged ($64.8\%$ versus $64.5\%$ at $i=3$),
+but the effective sample size is about half the instance count. We report
+instance-level rates over the full set, for comparability with the per-layer and
+probing analyses that were run on it, and compute every per-phrase statistic
+(\S\ref{sec:stability}) over distinct contexts only. Each instance
 contributes one trial per admissible lookahead distance, for a total of $27{,}098$
 trials, $24{,}740$ of them at $i \in \{2,3,4,5\}$. Instance counts fall with $i$
 because longer lookaheads require longer phrases: $9{,}148$ trials at $i=2$,
