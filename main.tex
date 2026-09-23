@@ -18,9 +18,6 @@
 \usepackage{booktabs}
 \usepackage{makecell}
 \usepackage{enumitem}
-% xurl loads after hyperref (pulled in by acl.sty) and lets long file
-% paths break anywhere, which the narrow justified columns need.
-\usepackage{xurl}
 \definecolor{hit}{HTML}{1B7F4B}
 \input{editing_macros}
 
@@ -54,14 +51,14 @@ presented alone. Recovery clusters strongly by phrase: outcomes across a phrase'
 far more extreme than an independent-context model at a common rate predicts. It is also legible from
 the representation itself:
 a small probe on a single hidden state predicts real completion at $76.8\%$
-balanced accuracy and $87.6\%$ precision. We also compare two ways of reading
-these states. Run on identical instances, Patchscopes and ordinary generation
-agree on only $78.7\%$ of them, reverse the ranking of the phrase categories,
-and, used as probe labels, locate the relevant information in different parts of
-the network; widening the Patchscopes layer sweep closes part of the gap but not
-the disagreement. Phrase continuations are often
-recoverable and predictable from hidden states, but the measured prevalence and
-the apparent layer localisation both depend strongly on the readout.
+balanced accuracy and $87.6\%$ precision. We also set that single-state
+intervention against the model's own continuation from the matched prefix. Run
+on identical instances the two agree on only $78.7\%$ of them, reverse the
+ranking of the phrase categories, and, used as probe labels, locate the relevant
+information in different parts of the network; widening the Patchscopes layer
+sweep closes part of the gap but not the disagreement. How much anticipation one
+measures, and where in the network it appears, both depend strongly on the
+readout.
 \end{abstract}
 
 \input{text/1.introduction}
