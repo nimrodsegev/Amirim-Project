@@ -175,4 +175,4 @@ for k, L in enumerate(LAYER_INDICES):
     prec_i = precision_score(yte, pred, zero_division=0) * 100
     print(f"L{L:<7}{len(yte):<9}{100*yte.mean():<12.1f}{acc_i:<12.1f}{acc_b:<10.1f}{prec_i:.1f}")
 
-print("\nDone. Copy this entire output back to Claude.")
+print("\nDone.")

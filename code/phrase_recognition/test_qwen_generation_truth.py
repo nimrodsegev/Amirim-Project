@@ -110,4 +110,4 @@ for i in sorted(ctx_by_i):
     vals = ctx_by_i[i]
     print(f"{i:<5}{len(vals):<8}{100*sum(vals)/len(vals):.1f}")
 
-print("\nDone. Copy this entire output back to Claude.")
+print("\nDone.")

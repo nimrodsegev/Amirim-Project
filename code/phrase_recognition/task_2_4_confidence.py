@@ -144,4 +144,4 @@ for r in high_conf_fail:
     print(f"  target: {r['target']!r}")
     print(f"  generated: {r['generated']!r}")
 
-print("\nDone. Copy this entire output back to Claude.")
+print("\nDone.")

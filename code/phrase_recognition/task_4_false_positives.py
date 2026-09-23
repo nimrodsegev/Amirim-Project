@@ -99,4 +99,4 @@ for r in fp_sorted_low_model_conf[:8]:
     print(f"  target: {r['target']!r}")
     print(f"  generated: {r['generated']!r}")
 
-print("\nDone. Copy this entire output back to Claude.")
+print("\nDone.")

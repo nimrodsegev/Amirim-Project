@@ -112,4 +112,4 @@ for r in sorted(results, key=lambda r: r["similarity"])[:6]:
     print(f"  target: {r['target']!r}")
     print(f"  generated: {r['generated']!r}")
 
-print("\nDone. Copy this entire output back to Claude.")
+print("\nDone.")

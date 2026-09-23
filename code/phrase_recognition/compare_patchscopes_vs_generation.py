@@ -151,4 +151,4 @@ for r in gen_only:
     l25_txt = r['ps_layer_texts'].get(25, '(n/a)')
     print(f"  patchscopes L25 said instead: {l25_txt!r}")
 
-print("\nDone. Copy this entire output back to Claude.")
+print("\nDone.")

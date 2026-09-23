@@ -30,4 +30,4 @@ for cat in sorted(set(categories)):
     share_of_successes = 100 * succ_cat / total_success
     print(f"{cat:<12}{n_cat:<8}{succ_rate:<11.1f}{share_of_all:<14.1f}{share_of_successes:.1f}")
 
-print("\nDone. Copy this entire output back to Claude.")
+print("\nDone.")
