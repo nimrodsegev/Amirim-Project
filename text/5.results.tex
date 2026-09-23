@@ -143,7 +143,7 @@ an instrument defect. The examples in Table~\ref{tab:disagree} are illustrative
 rather than a systematic sample, so what follows is a reading of them, not a
 measured property of the disagreement. Where Patchscopes succeeds and
 generation does not, the intervention can elicit the phrase from the state
-while the real context steers generation elsewhere: given
+while the surrounding context steers generation elsewhere: given
 \textit{Why should one person be brought up}, it writes \textit{a wealthy
 family, with every opportunity} rather than \textit{in the lap of luxury}. That
 is a different continuation, not a wrong one, and a reminder that our criterion
@@ -185,12 +185,12 @@ Patchscopes ranking rather than the top, so the reversal weakens to a
 re-ordering, but the categories are still ranked differently by the two
 instruments.
 
-The practical consequence is narrow but real. A study measuring only with
+The practical consequence is narrow but concrete. A study measuring only with
 Patchscopes would report that this model handles idioms better than landmarks or
 titles; one measuring only with generation would report the opposite. Both would
 be reporting their instrument as much as their model.
 
-\subsection{The hidden state predicts real completion}
+\subsection{The hidden state predicts generation success}
 \label{sec:probe}
 
 \begin{figure}[t]
@@ -201,8 +201,8 @@ a majority-class guess would achieve on the Patchscopes label. That baseline
 moves from $93.4\%$ at L5 to $52.3\%$ at L25 as the positive rate shifts, which
 is why raw accuracy on that label cannot be compared across layers and balanced
 accuracy is used instead. The label then determines the shape: predicting
-Patchscopes success peaks in the middle layers, while predicting real completion
-trends upward to a maximum at L30.}
+Patchscopes success peaks in the middle layers, while predicting generation
+success trends upward to a maximum at L30.}
 \label{fig:probes}
 \end{figure}
 
@@ -212,7 +212,7 @@ hidden state at the cut position to predict whether the readout succeeds, poolin
 $i \in \{2,3,4,5\}$ and splitting by phrase so that no test phrase is seen in
 training (Appendix~\ref{app:details}).
 
-Predicting \emph{real completion} works well. Balanced accuracy trends
+Predicting \emph{generation success} works well. Balanced accuracy trends
 upward with depth, from $69.8\%$ at L5 to a maximum of $76.8\%$ at L30 with a
 small dip at L20, and precision
 is high and nearly flat at $83.3\%$ to $87.6\%$ (full metrics in
@@ -275,7 +275,7 @@ of any bias in the recovery rates of \S\ref{sec:lookahead}. An independent split
 of the same cases by the model's own confidence agrees and uses no judge at all: in $40.0\%$ the model was itself confident ($>0.7$), and
 in only $10.4\%$ unsure ($<0.3$).
 
-\paragraph{The model's own confidence tracks the real outcome.}
+\paragraph{The model's own confidence tracks the observed outcome.}
 Taking the geometric mean of the probability the model assigns to each token it
 generates, confidence averages $0.878$ on successful completions and $0.447$ on
 failures. Split by probe outcome at L25 it follows the true label rather than

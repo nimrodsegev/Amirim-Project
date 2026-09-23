@@ -8,7 +8,7 @@ OLMo-2-7B produces the remaining tokens three early in roughly two thirds of
 instances and five early in more than half. Recovery clusters strongly by phrase: across a
 phrase's natural contexts, success sits at the extremes far more often than an
 independent-context model at a common rate would produce. It is also legible from the representation itself, well enough that a small probe reading a single hidden
-vector predicts real completion at $87.6\%$ precision.
+vector predicts whether the phrase will be completed, at $87.6\%$ precision.
 
 The second finding is a caution about how the first was obtained. Patchscopes
 and ordinary generation, run on identical instances, agree on only $78.7\%$ of

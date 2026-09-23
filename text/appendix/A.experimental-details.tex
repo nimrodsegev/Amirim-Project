@@ -201,15 +201,15 @@ buys perfect recall for free on a $69.1\%$-positive test set.
 \includegraphics[width=\textwidth]{figures/confidence_and_falsepos}
 \caption{\textbf{Left:} the model's own mean confidence in the tokens it
 generated, split by the four probe outcomes at L25. Confidence follows the true
-outcome, not the probe's guess: both real-success groups sit far above both
-real-failure groups, including where the probe was wrong. \textbf{Right:} the
+outcome, not the probe's guess: both observed-success groups sit far above
+both observed-failure groups, including where the probe was wrong. \textbf{Right:} the
 judge's adjudication of all $412$ probe false positives.}
 \label{fig:conf}
 \end{figure*}
 
 Figure~\ref{fig:conf} gives the two analyses behind \S\ref{sec:falsepos}: the
 model's own confidence split by probe outcome, and the judge's adjudication of
-the $412$ false positives. Confidence separates the real outcomes far more
+the $412$ false positives. Confidence separates the observed outcomes far more
 cleanly than it separates the probe's correct calls from its mistakes.
 
 \subsection{False-positive examples}
@@ -256,7 +256,7 @@ Each case was supplied on one line as
 \texttt{N. PHRASE: <phrase> | TARGET: <target> | GENERATED: <generated text>}.
 The rubric wording, in particular the instruction that a variant counts as
 valid, plainly invites a generous reading; the resulting split should be taken
-as an upper bound on how many of these are not real errors.
+as an upper bound on how many of these are acceptable rather than mistakes.
 
 \subsection{An efficiency pilot}
 
