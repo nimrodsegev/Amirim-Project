@@ -183,16 +183,14 @@ $0.806$ and $0.828$, so the split contributes little of the variation.
 \input{tables/probes}
 
 Table~\ref{tab:probes} gives balanced accuracy and precision at every probed
-layer, the two measures we rely on. For completeness, the generation-label probe's AUC-ROC rises from
-$0.76$ (L5) to $0.83$ (L30) and its AUC-PR from $0.85$ to $0.91$ against a base
-rate of $0.69$, both monotone in depth. The patchscopes-label probe inverts this:
-AUC-ROC is highest at L5 ($0.89$) and lowest at L25 and L30 ($0.74$), the
-opposite ordering to its balanced accuracy. The two metrics disagree because
-they answer different questions (ranking quality versus thresholded decision
-quality) under a positive rate that moves from $6.6\%$ to $47.7\%$ across
-layers. On $F_1$ the generation-label probe only beats the trivial
-always-predict-success baseline ($81.7$) at L30 ($82.9$), because that baseline
-buys perfect recall for free on a $69.1\%$-positive test set.
+layer. For completeness, the generation-label probe's AUC-ROC rises from $0.76$
+(L5) to $0.83$ (L30) and its AUC-PR from $0.85$ to $0.91$ against a base rate of
+$0.69$. The patchscopes-label probe inverts this, with AUC-ROC highest at L5
+($0.89$) and lowest at L25 and L30 ($0.74$): ranking quality and thresholded
+decision quality answer different questions under a positive rate moving from
+$6.6\%$ to $47.7\%$. On $F_1$ the generation-label probe beats the trivial
+always-predict-success baseline ($81.7$) only at L30 ($82.9$), that baseline
+getting perfect recall free on a $69.1\%$-positive test set.
 
 \subsection{Confidence and the false positives}
 
@@ -263,26 +261,26 @@ as an upper bound on how many of these are acceptable rather than mistakes.
 Separately from this paper we reproduced CLP \citep{xie-zhou-2026-clp}, a
 learned linear read of the hidden state that sets how many drafted tokens to
 accept at each step, on Qwen3.5-2B. It reached roughly $1.34\times$ the
-throughput of plain autoregressive decoding; a policy that simply drafts a fixed
-number of tokens every step was faster still, at $1.72\times$. The test set was
-ten held-out prompts, all that were available, so it settles nothing.
+throughput of plain autoregressive decoding; a fixed-length policy was faster
+still, at $1.72\times$. The test set was ten held-out prompts, all that were
+available, so it settles nothing.
 
 Three caveats. Our figure exceeds the $1.14\times$--$1.29\times$ Xie and Zhou
 report, which we take to reflect differences in model, hardware and workload
 rather than a better implementation. Divergences from autoregressive output
-appeared under \emph{every} drafting policy we tried, including fixed-length
-ones with no adaptive logic, pointing at this model's interaction with the
-inference engine rather than at any policy. And they were more common for the
-aggressive fixed-length policies (six of ten prompts against two for CLP), so
-the fixed-length speed advantage is not free. We report the pilot only because
-it bounds how much the anticipation we measure might be worth in practice.
+appeared under \emph{every} policy we tried, including fixed-length ones with no
+adaptive logic, pointing at this model's interaction with the inference engine
+rather than at any policy. They were also more common for the aggressive
+fixed-length policies (six of ten prompts against two for CLP), so that speed
+advantage is not free. We report the pilot only because it bounds how much the
+anticipation we measure might be worth in practice.
 
 \subsection{Reproducing the numbers}
 
 All main-text numbers except Table~\ref{tab:probes} and the adjudication in
-\S\ref{sec:falsepos} are regenerated from the files in \texttt{results/raw/} by
-the scripts in \texttt{code/}. There, \texttt{make\_paper\_numbers.py} writes a
-single \texttt{paper\_numbers.json}, and \texttt{make\_tables.py} and
-\texttt{make\_figures.py} build every table and figure from it. The experiment
-scripts live in \texttt{phrase\_recognition/}; per-trial hidden states are not
+\S\ref{sec:falsepos} are regenerated from \texttt{results/raw/} by the scripts
+in \texttt{code/}: \texttt{make\_paper\_numbers.py} writes
+\texttt{paper\_numbers.json}, from which \texttt{make\_tables.py} and
+\texttt{make\_figures.py} build every table and figure. Experiment scripts are
+in \texttt{phrase\_recognition/}; per-trial hidden states are not
 distributed.

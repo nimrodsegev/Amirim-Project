@@ -4,9 +4,9 @@
 We asked whether a language model's internal state, partway through a familiar
 multi-word expression, already carries enough information to recover the rest.
 For fixed expressions in natural text it often does, and at a useful range:
-OLMo-2-7B produces the remaining tokens three early in roughly two thirds of
-instances and five early in more than half. Recovery clusters strongly by phrase: across a
-phrase's natural contexts, success sits at the extremes far more often than an
+OLMo-2-7B recovers the remaining tokens at $i=3$ in roughly two thirds of
+instances and at $i=5$ in more than half. Recovery clusters strongly by phrase:
+across a phrase's natural contexts, success sits at the extremes far more than an
 independent-context model at a common rate would produce. It is also legible from the representation itself, well enough that a small probe reading a single hidden
 vector predicts whether the phrase will be completed, at $87.6\%$ precision.
 
