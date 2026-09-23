@@ -15,7 +15,7 @@ do not implement a decoding scheme.}
 \end{figure}
 
 A decoder-only language model emits one token per forward pass, and pays the
-full depth of the network for each one. This is not obviously necessary. Some
+full depth of the network for each one. This is not always necessary. Some
 continuations are all but fixed by the time the model has read a few tokens:
 after \textit{the Empire}, in a sentence about New York, very little other than
 \textit{State Building} can follow. If the model's hidden state at
@@ -36,7 +36,7 @@ consequences for how models are run:
 
 \begin{quote}
 Given a partial phrase, does the model's internal representation already carry
-enough information to recover the rest, before it has read or generated any of
+enough information to recover the rest, before it has read or generated all of
 it?
 \end{quote}
 
@@ -82,16 +82,16 @@ independent-context model at a common rate predicts
 raw hidden state predicts whether the model will in fact complete the phrase, at
 $76.8\%$ balanced accuracy and $87.6\%$ precision (\S\ref{sec:probe}).
 
-The two readouts, however, do not measure the same thing. Run on identical
-instances they agree on only $78.7\%$ of them, with generation recovering
-continuations Patchscopes misses about three times as often as the reverse; they
-reverse the ranking of the phrase types, idioms being easiest under Patchscopes
-and hardest under generation; and the two probes trained on their respective
-labels place the ``best'' layer in different parts of the network
-(\S\ref{sec:disagreement}). Some of the asymmetry is an artifact of how many
-layers the Patchscopes union is taken over, and we quantify how much; the
-disagreement that remains is not, and survives the widest sweep we can run. We
-take this as a caution rather than a refutation: Patchscopes remains informative
-about representational content, but a claim of the form \emph{the model knows
-$X$ at layer $\ell$} is not readout-independent, and should say which instrument
-produced it, and over how many layers.
+The two readouts, however, do not measure the same thing, and where they part
+they part in one direction. On identical instances, generation recovers
+continuations Patchscopes misses about three times as often as the reverse, so a
+Patchscopes rate is better read as a floor than as an estimate
+(\S\ref{sec:disagreement}). Part of even that gap is a choice rather than a
+finding: widening the Patchscopes sweep from eight layers to all $32$ recovers
+six to eight points. What does not wash out is where the signal appears to live.
+Train the same probe on one readout's labels and it peaks in the middle of the
+network; train it on the other's and it peaks at the last layer. We take this as
+a caution rather than a refutation: Patchscopes remains informative about
+representational content, but a claim of the form \emph{the model knows $X$ at
+layer $\ell$} is not readout-independent, and should say which instrument
+produced it and over how many layers.

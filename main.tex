@@ -43,19 +43,18 @@ titles, in isolation and in $9{,}955$ naturally occurring contexts, we find that
 it often does: the model produces
 the final three tokens of a phrase in $64.8\%$ of in-context instances and the
 final five in $53.6\%$, against $31.2\%$ and $17.6\%$ for the same phrases
-presented alone. Recovery clusters strongly by phrase: outcomes across a phrase's contexts are
-far more extreme than an independent-context model at a common rate predicts. It is also legible from
-the representation itself:
-a small probe on a single hidden state predicts whether the model will
-complete the phrase, at $76.8\%$
-balanced accuracy and $87.6\%$ precision. We also set that single-state
-intervention against the model's own continuation from the matched prefix. Run
-on identical instances the two agree on only $78.7\%$ of them, reverse the
-ranking of the phrase categories, and, used as probe labels, locate the relevant
-information in different parts of the network; widening the Patchscopes layer
-sweep closes part of the gap but not the disagreement. How much anticipation one
-measures, and where in the network it appears, both depend strongly on the
-readout.
+presented alone. Which phrase it is matters far more than which sentence it appears in: given
+several natural contexts, a phrase tends either to be recovered in almost all of
+them or in almost none. The signal is legible from the representation itself,
+and a small probe reading a single hidden state predicts whether the model will
+complete the phrase at $87.6\%$ precision, before any of it is generated.
+Comparing the two readouts on identical instances, Patchscopes systematically
+undercounts what the model does: generation recovers continuations it misses
+about three times as often as the reverse, and much of that gap turns out to be
+the number of layers we chose to sweep rather than anything about the model.
+Trained on the two readouts' labels, the same probe places the signal in
+different parts of the network. Anticipation is there to be measured; how much
+one finds, and where, depends on the instrument.
 \end{abstract}
 
 \input{text/1.introduction}

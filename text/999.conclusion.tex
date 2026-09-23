@@ -10,15 +10,18 @@ across a phrase's natural contexts, success sits at the extremes far more than a
 independent-context model at a common rate would produce. It is also legible from the representation itself, well enough that a small probe reading a single hidden
 vector predicts whether the phrase will be completed, at $87.6\%$ precision.
 
-The second finding is a caution about how the first was obtained. Patchscopes
-and ordinary generation, run on identical instances, agree on only $78.7\%$ of
-them, reverse the ranking of the phrase categories, and, used as probe labels,
-locate the relevant information in different parts of the network. Part of that
-gap is a budget we chose, since widening the sweep from eight layers to all $32$
-recovers six to eight points, but the disagreement itself survives the widest
-sweep we can run. Neither instrument is wrong; neither is a neutral window onto
-what the model knows. Claims of the form \emph{the model already knows $X$}
-should carry the readout that produced them, and the budget it was given.
+The second finding is a caution about how the first was obtained. The two
+readouts agree on most instances, but where they part they part in one
+direction: generation recovers continuations Patchscopes misses about three
+times as often as the reverse. A Patchscopes rate is therefore better read as a
+floor than as an estimate, and part of even that gap is a choice rather than a
+finding, since widening the sweep from eight layers to all $32$ recovers six to
+eight points. What does not wash out is where the signal appears to live. Train
+the same probe on one readout's labels and it peaks in the middle of the
+network; train it on the other's and it peaks at the last layer. Neither
+instrument is wrong; neither is a neutral window onto what the model knows.
+Claims of the form \emph{the model already knows $X$} should carry the readout
+that produced them, and the budget it was given.
 
 The practical thread we have not pulled is efficiency. A signal that is
 consistent within a phrase, available from mid-network states, and precise
