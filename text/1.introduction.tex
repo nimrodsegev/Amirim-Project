@@ -1,14 +1,25 @@
 \section{Introduction}
 \label{sec:intro}
 
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{figures/motivation}
+\caption{Why anticipation would be worth having. Emitting \textit{The Lord of
+the Rings} one token at a time costs five full passes through a 32-layer model.
+If the remainder were already recoverable from the state at \textit{Lord}, most
+of that work would be redundant. Whether it is recoverable is the question of
+this paper; we do not implement the shortcut.}
+\label{fig:motivation}
+\end{figure}
+
 A decoder-only language model emits one token per forward pass, and pays the
 full depth of the network for each one. This is not obviously necessary. Some
 continuations are all but fixed by the time the model has read a few tokens:
 after \textit{the Empire}, in a sentence about New York, very little other than
 \textit{State Building} can follow. If the model's hidden state at
 \textit{Empire} already encodes \textit{State Building}, then the two forward
-passes that produce those tokens are, in an information-theoretic sense,
-re-deriving something the model had already computed.
+passes that produce those tokens are re-deriving something the model had
+already computed (Figure~\ref{fig:motivation}).
 
 Recent interpretability work has shown that language models do build
 representations of units larger than a single token. \citet{kaplan-etal-2025-tokens}

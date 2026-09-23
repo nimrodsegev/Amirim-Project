@@ -36,19 +36,17 @@ report better than $48\%$ accuracy at some layers of GPT-J-6B. That transplant
 is the technique Patchscopes later generalised, and our Patchscopes readout is a
 direct descendant of it.
 
-We differ in what is being anticipated and in what the anticipation is checked
-against. Future Lens targets the model's own subsequent predictions on running
-text, so the reference is whatever the model would have emitted. We target
-\emph{fixed multi-word expressions}, so the continuation is defined externally,
-by the phrase, and is the same string regardless of what the model does. That
-buys three things: a lookahead distance that is meaningful rather than arbitrary
-(the tokens remaining in a known unit), a per-phrase repetition structure that
-lets us ask whether anticipation is stable across occasions
-(\S\ref{sec:stability}), and a second readout --- the model's actual continuation
-in its real context --- that can be compared against the transplant on matched
-instances (\S\ref{sec:disagreement}). Future Lens compares two \emph{decoding}
-methods against the model's output; we compare a decoding method against the
-model's behaviour, and find they disagree in ways that change conclusions.
+We differ in what is anticipated and in what it is checked against. Future Lens
+targets the model's own subsequent predictions on running text, so the reference
+is whatever the model would have emitted. We target \emph{fixed multi-word
+expressions}, so the continuation is defined externally and is the same string
+regardless of what the model does. That buys a lookahead distance which counts
+the tokens remaining in a known unit, a repetition structure across occurrences
+of the same phrase (\S\ref{sec:stability}), and a second readout --- the model's
+real continuation --- to compare the transplant against on matched instances
+(\S\ref{sec:disagreement}). Future Lens compares two \emph{decoding} methods
+against the model's output; we compare a decoding method against the model's
+behaviour, and find they disagree in ways that change conclusions.
 
 \paragraph{Reading hidden states.}
 The logit lens \citep{nostalgebraist-2020-logitlens} projects an intermediate

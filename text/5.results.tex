@@ -6,16 +6,19 @@
 
 \input{tables/main_results}
 
-\begin{figure}[t]
+\begin{figure*}[t]
 \centering
-\includegraphics[width=\columnwidth]{figures/context_vs_isolation}
-\caption{Recovery rate against lookahead distance. Natural context lifts the
-generation readout by $25$--$36$ points over the same phrases in isolation. The
-two Patchscopes curves are the same measurement under different layer budgets
+\includegraphics[width=\textwidth]{figures/context_vs_isolation}
+\caption{Recovery rate against lookahead distance. \textbf{(a)} Phrases in
+isolation, out to $i=8$; the two readouts are within a few points of each other
+throughout, and both decay steeply. Sample sizes ($n$, below the axis) shrink
+with $i$ because longer lookaheads require longer phrases. \textbf{(b)} The same
+phrases in natural context. Context lifts the generation readout by $25$--$36$
+points. The two Patchscopes curves are one measurement under two layer budgets
 and differ by $6$--$8$ points, which is most of the apparent gap to generation
 (\S\ref{sec:disagreement}).}
 \label{fig:context}
-\end{figure}
+\end{figure*}
 
 Table~\ref{tab:main} gives the central measurement. In natural context,
 OLMo-2-7B completes a familiar phrase two tokens early in $84.0\%$ of instances,
@@ -35,14 +38,23 @@ results. A bare phrase is a poor proxy for the condition
 under which a model actually encounters these expressions, and measurements
 taken in isolation should be read as a lower bound.
 
+\paragraph{In isolation the two readouts nearly coincide.}
+Figure~\ref{fig:context}a shows the isolated condition out to $i=8$. Recovery
+falls steeply --- $87.1\%$ at $i=1$, $57.8\%$ at $i=2$, $30.9\%$ at $i=3$ --- and
+the two readouts stay within a few points of each other across the whole range.
+Whatever separates them later (\S\ref{sec:disagreement}) does not appear when
+the phrase stands alone, which is itself a clue: the disagreement is something
+context creates, not a constant property of the instruments.
+
 \paragraph{Successes persist beyond the range we analyse.}
-We restrict the main analysis to $i \leq 5$ because instance counts fall
-steeply beyond that. The effect does not stop there, however: in context,
-generation recovers $48.9\%$ of the $1{,}123$ trials at $i=6$ and $41.7\%$ of
-the $312$ at $i=8$. We do not draw conclusions from the sparse tail, but we note
-it because an earlier version of this work reported zero successes at
-$i \geq 6$; that was an artifact of a fixed generation budget
-(\S\ref{sec:criterion}), not a property of the model.
+We restrict the main analysis to $i \leq 5$ because sample sizes fall steeply
+beyond that --- $185$ phrases at $i=6$ and $51$ at $i=8$ in the isolated
+condition. The effect does not stop there: in context, generation recovers
+$48.9\%$ of the $1{,}123$ trials at $i=6$ and $41.7\%$ of the $312$ at $i=8$.
+We draw no conclusions from the sparse tail, but we note it because an earlier
+version of this work reported zero successes at $i \geq 6$; that was an artifact
+of a fixed generation budget (\S\ref{sec:criterion}), not a property of the
+model.
 
 \subsection{Anticipation is a property of the phrase}
 \label{sec:stability}
@@ -195,19 +207,21 @@ be reporting their instrument as much as their model.
 \begin{figure}[t]
 \centering
 \includegraphics[width=\columnwidth]{figures/probe_balanced_accuracy}
-\caption{Balanced accuracy of the two probes by layer. The label determines the
-shape: predicting Patchscopes success peaks in the middle layers, while
-predicting real completion rises monotonically to L30.}
+\caption{Balanced accuracy of the two probes by layer, against the raw accuracy
+a majority-class guess would achieve on the Patchscopes label. That baseline
+moves from $93.4\%$ at L5 to $52.3\%$ at L25 as the positive rate shifts, which
+is why raw accuracy on that label cannot be compared across layers and balanced
+accuracy is used instead. The label then determines the shape: predicting
+Patchscopes success peaks in the middle layers, while predicting real completion
+rises monotonically to L30.}
 \label{fig:probes}
 \end{figure}
 
 If phrase anticipation is carried by the representation, it should be readable
-from the representation without an intervention. We train a small MLP
-($32$ hidden units) on the raw hidden state at the cut position to predict, as a
-binary label, whether the readout succeeds. Data are pooled over
-$i \in \{2,3,4,5\}$ and split by phrase at $80/20$, so no test phrase appears in
-training; the training set is class-balanced by downsampling and the test set is
-left at its natural distribution.
+from the representation without an intervention. We train a small MLP on the raw
+hidden state at the cut position to predict whether the readout succeeds, pooling
+$i \in \{2,3,4,5\}$ and splitting by phrase so that no test phrase is seen in
+training (Appendix~\ref{app:details}).
 
 Predicting \emph{real completion} works well. Balanced accuracy rises
 monotonically with depth, from $69.8\%$ at L5 to $76.8\%$ at L30, and precision
@@ -276,8 +290,6 @@ layer being probed, but the divergence is itself the point.
 \subsection{Most apparent errors are valid alternates}
 \label{sec:falsepos}
 
-\input{tables/falsepos_examples}
-
 \begin{figure*}[t]
 \centering
 \includegraphics[width=\textwidth]{figures/confidence_and_falsepos}
@@ -297,10 +309,11 @@ ChatGPT with a three-way rubric and asking which category it fell into. The
 prompt is reproduced verbatim in Appendix~\ref{app:judge}. It labelled $259$
 cases ($62.9\%$) valid alternates, $72$ ($17.5\%$) partially correct and $81$
 ($19.7\%$) unrelated (Figure~\ref{fig:conf}, right).
-Table~\ref{tab:falsepos} gives examples: \textit{laughs best} for
-\textit{laughs loudest}, \textit{plowshares} for \textit{ploughshares},
-\textit{beat around the bush} for \textit{beat about the bush} --- in each case
-the more common form of the expression, scored as a failure.
+Typical cases are \textit{laughs best} for \textit{laughs loudest},
+\textit{plowshares} for \textit{ploughshares}, and \textit{beat around the bush}
+for \textit{beat about the bush} --- in each case the more common form of the
+expression, scored as a failure. Appendix~\ref{app:details} gives a fuller
+sample, including the cases the judge called unrelated.
 
 Read cautiously --- this is a single judge, with no human validation, no
 inter-annotator agreement, and, as we note in the Limitations, no record of
@@ -311,20 +324,16 @@ direction of the bias, not as a corrected accuracy. That direction is consistent
 across our analyses: the rates we report are conservative.
 
 An independent split of the same $412$ cases by the model's own confidence
-points the same way. In $40.0\%$ of them the model was itself confident
-($>0.7$), which is the signature of a valid alternate; in only $10.4\%$ was it
-unsure ($<0.3$), the signature of real confusion. The remaining $49.6\%$ fall in
-between. This uses no judge at all, and agrees with the adjudication that most
-of these are not failures of knowledge.
+agrees, and uses no judge at all: in $40.0\%$ the model was itself confident
+($>0.7$), the signature of a valid alternate, and in only $10.4\%$ was it unsure
+($<0.3$), the signature of real confusion.
 
 \paragraph{The model's own confidence tracks the real outcome.}
 Taking the geometric mean of the probability the model assigns to each token it
-generates over the steps needed to complete the phrase, mean confidence is
-$0.878$ on successful completions and $0.447$ on failures (medians $0.934$ and
-$0.416$) --- a usable signal in its own right. Split by probe outcome at L25
-(Figure~\ref{fig:conf}, left), confidence follows the true label rather than the
-probe's guess: true positives average $0.904$ and false negatives $0.791$, while
-false positives average $0.599$ and true negatives $0.414$. The ordering is by
-what the model actually did, not by what the probe predicted. Where the probe is
-wrong, the model was not, which suggests the two signals are partly complementary
-and that combining them is worth trying.
+generates, confidence averages $0.878$ on successful completions and $0.447$ on
+failures --- a usable signal in its own right. Split by probe outcome at L25
+(Figure~\ref{fig:conf}, left), it follows the true label rather than the probe's
+guess: true positives average $0.904$ and false negatives $0.791$, against
+$0.599$ for false positives and $0.414$ for true negatives. Where the probe is
+wrong, the model is not, which suggests the two signals are complementary and
+worth combining.

@@ -31,10 +31,12 @@ position of at least $2$ are excluded.
 
 Fixed expressions in isolation are an artificial stimulus: the model sees a
 bare phrase with no indication that a phrase is what it is looking at. We
-therefore also collect natural occurrences. Streaming
-FineWeb-Edu \citep{penedo-etal-2024-fineweb}, we search for surface occurrences
-of each phrase and keep up to ten per phrase, each with up to $150$ tokens of
-preceding text. For phrases that are predominantly capitalised --- most
+therefore also collect natural occurrences. Streaming $6.3$ million documents
+from FineWeb-Edu \citep{penedo-etal-2024-fineweb}, we search for surface
+occurrences of each phrase and keep up to ten per phrase, each with up to $150$
+tokens of preceding text. This gives two parallel views of the same expressions:
+\textit{Empire \underline{\hspace{1.2em}}} on its own, and \textit{he went to
+NYC to see the Empire \underline{\hspace{1.2em}}}. For phrases that are predominantly capitalised --- most
 landmarks and titles --- we require the occurrence to preserve at least $70\%$
 of the original capitalisation, which prevents a sentence about sunrise from
 being collected as an instance of the film \textit{Before Sunrise}.

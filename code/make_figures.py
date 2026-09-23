@@ -25,22 +25,46 @@ def save(fig, name):
     print("  wrote figures/" + name + ".pdf")
 
 
-# Fig 1: context effect (generation) + Patchscopes layer-budget sensitivity
-fig, ax = plt.subplots(figsize=(3.2, 2.1))
-x = list(range(len(IS)))
-iso_g = [NUM["isolated"]["generation_olmo2"][str(i)][2] for i in IS]
+# Fig 1: (a) decay with lookahead distance, isolated; (b) what context adds
+ALLI = [str(i) for i in range(1, 9)]
+iso_p_all = NUM["isolated"]["patchscopes_olmo2_32L"]
+iso_g_all = NUM["isolated"]["generation_olmo2"]
+fig, (axA, axB) = plt.subplots(1, 2, figsize=(6.6, 2.15))
+
+xs = range(len(ALLI))
+axA.plot(xs, [iso_p_all[i][2] for i in ALLI], "s-", ms=3.2, color=C["ps"],
+         label="patchscopes")
+axA.plot(xs, [iso_g_all[i][2] for i in ALLI], "o-", ms=3.2, color=C["gen"],
+         label="generation")
+for j, i in enumerate(ALLI):
+    axA.annotate(f"{iso_g_all[i][1]:,}", (j, -13.5), fontsize=5.2, color=C["grey"],
+                 ha="center", annotation_clip=False)
+axA.annotate("$n$", (-0.85, -13.5), fontsize=5.6, color=C["grey"], ha="center",
+             annotation_clip=False)
+axA.set_xticks(list(xs)); axA.set_xticklabels(ALLI)
+axA.set_xlabel("lookahead distance $i$", labelpad=14)
+axA.set_ylabel("recovery rate (%)"); axA.set_ylim(0, 100)
+axA.set_title("(a) phrase alone", fontsize=7.6, loc="left")
+axA.grid(axis="y", lw=.4, alpha=.3); axA.set_axisbelow(True)
+axA.legend(frameon=False, loc="upper right")
+
+x2 = range(len(IS))
 ctx_g = [NUM["in_context"]["generation_olmo2"][str(i)][2] for i in IS]
 ctx_p8 = [NUM["external"]["patchscopes_8L_union_in_context_pct"][str(i)] for i in IS]
 ctx_p32 = [NUM["in_context"]["patchscopes_olmo2_32L"][str(i)][2] for i in IS]
-ax.plot(x, ctx_g, "o-", color=C["gen"], label="generation, in context")
-ax.plot(x, iso_g, "o--", color=C["gen"], alpha=.5, label="generation, isolated")
-ax.plot(x, ctx_p8, "s-", color=C["ps"], label="patchscopes (8L), in context")
-ax.plot(x, ctx_p32, "s:", color=C["ps"], alpha=.6, label="patchscopes (32L), in context")
-ax.set_xticks(x); ax.set_xticklabels([f"$i={i}$" for i in IS])
-ax.set_ylabel("recovery rate (%)"); ax.set_ylim(0, 100)
-ax.set_xlabel("lookahead distance")
-ax.grid(axis="y", lw=.4, alpha=.3); ax.set_axisbelow(True)
-ax.legend(frameon=False, loc="upper right", fontsize=6)
+iso_g = [iso_g_all[str(i)][2] for i in IS]
+axB.plot(x2, ctx_g, "o-", ms=3.2, color=C["gen"], label="generation, in context")
+axB.plot(x2, iso_g, "o--", ms=3.2, color=C["gen"], alpha=.45,
+         label="generation, alone")
+axB.plot(x2, ctx_p8, "s-", ms=3.2, color=C["ps"], label="patchscopes (8L), in context")
+axB.plot(x2, ctx_p32, "s:", ms=3.2, color=C["ps"], alpha=.6,
+         label="patchscopes (32L), in context")
+axB.set_xticks(list(x2)); axB.set_xticklabels(IS)
+axB.set_xlabel("lookahead distance $i$", labelpad=14)
+axB.set_ylim(0, 100)
+axB.set_title("(b) phrase in natural context", fontsize=7.6, loc="left")
+axB.grid(axis="y", lw=.4, alpha=.3); axB.set_axisbelow(True)
+axB.legend(frameon=False, loc="upper right", fontsize=5.8)
 save(fig, "context_vs_isolation")
 
 # Fig 2: per-phrase consistency on distinct contexts, vs binomial null
@@ -94,8 +118,11 @@ save(fig, "patchscopes_by_layer")
 fig, ax = plt.subplots(figsize=(3.2, 2.0))
 ps = NUM["external"]["patchscopes_label_probe"]["balanced_accuracy_pct"]
 ge = NUM["external"]["generation_label_probe"]["balanced_accuracy_pct"]
+base = NUM["external"]["patchscopes_label_probe"]["majority_baseline_pct"]
 ax.plot(L, [ps[str(l)] for l in L], "s-", ms=3, color=C["ps"], label="patchscopes label")
 ax.plot(L, [ge[str(l)] for l in L], "o-", ms=3, color=C["gen"], label="generation label")
+ax.plot(L, [base[str(l)] for l in L], "^--", ms=2.6, color=C["grey"], alpha=.75,
+        label="majority-class baseline (raw acc.)")
 ax.axhline(50, ls=":", lw=.8, color=C["grey"])
 ax.text(30, 51, "chance", ha="right", fontsize=6, color=C["grey"])
 ax.set_xlabel("layer"); ax.set_ylabel("balanced accuracy (%)")
