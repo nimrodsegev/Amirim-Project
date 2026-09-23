@@ -14,25 +14,23 @@ do not implement a decoding scheme.}
 \label{fig:motivation}
 \end{figure}
 
-A decoder-only language model emits one token per forward pass, and pays the
-full depth of the network for each one. This is not always necessary. Some
-continuations are all but fixed by the time the model has read a few tokens:
-after \textit{the Empire}, in a sentence about New York, very little other than
-\textit{State Building} can follow. If the model's hidden state at
-\textit{Empire} already encodes \textit{State Building}, then the two forward
-passes that produce those tokens are re-deriving something the model had
-already computed (Figure~\ref{fig:motivation}).
+A decoder-only language model emits one token per forward pass, paying the full
+depth of the network for each. This is not always necessary. Some continuations
+are all but fixed once the model has read a few tokens: after \textit{the
+Empire}, in a sentence about New York, little other than \textit{State Building}
+can follow. If the state at \textit{Empire} already holds \textit{State
+Building}, the two passes that produce those tokens are recomputing something
+the model already had (Figure~\ref{fig:motivation}).
 
 Recent interpretability work has shown that language models do build
 representations of units larger than a single token. \citet{kaplan-etal-2025-tokens}
 demonstrate an \emph{intrinsic detokenization} process: when a word is split
 into several subword tokens, information from the earlier pieces is aggregated
 into the last one, and the resulting state behaves like a representation of the
-whole word, even for words the tokenizer never emits as a unit. That result,
-however, concerns a unit the model has \emph{already finished reading}: it
-establishes that the model consolidates evidence backwards, not that it
-anticipates forwards. Our question is the forward one, and it is the one with
-consequences for how models are run:
+whole word, even for words the tokenizer never emits as a unit. But that is a unit the model has
+\emph{already finished reading}: it shows the model pulling earlier evidence
+together, not looking ahead. Ours is the forward question, and it is the one
+that matters for how models are run:
 
 \begin{quote}
 Given a partial phrase, does the model's internal representation already carry
@@ -40,47 +38,47 @@ enough information to recover the rest, before it has read or generated all of
 it?
 \end{quote}
 
-A general form of this question is already answered in the affirmative.
+A general version of this question has already been answered yes.
 \citet{pal-etal-2023-future} show that tokens two or more positions ahead can be
 recovered from a single hidden state, by transplanting it into a fresh context
-and reading what the model produces. What their setup cannot easily ask is
-whether the anticipated material is \emph{a unit}: their reference is
-whatever the model itself would have emitted next, so there is no target
-independent of the model's own behaviour to hold fixed across occasions, or to
-check the model's behaviour against.
+and reading what the model produces. But they compare the recovered tokens
+against whatever the model itself would have written next. There is no target
+fixed in advance, so one cannot ask whether the same material comes back on a
+different occasion, or whether the model's own behaviour matches it.
 
-We therefore study \emph{fixed multi-word expressions}: idioms, landmark
-names, and film titles. For these the continuation is defined by the phrase
-rather than by the model, which makes three things possible: a lookahead
-distance that counts something meaningful, a repetition structure that lets us
-ask whether anticipation is a property of the phrase or of the occasion, and a
-comparison between what a transplanted state yields and what the model actually
-writes. Their frequency in pretraining text also makes them the most favourable
-case; if anticipation does not happen here, it is unlikely to happen anywhere.
+We therefore study \emph{fixed multi-word expressions}: idioms, landmark names
+and film titles. Here the continuation is set by the phrase, not by the model,
+and that buys three things. The distance we measure counts something real, the
+tokens left in a known phrase. The same phrase can be tested in many different
+sentences, so we can ask whether what varies is the phrase or the occasion. And
+because the target is fixed, we can check the model's own writing against it.
+These phrases are also common in pretraining text, which makes them the easiest
+case: if anticipation does not show up here, it is unlikely to show up
+anywhere.
 We index the question by \emph{lookahead distance} $i$: the number of phrase
 tokens still unread at the point where we interrupt the model. At $i=4$ in
 \textit{The Lord of the Rings}, the model has read only \textit{The}, and we ask
 whether \textit{Lord of the Rings} is recoverable from its state.
 
-Recoverable by what means, however, turns out to matter as much as the answer.
-We use two readouts on the same interrupted states. The first is
+How we look turns out to matter as much as what we find. We use two readouts on
+the same interrupted state. The first is
 Patchscopes \citep{ghandeharioun-etal-2024-patchscopes}: we lift the hidden
-state at the cut position and inject it into an unrelated prompt, and ask
-whether the model verbalises the remaining tokens. The second simply lets the
-model continue generating from the true prefix it has actually seen. The first
-asks what a vector contains; the second asks what the model does. A successful
-Patchscopes readout is routinely taken as evidence that the model ``knows''
-something; we ask how far that licence extends.
+state at the cut point, drop it into an unrelated prompt, and see whether the
+model writes out the missing tokens. The second simply lets the model carry on
+from the text it has actually read. The first asks what a single vector can be
+made to say; the second asks what the model does. A successful Patchscopes
+readout is often treated as proof that the model ``knows'' something, and we
+wanted to see how far that holds.
 
 Our findings are as follows. Anticipation at the phrase level is substantial:
 in natural context, OLMo-2-7B produces the final two tokens of a familiar phrase
 in $84.0\%$ of instances and the final five in $53.6\%$, against $59.2\%$ and
-$17.6\%$ for the same phrases in isolation (\S\ref{sec:lookahead}). Recovery clusters strongly by phrase:
-outcomes across a phrase's contexts are far more extreme than an
-independent-context model at a common rate predicts
-(\S\ref{sec:stability}). And it is decodable. A small classifier reading the
-raw hidden state predicts whether the model will in fact complete the phrase, at
-$76.8\%$ balanced accuracy and $87.6\%$ precision (\S\ref{sec:probe}).
+$17.6\%$ for the same phrases in isolation (\S\ref{sec:lookahead}). Which phrase it is matters far more than which sentence it sits in: a phrase
+tends to be recovered in nearly all of its contexts or in nearly none
+(\S\ref{sec:stability}). And the signal can be read off the state directly. A
+small classifier looking at one hidden vector predicts whether the model will
+finish the phrase, at $76.8\%$ balanced accuracy and $87.6\%$ precision
+(\S\ref{sec:probe}).
 
 The two readouts, however, do not measure the same thing, and where they part
 they part in one direction. On identical instances, generation recovers
@@ -90,8 +88,8 @@ Patchscopes rate is better read as a floor than as an estimate
 finding: widening the Patchscopes sweep from eight layers to all $32$ recovers
 six to eight points. What does not wash out is where the signal appears to live.
 Train the same probe on one readout's labels and it peaks in the middle of the
-network; train it on the other's and it peaks at the last layer. We take this as
-a caution rather than a refutation: Patchscopes remains informative about
-representational content, but a claim of the form \emph{the model knows $X$ at
-layer $\ell$} is not readout-independent, and should say which instrument
+network; train it on the other's and it peaks at the last layer. We take this as a
+warning rather than a refutation. Patchscopes still tells us something real
+about what a state holds, but a claim of the form \emph{the model knows $X$ at
+layer $\ell$} depends on how it was measured, and should say which readout
 produced it and over how many layers.

@@ -47,30 +47,30 @@ embedding of \texttt{X} in the prompt \texttt{"Repeat this: X"}. We then decode
 greedily for $i+3$ tokens. The readout succeeds at layer $\ell$ if the target
 string occurs in the output, case-insensitively. Unless stated otherwise we
 report the union over layers: the readout succeeds if \emph{any} probed layer
-succeeds. This is a deliberately generous criterion, and \S\ref{sec:disagreement}
-shows that how many layers enter the union materially changes the result.
+succeeds. This is deliberately generous, and \S\ref{sec:disagreement} shows that how
+many layers go into the union changes the result quite a lot.
 
 \paragraph{Generation readout.}
 We take the same prefix, context plus the first $p$ phrase tokens, and let
 the model generate greedily for $i+3$ tokens, with no intervention of any kind.
 The readout succeeds under the same string-containment criterion.
 
-Neither readout is ground truth for the other, and they are not two decoders of
-the same object. Patchscopes intervenes on a single hidden state and asks what
-that vector can be made to express; generation runs the full model on the
-matched prefix and asks what it does. The comparison is therefore between
-representational extractability and behaviour, and we treat them as two
+Neither readout is ground truth for the other, and they are not two ways of
+decoding the same thing. Patchscopes works on a single hidden state and asks
+what that vector can be made to say; generation runs the whole model on the
+matched text and asks what it does. One measures what can be pulled out of a
+representation, the other what the model actually does, so we treat them as two
 instruments rather than two views (\S\ref{sec:disagreement}).
 
 One consequence is worth stating before any results. Both readouts decode
 autoregressively, so a recovered target of several tokens does not show that
 each of those tokens is separately encoded in the cut-position state: after the
 first generated token, the rest may follow from what has already been emitted.
-What a success shows is that the state carries enough information to elicit the
-continuation under that readout. We use \emph{recognition} and
-\emph{anticipation} in that operational sense throughout: a phrase is
-recognized at distance $i$ when a named readout recovers its remaining $i$
-tokens under the matching criterion below.
+What a success shows is that the state carries enough information to bring the
+continuation out under that readout. We use \emph{recognition} and
+\emph{anticipation} in that practical sense throughout: a phrase is recognized
+at distance $i$ when a named readout recovers its remaining $i$ tokens under the
+matching rule below.
 
 \subsection{Success criterion}
 \label{sec:criterion}
@@ -78,8 +78,8 @@ tokens under the matching criterion below.
 A trial succeeds if the target string appears as a case-insensitive substring of
 the generated continuation. The budget of $i+3$ tokens allows the model to
 overshoot slightly (a trailing clause after the phrase does not cost it the
-trial) while remaining tight enough that a success reflects the phrase
-rather than a long ramble that happens to contain it.\footnote{An earlier
+trial) while staying tight enough that a success reflects the phrase rather than a
+long ramble that happens to contain it.\footnote{An earlier
 version of this work used a fixed five-token budget, which mechanically forced
 zero successes at $i \geq 6$. The reported $i \geq 6$ rates here are the
 corrected ones.}

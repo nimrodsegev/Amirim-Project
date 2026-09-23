@@ -21,23 +21,19 @@ generation and $22$--$33$ for Patchscopes, and generation pulls slightly ahead.}
 Table~\ref{tab:main} gives the central measurement. In natural context, the
 remaining tokens of a familiar phrase appear in OLMo-2-7B's next $i+3$ generated
 tokens in $84.0\%$ of instances at $i=2$, $64.8\%$ at $i=3$ and $53.6\%$ at
-$i=5$. Anticipation
-of fixed expressions is therefore not a marginal effect at short range; it
-persists at distances of several tokens, well past the horizon of ordinary
-next-token prediction.
+$i=5$. So this is not a small effect that dies out after one token: it holds several
+tokens ahead, well past ordinary next-token prediction.
 
 \paragraph{Isolation understates the effect.}
 The same phrases presented alone, with no surrounding text, are recovered far
 less often: $59.2\%$ at $i=2$ falling to $17.6\%$ at $i=5$ (Figure~\ref{fig:context}).
 The generation gap widens with distance, from $24.8$ points at $i=2$ to $36.0$
 at $i=5$. Patchscopes benefits substantially too, by $21.8$ to $33.2$ points,
-though not in a steadily widening way. This is the expected
-direction, since context supplies both topical evidence and the signal that a
-fixed expression is under way, but its size matters for interpreting prior
-results. A bare phrase is a poor proxy for the condition
-under which a model actually encounters these expressions: for these phrases
-and models, measuring in isolation substantially underestimates recovery in
-natural context.
+though not in a steadily widening way. The direction is no surprise: context gives the model both the topic and the
+cue that a set phrase is under way. The size is what matters. A bare phrase is a
+poor stand-in for how a model actually meets these expressions, and for these
+phrases and models, testing in isolation badly understates what the model can
+do.
 
 \paragraph{In isolation the two readouts nearly coincide.}
 The lower pair of curves in Figure~\ref{fig:context} is the isolated condition,
@@ -48,14 +44,13 @@ phrase stands alone, itself a clue that the disagreement is something context
 creates rather than a fixed property of the instruments.
 
 \paragraph{Successes persist beyond the range we analyse.}
-We cap the analysis at $i=5$ because sample sizes fall steeply beyond it: $185$
-phrases at $i=6$ and $51$ at $i=8$ in the isolated condition. The effect does
-not stop there: in context, generation recovers $48.9\%$ of the $1{,}123$ trials
-at $i=6$ and $41.7\%$ of the $312$ at $i=8$. We draw no conclusions from so
-sparse a tail. We report it only because an earlier version
-of this work found zero successes at $i \geq 6$, which was an artifact of a
-fixed generation budget (\S\ref{sec:criterion}) rather than a property of the
-model.
+We stop at $i=5$ because the samples thin out fast: $185$ phrases at $i=6$ and
+$51$ at $i=8$. The effect does not stop there, though. In context, generation
+recovers $48.9\%$ of the $1{,}123$ trials at $i=6$ and $41.7\%$ of the $312$ at
+$i=8$. We draw nothing from so thin a tail, and mention it only because an
+earlier version of this work found zero successes at $i \geq 6$, which turned
+out to be a generation-budget artifact (\S\ref{sec:criterion}) rather than a
+property of the model.
 
 \subsection{Recovery varies systematically by phrase}
 \label{sec:stability}
@@ -93,17 +88,15 @@ $32.3\%$ observed. The Patchscopes readout is more extreme still, with $37.4\%$
 of phrases recovered in at least $90\%$ of their contexts against a null of
 $9.5\%$.
 
-What this rules out is the picture in which every context is an independent
-draw at a common rate: the between-phrase spread is far larger than that model
-allows. Some expressions are recovered across most of their occurrences and
-others across almost none. It does not establish that the phrase \emph{itself}
-is what varies, since we have not separated phrase identity from its
-correlates: pretraining frequency, length, tokenization, category, or how
-similar a phrase's contexts happen to be (\S\ref{sec:limitations}). What it does
-establish is that outcomes cluster strongly by phrase: contexts carrying the
-same expression behave far more alike than a common-rate independent model
-predicts. Whether that clustering is caused by phrase identity itself or by
-correlated properties we did not measure is open. Either way it is what makes
+So the differences between phrases are far larger than they would be if every
+context were an independent coin flip at the same rate. Some expressions are
+recovered in most of their occurrences and others in almost none. That does not show the phrase \emph{itself} is what matters, because we have
+not separated a phrase from the things that travel with it: how often it appears
+in pretraining, how long it is, how it is tokenized, what category it belongs
+to, and how alike its contexts happen to be (\S\ref{sec:limitations}). What it does show is that
+outcomes group tightly by phrase: sentences containing the same expression
+behave much more alike than chance would predict. Whether that is the phrase
+itself or something that comes with it remains open. Either way it is what makes
 the probing question in \S\ref{sec:probe} worth asking: a signal that is
 consistent within a phrase is one that something in the representation could
 carry.
@@ -142,7 +135,7 @@ The two failure directions look qualitatively different, and neither is simply
 an instrument defect. The examples in Table~\ref{tab:disagree} are illustrative
 rather than a systematic sample, so what follows is a reading of them, not a
 measured property of the disagreement. Where Patchscopes succeeds and
-generation does not, the intervention can elicit the phrase from the state
+generation does not, the intervention can bring the phrase out of the state
 while the surrounding context steers generation elsewhere: given
 \textit{Why should one person be brought up}, it writes \textit{a wealthy
 family, with every opportunity} rather than \textit{in the lap of luxury}. That
@@ -223,8 +216,8 @@ tokens in question.
 
 \paragraph{The signal is learned, not a base rate.}
 Because $69.1\%$ of instances are positive, a probe could score respectably by
-guessing. Balanced accuracy corrects for that by construction, and running the
-same probe on the earliest layers gives a clean gradient: $58.6\%$ at L0, the raw
+guessing. Balanced accuracy already corrects for that, and running the same
+probe on the earliest layers gives a clean gradient: $58.6\%$ at L0, the raw
 embedding, rising through $65.1\%$ at L1 and $66.5\%$ at L2 to $69.8\%$ at
 L5 (Appendix~\ref{app:details}). A base-rate artifact would be flat; this
 climbs as computation accumulates. That L0 is already above chance does suggest

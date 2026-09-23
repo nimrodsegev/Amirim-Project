@@ -2,27 +2,25 @@
 \label{sec:related}
 
 \paragraph{Representations of units larger than a token.}
-The closest antecedent to this work is \citet{kaplan-etal-2025-tokens}, who show
+The closest earlier work is \citet{kaplan-etal-2025-tokens}, who show
 that when a word is split into several subword tokens, early attention
 aggregates the pieces into the final subtoken and feed-forward layers then write
 a whole-word representation into that position. They read these states out with
 Patchscopes and find that the model can regenerate words for which no single
 vocabulary token exists, which they interpret as a latent lexicon broader than
-the tokenizer's vocabulary. Their unit is a word the model has finished reading;
-ours is a phrase it has not. The two questions share a method but not a claim:
-consolidating evidence already received is a weaker property than anticipating
-evidence not yet received. \citet{reif-etal-2026-vocab} build on the same
-representational picture to reshape model vocabularies, and
-\citet{artzy-schwartz-2024-attend} give complementary evidence that attention
-gathers information early and later layers operate on the consolidated state.
+the tokenizer's vocabulary. Their unit is a word the model has finished reading; ours is a phrase it has
+not. The two share a method but not a claim: pulling together evidence already
+seen is a weaker thing than anticipating evidence not yet seen.
+\citet{reif-etal-2026-vocab} build on the same picture to reshape model
+vocabularies, and \citet{artzy-schwartz-2024-attend} add evidence that attention
+gathers information early and later layers work on the result.
 
 \paragraph{Idioms and memorised sequences.}
 \citet{haviv-etal-2023-understanding} study how transformers recall memorised
 idiom completions, and find the process to be two-stage: early layers promote
 the memorised token to the top of the output distribution, and upper layers
-raise the model's confidence in it. Their focus is the mechanism of
-recall for a single target token; we measure how far ahead recall extends and
-how it varies across phrases and contexts. Our idiom set is drawn from
+raise the model's confidence in it. They study how a single target token is recalled; we measure how far ahead
+recall reaches and how it varies across phrases and sentences. Our idiom set is drawn from
 MAGPIE \citep{haagsma-etal-2020-magpie} and
 LIdioms \citep{moussallem-etal-2018-lidioms}.
 
@@ -37,36 +35,33 @@ is the technique Patchscopes later generalised, and our Patchscopes readout is a
 direct descendant of it.
 
 We differ in what is anticipated and in what it is checked against. Future Lens
-targets the model's own subsequent predictions on running text, so the reference
-is whatever the model would have emitted. We target \emph{fixed multi-word
-expressions}, so the continuation is defined externally and is the same string
-regardless of what the model does. That buys a lookahead distance which counts
-the tokens remaining in a known unit, a repetition structure across occurrences
-of the same phrase (\S\ref{sec:stability}), and a second readout, the model's
-own continuation, to compare the transplant against on matched instances
-(\S\ref{sec:disagreement}). Future Lens compares two \emph{decoding} methods
-against the model's output; we compare a decoding method against the model's
-behaviour, and find they disagree in ways that change conclusions.
+scores the recovered tokens against whatever the model would have written next;
+we score them against the phrase, which is fixed in advance and does not move
+with the model. That lets us repeat a phrase across many sentences
+(\S\ref{sec:stability}) and set the transplant against the model's own writing
+on matched instances (\S\ref{sec:disagreement}). Future Lens compares two
+\emph{decoding} methods against the model's output; we compare a decoding
+method against the model's behaviour, and find that they disagree in ways that
+change conclusions.
 
 \paragraph{Reading hidden states.}
 The logit lens \citep{nostalgebraist-2020-logitlens} projects an intermediate
 state through the unembedding to ask what token it would predict.
 Patchscopes \citep{ghandeharioun-etal-2024-patchscopes} generalises both it and
 the Future Lens intervention by injecting the state into an arbitrary prompt and
-letting the model verbalise it, which removes the constraint that the answer be
-a single vocabulary item and makes multi-token readouts possible. All of these
-are inference-time interventions on a representation, and all raise the question
-of whether what is extracted is what the model would otherwise have used. We
-address that question directly in \S\ref{sec:disagreement}.
+letting the model write it out, which lifts the restriction that the answer be
+a single vocabulary item and so allows multi-token readouts. All three act on a representation at inference time, and all raise the same
+question: is what comes out what the model would otherwise have used? We test
+that directly in \S\ref{sec:disagreement}.
 
 \paragraph{Probing internal states for future correctness.}
 \citet{orgad-etal-2025-llms} show that hidden states encode more about the
 truthfulness of a forthcoming answer than the output distribution reveals, that
 the signal concentrates in particular tokens, and that probes trained on it
-generalise poorly across datasets. Our probe is the same object aimed at a
-different target (not whether an answer will be true but whether a phrase will
-be completed), and shows a comparable pattern, including the limited
-cross-category transfer in Appendix~\ref{app:details}. In a similar spirit,
+generalise poorly across datasets. Our probe is the same kind of thing pointed at a different question, not whether
+an answer will be true but whether a phrase will be finished, and it behaves
+similarly, including the limited transfer across categories in
+Appendix~\ref{app:details}. In a similar spirit,
 \citet{gekhman-etal-2024-fine} treat a model's pre-existing knowledge of an item
 as a measurable quantity predicting downstream behaviour.
 
@@ -84,8 +79,8 @@ suggesting the capacity to train for lookahead is not confined to large models.
 Closest to the use our probe suggests is CLP \citep{xie-zhou-2026-clp}, which
 trains one small linear layer on the hidden state to set how many drafted tokens
 to accept at each step, reporting $1.14\times$--$1.29\times$ on Qwen2.5 without
-measurable quality loss: the same object as our probe, aimed at a decoding
-decision rather than an analysis question. All of these methods assume useful
-anticipation exists; we measure it directly, for one well-defined class of
-continuations, and characterise when it is reliable. We implement no decoding
+measurable quality loss: the same kind of read as our probe, used to make a
+decoding decision rather than to answer a question. All of these methods assume
+useful anticipation exists. We measure it directly, for one well-defined class
+of continuations, and say when it is reliable. We implement no decoding
 method here and report no speed-ups of our own.

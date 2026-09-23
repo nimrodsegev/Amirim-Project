@@ -108,9 +108,8 @@ confidence analyses of \S\ref{sec:falsepos} use the L25 probe.
 \subsection{The L2 irregularity under the Patchscopes label}
 
 The generation-label probe climbs smoothly through the earliest layers
-(Figure~\ref{fig:early}); the Patchscopes-label probe on the \emph{same}
-states does not, reaching $76.6\%$ balanced accuracy at L1, dropping to
-$55.4\%$ at L2 and recovering to $76.0\%$ at L5. We doubt the dip is a property
+(Figure~\ref{fig:early}). The Patchscopes-label probe on the \emph{same} states
+does not: $76.6\%$ at L1, $55.4\%$ at L2, back to $76.0\%$ at L5. We doubt the dip is a property
 of layer 2: Patchscopes itself almost never succeeds this early ($0.7\%$,
 $0.8\%$ and $1.6\%$ at L0, L1 and L2), so the positive class is
 $0.6$--$1.2\%$ of the data, roughly $100$ to $250$ examples, and one split can
@@ -149,8 +148,8 @@ probe confidence and true phrase difficulty.
 
 \subsection{Probe generalisation to unseen categories}
 
-Training the generation-label probe on two phrase categories and testing on the
-third costs accuracy but does not eliminate the signal. Against a no-hold-out
+Training the generation-label probe on two categories and testing on the third
+costs accuracy but does not remove the signal. Against a no-hold-out
 baseline of $73.6\%$ / $74.6\%$ / $76.8\%$ balanced accuracy at L13 / L25 / L30,
 holding out landmarks gives $69.1\%$ / $62.6\%$ / $63.4\%$, idioms
 $68.7\%$ / $68.9\%$ / $72.3\%$, and film titles
