@@ -18,9 +18,10 @@ generation and $22$--$33$ for Patchscopes, and generation pulls slightly ahead.}
 \label{fig:context}
 \end{figure}
 
-Table~\ref{tab:main} gives the central measurement. In natural context,
-OLMo-2-7B completes a familiar phrase two tokens early in $84.0\%$ of instances,
-three tokens early in $64.8\%$, and five tokens early in $53.6\%$. Anticipation
+Table~\ref{tab:main} gives the central measurement. In natural context, the
+remaining tokens of a familiar phrase appear in OLMo-2-7B's next $i+3$ generated
+tokens in $84.0\%$ of instances at $i=2$, $64.8\%$ at $i=3$ and $53.6\%$ at
+$i=5$. Anticipation
 of fixed expressions is therefore not a marginal effect at short range; it
 persists at distances of several tokens, well past the horizon of ordinary
 next-token prediction.
