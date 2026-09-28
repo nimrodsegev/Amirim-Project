@@ -368,9 +368,10 @@ NUM["external"]["bin_chart_provenance"] = {
 NUM["external"]["clp_pilot"] = {
     "note": ("Separate reproduction of CLP (Xie and Zhou, 2026) on Qwen3.5-2B "
              "with the adaptive-mtp toolkit. Not a result of this paper; cited "
-             "in the Conclusion only. Ten held-out prompts, the whole test set "
-             "available. Source: sources/notes/clp_reproduction_summary.pdf and "
-             "the project assistant's records."),
+             "in the Conclusion only. Source: "
+             "sources/notes/clp_reproduction_summary.pdf, which reports the "
+             "speed-ups. The test-set size of ten prompts is from the author's "
+             "run and is not stated in that summary."),
     "test_prompts": 10,
     "speedup_vs_autoregressive": {
         "plain_autoregressive": 1.00, "entropy": 1.30, "max_probability": 1.37,

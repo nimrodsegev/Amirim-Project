@@ -1,5 +1,5 @@
 """
-For all 412 false positives of the generation-label probe at L25, compute
+For every false positive of the generation-label probe at L25, compute
 a real text-similarity score between the target phrase and what the model
 actually generated (trimmed to a comparable length), then bucket into
 close / somewhat similar / unrelated. Uses difflib's SequenceMatcher,

@@ -17,7 +17,7 @@ or `figures/*.pdf` by hand; change the script and re-run.
 
 ## What is in `raw/`
 
-| File | Model | Condition | Readout |
+| File | Model | Condition | Measurement |
 |---|---|---|---|
 | `lookahead_analysis_fixed.json` | OLMo-2-7B | isolated | patchscopes, 32 layers |
 | `lookahead_5x_fixed.json` | OLMo-2-7B | isolated | patchscopes, 5-slot prompt ablation |
@@ -26,7 +26,10 @@ or `figures/*.pdf` by hand; change the script and re-run.
 | `lookahead_with_context_full.json` | OLMo-2-7B | FineWeb-Edu context | patchscopes, 32 layers |
 | `lookahead_olmo3_with_context.json` | OLMo-3-7B | FineWeb-Edu context | patchscopes, 32 layers |
 | `generation_truth_context.json` | OLMo-2-7B | FineWeb-Edu context | greedy generation |
-| `correlation_per_i.json`, `probing_*.json`, `probe_*.json` | OLMo-2-7B | probe metrics from the 8-layer runs |
+| `correlation_per_i.json` | OLMo-2-7B | per-phrase correlation from the 8-layer runs |
+
+Five files that the current pipeline does not read have moved to `legacy/`;
+see `legacy/README.md`.
 
 `lookahead_with_context_full.json` and `generation_truth_context.json` are
 row-aligned: record *k* of one is the same (phrase, context) instance as record
@@ -72,7 +75,7 @@ as a record of how the discrepancies were resolved at the time.
   four decimal places, so it belongs to the 180-phrase set.
 - **One recorded correlation did not reproduce.** The same rerun returned 0.499
   for the natural-training MLP at L25, against the 0.531 in
-  `probing_bins_seeds.json`. Most likely package-version drift. Both values are
+  `legacy/probing_bins_seeds.json`. Most likely package-version drift. Both values are
   recorded in `bin_chart_provenance` in `processed/paper_numbers.json` and the
   paper footnotes the discrepancy. The balanced-MLP value, which is the one the
   figure uses, reproduced exactly.

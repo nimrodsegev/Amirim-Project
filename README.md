@@ -1,7 +1,8 @@
 # Do Language Models Recognize a Phrase Before Reading It?
 
-Amirim final project (HUJI, CS 68101). Nimrod Segev, advised by Yuval Reif and
-Roy Schwartz. Written in ACL format; this repository is synced to Overleaf.
+Amirim final project (HUJI, CS 68101). Nimrod Segev, Yuval Reif and Roy
+Schwartz; the project is Nimrod's, supervised by Yuval and Roy. Written in ACL
+format; this repository is synced to Overleaf.
 
 **The paper asks:** when a model is partway through a familiar fixed phrase, does
 its hidden state already carry enough information to recover the rest? We read
@@ -20,15 +21,15 @@ Read in this order:
 3. **`results/README.md`**, what is in the raw result files, and the known
    issues with the data that the paper discloses.
 
-The two things most worth your judgement are noted at the end of
-`notes/PAPER_BRIEF.md`: whether to spend cluster time on a phrase-clustered
-bootstrap, and whether to measure pretraining frequency. Both are currently
-stated as limitations rather than done.
+The open items are listed at the end of `notes/PAPER_BRIEF.md`: no confidence
+intervals, no frequency-matched control, and no measured pretraining frequency.
+All three are stated in the paper's Limitations rather than hidden.
 
 ## Build
 
 ```bash
-latexmk -pdf main.tex
+pip install -r requirements-artifacts.txt   # Python 3.11, matplotlib only
+latexmk -pdf main.tex                       # TeX Live 2023 or newer
 ```
 
 `main.tex` is in `preprint` mode: author names visible, page numbers, no line
@@ -45,7 +46,9 @@ three options are documented in a comment above the `\usepackage` line.
 | `results/raw/` | analysis outputs from the cluster runs |
 | `results/processed/` | `paper_numbers.json`, the single source for every reported value |
 | `code/` | the scripts that produced the results, and that rebuild the tables and figures |
-| `notes/PAPER_BRIEF.md` | claim-and-evidence map, settled decisions, open questions |
+| `notes/PAPER_BRIEF.md` | claim-and-evidence map, generated from `paper_numbers.json` |
+| `results/legacy/` | outputs the current pipeline does not read |
+| `requirements-*.txt` | artifact and experiment dependencies |
 | `sources/papers/` | related-work PDFs |
 | `custom.bib` | verified references not in the ACL Anthology |
 | `anthology-1.bib`, `anthology-2.bib` | ACL Anthology snapshot (2026-09-15) |
@@ -63,6 +66,22 @@ All four are deterministic: two consecutive runs produce byte-identical output.
 Two tables hold qualitative examples rather than computed values and are
 hand-written, so the scripts do not touch them:
 `tables/disagreement_examples.tex` and `tables/falsepos_examples.tex`.
+
+## Running the experiment scripts
+
+`code/phrase_recognition/` holds the scripts that produced `results/raw/` on the
+compute cluster. They are here for provenance and **cannot be run from a clone
+as-is**: they expect a GPU, a `data/` directory at the working root, and inputs
+that are not in this repository, chiefly
+`data/phrases_with_context_v2.json` (the collected contexts) and the per-trial
+hidden states `data/probing_features.npz` (1.28 GB) and
+`data/generation_probing_features.npz` (3.02 GB). Each writes into `results/`,
+and those outputs were copied here into `results/raw/`.
+
+`code/rerun_dedup.sh` is the September 2026 rerun: it deduplicates the context
+file and re-runs every affected script in order. It documents which script
+produced which raw file. Dependencies for these are in
+`requirements-experiments.txt`.
 
 ## Checks
 

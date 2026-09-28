@@ -1,7 +1,7 @@
 """
-Dumps ALL 412 false positives (target + generated text) in a clean, compact
-format, ready to paste into an LLM prompt for semantic judgment. Same
-probe/split/seed as before, so this is the identical set of 412 cases.
+Dumps every false positive of the generation-label probe at L25 (target +
+generated text) in a clean, compact format, ready to paste into an LLM prompt
+for semantic judgment. On the deduplicated set this is 212 cases.
 """
 import json
 import numpy as np

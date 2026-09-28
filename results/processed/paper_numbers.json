@@ -1309,7 +1309,7 @@
       "third_variant": "sanity_check_probe_l25.py is a separate script with a different methodology (trains on i=3 data only) and gives a fourth figure again: 178 phrases, r=0.614. Not used in the paper."
     },
     "clp_pilot": {
-      "note": "Separate reproduction of CLP (Xie and Zhou, 2026) on Qwen3.5-2B with the adaptive-mtp toolkit. Not a result of this paper; cited in the Conclusion only. Ten held-out prompts, the whole test set available. Source: sources/notes/clp_reproduction_summary.pdf and the project assistant's records.",
+      "note": "Separate reproduction of CLP (Xie and Zhou, 2026) on Qwen3.5-2B with the adaptive-mtp toolkit. Not a result of this paper; cited in the Conclusion only. Source: sources/notes/clp_reproduction_summary.pdf, which reports the speed-ups. The test-set size of ten prompts is from the author's run and is not stated in that summary.",
       "test_prompts": 10,
       "speedup_vs_autoregressive": {
         "plain_autoregressive": 1.0,
