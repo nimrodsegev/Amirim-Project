@@ -61,7 +61,7 @@ write("main_results", r"""\begin{table}[t]
 \toprule
 & \multicolumn{4}{c}{\textbf{Lookahead distance} $i$} \\
 \cmidrule(lr){2-5}
-\textbf{Readout / condition} & 2 & 3 & 4 & 5 \\
+\textbf{Measurement / condition} & 2 & 3 & 4 & 5 \\
 \midrule
 \multicolumn{5}{l}{\textit{Phrase in isolation}} \\
 """ + row("\\quad Patchscopes", ["isolated", "patchscopes_olmo2_32L"], IS) + "\n"
@@ -207,7 +207,7 @@ write("replication", r"""\begin{table}[t]
 \toprule
 & & \multicolumn{4}{c}{$i$} \\
 \cmidrule(lr){3-6}
-\textbf{Model} & \textbf{Readout} & 2 & 3 & 4 & 5 \\
+\textbf{Model} & \textbf{Measurement} & 2 & 3 & 4 & 5 \\
 \midrule
 \multicolumn{6}{l}{\textit{Phrase in isolation}} \\
 """ + f"OLMo-2-7B & patchscopes & {cells(iso['patchscopes_olmo2_32L'], IS)} \\\\\n"

@@ -241,16 +241,16 @@ exactly match the target string. For each one, I have the target (the correct
 completion) and what the model actually generated. I want you to classify each
 case into exactly one of three categories:
 
-\textbf{Valid alternate} --- the model's answer means the same thing or is a
+\textbf{Valid alternate}: the model's answer means the same thing or is a
 genuinely acceptable variant (a synonym, a common alternate phrasing of the same
 idiom, a spelling variant, a grammatically different but equivalent form, or a
 very reasonable related answer like a sequel number).
 
-\textbf{Partially right} --- the model got some of it right but changed or
+\textbf{Partially right}: the model got some of it right but changed or
 dropped something meaningful, so it's not quite equivalent but clearly shows
 real knowledge of the target.
 
-\textbf{Unrelated} --- the model's output has no real connection to the target;
+\textbf{Unrelated}: the model's output has no real connection to the target;
 it looks like genuine confusion.
 
 For each of the 412 lines below, respond with just the number and the category
