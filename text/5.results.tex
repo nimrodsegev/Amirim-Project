@@ -147,11 +147,13 @@ layers, with $18.9\%$ of instances classified differently and $7.8\%$ recovered
 only by Patchscopes. We keep the eight-layer sweep as our primary measurement
 because every per-layer, per-category and probing analysis was run on that layer
 set. Readers comparing our Patchscopes rates against other work should note that
-the budget moves them by six to eight points.\nimrod{Worth discussing: when
-Patchscopes fails and generation succeeds, we cannot tell from these
-measurements whether the intervention missed something the state holds or the
-model simply was not looking ahead at that point. I have not tried to settle it
-here.}
+the budget moves them by six to eight points.
+
+Where generation succeeds and Patchscopes fails, these measurements cannot
+separate two explanations: the intervention may have failed to bring out
+information the state does hold, or the model may not yet have represented the
+rest of the phrase at that cut point. Telling them apart would need a further
+intervention or diagnostic, which we leave to future work.
 
 The examples in Table~\ref{tab:disagree} suggest the two kinds of disagreement
 differ in character, though they are illustrative rather than a systematic
@@ -193,8 +195,8 @@ accuracy.}
 \label{fig:probes}
 \end{figure}
 
-If the model is really looking ahead, that should be visible in the hidden state
-itself, without any intervention. We train a small MLP on the raw hidden state at
+If information about the continuation is already present at the cut, it should
+be detectable in the hidden state without a Patchscopes intervention. We train a small MLP on the raw hidden state at
 the cut position to predict whether recovery succeeds, pooling
 $i \in \{2,3,4,5\}$ and splitting by phrase so that no test phrase is seen in
 training (Appendix~\ref{app:details}). We train two versions, differing only in
@@ -255,8 +257,8 @@ more common form of the expression, scored as a failure.
 This is a single judge, with no human validation and no record of which ChatGPT
 version produced it, so we report it as indicative of the direction of the bias
 rather than as a corrected accuracy. Read that way, roughly four in five of
-these apparent errors reflect the rigidity of exact matching rather than a model
-that did not know the phrase. These cases were selected by the probe, not
+these apparent errors were labelled either a valid alternate or partially
+correct, rather than a model that did not know the phrase. These cases were selected by the probe, not
 sampled from all exact-match failures, so this demonstrates a limitation of
 exact matching within that subset; it does not establish the direction or size
 of any bias in the recovery rates of \S\ref{sec:lookahead}. An independent split

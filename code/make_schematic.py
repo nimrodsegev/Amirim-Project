@@ -172,7 +172,7 @@ ax.add_patch(FancyArrowPatch((lord_r - CW / 2, B2 + COLH + 1.2),
                              color=PS, lw=1.0, shrinkA=0, shrinkB=0,
                              connectionstyle="arc3,rad=-0.42"))
 ax.text(rx + rw / 2, B2 + COLH + 8.8,
-        "already in $h^{\\ell}_p$?", ha="center", va="center",
+        "already recoverable here?", ha="center", va="center",
         fontsize=6.9, color=PS, weight="bold")
 
 fig.savefig("figures/motivation.pdf", metadata={"CreationDate": None})

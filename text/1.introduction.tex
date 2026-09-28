@@ -14,7 +14,8 @@ check.}
 \end{figure}
 
 A decoder-only language model emits one token per forward pass, paying the full
-depth of the network for each. That is not always necessary. Some continuations
+depth of the network for each. It is worth asking whether all of that is always
+needed. Some continuations
 are highly predictable once the model has read a few tokens: after \textit{the
 Empire}, in a sentence about New York, little other than \textit{State Building}
 can follow. If the model's state at \textit{Empire} already holds \textit{State
@@ -61,14 +62,14 @@ actually does with the same input, we also let it simply carry on from the text
 it has read.
 
 Our findings are as follows. The rest of a familiar phrase is often recoverable
-several tokens early. Over $1.1$k expressions in $9.9$k naturally occurring
-sentences, Patchscopes recovers the remaining tokens of a phrase in $57.5\%$ of
+several tokens early. Over $1.1$k expressions in $9.9$k collected
+phrase-context instances, about $5.5$k of them distinct (\S\ref{sec:setup}), Patchscopes recovers the remaining tokens of a phrase in $57.5\%$ of
 instances three tokens before it ends, and in $38.7\%$ five tokens before. The
 same phrases shown with no surrounding sentence are recovered far less often, so
 how well a model handles these expressions cannot be judged from the phrase alone
-(\S\ref{sec:lookahead}). Which phrase it is matters far more than which sentence
-it sits in: a phrase tends to be recovered in nearly all of its contexts or in
-nearly none (\S\ref{sec:stability}). And the signal can be read off the state
+(\S\ref{sec:lookahead}). Results group tightly by phrase: a phrase tends to be
+recovered in nearly all of its contexts or in nearly none, far more consistently
+than chance would predict (\S\ref{sec:stability}). And the signal can be read off the state
 directly, with no intervention at all. A small classifier looking at one hidden
 vector predicts whether the model will finish the phrase, at $76.8\%$ balanced
 accuracy and $87.6\%$ precision (\S\ref{sec:probe}).

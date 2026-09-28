@@ -8,25 +8,24 @@ Patchscopes recovers the remaining tokens in $57.5\%$ of instances three tokens
 before the phrase ends, and in $38.7\%$ five tokens before. The same phrases
 shown with no surrounding sentence are recovered far less often, so a model
 meeting these expressions in real text is in a much better position than an
-isolated test would suggest. Which phrase it is matters far more than which
-sentence it sits in: a phrase tends to be recovered in nearly all of its
-contexts or in nearly none. And the signal is legible from the state itself,
+isolated test would suggest. Results group tightly by phrase: a phrase tends to
+be recovered in nearly all of its contexts or in almost none, though we do not
+separate phrase identity from related properties such as frequency or
+tokenization. And the signal is legible from the state itself,
 well enough that a small probe reading a single hidden vector predicts whether
 the model will complete the phrase, at $87.6\%$ precision.
 
-How much one finds depends partly on how hard one looks. Patchscopes and the
-model's own continuations agree on $78.7\%$ of instances, and widening the
-Patchscopes sweep from eight layers to all $32$ closes much of the remaining
-difference. Patchscopes rates are worth reporting together with the layers that
-produced them.
+Patchscopes recovery depends on the layer budget: widening the sweep from eight
+layers to all $32$ raises agreement with generation from $78.7\%$ to $81.1\%$.
+Patchscopes rates are worth reporting together with the layers that produced
+them.
 
-The practical thread we have not pulled is efficiency. A signal that is
+We have not tested the main practical implication, efficiency. A signal that is
 consistent within a phrase, available from mid-network states, and precise
 enough to be worth testing as a control signal is the kind of signal a decoding
 scheme could use to commit several tokens at once rather than paying full depth
 for each. We are pursuing that separately, and an early pilot reproducing CLP
 \citep{xie-zhou-2026-clp} on a different model is reported in
 Appendix~\ref{app:details}; it does not bear on anything claimed here. What this
-paper settles is narrower than the efficiency question and prior to it: for
-familiar fixed expressions in English, the continuation is often recoverable
-well before it is read.
+paper shows is narrower: for familiar fixed expressions in English, the
+continuation is often recoverable well before it is read.
