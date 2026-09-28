@@ -68,8 +68,9 @@ instances three tokens before it ends, and in $38.7\%$ five tokens before. The
 same phrases shown with no surrounding sentence are recovered far less often, so
 how well a model handles these expressions cannot be judged from the phrase alone
 (\S\ref{sec:lookahead}). Results group tightly by phrase: a phrase tends to be
-recovered in nearly all of its contexts or in nearly none, far more consistently
-than chance would predict (\S\ref{sec:stability}). And the signal can be read off the state
+recovered in nearly all of its contexts or in nearly none, much more often than
+if each context succeeded independently at the same average rate
+(\S\ref{sec:stability}). And the signal can be read off the state
 directly, with no intervention at all. A small classifier looking at one hidden
 vector predicts whether the model will finish the phrase, at $76.8\%$ balanced
 accuracy and $87.6\%$ precision (\S\ref{sec:probe}).
