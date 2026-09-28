@@ -35,27 +35,26 @@
 \maketitle
 \begin{abstract}
 
-Language models emit one token per forward pass, yet some continuations are
-effectively fixed several tokens in advance.\yuval{think of a first time reader, unfamiliar with this project, that doesn't have any context beyond general knowledge on LLMs. "some continuations are effectively fixed several tokens in advance" is unclear and underspecified, they won't know what this means. we should prefer a simpler and more explicit language when describing things, like "yet when generating frequent multi-word expressions, several future words are effectively known in advance" (there are better ways to say this)} We ask whether a model's hidden
-state, partway through a familiar multi-word expression, already carries enough
-information to recover the rest of it. Interrupting OLMo-2-7B at a controlled
-\emph{lookahead distance} $i$ across $1{,}164$ idioms, landmark names and film
-titles, in isolation and in $9{,}955$ naturally occurring contexts,\yuval{for numbers in the abstract and the introduction, we should prefer something simpler to digest, like 1.1k idioms, 9.9k contexts (unless there's good reason to use the full number)} we find that
-it often does: the model produces
-the final three tokens of a phrase\yuval{so this result is for patchscopes or when just letting the model generate the suffix? from the description, it sounds like the latter, but from the motivation here we want to talk about the patchscopes result (it's more interesting)} in $64.8\%$ of in-context instances and the
-final five in $53.6\%$, against $31.2\%$ and $17.6\%$ for the same phrases
-presented alone. Which phrase it is matters far more than which sentence it appears in: given
-several natural contexts, a phrase tends either to be recovered in almost all of
-them or in almost none. The signal is legible from the representation itself,
-and a small probe reading a single hidden state predicts whether the model will
-complete the phrase at $87.6\%$ precision, before any of it is generated.\yuval{any of it? this sounds like the probe works on the hidden state before generating the very first token of the phrase, given no prefix}
-Comparing the two readout\yuval{I think readouts weren't mentioned in the abstract before this, so unclear what this means. Also, I think the patchscopes vs generation result is a bit complex to explain in the abstract, at least in the level of detail below. we can try to give a high-level intuitive explanation of the result, but I am not sure it's interesting or strong enough for the abstract.} on identical instances, Patchscopes systematically
-undercounts what the model does: generation recovers continuations it misses
-about three times as often as the reverse, and much of that gap turns out to be
-the number of layers we chose to sweep rather than anything about the model.
-Trained on the two readouts' labels, the same probe places the signal in
-different parts of the network. Anticipation is there to be measured; how much
-one finds, and where, depends on the instrument.\yuval{this last sentence is very claude-ish and doesn't add anything interesting. The abstract should usually end with a sentence about why what we learned here  has interesting potential or implications - but things that would be "useful" for a person researching LLMs}
+Language models produce one token per forward pass, but when they write a
+familiar multi-word expression, the next few words are largely settled before
+they are written. We ask whether this shows up inside the model: partway through
+such a phrase, does the hidden state already carry enough information to recover
+the words still to come? We test this on OLMo-2-7B with $1.1$k idioms, landmark
+names and film titles, stopping the model at a controlled \emph{lookahead
+distance} $i$ and reading the hidden state at that point with Patchscopes. Across
+$9.9$k naturally occurring sentences, the remaining tokens of a phrase are
+recovered in $57.5\%$ of instances three tokens before the phrase ends and
+$38.7\%$ five tokens before. The same phrases shown with no surrounding sentence
+are recovered far less often, so a model meeting these expressions in real text
+is in a much better position than an isolated test would suggest. Which phrase it is matters far more than
+which sentence it appears in: given several natural contexts, a phrase tends to
+be recovered in almost all of them or in almost none. The signal can also be read
+straight from the state, with no intervention at all: a small classifier reading
+a single hidden state predicts whether the model will complete the phrase, at
+$87.6\%$ precision. Models
+therefore carry usable information about words they have not yet produced, and a
+cheap read of one hidden state can say in advance whether that information is
+there.
 \end{abstract}
 
 \input{text/1.introduction}

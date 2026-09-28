@@ -103,7 +103,7 @@ print("wrote figures/protocol.pdf")
 # ---------------------------------------------------------------- motivation
 # Slide 3: the cost argument, as two stacked rows of layer columns.
 fig, ax = plt.subplots(figsize=(3.3, 2.45))
-ax.set_xlim(0, 100); ax.set_ylim(0, 72); ax.axis("off")
+ax.set_xlim(0, 100); ax.set_ylim(-9, 72); ax.axis("off")
 TOKS = ["The", "Lord", "of", "the", "Rings"]
 CW, GAP, X0, COLH = 10.4, 2.6, 2.0, 14.0
 LIGHT_PS, LIGHT_GEN = "#dce6f2", "#f7e6d6"
@@ -133,30 +133,42 @@ for k, t in enumerate(TOKS):
 ax.text(TOTX, B1 + COLH / 2, "160\nlayer-passes", ha="left", va="center",
         fontsize=7.0, color=INK, weight="bold", linespacing=1.3)
 
-# --- row 2: the rest read out of the state at 'Lord'
+# --- row 2: the question. Cut after 'Lord'; are the unread tokens already
+# recoverable from the state there? No layers are skipped: the cut is a position
+# in the phrase, not an early exit.
 B2 = 7
-ax.text(X0, B2 + COLH + 9.0, "hypothetical: if the rest were recoverable",
-        ha="left", va="center", fontsize=6.9, color=GEN, weight="bold")
-for k, (t, L) in enumerate(zip(TOKS[:2], [32, 13])):
-    column(X0 + k * (CW + GAP), B2, t, L, GEN, LIGHT_GEN)
-rx = X0 + 2 * (CW + GAP) + 7.5      # extra gap: the skip arrow lives here
+ax.text(X0, B2 + COLH + 15.5, "what we ask", ha="left", va="center",
+        fontsize=6.9, color=CUT, weight="bold")
+for k, t in enumerate(TOKS[:2]):
+    column(X0 + k * (CW + GAP), B2, t, 32, PS, LIGHT_PS)
+
+lord_r = X0 + (CW + GAP) + CW        # right edge of the 'Lord' column
+ax.plot([lord_r + 1.3] * 2, [B2 - 1.0, B2 + COLH + 1.0],
+        color=CUT, lw=1.1, ls=(0, (2.4, 1.7)))
+ax.text(lord_r + 3.4, B2 - 3.4, "cut", ha="center", va="center",
+        fontsize=5.8, color=CUT, weight="bold")
+
+rx = X0 + 2 * (CW + GAP) + 4.0
 rw = (X0 + SPAN) - rx
 ax.add_patch(FancyBboxPatch((rx, B2), rw, COLH,
                             boxstyle="round,pad=0.05,rounding_size=0.5",
-                            facecolor="none", edgecolor=GEN,
+                            facecolor="none", edgecolor=GREY,
                             linewidth=0.75, linestyle=(0, (2.6, 2.0))))
 ax.text(rx + rw / 2, B2 + COLH / 2, "\u201cof the Rings\u201d",
-        ha="center", va="center", fontsize=6.9, color=INK)
-lord_r = X0 + (CW + GAP) + CW        # right edge of the 13-layer column
-ax.add_patch(FancyArrowPatch((lord_r + 0.5, B2 + 2.6), (rx - 0.4, B2 + 3.0),
-                             arrowstyle="-|>", mutation_scale=8.5,
-                             color=GEN, lw=1.0, shrinkA=0, shrinkB=0,
-                             connectionstyle="arc3,rad=-0.55"))
-ax.text((lord_r + rx) / 2, B2 - 3.2, "skip", ha="center", va="center",
-        fontsize=5.8, color=GEN, style="italic")
+        ha="center", va="center", fontsize=6.9, color=GREY)
+ax.text(rx + rw / 2, B2 - 8.2, "$i=3$ tokens still unread", ha="center",
+        va="center", fontsize=5.8, color=GREY, style="italic")
 
-ax.text(TOTX, B2 + COLH / 2, "45\nlayer-passes", ha="left", va="center",
-        fontsize=7.0, color=GEN, weight="bold", linespacing=1.3)
+# the state at the cut, and the question asked of it
+ax.text(lord_r - CW / 2, B2 + COLH + 3.2, "", ha="center")
+ax.add_patch(FancyArrowPatch((lord_r - CW / 2, B2 + COLH + 1.2),
+                             (rx + rw / 2, B2 + COLH + 1.2),
+                             arrowstyle="-|>", mutation_scale=8.5,
+                             color=PS, lw=1.0, shrinkA=0, shrinkB=0,
+                             connectionstyle="arc3,rad=-0.42"))
+ax.text(rx + rw / 2, B2 + COLH + 8.8,
+        "already in $h^{\\ell}_p$?", ha="center", va="center",
+        fontsize=6.9, color=PS, weight="bold")
 
 fig.savefig("figures/motivation.pdf", metadata={"CreationDate": None})
 plt.close(fig)
