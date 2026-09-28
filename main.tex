@@ -47,15 +47,13 @@ phrase are
 recovered in $56.6\%$ of instances three tokens before the phrase ends and
 $37.3\%$ five tokens before. The same phrases shown with no surrounding sentence
 are recovered far less often, so a model meeting these expressions in real text
-is in a much better position than an isolated test would suggest. Results group
-tightly by phrase: given several natural contexts, a phrase tends to be
-recovered in almost all of them or in almost none. The signal can also be read
-straight from the state, with no intervention at all: a small classifier reading
-a single hidden state predicts whether the model will complete the phrase, at
-$84.6\%$ precision. Models therefore carry usable information about words they
+is in a much better position than an isolated test would suggest. Recovery is highly consistent within a phrase. Across natural contexts, a
+phrase tends to be recovered almost always or almost never. None of this requires an intervention. A small classifier trained on a single
+hidden state predicts
+whether the model will complete the phrase, at $84.6\%$ precision. Models therefore carry usable information about words they
 have not yet produced, and that information can be detected before those words
-appear. That is the kind of advance signal a decoding method would need in order
-to commit several tokens at once.
+appear. A decoding method that commits several tokens at once would need
+information of exactly this kind.
 \end{abstract}
 
 \input{text/1.introduction}

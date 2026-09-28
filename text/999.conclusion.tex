@@ -3,29 +3,27 @@
 
 We asked whether a model's internal state, partway through a familiar phrase,
 already holds enough to recover the rest. For fixed expressions in natural text
-it often does, and at a useful range: reading a single hidden state with
+it often does, and at a useful range. Reading a single hidden state with
 Patchscopes recovers the remaining tokens in $56.6\%$ of cases three tokens
 before the phrase ends, and in $37.3\%$ five tokens before. The same phrases
 shown with no surrounding sentence are recovered far less often, so a model
 meeting these expressions in real text is in a much better position than an
-isolated test would suggest. Results group tightly by phrase: a phrase tends to
-be recovered in nearly all of its contexts or in almost none, though we do not
+isolated test would suggest. Outcomes cluster by phrase. A phrase tends to be
+recovered in nearly all of its contexts or in almost none, though we do not
 separate phrase identity from related properties such as frequency or
-tokenization. And the signal is legible from the state itself,
-well enough that a small probe reading a single hidden vector predicts whether
+tokenization. A small probe trained on a single hidden state predicts whether
 the model will complete the phrase, at $84.6\%$ precision.
 
-Patchscopes recovery depends on the layer budget: widening the sweep from eight
+Patchscopes recovery depends on the layer budget. Widening the sweep from eight
 layers to all $32$ raises agreement with generation from $77.8\%$ to $80.4\%$.
-Patchscopes rates are worth reporting together with the layers that produced
-them.
+Patchscopes results should therefore specify which layers were included.
 
-We have not tested the main practical implication, efficiency. A signal that is
-consistent within a phrase, available from mid-network states, and precise
-enough to be worth testing as a control signal is the kind of signal a decoding
-scheme could use to commit several tokens at once rather than paying full depth
-for each. We are pursuing that separately, and an early pilot reproducing CLP
+We have not tested the main practical implication, efficiency. Because this
+information is available from mid-network states and is consistent within a
+phrase, future work could test whether a decoding scheme can use it to commit
+several tokens at once rather than paying full depth for each token. We are
+pursuing that separately, and an early pilot reproducing CLP
 \citep{xie-zhou-2026-clp} on a different model is reported in
-Appendix~\ref{app:details}; it does not bear on anything claimed here. What this
-paper shows is narrower: for familiar fixed expressions in English, the
-continuation is often recoverable well before it is read.
+Appendix~\ref{app:details}; it is separate from the results reported here. Our
+result is narrower than that question. For familiar fixed expressions in
+English, the continuation is often recoverable well before it is read.

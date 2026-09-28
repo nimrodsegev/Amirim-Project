@@ -6,10 +6,9 @@ All layer-level and probing results come from OLMo-2-7B. We replicate the
 lookahead curves on OLMo-3-7B and generation on Qwen2.5-14B
 (Appendix~\ref{app:details}) and the qualitative pattern holds, but we have not
 shown that the layer localisation or the probe's profile transfers, and the
-replication covers the isolated condition only. The
-Qwen2.5-14B result is worth flagging on its own: at roughly twice the parameters
-it does not clearly beat OLMo-2-7B here, so recovering phrases this way does not
-look like a simple function of general model capability. The phrases are a
+replication covers the isolated condition only. Qwen2.5-14B does not clearly beat OLMo-2-7B here despite having roughly twice
+the parameters, so recovering phrases this way does not look like a simple
+function of general model capability. The phrases are a
 deliberately favourable case, and a narrow one: frequent fixed English
 expressions, unbalanced across categories (idioms are $82\%$ of pooled trials),
 with the landmark and film-title lists taken from public web pages rather than
@@ -32,7 +31,7 @@ criterion adds slack in both directions: substring containment credits any
 output that contains the target without asking why it appeared, and penalises
 accepted variants of the same expression (\S\ref{sec:falsepos}).
 
-\paragraph{How firmly the numbers should be held.}
+\paragraph{How much to trust the numbers.}
 Our primary Patchscopes measurement unions eight of the model's $32$ layers, so
 that every per-layer, per-category and probing result rests on the same stored
 states. That undercounts a full sweep by six to eight points and is the single
@@ -42,21 +41,21 @@ alongside, but it is not available for the per-category or probing analyses,
 which should be read as lower bounds on Patchscopes. We report no confidence
 intervals. The probe numbers come from one phrase-level split at seed $42$.
 Trials within a phrase are not independent, so the right unit for resampling is
-the phrase rather than the instance, and a phrase-clustered bootstrap over the
-central comparisons is the obvious next step. Differences of one or two points
+the phrase rather than the instance, and future work should estimate uncertainty with a phrase-clustered bootstrap
+over the central comparisons. Differences of one or two points
 should not be read as meaningful. Finally, we
-implement no decoding scheme and report no latency or throughput measurement:
-whether a probe of this kind is cheap enough to pay for itself is open.
+implement no decoding scheme and report no latency or throughput measurement.
+Whether a probe of this kind is cheap enough to pay for itself is open.
 
 \section*{Ethics Statement}
 
 This work analyses publicly available language models on publicly available
-text. The phrase sets are drawn from published idiom corpora and public lists of
-landmarks and film titles; the contexts are sampled from FineWeb-Edu, a filtered
-web corpus whose documents we did not inspect individually and which may contain
-the biases of web text. We do not release any model and the analysis does not involve human subjects.
-We did not set out to collect or analyse personal information, but the
-underlying web corpus was not inspected document by document and may contain
-incidental personal data. The efficiency direction this work
-motivates, if pursued, would reduce inference cost; we make no claim to have
-demonstrated that reduction here.
+text. The phrase sets are drawn from published idiom corpora and public lists
+of landmarks and film titles; the contexts are sampled from FineWeb-Edu, a
+filtered web corpus whose documents we did not inspect individually and which
+may contain the biases of web text. We do not release any model and the
+analysis does not involve human subjects. We did not set out to collect or
+analyse personal information, but the underlying web corpus was not inspected
+document by document and may contain incidental personal data. The efficiency
+direction this work motivates, if pursued, would reduce inference cost; we make
+no claim to have demonstrated that reduction here.

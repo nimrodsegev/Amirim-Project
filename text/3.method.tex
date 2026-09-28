@@ -18,24 +18,25 @@ $h^{\ell}_p$.}
 We now describe how we measure whether the rest of a phrase can be recovered
 partway through it. We first define where we interrupt the model and how far
 ahead we ask it to look. We then describe the two measurements we take at that
-point: reading the hidden state with Patchscopes, and letting the model continue
-on its own, which serves as our baseline. Finally we give the rule that decides
-whether a trial succeeded. Figure~\ref{fig:protocol} summarises the protocol.
+point: reading the hidden state with Patchscopes, and letting the model
+continue on its own, which serves as our baseline. Finally we give the rule
+that decides whether a trial succeeded. Figure~\ref{fig:protocol} summarises
+the protocol.
 
 \subsection{Lookahead distance}
 
 Let a phrase tokenize as $t_1 \ldots t_n$. We interrupt the model at position
-$p$ and define the \emph{lookahead distance} $i = n - p$ as the number of phrase
-tokens that remain unread. The target is the decoded string of those $i$ tokens.
-A single phrase therefore yields several trials, one per position, and $i$ is
-the difficulty axis throughout: larger $i$ means the model must account for more
-unseen material.
+$p$ and define the \emph{lookahead distance} $i = n - p$ as the number of
+phrase tokens that remain unread. The target is the decoded string of those $i$
+tokens. A single phrase therefore yields several trials, one per position, and
+$i$ is the difficulty axis throughout: larger $i$ means the model must account
+for more unseen material.
 
-Every phrase is processed with its full left context (a BOS token, then,
-where applicable, the natural text preceding the phrase), so the state at
-position $p$ is the state the model would actually have at that point. We analyse
-$i \geq 2$ throughout; $i=1$ reduces to ordinary next-token prediction and is
-not of interest here.
+Every phrase is processed with its full left context (a BOS token, then, where
+applicable, the natural text preceding the phrase), so the state at position
+$p$ is the state the model would actually have at that point. We analyse $i
+\geq 2$ throughout; $i=1$ reduces to ordinary next-token prediction and is not
+of interest here.
 
 \subsection{Two measurements}
 \label{sec:measures}
@@ -52,8 +53,8 @@ embedding of \texttt{X} in the prompt \texttt{"Repeat this: X"}. We then decode
 greedily for $i+3$ tokens. Patchscopes succeeds at layer $\ell$ if the target
 string occurs in the output, case-insensitively. Unless stated otherwise we
 report the union over layers: it succeeds if \emph{any} probed layer
-succeeds. This is deliberately generous, and \S\ref{sec:disagreement} shows that how
-many layers go into the union changes the result quite a lot.
+succeeds. This is deliberately generous, and \S\ref{sec:disagreement} shows how
+much the number of layers in the union changes the result.
 
 \paragraph{Generation, our baseline.}
 We take the same prefix, context plus the first $p$ phrase tokens, and let
@@ -65,23 +66,23 @@ pulled out of a single hidden state. Generation asks what the model actually
 does when it continues the real sentence, which is why we treat it as a
 baseline rather than as a second way of inspecting the state.
 
-One consequence is worth stating before any results. Both measurements decode
-one token at a time, so recovering a target of several tokens does not show that
-each of those tokens is separately encoded in the state at the cut: after the
-first generated token, the rest may follow from what has already been emitted.
-What a success shows is that the state carries enough information to bring the
-continuation out. We use \emph{recognition} in this practical sense throughout:
-a phrase is recognized at distance $i$ when the measurement in question
-recovers its remaining $i$ tokens under the matching rule below.
+Both measurements decode one token at a time, so recovering a target of several
+tokens does not show that each of those tokens is separately encoded in the
+state at the cut: after the first generated token, the rest may follow from
+what has already been emitted. What a success shows is that the state carries
+enough information to bring the continuation out. We use \emph{recognition} in
+this practical sense throughout: a phrase is recognized at distance $i$ when
+the measurement in question recovers its remaining $i$ tokens under the
+matching rule below.
 
 \subsection{Success criterion}
 \label{sec:criterion}
 
-A trial succeeds if the target string appears as a case-insensitive substring of
-the generated continuation. The budget of $i+3$ tokens allows the model to
+A trial succeeds if the target string appears as a case-insensitive substring
+of the generated continuation. The budget of $i+3$ tokens allows the model to
 overshoot slightly (a trailing clause after the phrase does not cost it the
-trial) while staying tight enough that a success reflects the phrase rather than a
-long ramble that happens to contain it.
+trial) while staying tight enough that a success reflects the phrase rather
+than a long ramble that happens to contain it.
 
 The criterion is lenient in one direction and strict in the other. Lenient,
 because it accepts any output containing the target without asking whether the

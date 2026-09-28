@@ -3,12 +3,12 @@
 
 \subsection{Implementation}
 
-Hidden states are extracted with a single forward pass over
-\texttt{[BOS]} $+$ context $+$ phrase, with \texttt{output\_hidden\_states}
-enabled. The BOS token matters here: a phrase's first token has a different
-state at position $0$ than at position $1$ after a BOS, so we always include it.
-Positions are enumerated from the first phrase token to the second-to-last; the
-BOS and the final phrase token are never cut points.
+Hidden states are extracted with a single forward pass over \texttt{[BOS]} $+$
+context $+$ phrase, with \texttt{output\_hidden\_states} enabled. The BOS token
+matters here: a phrase's first token has a different state at position $0$ than
+at position $1$ after a BOS, so we always include it. Positions are enumerated
+from the first phrase token to the second-to-last; the BOS and the final phrase
+token are never cut points.
 
 For Patchscopes, the states for all probed layers are stacked into
 one batch and decoded in a single \texttt{generate} call. This is one call, not
@@ -18,14 +18,14 @@ throughout, for both measurements, with \texttt{max\_new\_tokens} $= i+3$.
 
 \subsection{Scoring at the token level}
 
-The target is the decoded string of the final $i$ tokens, which for some phrases
-begins mid-word: at $i=2$ in \textit{Sistine Chapel} the target is
-\textit{istine Chapel}, and in \textit{Pulp Fiction} it is \textit{ulp Fiction}.
-The criterion is applied identically to both measurements, so comparisons
-between them are unaffected, but absolute rates for phrases with unusual
-tokenization are not directly interpretable as ``the model produced the
-phrase''. Rerunning with word-aligned cut points would make the absolute numbers
-cleaner.
+The target is the decoded string of the final $i$ tokens, which for some
+phrases begins mid-word: at $i=2$ in \textit{Sistine Chapel} the target is
+\textit{istine Chapel}, and in \textit{Pulp Fiction} it is \textit{ulp
+Fiction}. The criterion is applied identically to both measurements, so
+comparisons between them are unaffected, but absolute rates for phrases with
+unusual tokenization are not directly interpretable as ``the model produced the
+phrase''. Rerunning with word-aligned cut points would make the absolute
+numbers cleaner.
 
 \subsection{Patchscope prompt ablation}
 
@@ -43,8 +43,8 @@ long $i$ is not a shortage of output positions.
 \input{tables/replication}
 
 Table~\ref{tab:replication} repeats the central measurement on OLMo-3-7B
-(\texttt{allenai/Olmo-3-1025-7B}; both measurements share the OLMo-2 protocol, but
-note that this tokenizer does not prepend a BOS token) and on Qwen2.5-14B
+(\texttt{allenai/Olmo-3-1025-7B}; both measurements share the OLMo-2 protocol,
+but note that this tokenizer does not prepend a BOS token) and on Qwen2.5-14B
 (\texttt{Qwen/Qwen2.5-14B}, generation only). OLMo-2-7B is
 \texttt{allenai/OLMo-2-1124-7B}. All three are base checkpoints, not
 instruction-tuned. The qualitative picture is stable across all three: recovery
@@ -66,9 +66,10 @@ falls at L30 at every distance.}
 \label{fig:bylayer}
 \end{figure}
 
-Figure~\ref{fig:bylayer} gives the per-layer detail behind \S\ref{sec:stability}:
-$60.7\%$ at $i=2$ and $47.0\%$ at $i=3$ at the L25 peak, falling to $58.1\%$ and
-$38.2\%$ by L30. The shape is the same at every distance.
+Figure~\ref{fig:bylayer} gives the per-layer detail behind
+\S\ref{sec:stability}: $60.7\%$ at $i=2$ and $47.0\%$ at $i=3$ at the L25 peak,
+falling to $58.1\%$ and $38.2\%$ by L30. The shape is the same at every
+distance.
 
 \subsection{Depth of first recovery}
 
@@ -90,8 +91,8 @@ which samples only L5 and L7 below L10.
 \subsection{Probe configuration}
 
 Both probes use an MLP with a single hidden layer of $32$ units, trained on the
-standardised hidden state at the cut position. Data are pooled over
-$i \in \{2,3,4,5\}$ and split $80/20$ with \texttt{GroupShuffleSplit} grouped by
+standardised hidden state at the cut position. Data are pooled over $i \in
+\{2,3,4,5\}$ and split $80/20$ with \texttt{GroupShuffleSplit} grouped by
 phrase, so no phrase appears in both partitions; the majority class is
 downsampled in the training set only, and the test set is left at its natural
 distribution. All reported runs use seed $42$. The false-positive and
@@ -101,10 +102,10 @@ confidence analyses of \S\ref{sec:falsepos} use the L25 probe.
 
 Patchscopes itself almost never succeeds in the first few layers ($0.6\%$,
 $0.8\%$ and $1.5\%$ at L0, L1 and L2), so a probe trained on that label there
-has a positive class of about $1\%$ of the data and one split can swing on luck.
-Balanced accuracy is nonetheless well above chance at those depths: $72.2\%$ at
-L0, $74.7\%$ at L1 and $68.9\%$ at L2. We report these as unstable rather than
-as a finding; no multi-seed check was run.
+has a positive class of about $1\%$ of the data and one split can swing on
+luck. Balanced accuracy is nonetheless well above chance at those depths:
+$72.2\%$ at L0, $74.7\%$ at L1 and $68.9\%$ at L2. We report these as unstable
+rather than as a finding; no multi-seed check was run.
 
 \subsection{Per-phrase correlation}
 
@@ -162,9 +163,9 @@ Table~\ref{tab:falsepos} gives examples from the $212$ cases of
 \subsection{False-positive adjudication prompt}
 \label{app:judge}
 
-The $212$ false positives of \S\ref{sec:falsepos} were adjudicated by presenting
-them to ChatGPT (GPT-5.6 Sol) in a single batch. The prompt was (reproduced
-verbatim, including its punctuation):
+The $212$ false positives of \S\ref{sec:falsepos} were adjudicated by
+presenting them to ChatGPT (GPT-5.6 Sol) in a single batch. The prompt was
+(reproduced verbatim, including its punctuation):
 
 \begin{quote}\small
 I have 212 cases where a language model was supposed to complete a phrase (a
@@ -202,18 +203,18 @@ Separately from this paper we reproduced CLP \citep{xie-zhou-2026-clp}, a
 learned linear read of the hidden state that sets how many drafted tokens to
 accept at each step, on Qwen3.5-2B. It reached roughly $1.34\times$ the
 throughput of plain autoregressive decoding; a fixed-length policy was faster
-still, at $1.72\times$. The test set was ten held-out prompts, all that were
-available, so it settles nothing.
+still, at $1.72\times$. The test set contained only ten held-out prompts, so
+the result is inconclusive.
 
 Three caveats. Our figure exceeds the $1.14\times$--$1.29\times$ Xie and Zhou
 report, which we take to reflect differences in model, hardware and workload
 rather than a better implementation. Divergences from autoregressive output
-appeared under \emph{every} policy we tried, including fixed-length ones with no
-adaptive logic, pointing at this model's interaction with the inference engine
-rather than at any policy. They were also more common for the aggressive
-fixed-length policies (six of ten prompts against two for CLP), so that speed
-advantage is not free. We report the pilot only because it bounds how much the
-lookahead we measure might be worth in practice.
+appeared under \emph{every} policy we tried, including fixed-length ones with
+no adaptive logic, pointing at this model's interaction with the inference
+engine rather than at any policy. They were also more common for the aggressive
+fixed-length policies (six of ten prompts against two for CLP), so the
+additional speed comes with a higher divergence rate. We report the pilot only
+because it bounds how much the lookahead we measure might be worth in practice.
 
 \subsection{Reproducing the numbers}
 
@@ -224,13 +225,13 @@ figure scripts then consume. The experiment scripts that produced the raw
 results sit alongside them. The repository README gives the exact filenames and
 the commands to run them.
 
-The two exceptions are worth stating plainly. The probing experiments need
-per-trial hidden states, $1.28$\,GB for the Patchscopes labels and $3.02$\,GB
-for the generation labels. These are too large to distribute and remain on the
-compute cluster, so the probe numbers in Table~\ref{tab:probes} are reported
-from the run logs rather than recomputed from this repository. The
-false-positive adjudication of \S\ref{sec:falsepos} rests on a single judge with
-no human validation and no inter-annotator agreement; the judge and prompt are
-named in this appendix, so the run can be repeated, but a single automatic
+Two results are not regenerated from this repository. The probing experiments
+need per-trial hidden states, $1.28$\,GB for the Patchscopes labels and
+$3.02$\,GB for the generation labels. These are too large to distribute and
+remain on the compute cluster, so the probe numbers in Table~\ref{tab:probes}
+are reported from the run logs rather than recomputed from this repository. The
+false-positive adjudication of \S\ref{sec:falsepos} rests on a single judge
+with no human validation and no inter-annotator agreement; the judge and prompt
+are named in this appendix, so the run can be repeated, but a single automatic
 judge is not a substitute for human annotation. The confidence-based split in
 \S\ref{sec:falsepos} uses no judge and points the same way.

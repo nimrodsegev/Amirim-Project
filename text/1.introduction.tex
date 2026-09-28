@@ -15,27 +15,26 @@ check.}
 \end{figure}
 
 A decoder-only language model emits one token per forward pass, paying the full
-depth of the network for each. It is worth asking whether all of that is always
-needed. Some continuations
-are highly predictable once the model has read a few tokens: after \textit{the
-Empire}, in a sentence about New York, little other than \textit{State Building}
-can follow. If the model's state at \textit{Empire} already holds \textit{State
-Building}, then the two passes that produce those tokens repeat work the model
-has already done (Figure~\ref{fig:motivation}).
+depth of the network for each. Not all of that may be needed. Some
+continuations are highly predictable once the model has read a few tokens:
+after \textit{the Empire}, in a sentence about New York, little other than
+\textit{State Building} can follow. If the model's state at \textit{Empire}
+already holds \textit{State Building}, then the two passes that produce those
+tokens repeat work the model has already done (Figure~\ref{fig:motivation}).
 
-Whether models really hold such information is a question prior work has answered
-only in part. Language models are known to build representations of units larger
-than a single token: \citet{kaplan-etal-2025-tokens} show that when a word is
-split into several subword pieces, information from the earlier pieces is
-gathered into the last one, so that state behaves like a representation of the
-whole word. But that is a unit the model has already finished reading. Looking
-forward instead, \citet{pal-etal-2023-future} show that tokens two or more
-positions ahead can be recovered from a single hidden state, by copying that
-state into a fresh context and reading what the model writes. Their target,
-though, is whatever the model itself would have written next, which is not fixed
-in advance. So one cannot ask whether the same material comes back on a different
-occasion, or whether the model's own behaviour matches it. That is the gap we
-address:
+Whether models really hold such information is a question prior work has
+answered only in part. Language models are known to build representations of
+units larger than a single token. \citet{kaplan-etal-2025-tokens} show that
+when a word is split into several subword pieces, information from the earlier
+pieces is gathered into the last one, so that state behaves like a
+representation of the whole word. But that is a unit the model has already
+finished reading. Looking forward instead, \citet{pal-etal-2023-future} show
+that tokens two or more positions ahead can be recovered from a single hidden
+state, by copying that state into a fresh context and reading what the model
+writes. Their target, though, is whatever the model itself would have written
+next, which is not fixed in advance. So one cannot ask whether the same
+material comes back on a different occasion, or whether the model's own
+behaviour matches it. That is the gap we address:
 
 \begin{quote}
 Given a partial phrase, does the model's internal representation already carry
@@ -44,35 +43,34 @@ it?
 \end{quote}
 
 We study this through fixed multi-word expressions: idioms, landmark names and
-film titles. These are a good place to look for three reasons. They are common in
-pretraining text, so the model has had ample opportunity to learn them. The same
-expression turns up in many different sentences, which lets us ask whether what
-varies is the phrase or the occasion. And they mean something as a whole, beyond
-the words that make them up, so the continuation is set by the expression rather
-than chosen by the model. That gives us a target fixed in advance to check
-against.
+film titles. These are a good place to look for three reasons. They are common
+in pretraining text, so the model has had ample opportunity to learn them. The
+same expression turns up in many different sentences, which lets us ask whether
+what varies is the phrase or the occasion. And they mean something as a whole,
+beyond the words that make them up, so the continuation is set by the
+expression rather than chosen by the model. That gives us a target fixed in
+advance to check against.
 
 We index the question by \emph{lookahead distance} $i$: the number of phrase
 tokens still unread at the point where we interrupt the model. At $i=4$ in
-\textit{The Lord of the Rings}, the model has read only \textit{The}, and we ask
-whether \textit{Lord of the Rings} is recoverable from its state. To answer that
-we use Patchscopes \citep{ghandeharioun-etal-2024-patchscopes}: we lift the
-hidden state at the cut point, copy it into an unrelated prompt, and see whether
-the model writes out the missing tokens. As a baseline for what the model
-actually does with the same input, we also let it simply carry on from the text
-it has read.
+\textit{The Lord of the Rings}, the model has read only \textit{The}, and we
+ask whether \textit{Lord of the Rings} is recoverable from its state. To answer
+that we use Patchscopes \citep{ghandeharioun-etal-2024-patchscopes}. We lift
+the hidden state at the cut point, copy it into an unrelated prompt, and see
+whether the model writes out the missing tokens. As a baseline for what the
+model actually does with the same input, we also let it simply carry on from
+the text it has read.
 
-Our findings are as follows. The rest of a familiar phrase is often recoverable
-several tokens early. Over $1.1$k expressions in $5.5$k naturally occurring
-phrase-context pairs, Patchscopes recovers the remaining tokens of a phrase in
-$56.6\%$ of cases three tokens before it ends, and in $37.3\%$ five tokens
-before. The
-same phrases shown with no surrounding sentence are recovered far less often, so
-how well a model handles these expressions cannot be judged from the phrase alone
-(\S\ref{sec:lookahead}). Results group tightly by phrase: a phrase tends to be
-recovered in nearly all of its contexts or in nearly none, much more often than
-if each context succeeded independently at the same average rate
-(\S\ref{sec:stability}). And the signal can be read off the state
-directly, with no intervention at all. A small classifier looking at one hidden
-vector predicts whether the model will finish the phrase, at $74.1\%$ balanced
+The rest of a familiar phrase is often recoverable several tokens early. Over
+$1.1$k expressions in $5.5$k naturally occurring phrase-context pairs,
+Patchscopes recovers the remaining tokens of a phrase in $56.6\%$ of cases
+three tokens before it ends, and in $37.3\%$ five tokens before. The same
+phrases shown with no surrounding sentence are recovered far less often, so how
+well a model handles these expressions cannot be judged from the phrase alone
+(\S\ref{sec:lookahead}). Recovery also varies systematically by phrase. A
+phrase tends to be recovered in nearly all of its contexts or in nearly none,
+much more often than if each context succeeded independently at the same
+average rate (\S\ref{sec:stability}). The same information can be read from the
+state without any intervention. A small classifier looking at one hidden vector
+predicts whether the model will finish the phrase, at $74.1\%$ balanced
 accuracy and $84.6\%$ precision (\S\ref{sec:probe}).
