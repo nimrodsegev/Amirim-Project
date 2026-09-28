@@ -42,17 +42,17 @@ such a phrase, does the hidden state already carry enough information to recover
 the words still to come? We test this on OLMo-2-7B with $1.1$k idioms, landmark
 names and film titles, stopping the model at a controlled \emph{lookahead
 distance} $i$ and reading the hidden state at that point with Patchscopes. Across
-$9.9$k collected phrase-context instances, about $5.5$k of them distinct, the
-remaining tokens of a phrase are
-recovered in $57.5\%$ of instances three tokens before the phrase ends and
-$38.7\%$ five tokens before. The same phrases shown with no surrounding sentence
+$5.5$k naturally occurring phrase-context pairs, the remaining tokens of a
+phrase are
+recovered in $56.6\%$ of instances three tokens before the phrase ends and
+$37.3\%$ five tokens before. The same phrases shown with no surrounding sentence
 are recovered far less often, so a model meeting these expressions in real text
 is in a much better position than an isolated test would suggest. Results group
 tightly by phrase: given several natural contexts, a phrase tends to be
 recovered in almost all of them or in almost none. The signal can also be read
 straight from the state, with no intervention at all: a small classifier reading
 a single hidden state predicts whether the model will complete the phrase, at
-$87.6\%$ precision. Models therefore carry usable information about words they
+$84.6\%$ precision. Models therefore carry usable information about words they
 have not yet produced, and that information can be detected before those words
 appear. That is the kind of advance signal a decoding method would need in order
 to commit several tokens at once.

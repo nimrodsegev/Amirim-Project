@@ -93,9 +93,21 @@ across the whole paper rather than only where he flagged them.
 Every number in the main text except the two noted above traces to
 `results/processed/paper_numbers.json`, which regenerates from `results/raw/`.
 
+The contexts were deduplicated on 2026-09-28 and every affected measurement was
+rerun on the cluster: the Patchscopes sweeps, both feature extractions, all
+probe training, the category breakdown and the false-positive adjudication.
+`results/raw/` holds the rerun outputs. Headline rates moved by about a point
+and no conclusion changed, with two exceptions worth knowing: the probe's
+precision fell from 87.6% to 84.6%, and film titles overtook idioms as the
+easiest category under Patchscopes once the category breakdown was restricted to
+i=2..5 as its caption always claimed.
+
+Some analyses were not rerun and are therefore not reported rather than carried
+forward stale: the in-context replication on OLMo-3 and Qwen, the generation-label
+probe at the earliest layers, the held-out-category generalisation, the
+layer-group pooling, and the confidence breakdown by probe outcome.
+
 Not yet done, and flagged in the paper's Limitations rather than hidden: a
 phrase-clustered bootstrap for confidence intervals, a frequency-matched
 non-phrase control, and a measurement of how often these phrases occur in
-pretraining data. One further item is a fix rather than a limitation: 44.8% of
-the collected contexts are duplicates, and deduplicating requires rerunning the
-8-layer Patchscopes sweep and all probe training on the cluster.
+pretraining data.

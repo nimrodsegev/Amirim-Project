@@ -6,13 +6,13 @@
       "idiom": 852,
       "movie": 185
     },
-    "context_instances": 9955,
+    "context_instances": 5498,
     "phrases_with_at_least_one_context": 1096,
-    "phrases_with_10_contexts": 925,
+    "phrases_with_10_contexts": 12,
     "context_instances_by_category": {
-      "building": 1217,
-      "idiom": 7230,
-      "movie": 1508
+      "building": 651,
+      "idiom": 3914,
+      "movie": 933
     },
     "phrases_with_context_by_category": {
       "building": 125,
@@ -393,93 +393,93 @@
   "in_context": {
     "patchscopes_olmo2_32L": {
       "1": [
-        8856,
-        9148,
+        4860,
+        5023,
         96.8
       ],
       "2": [
-        7278,
-        9148,
-        79.6
+        3939,
+        5023,
+        78.4
       ],
       "3": [
-        5464,
-        8529,
-        64.1
+        2940,
+        4651,
+        63.2
       ],
       "4": [
-        2413,
-        4677,
-        51.6
+        1306,
+        2606,
+        50.1
       ],
       "5": [
-        1108,
-        2386,
-        46.4
+        603,
+        1333,
+        45.2
       ],
       "6": [
-        445,
-        1123,
-        39.6
+        237,
+        643,
+        36.9
       ],
       "7": [
-        178,
-        530,
-        33.6
+        99,
+        307,
+        32.2
       ],
       "8": [
-        83,
-        312,
-        26.6
+        51,
+        184,
+        27.7
       ],
       "9": [
-        70,
-        150,
-        46.7
+        41,
+        85,
+        48.2
       ],
       "10": [
-        64,
-        96,
+        36,
+        54,
         66.7
       ],
       "11": [
-        26,
-        46,
-        56.5
+        17,
+        29,
+        58.6
       ],
       "12": [
+        12,
         15,
-        21,
-        71.4
+        80.0
       ],
       "13": [
-        11,
-        20,
-        55.0
+        8,
+        14,
+        57.1
       ],
       "14": [
-        4,
-        20,
-        20.0
+        2,
+        14,
+        14.3
       ],
       "15": [
         0,
-        10,
+        5,
         0.0
       ],
       "16": [
         0,
-        10,
+        5,
         0.0
       ],
       "17": [
         0,
-        10,
+        5,
         0.0
       ],
       "18": [
         0,
-        10,
+        5,
         0.0
       ]
     },
@@ -577,268 +577,260 @@
     },
     "generation_olmo2": {
       "1": [
-        8713,
-        9148,
-        95.2
+        4775,
+        5023,
+        95.1
       ],
       "2": [
-        7680,
-        9148,
-        84.0
+        4183,
+        5023,
+        83.3
       ],
       "3": [
-        5530,
-        8529,
-        64.8
+        3000,
+        4651,
+        64.5
       ],
       "4": [
-        2600,
-        4677,
-        55.6
+        1440,
+        2606,
+        55.3
       ],
       "5": [
-        1280,
-        2386,
-        53.6
+        707,
+        1333,
+        53.0
       ],
       "6": [
-        549,
-        1123,
-        48.9
+        302,
+        643,
+        47.0
       ],
       "7": [
-        240,
-        530,
-        45.3
+        138,
+        307,
+        45.0
       ],
       "8": [
-        130,
-        312,
-        41.7
+        77,
+        184,
+        41.8
       ],
       "9": [
-        84,
-        150,
-        56.0
+        47,
+        85,
+        55.3
       ],
       "10": [
-        49,
-        96,
-        51.0
+        28,
+        54,
+        51.9
       ],
       "11": [
+        18,
         29,
-        46,
-        63.0
+        62.1
       ],
       "12": [
-        18,
-        21,
-        85.7
+        12,
+        15,
+        80.0
       ],
       "13": [
-        10,
-        20,
-        50.0
+        5,
+        14,
+        35.7
       ],
       "14": [
-        4,
-        20,
-        20.0
+        2,
+        14,
+        14.3
       ],
       "15": [
-        4,
-        10,
+        2,
+        5,
         40.0
       ],
       "16": [
-        4,
-        10,
+        2,
+        5,
         40.0
       ],
       "17": [
-        4,
-        10,
+        2,
+        5,
         40.0
       ],
       "18": [
-        4,
-        10,
+        2,
+        5,
         40.0
       ]
     }
   },
   "agreement_32L": {
     "1": {
-      "n": 9148,
-      "both": 8584,
-      "patchscopes_only": 272,
-      "generation_only": 129,
-      "neither": 163,
+      "n": 5023,
+      "both": 4707,
+      "patchscopes_only": 153,
+      "generation_only": 68,
+      "neither": 95,
       "agreement_pct": 95.6
     },
     "2": {
-      "n": 9148,
-      "both": 6757,
-      "patchscopes_only": 521,
-      "generation_only": 923,
-      "neither": 947,
-      "agreement_pct": 84.2
+      "n": 5023,
+      "both": 3651,
+      "patchscopes_only": 288,
+      "generation_only": 532,
+      "neither": 552,
+      "agreement_pct": 83.7
     },
     "3": {
-      "n": 8529,
-      "both": 4681,
-      "patchscopes_only": 783,
-      "generation_only": 849,
-      "neither": 2216,
-      "agreement_pct": 80.9
+      "n": 4651,
+      "both": 2510,
+      "patchscopes_only": 430,
+      "generation_only": 490,
+      "neither": 1221,
+      "agreement_pct": 80.2
     },
     "4": {
-      "n": 4677,
-      "both": 1968,
-      "patchscopes_only": 445,
-      "generation_only": 632,
-      "neither": 1632,
-      "agreement_pct": 77.0
+      "n": 2606,
+      "both": 1060,
+      "patchscopes_only": 246,
+      "generation_only": 380,
+      "neither": 920,
+      "agreement_pct": 76.0
     },
     "5": {
-      "n": 2386,
-      "both": 933,
-      "patchscopes_only": 175,
-      "generation_only": 347,
-      "neither": 931,
-      "agreement_pct": 78.1
+      "n": 1333,
+      "both": 501,
+      "patchscopes_only": 102,
+      "generation_only": 206,
+      "neither": 524,
+      "agreement_pct": 76.9
     },
     "6": {
-      "n": 1123,
-      "both": 351,
-      "patchscopes_only": 94,
-      "generation_only": 198,
-      "neither": 480,
+      "n": 643,
+      "both": 186,
+      "patchscopes_only": 51,
+      "generation_only": 116,
+      "neither": 290,
       "agreement_pct": 74.0
     },
     "7": {
-      "n": 530,
-      "both": 125,
-      "patchscopes_only": 53,
-      "generation_only": 115,
-      "neither": 237,
-      "agreement_pct": 68.3
+      "n": 307,
+      "both": 69,
+      "patchscopes_only": 30,
+      "generation_only": 69,
+      "neither": 139,
+      "agreement_pct": 67.8
     },
     "8": {
-      "n": 312,
-      "both": 63,
-      "patchscopes_only": 20,
-      "generation_only": 67,
-      "neither": 162,
-      "agreement_pct": 72.1
-    },
-    "9": {
-      "n": 150,
-      "both": 55,
-      "patchscopes_only": 15,
-      "generation_only": 29,
-      "neither": 51,
-      "agreement_pct": 70.7
-    },
-    "10": {
-      "n": 96,
-      "both": 41,
-      "patchscopes_only": 23,
-      "generation_only": 8,
-      "neither": 24,
-      "agreement_pct": 67.7
-    },
-    "11": {
-      "n": 46,
-      "both": 21,
-      "patchscopes_only": 5,
-      "generation_only": 8,
-      "neither": 12,
+      "n": 184,
+      "both": 38,
+      "patchscopes_only": 13,
+      "generation_only": 39,
+      "neither": 94,
       "agreement_pct": 71.7
     },
+    "9": {
+      "n": 85,
+      "both": 32,
+      "patchscopes_only": 9,
+      "generation_only": 15,
+      "neither": 29,
+      "agreement_pct": 71.8
+    },
+    "10": {
+      "n": 54,
+      "both": 23,
+      "patchscopes_only": 13,
+      "generation_only": 5,
+      "neither": 13,
+      "agreement_pct": 66.7
+    },
+    "11": {
+      "n": 29,
+      "both": 13,
+      "patchscopes_only": 4,
+      "generation_only": 5,
+      "neither": 7,
+      "agreement_pct": 69.0
+    },
     "12": {
-      "n": 21,
-      "both": 12,
+      "n": 15,
+      "both": 9,
       "patchscopes_only": 3,
-      "generation_only": 6,
+      "generation_only": 3,
       "neither": 0,
-      "agreement_pct": 57.1
+      "agreement_pct": 60.0
     },
     "13": {
-      "n": 20,
-      "both": 4,
-      "patchscopes_only": 7,
-      "generation_only": 6,
+      "n": 14,
+      "both": 2,
+      "patchscopes_only": 6,
+      "generation_only": 3,
       "neither": 3,
-      "agreement_pct": 35.0
+      "agreement_pct": 35.7
     },
     "14": {
-      "n": 20,
-      "both": 2,
-      "patchscopes_only": 2,
-      "generation_only": 2,
-      "neither": 14,
-      "agreement_pct": 80.0
+      "n": 14,
+      "both": 1,
+      "patchscopes_only": 1,
+      "generation_only": 1,
+      "neither": 11,
+      "agreement_pct": 85.7
     },
     "15": {
-      "n": 10,
+      "n": 5,
       "both": 0,
       "patchscopes_only": 0,
-      "generation_only": 4,
-      "neither": 6,
+      "generation_only": 2,
+      "neither": 3,
       "agreement_pct": 60.0
     },
     "16": {
-      "n": 10,
+      "n": 5,
       "both": 0,
       "patchscopes_only": 0,
-      "generation_only": 4,
-      "neither": 6,
+      "generation_only": 2,
+      "neither": 3,
       "agreement_pct": 60.0
     },
     "17": {
-      "n": 10,
+      "n": 5,
       "both": 0,
       "patchscopes_only": 0,
-      "generation_only": 4,
-      "neither": 6,
+      "generation_only": 2,
+      "neither": 3,
       "agreement_pct": 60.0
     },
     "18": {
-      "n": 10,
+      "n": 5,
       "both": 0,
       "patchscopes_only": 0,
-      "generation_only": 4,
-      "neither": 6,
+      "generation_only": 2,
+      "neither": 3,
       "agreement_pct": 60.0
     }
   },
   "agreement_32L_pooled_i2_5": {
-    "n": 24740,
-    "both": 14339,
-    "patchscopes_only": 1924,
-    "generation_only": 2751,
-    "neither": 5726,
-    "agreement_pct": 81.1,
-    "patchscopes_pct": 65.7,
-    "generation_pct": 69.1
+    "n": 13613,
+    "both": 7722,
+    "patchscopes_only": 1066,
+    "generation_only": 1608,
+    "neither": 3217,
+    "agreement_pct": 80.4,
+    "patchscopes_pct": 64.6,
+    "generation_pct": 68.5
   },
   "context_duplication": {
-    "instances": 9955,
+    "instances": 5498,
     "unique_phrase_context_pairs": 5498,
-    "duplicate_instances": 4457,
-    "duplicate_pct": 44.8,
-    "phrases_with_duplicates": 1025,
+    "duplicate_instances": 0,
+    "duplicate_pct": 0.0,
+    "phrases_with_duplicates": 0,
     "unique_context_count_hist_for_10_slot_phrases": {
-      "2": 1,
-      "3": 1,
-      "4": 21,
-      "5": 734,
-      "6": 60,
-      "7": 45,
-      "8": 38,
-      "9": 13,
       "10": 12
     },
     "note": "The context collector resumed from an earlier five-context run and re-added the same contexts instead of topping up with new ones, so most phrases hold five distinct contexts recorded twice. Aggregate instance rates are essentially unchanged (see per_phrase_consistency_i3), but the effective sample size is about half the instance count, and any per-phrase count over raw instances is quantised to even values."
@@ -966,88 +958,88 @@
   "category_pooled_i2_5": {
     "patchscopes_32L": {
       "building": {
-        "n": 1409,
-        "success_pct": 56.8
+        "n": 756,
+        "success_pct": 55.7
       },
       "idiom": {
-        "n": 20371,
-        "success_pct": 65.9
+        "n": 11104,
+        "success_pct": 64.7
       },
       "movie": {
-        "n": 2960,
-        "success_pct": 68.6
+        "n": 1753,
+        "success_pct": 67.4
       }
     },
     "generation": {
       "building": {
-        "n": 1409,
-        "success_pct": 75.3
+        "n": 756,
+        "success_pct": 74.1
       },
       "idiom": {
-        "n": 20371,
-        "success_pct": 66.4
+        "n": 11104,
+        "success_pct": 65.7
       },
       "movie": {
-        "n": 2960,
-        "success_pct": 84.5
+        "n": 1753,
+        "success_pct": 83.9
       }
     }
   },
   "first_successful_layer": {
-    "n_successes": 26015,
-    "median": 16,
-    "pct_at_or_before_L10": 41.9,
+    "n_successes": 14151,
+    "median": 17,
+    "pct_at_or_before_L10": 41.1,
     "histogram": {
-      "1": 613,
-      "2": 505,
-      "3": 904,
-      "4": 902,
-      "5": 1742,
-      "6": 1627,
-      "7": 1770,
-      "8": 1111,
-      "9": 1052,
-      "10": 672,
-      "11": 291,
-      "12": 280,
-      "13": 185,
-      "14": 183,
-      "15": 321,
-      "16": 861,
-      "17": 1068,
-      "18": 2172,
-      "19": 1078,
-      "20": 1325,
-      "21": 1683,
-      "22": 1275,
-      "23": 1094,
-      "24": 730,
-      "25": 612,
-      "26": 455,
-      "27": 371,
-      "28": 300,
-      "29": 250,
-      "30": 245,
-      "31": 189,
-      "32": 149
+      "1": 328,
+      "2": 286,
+      "3": 482,
+      "4": 474,
+      "5": 902,
+      "6": 863,
+      "7": 956,
+      "8": 601,
+      "9": 566,
+      "10": 357,
+      "11": 159,
+      "12": 161,
+      "13": 95,
+      "14": 101,
+      "15": 182,
+      "16": 470,
+      "17": 571,
+      "18": 1203,
+      "19": 587,
+      "20": 720,
+      "21": 939,
+      "22": 704,
+      "23": 598,
+      "24": 402,
+      "25": 337,
+      "26": 247,
+      "27": 207,
+      "28": 173,
+      "29": 151,
+      "30": 138,
+      "31": 107,
+      "32": 84
     }
   },
   "probe_phrase_correlation": {
     "source": "results/raw/correlation_per_i.json (balanced MLP, patchscopes label)",
     "by_layer_i3": {
-      "5": 0.413,
-      "7": 0.551,
-      "10": 0.621,
-      "13": 0.584,
-      "15": 0.603,
-      "20": 0.556,
-      "25": 0.517,
-      "30": 0.48
+      "5": 0.441,
+      "7": 0.474,
+      "10": 0.611,
+      "13": 0.549,
+      "15": 0.577,
+      "20": 0.569,
+      "25": 0.549,
+      "30": 0.527
     },
-    "n_phrases_i3": 180
+    "n_phrases_i3": 171
   },
   "external": {
-    "note": "Probe metrics require data/{generation_,}probing_features.npz (hidden states, produced on the cluster and not stored in this repo). Values below are transcribed from the July 2026 analysis reports and the August 2026 summary deck.",
+    "note": "Probe metrics require data/{generation_,}probing_features.npz (hidden states, produced on the cluster and not stored in this repo). Values below are transcribed from the September 2026 deduplicated rerun logs.",
     "layers_probed": [
       5,
       7,
@@ -1078,261 +1070,207 @@
     },
     "patchscopes_label_probe": {
       "pos_rate_pct": {
-        "5": 6.6,
-        "7": 14.7,
-        "10": 18.8,
-        "13": 16.9,
-        "15": 18.5,
-        "20": 36.8,
-        "25": 47.7,
-        "30": 40.2
+        "5": 6.4,
+        "7": 14.1,
+        "10": 18.2,
+        "13": 16.4,
+        "15": 17.8,
+        "20": 35.8,
+        "25": 46.4,
+        "30": 39.1
       },
       "accuracy_pct": {
-        "5": 89.6,
-        "7": 82.7,
-        "10": 82.3,
-        "13": 81.1,
-        "15": 82.0,
-        "20": 72.4,
-        "25": 68.2,
-        "30": 67.6
+        "5": 87.6,
+        "7": 82.3,
+        "10": 79.8,
+        "13": 80.0,
+        "15": 80.8,
+        "20": 71.0,
+        "25": 68.8,
+        "30": 68.7
       },
       "majority_baseline_pct": {
-        "5": 93.4,
-        "7": 85.3,
-        "10": 81.2,
-        "13": 83.1,
-        "15": 81.5,
-        "20": 63.2,
-        "25": 52.3,
-        "30": 59.8
+        "5": 93.6,
+        "7": 85.9,
+        "10": 81.8,
+        "13": 83.6,
+        "15": 82.2,
+        "20": 64.2,
+        "25": 53.6,
+        "30": 60.9
       },
       "balanced_accuracy_pct": {
-        "5": 76.0,
-        "7": 70.2,
-        "10": 76.5,
-        "13": 74.8,
-        "15": 76.3,
-        "20": 70.4,
-        "25": 68.1,
-        "30": 66.4
+        "5": 78.5,
+        "7": 75.7,
+        "10": 77.6,
+        "13": 76.5,
+        "15": 77.5,
+        "20": 69.7,
+        "25": 68.6,
+        "30": 68.0
       },
       "precision_pct": {
-        "5": 33.9,
-        "7": 42.8,
-        "10": 52.3,
-        "13": 45.8,
-        "15": 51.1,
-        "20": 62.4,
-        "25": 67.2,
-        "30": 59.7
+        "5": 29.5,
+        "7": 41.8,
+        "10": 46.5,
+        "13": 43.4,
+        "15": 47.4,
+        "20": 58.4,
+        "25": 66.2,
+        "30": 59.1
       },
       "auc_roc": {
-        "5": 0.89,
-        "7": 0.82,
-        "10": 0.85,
-        "13": 0.85,
+        "5": 0.906,
+        "7": 0.838,
+        "10": 0.855,
+        "13": 0.855,
         "15": 0.87,
-        "20": 0.78,
-        "25": 0.74,
-        "30": 0.74
+        "20": 0.768,
+        "25": 0.741,
+        "30": 0.738
       }
     },
     "generation_label_probe": {
       "pos_rate_pct": 69.1,
       "accuracy_pct": {
-        "5": 70.4,
-        "7": 71.5,
-        "10": 72.4,
-        "13": 74.3,
-        "15": 74.8,
-        "20": 74.0,
-        "25": 75.3,
-        "30": 77.5
+        "5": 72.1,
+        "7": 73.6,
+        "10": 73.2,
+        "13": 74.6,
+        "15": 76.0,
+        "20": 74.1,
+        "25": 74.8,
+        "30": 76.7
       },
       "balanced_accuracy_pct": {
-        "5": 69.8,
-        "7": 71.0,
-        "10": 72.0,
-        "13": 73.6,
-        "15": 74.2,
-        "20": 73.6,
-        "25": 74.6,
-        "30": 76.8
+        "5": 68.6,
+        "7": 70.2,
+        "10": 70.1,
+        "13": 71.5,
+        "15": 73.0,
+        "20": 71.4,
+        "25": 72.5,
+        "30": 74.1
       },
       "precision_pct": {
-        "5": 83.3,
-        "7": 84.2,
-        "10": 84.9,
-        "13": 85.6,
-        "15": 86.1,
-        "20": 85.8,
-        "25": 86.2,
-        "30": 87.6
+        "5": 81.1,
+        "7": 82.0,
+        "10": 82.1,
+        "13": 83.0,
+        "15": 83.8,
+        "20": 83.1,
+        "25": 83.9,
+        "30": 84.6
       },
       "auc_roc": {
-        "5": 0.76,
-        "7": 0.78,
-        "10": 0.8,
-        "13": 0.81,
-        "15": 0.81,
-        "20": 0.8,
-        "25": 0.81,
-        "30": 0.83
-      },
-      "early_layers_balanced_accuracy_pct": {
-        "0": 58.6,
-        "1": 65.1,
-        "2": 66.5,
-        "5": 69.8
-      },
-      "early_layers_note": "Monotone, with no irregularity at L2. The patchscopes-label probe on the same states dips at L2 (55.4%, down from 76.6% at L1); that dip is most likely instability from a positive class of 0.6-1.2%, but no multi-seed check was run to confirm it.",
-      "early_layers_precision_pct": {
-        "0": 75.4,
-        "1": 80.6,
-        "2": 80.9,
-        "5": 83.3
-      },
-      "held_out_category_balanced_accuracy_pct": {
-        "none": {
-          "13": 73.6,
-          "25": 74.6,
-          "30": 76.8
-        },
-        "building": {
-          "13": 69.1,
-          "25": 62.6,
-          "30": 63.4
-        },
-        "idiom": {
-          "13": 68.7,
-          "25": 68.9,
-          "30": 72.3
-        },
-        "movie": {
-          "13": 72.4,
-          "25": 72.7,
-          "30": 73.5
-        }
+        "5": 0.751,
+        "7": 0.772,
+        "10": 0.769,
+        "13": 0.792,
+        "15": 0.799,
+        "20": 0.792,
+        "25": 0.806,
+        "30": 0.82
       }
     },
     "patchscopes_per_layer_success_pct": {
       "2": {
-        "5": 14.9,
-        "7": 24.5,
-        "10": 29.8,
-        "13": 27.1,
-        "15": 28.5,
-        "20": 51.0,
-        "25": 62.2,
-        "30": 59.2
+        "5": 14.2,
+        "7": 23.4,
+        "10": 28.7,
+        "13": 26.0,
+        "15": 27.4,
+        "20": 49.5,
+        "25": 60.7,
+        "30": 58.1
       },
       "3": {
-        "5": 7.7,
-        "7": 14.3,
-        "10": 18.3,
-        "13": 16.9,
-        "15": 18.6,
-        "20": 38.2,
-        "25": 48.1,
-        "30": 39.1
+        "5": 7.2,
+        "7": 13.7,
+        "10": 17.4,
+        "13": 16.2,
+        "15": 17.8,
+        "20": 37.3,
+        "25": 47.0,
+        "30": 38.2
       },
       "4": {
-        "5": 4.3,
-        "7": 9.2,
-        "10": 12.0,
-        "13": 10.7,
-        "15": 12.8,
-        "20": 25.0,
-        "25": 34.7,
-        "30": 25.7
+        "5": 3.9,
+        "7": 8.6,
+        "10": 11.1,
+        "13": 10.0,
+        "15": 11.9,
+        "20": 23.4,
+        "25": 33.2,
+        "30": 24.7
       },
       "5": {
-        "5": 2.3,
-        "7": 5.5,
-        "10": 9.4,
-        "13": 8.8,
-        "15": 9.1,
-        "20": 21.8,
-        "25": 29.4,
-        "30": 20.8
+        "5": 2.4,
+        "7": 5.6,
+        "10": 8.9,
+        "13": 8.3,
+        "15": 8.3,
+        "20": 21.1,
+        "25": 27.5,
+        "30": 20.3
       },
       "L0_L1_L2_pooled_i2_5": {
-        "0": 0.7,
+        "0": 0.6,
         "1": 0.8,
-        "2": 1.6,
-        "any_of_3": 1.9
+        "2": 1.5,
+        "any_of_3": 1.8
       }
     },
     "patchscopes_8L_union_in_context_pct": {
-      "2": 73.2,
-      "3": 57.5,
-      "4": 43.9,
-      "5": 38.7
+      "2": 71.9,
+      "3": 56.6,
+      "4": 42.3,
+      "5": 37.3
     },
     "agreement_8L_pooled_i2_5": {
-      "n": 24740,
-      "agreement_pct": 78.7,
-      "generation_only_pct": 15.7,
+      "n": 13613,
+      "agreement_pct": 77.8,
+      "generation_only_pct": 16.6,
       "patchscopes_only_pct": 5.6,
-      "both_pct": 53.4,
-      "neither_pct": 25.3,
-      "patchscopes_pct": 59.0,
-      "generation_pct": 69.1,
-      "note": "Reported in the July 2026 analysis report as agreement 78.7%, generation-only 15.7%, patchscopes-only 5.6%. The remaining cells follow from those and the fixed 69.1% generation rate; they are derived from rounded percentages, so we quote percentages rather than counts."
+      "both_pct": 52.0,
+      "neither_pct": 25.8,
+      "patchscopes_pct": 57.6,
+      "generation_pct": 68.5,
+      "note": "Computed on the deduplicated set by matching the two feature files on (phrase, instance, i); all four cells are measured, not derived from rounded percentages."
     },
     "category_8L_pooled_i2_5_pct": {
-      "building": 47.2,
-      "idiom": 57.4,
-      "movie": 54.7
+      "building": 46.4,
+      "idiom": 58.0,
+      "movie": 59.9
     },
     "generation_confidence": {
       "definition": "Geometric mean of the probability the model assigned to each token it actually generated, over the steps needed to complete the phrase.",
-      "mean_when_success": 0.878,
-      "mean_when_failure": 0.447,
+      "mean_when_success": 0.877,
+      "mean_when_failure": 0.45,
       "median_when_success": 0.934,
-      "median_when_failure": 0.416,
-      "by_probe_outcome_L25": {
-        "true_positive": {
-          "n": 2491,
-          "mean": 0.904,
-          "median": 0.95
-        },
-        "false_negative": {
-          "n": 864,
-          "mean": 0.791,
-          "median": 0.824
-        },
-        "false_positive": {
-          "n": 412,
-          "mean": 0.599,
-          "median": 0.636
-        },
-        "true_negative": {
-          "n": 1091,
-          "mean": 0.414,
-          "median": 0.394
-        }
-      }
+      "median_when_failure": 0.419,
+      "note": "The breakdown by probe outcome (TP/FN/FP/TN) is not reported: it was not recomputed on the deduplicated set."
     },
     "false_positive_llm_judgement": {
-      "n": 412,
-      "valid_alternate_pct": 62.9,
-      "partially_right_pct": 17.5,
-      "unrelated_pct": 19.7,
+      "n": 212,
+      "valid_alternate_pct": 59.9,
+      "partially_right_pct": 22.2,
+      "unrelated_pct": 17.9,
       "counts": {
-        "valid_alternate": 259,
-        "partially_right": 72,
-        "unrelated": 81
+        "valid_alternate": 127,
+        "partially_right": 47,
+        "unrelated": 38
       },
-      "judge": "ChatGPT (web interface); the specific model version was not recorded at the time. The prompt is reproduced verbatim in the appendix. A separate informal pass by a different assistant reached a similar split but used no fixed rubric and is not reported."
+      "judge": "ChatGPT, GPT-5.6 Sol, run on the deduplicated set in a single batch. The prompt is reproduced verbatim in the appendix."
     },
     "false_positive_by_model_confidence": {
-      "n": 412,
-      "model_confident_gt_0_7_pct": 40.0,
-      "model_unsure_lt_0_3_pct": 10.4,
-      "middle_pct": 49.6,
-      "note": "Independent of the LLM adjudication; splits the same 412 cases by the model's own confidence."
+      "n": 212,
+      "mean": 0.636,
+      "median": 0.681,
+      "model_confident_gt_0_7_pct": 46.2,
+      "model_unsure_lt_0_3_pct": 7.1,
+      "middle_pct": 46.7,
+      "note": "Independent of the LLM adjudication; splits the same 212 cases by the model's own confidence."
     },
     "qwen25_14b_generation_pct": {
       "isolated": {
@@ -1345,12 +1283,7 @@
         "7": 13.9,
         "8": 15.4
       },
-      "in_context": {
-        "2": 84.8,
-        "3": 66.2,
-        "4": 57.4,
-        "5": 54.7
-      }
+      "note": "Isolated only. The in-context replication was run on the pre-deduplication contexts and is not reported."
     },
     "bin_chart_provenance": {
       "note": "The August deck's slide-14 chart (L25 per-phrase prediction bins, i=3 only) covers 194 phrases. No saved file or script reproduces that count. Resolved by direct rerun on the cluster against the current probing_features.npz.",
@@ -1407,13 +1340,6 @@
         1.29
       ],
       "correctness_caveat": "Divergences from autoregressive output appeared for every drafting policy tested, including fixed-length ones with no adaptive logic, so the cause appears to be the model's interaction with the inference engine rather than any policy. Frequency scaled with how aggressively a policy drafted."
-    },
-    "layer_group_pooling": {
-      "note": "Deck slide 11. Grouping the eight probed layers into A={5,7}, B={10,13,15}, C={20,25,30} and asking, per phrase, which groups contain at least one context at one layer that succeeded. Pooled over up to 10 contexts, so this is a deliberately generous criterion. Requires data/probing_features.npz to recompute.",
-      "A_and_B_and_C_pct": 47.8,
-      "B_and_C_only_pct": 17.3,
-      "C_only_pct": 33.7,
-      "covered_pct": 98.8
     }
   }
 }

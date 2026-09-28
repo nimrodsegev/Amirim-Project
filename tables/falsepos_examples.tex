@@ -1,28 +1,30 @@
+% Hand-written. Examples are drawn from the deduplicated L25 false-positive set
+% and are reproduced verbatim from the run log. They are grouped by inspection:
+% the judge's per-case labels were returned as counts, not per example, so this
+% table does not attribute a label to any individual row.
 \begin{table*}[t]
 \centering\small
-\begin{tabular}{@{}p{0.34\textwidth}p{0.24\textwidth}p{0.28\textwidth}@{}}
+\begin{tabular}{@{}p{0.32\textwidth}p{0.22\textwidth}p{0.32\textwidth}@{}}
 \toprule
 \textbf{Phrase} & \textbf{Target} & \textbf{Model generated} \\
 \midrule
-\multicolumn{3}{@{}l}{\textit{Valid alternate (62.9\%)}} \\[2pt]
+\multicolumn{3}{@{}l}{\textit{A variant of the same expression}} \\[2pt]
 beat swords into ploughshares & ploughshares & plowshares \\[2pt]
-beat about the bush & about the bush & around the bush \\[2pt]
-he who laughs last laughs loudest & laughs loudest & laughs best \\[2pt]
-an Englishman's home is his castle & home is his castle & house is his castle \\
+beat about the bush & about the bush & around the bush \\
 \midrule
-\multicolumn{3}{@{}l}{\textit{Partially right (17.5\%)}} \\[2pt]
-start off on the right foot & the right foot & the \emph{wrong} foot \\[2pt]
-pull a rabbit out of a hat & a hat & \emph{the} hat \\
+\multicolumn{3}{@{}l}{\textit{A word changed or dropped}} \\[2pt]
+pull a rabbit out of a hat & of a hat & of \emph{the} hat \\[2pt]
+hit the right note & the right note & a note that sounds good \\
 \midrule
-\multicolumn{3}{@{}l}{\textit{Unrelated (19.7\%)}} \\[2pt]
-fall between two stools & between two stools & between two schools \\[2pt]
-How to Train Your Dragon & Train Your Dragon & use the new \ldots \\
+\multicolumn{3}{@{}l}{\textit{Unrelated}} \\[2pt]
+burn the midnight oil & midnight oil & moon \\[2pt]
+swim with the tide & the tide & the fishes \\
 \bottomrule
 \end{tabular}
-\caption{Probe false positives at L25: cases the probe predicted would
-succeed and exact-match scoring recorded as failures. Most are the model
-producing a legitimate variant of the expression rather than failing to know it.
-Percentages are the judge's labels over all $412$ L25 probe false positives and
-should not be extrapolated to all failed recovery trials.}
+\caption{Probe false positives at L25: cases the probe predicted would succeed
+and exact-match scoring recorded as failures. Over all $212$ of them the judge
+labelled $59.9\%$ valid alternates, $22.2\%$ partially right and $17.9\%$
+unrelated; those proportions should not be extrapolated to all failed recovery
+trials. The rows above are illustrative and grouped by inspection.}
 \label{tab:falsepos}
 \end{table*}

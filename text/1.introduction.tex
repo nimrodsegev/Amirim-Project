@@ -63,9 +63,10 @@ actually does with the same input, we also let it simply carry on from the text
 it has read.
 
 Our findings are as follows. The rest of a familiar phrase is often recoverable
-several tokens early. Over $1.1$k expressions in $9.9$k collected
-phrase-context instances, about $5.5$k of them distinct (\S\ref{sec:setup}), Patchscopes recovers the remaining tokens of a phrase in $57.5\%$ of
-instances three tokens before it ends, and in $38.7\%$ five tokens before. The
+several tokens early. Over $1.1$k expressions in $5.5$k naturally occurring
+phrase-context pairs, Patchscopes recovers the remaining tokens of a phrase in
+$56.6\%$ of cases three tokens before it ends, and in $37.3\%$ five tokens
+before. The
 same phrases shown with no surrounding sentence are recovered far less often, so
 how well a model handles these expressions cannot be judged from the phrase alone
 (\S\ref{sec:lookahead}). Results group tightly by phrase: a phrase tends to be
@@ -73,5 +74,5 @@ recovered in nearly all of its contexts or in nearly none, much more often than
 if each context succeeded independently at the same average rate
 (\S\ref{sec:stability}). And the signal can be read off the state
 directly, with no intervention at all. A small classifier looking at one hidden
-vector predicts whether the model will finish the phrase, at $76.8\%$ balanced
-accuracy and $87.6\%$ precision (\S\ref{sec:probe}).
+vector predicts whether the model will finish the phrase, at $74.1\%$ balanced
+accuracy and $84.6\%$ precision (\S\ref{sec:probe}).

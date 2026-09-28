@@ -47,13 +47,13 @@ Table~\ref{tab:replication} repeats the central measurement on OLMo-3-7B
 note that this tokenizer does not prepend a BOS token) and on Qwen2.5-14B
 (\texttt{Qwen/Qwen2.5-14B}, generation only). OLMo-2-7B is
 \texttt{allenai/OLMo-2-1124-7B}. All three are base checkpoints, not
-instruction-tuned. The
-qualitative picture is stable across all three: recovery several tokens
-ahead, a large context effect, and a monotone decline with $i$. The absolute
-levels differ, and not in the direction model scale would predict: OLMo-3-7B
-is consistently below OLMo-2-7B, and Qwen2.5-14B, at roughly twice the
-parameters, trails OLMo-2-7B in isolation and leads it by one to two points in
-context.
+instruction-tuned. The qualitative picture is stable across all three: recovery
+several tokens ahead and a monotone decline with $i$. The absolute levels
+differ, and not in the direction model scale would predict: OLMo-3-7B is
+consistently below OLMo-2-7B, and Qwen2.5-14B, at roughly twice the parameters,
+trails OLMo-2-7B. Only the isolated condition is shown. The in-context
+replication was run before the contexts were deduplicated and was not repeated,
+so it is not comparable with the in-context numbers reported in the main text.
 
 \subsection{Patchscopes success by layer}
 
@@ -67,8 +67,8 @@ falls at L30 at every distance.}
 \end{figure}
 
 Figure~\ref{fig:bylayer} gives the per-layer detail behind \S\ref{sec:stability}:
-$62.2\%$ at $i=2$ and $48.1\%$ at $i=3$ at the L25 peak, falling to $59.2\%$ and
-$39.1\%$ by L30. The shape is the same at every distance.
+$60.7\%$ at $i=2$ and $47.0\%$ at $i=3$ at the L25 peak, falling to $58.1\%$ and
+$38.2\%$ by L30. The shape is the same at every distance.
 
 \subsection{Depth of first recovery}
 
@@ -80,28 +80,12 @@ the patchscope recovers the target, as a fraction of all successes.}
 \label{fig:firstlayer}
 \end{figure}
 
-Figure~\ref{fig:firstlayer} shows, across the $26{,}015$ successful in-context
+Figure~\ref{fig:firstlayer} shows, across the $14{,}151$ successful in-context
 trials of the $32$-layer sweep, which layer first produced the target. The
 distribution has two modes, one around L5--L8 and a larger one around L18--L22;
-the median is L16 and $41.9\%$ of successes first appear at or before L10. The
+the median is L17 and $41.1\%$ of successes first appear at or before L10. The
 early mode is not visible in the eight-layer analysis of \S\ref{sec:stability},
 which samples only L5 and L7 below L10.
-
-\subsection{Pooling across layer groups}
-
-A complementary question to where recovery happens is whether the early layers
-ever succeed \emph{alone}. Grouping the eight probed layers into
-$A=\{5,7\}$, $B=\{10,13,15\}$ and $C=\{20,25,30\}$ and asking which groups
-contain at least one succeeding context for each phrase, $47.8\%$ succeed in
-all three, $17.3\%$ in $B$ and $C$ only, and $33.7\%$ in $C$ only. These cover
-$98.8\%$ of phrases: almost none succeeds early without also succeeding later,
-so recovery accumulates with depth rather than appearing and disappearing.
-
-This is a deliberately generous criterion (any of up to ten contexts, at any
-layer in the group, counts), so the absolute numbers are much higher than a
-single context checked at a single layer would give. Duplicated contexts do not
-add to them: an exact repeat cannot turn a failure into a success or create a
-new group membership. The ordering is the informative part, not the levels.
 
 \subsection{Probe configuration}
 
@@ -113,33 +97,16 @@ downsampled in the training set only, and the test set is left at its natural
 distribution. All reported runs use seed $42$. The false-positive and
 confidence analyses of \S\ref{sec:falsepos} use the L25 probe.
 
-\subsection{The L2 irregularity under the Patchscopes label}
+\subsection{The Patchscopes label at the earliest layers}
 
-The generation-label probe climbs smoothly through the earliest layers
-(Figure~\ref{fig:early}). The Patchscopes-label probe on the \emph{same} states
-does not: $76.6\%$ at L1, $55.4\%$ at L2, back to $76.0\%$ at L5. We doubt the dip is a property
-of layer 2: Patchscopes itself almost never succeeds this early ($0.7\%$,
-$0.8\%$ and $1.6\%$ at L0, L1 and L2), so the positive class is
-$0.6$--$1.2\%$ of the data, roughly $100$ to $250$ examples, and one split can
-swing on luck. The generation label, whose positive rate is a fixed $69.1\%$ at
-every layer, shows no such irregularity on the same states. No multi-seed check
-was run, so we report it as an unresolved artifact rather than a finding.
+Patchscopes itself almost never succeeds in the first few layers ($0.6\%$,
+$0.8\%$ and $1.5\%$ at L0, L1 and L2), so a probe trained on that label there
+has a positive class of about $1\%$ of the data and one split can swing on luck.
+Balanced accuracy is nonetheless well above chance at those depths: $72.2\%$ at
+L0, $74.7\%$ at L1 and $68.9\%$ at L2. We report these as unstable rather than
+as a finding; no multi-seed check was run.
 
-L1 is worth flagging in the other direction: $76.6\%$ balanced accuracy after a
-single transformer block, on a label Patchscopes can satisfy less than $1\%$ of
-the time at that depth.
-
-\subsection{The probe at the earliest layers}
-
-\begin{figure}[t]
-\centering
-\includegraphics[width=\columnwidth]{figures/probe_early_layers}
-\caption{The generation-label probe at the earliest layers, against its best
-layer. At L0, the raw embedding, before any contextual processing, the
-probe is barely above chance on balanced accuracy; it climbs steadily as
-computation accumulates. A base-rate artifact would be flat.}
-\label{fig:early}
-\end{figure}
+\subsection{Per-phrase correlation}
 
 \begin{figure}[t]
 \centering
@@ -150,54 +117,24 @@ which phrase it is looking at, most strongly in the middle of the network.}
 \label{fig:corr}
 \end{figure}
 
-Figure~\ref{fig:early} shows the gradient behind the base-rate control of
-\S\ref{sec:probe}, and Figure~\ref{fig:corr} the per-layer correlation between
-probe confidence and true phrase difficulty.
+Figure~\ref{fig:corr} gives the per-layer correlation between probe confidence
+and true phrase difficulty, behind \S\ref{sec:probe}.
 
-\subsection{Probe generalisation to unseen categories}
-
-Training the generation-label probe on two categories and testing on the third
-costs accuracy but does not remove the signal. Against a no-hold-out
-baseline of $73.6\%$ / $74.6\%$ / $76.8\%$ balanced accuracy at L13 / L25 / L30,
-holding out landmarks gives $69.1\%$ / $62.6\%$ / $63.4\%$, idioms
-$68.7\%$ / $68.9\%$ / $72.3\%$, and film titles
-$72.4\%$ / $72.7\%$ / $73.5\%$. Landmarks are the hardest category to
-generalise to, which is unsurprising given that they are only $5.7\%$ of pooled
-instances. The probe is therefore learning something that partly transfers
-across phrase types rather than memorising category-specific surface features,
-but the transfer is imperfect, a pattern also reported by
-\citet{orgad-etal-2025-llms} for truthfulness probes across datasets.
-
-\subsection{Per-phrase correlation: robustness}
-
-Figure~\ref{fig:corr} uses the balanced MLP probe at $i=3$ over $180$ test
-phrases, but the shape is not specific to it. Across the four combinations of
-classifier (logistic, MLP) and training regime (natural, class-balanced), the
-L13 correlation ranges from $0.444$ to $0.584$ on $i=3$ and $0.432$ to $0.564$
-pooled, the MLP consistently ahead of logistic regression and balanced training
-ahead of natural; L25 preserves the ordering at lower values, $0.381$ to
-$0.531$.\footnote{Re-running this
-sweep reproduced the balanced MLP value at L25 to four decimal places
-($0.5173$), but returned $0.499$ for the natural-training MLP against the
-$0.531$ recorded at the time, most likely package-version drift. We report the
-recorded values and flag the one that did not reproduce; the ordering across
-variants, which is what the paragraph claims, is unaffected.} Across five random
-phrase-level splits the L13 balanced logistic probe gives AUC-ROC between
-$0.806$ and $0.828$, so the split contributes little of the variation.
+Across the probed layers the correlation at $i=3$ peaks at $0.61$ (L10) and
+falls away at both ends, to $0.44$ at L5 and $0.53$ at L30, over $171$ held-out
+test phrases. The robustness sweep across classifiers and training regimes was
+run before the contexts were deduplicated and is not repeated here.
 
 \subsection{Full probe metrics}
 
 \input{tables/probes}
 
 Table~\ref{tab:probes} gives balanced accuracy and precision at every probed
-layer. For completeness, the generation-label probe's AUC-ROC rises from $0.76$
-(L5) to $0.83$ (L30) and its AUC-PR from $0.85$ to $0.91$ against a base rate of
-$0.69$. The patchscopes-label probe inverts this, with AUC-ROC highest at L5
-($0.89$) and lowest at L25 and L30 ($0.74$): ranking quality and thresholded
-decision quality answer different questions under a positive rate moving from
-$6.6\%$ to $47.7\%$. On $F_1$ the generation-label probe beats the trivial
-always-predict-success baseline ($81.7$) only at L30 ($82.9$), that baseline
-getting perfect recall free on a $69.1\%$-positive test set.
+layer. For completeness, the generation-label probe's AUC-ROC rises from $0.75$
+(L5) to $0.82$ (L30) against a base rate of $0.69$. The Patchscopes-label probe
+inverts this, with AUC-ROC highest at L5 ($0.91$) and lowest at L25 and L30
+($0.74$): ranking quality and thresholded decision quality answer different
+questions under a positive rate moving from $6.4\%$ to $46.4\%$.
 
 \subsection{Confidence and the false positives}
 
@@ -205,36 +142,32 @@ getting perfect recall free on a $69.1\%$-positive test set.
 \centering
 \includegraphics[width=\textwidth]{figures/confidence_and_falsepos}
 \caption{\textbf{Left:} the model's own mean confidence in the tokens it
-generated, split by the four probe outcomes at L25. Confidence follows the true
-outcome, not the probe's guess: both observed-success groups sit far above
-both observed-failure groups, including where the probe was wrong. \textbf{Right:} the
-judge's adjudication of all $412$ probe false positives.}
+generated, for completions that succeeded, for those that failed, and for the
+probe's false positives, which sit between the two. \textbf{Right:} the judge's
+adjudication of all $212$ probe false positives.}
 \label{fig:conf}
 \end{figure*}
 
 Figure~\ref{fig:conf} gives the two analyses behind \S\ref{sec:falsepos}: the
-model's own confidence split by probe outcome, and the judge's adjudication of
-the $412$ false positives. Confidence separates the observed outcomes far more
-cleanly than it separates the probe's correct calls from its mistakes.
+model's own confidence, and the judge's adjudication of the $212$ false
+positives.
 
 \subsection{False-positive examples}
 
 \input{tables/falsepos_examples}
 
-Table~\ref{tab:falsepos} samples the $412$ cases of \S\ref{sec:falsepos} under
-each of the judge's three labels.
+Table~\ref{tab:falsepos} gives examples from the $212$ cases of
+\S\ref{sec:falsepos}.
 
 \subsection{False-positive adjudication prompt}
 \label{app:judge}
 
-The $412$ false positives of \S\ref{sec:falsepos} were adjudicated by presenting
-them to ChatGPT in a single batch, reportedly GPT-5.6, though the version was
-not logged at the time and the authors are not certain of it. This is a
-reproducibility gap and the run should be repeated against a recorded model. The
-prompt was (reproduced verbatim, including its punctuation):
+The $212$ false positives of \S\ref{sec:falsepos} were adjudicated by presenting
+them to ChatGPT (GPT-5.6 Sol) in a single batch. The prompt was (reproduced
+verbatim, including its punctuation):
 
 \begin{quote}\small
-I have 412 cases where a language model was supposed to complete a phrase (a
+I have 212 cases where a language model was supposed to complete a phrase (a
 well-known idiom, movie title, or landmark name) but its actual output didn't
 exactly match the target string. For each one, I have the target (the correct
 completion) and what the model actually generated. I want you to classify each
@@ -252,7 +185,7 @@ real knowledge of the target.
 \textbf{Unrelated}: the model's output has no real connection to the target;
 it looks like genuine confusion.
 
-For each of the 412 lines below, respond with just the number and the category
+For each of the 212 lines below, respond with just the number and the category
 (e.g., ``1. Valid alternate''). At the end, give me a total count and percentage
 for each of the three categories.
 \end{quote}
@@ -297,8 +230,7 @@ for the generation labels. These are too large to distribute and remain on the
 compute cluster, so the probe numbers in Table~\ref{tab:probes} are reported
 from the run logs rather than recomputed from this repository. The
 false-positive adjudication of \S\ref{sec:falsepos} rests on a single judge with
-no human validation and no inter-annotator agreement, and the ChatGPT version
-used was not logged at the time (most likely GPT-5.6, though we cannot confirm
-it), so that run is not exactly reproducible either; it should be rerun with a
-named model before the number is relied on. The confidence-based split in
-\S\ref{sec:falsepos} uses no judge, is reproducible, and points the same way.
+no human validation and no inter-annotator agreement; the judge and prompt are
+named in this appendix, so the run can be repeated, but a single automatic
+judge is not a substitute for human annotation. The confidence-based split in
+\S\ref{sec:falsepos} uses no judge and points the same way.

@@ -5,7 +5,8 @@
 All layer-level and probing results come from OLMo-2-7B. We replicate the
 lookahead curves on OLMo-3-7B and generation on Qwen2.5-14B
 (Appendix~\ref{app:details}) and the qualitative pattern holds, but we have not
-shown that the layer localisation or the probe's profile transfers. The
+shown that the layer localisation or the probe's profile transfers, and the
+replication covers the isolated condition only. The
 Qwen2.5-14B result is worth flagging on its own: at roughly twice the parameters
 it does not clearly beat OLMo-2-7B here, so recovering phrases this way does not
 look like a simple function of general model capability. The phrases are a
@@ -39,14 +40,11 @@ largest contributor to the gap between the two measurements
 (\S\ref{sec:disagreement}). Where the $32$-layer sweep is available we report it
 alongside, but it is not available for the per-category or probing analyses,
 which should be read as lower bounds on Patchscopes. We report no confidence
-intervals. The probe numbers come from one phrase-level split at seed $42$, and
-$44.8\%$ of the collected contexts are duplicates (\S\ref{sec:setup}), so the
-effective sample behind every instance-level number is closer to $5{,}498$ than
-to $9{,}955$ and any interval computed from the instance count would be too
-narrow. The right unit for resampling is the phrase rather than the instance,
-and a phrase-clustered bootstrap over the central comparisons is the obvious
-next step. Differences of one or two points, such as those between models in
-Appendix~\ref{app:details}, should not be read as meaningful. Finally, we
+intervals. The probe numbers come from one phrase-level split at seed $42$.
+Trials within a phrase are not independent, so the right unit for resampling is
+the phrase rather than the instance, and a phrase-clustered bootstrap over the
+central comparisons is the obvious next step. Differences of one or two points
+should not be read as meaningful. Finally, we
 implement no decoding scheme and report no latency or throughput measurement:
 whether a probe of this kind is cheap enough to pay for itself is open.
 

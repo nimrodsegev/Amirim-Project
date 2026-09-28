@@ -37,8 +37,9 @@ idioms (\textit{{the grass is always greener\ldots}}) and film titles
 (\textit{{Harry Potter and the Goblet of Fire}}). \textbf{{Phrases}} counts
 expressions long enough to admit at least one lookahead position;
 \textbf{{w/ ctx.}} those for which a natural occurrence was found in
-FineWeb-Edu; \textbf{{Inst.}} the resulting (phrase, context) pairs, of which
-{d['phrases_with_10_contexts']:,} phrases contributed the full ten.}}
+FineWeb-Edu; \textbf{{Inst.}} the resulting distinct (phrase, context) pairs.
+Most phrases contribute five, and {d['phrases_with_10_contexts']:,} reach the
+full ten.}}
 \label{{tab:dataset}}
 \end{{table}}""")
 
@@ -209,22 +210,16 @@ write("replication", r"""\begin{table}[t]
 \cmidrule(lr){3-6}
 \textbf{Model} & \textbf{Measurement} & 2 & 3 & 4 & 5 \\
 \midrule
-\multicolumn{6}{l}{\textit{Phrase in isolation}} \\
 """ + f"OLMo-2-7B & patchscopes & {cells(iso['patchscopes_olmo2_32L'], IS)} \\\\\n"
       + f"OLMo-3-7B & patchscopes & {cells(iso['patchscopes_olmo3_32L'], IS)} \\\\\n"
       + f"OLMo-2-7B & generation & {cells(iso['generation_olmo2'], IS)} \\\\\n"
-      + f"Qwen2.5-14B & generation & {qcells(q['isolated'], IS)} \\\\\n" + r"""\midrule
-\multicolumn{6}{l}{\textit{Phrase in natural context}} \\
-""" + f"OLMo-2-7B & patchscopes & {cells(ctxn['patchscopes_olmo2_32L'], IS)} \\\\\n"
-      + f"OLMo-3-7B & patchscopes & {cells(ctxn['patchscopes_olmo3_32L'], IS)} \\\\\n"
-      + f"OLMo-2-7B & generation & {cells(ctxn['generation_olmo2'], IS)} \\\\\n"
-      + f"Qwen2.5-14B & generation & {qcells(q['in_context'], IS)} \\\\\n" + r"""\bottomrule
+      + f"Qwen2.5-14B & generation & {qcells(q['isolated'], IS)} \\\\\n" + r"""\bottomrule
 \end{tabular}
-\caption{Recovery rate (\%) across models, on the same phrase strings and
-contexts. Each model uses its own tokenizer, so $i$ counts model-specific tokens
-and the cut points need not coincide across rows. Patchscopes rows are the union
-over all 32 layers. Qwen2.5-14B, at
-roughly twice the parameters of OLMo-2-7B, is slightly behind it in isolation
-and slightly ahead of it in context.}
+\caption{Recovery rate (\%) across models, phrases presented in isolation. Each
+model uses its own tokenizer, so $i$ counts model-specific tokens and the cut
+points need not coincide across rows. Patchscopes rows are the union over all 32
+layers. The in-context replication is not shown: it was run before the contexts
+were deduplicated and was not repeated, so it is not comparable with the
+in-context numbers reported elsewhere in this paper.}
 \label{tab:replication}
 \end{table}""")

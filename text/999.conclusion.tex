@@ -4,8 +4,8 @@
 We asked whether a model's internal state, partway through a familiar phrase,
 already holds enough to recover the rest. For fixed expressions in natural text
 it often does, and at a useful range: reading a single hidden state with
-Patchscopes recovers the remaining tokens in $57.5\%$ of instances three tokens
-before the phrase ends, and in $38.7\%$ five tokens before. The same phrases
+Patchscopes recovers the remaining tokens in $56.6\%$ of cases three tokens
+before the phrase ends, and in $37.3\%$ five tokens before. The same phrases
 shown with no surrounding sentence are recovered far less often, so a model
 meeting these expressions in real text is in a much better position than an
 isolated test would suggest. Results group tightly by phrase: a phrase tends to
@@ -13,10 +13,10 @@ be recovered in nearly all of its contexts or in almost none, though we do not
 separate phrase identity from related properties such as frequency or
 tokenization. And the signal is legible from the state itself,
 well enough that a small probe reading a single hidden vector predicts whether
-the model will complete the phrase, at $87.6\%$ precision.
+the model will complete the phrase, at $84.6\%$ precision.
 
 Patchscopes recovery depends on the layer budget: widening the sweep from eight
-layers to all $32$ raises agreement with generation from $78.7\%$ to $81.1\%$.
+layers to all $32$ raises agreement with generation from $77.8\%$ to $80.4\%$.
 Patchscopes rates are worth reporting together with the layers that produced
 them.
 

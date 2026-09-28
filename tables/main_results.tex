@@ -11,20 +11,20 @@
 \quad Generation & 59.2 & 31.2 & 20.6 & 17.6 \\
 \midrule
 \multicolumn{5}{l}{\textit{Phrase in natural context}} \\
-\quad Patchscopes & 73.2 & 57.5 & 43.9 & 38.7 \\
-\quad Generation & 84.0 & 64.8 & 55.6 & 53.6 \\
+\quad Patchscopes & 71.9 & 56.6 & 42.3 & 37.3 \\
+\quad Generation & 83.3 & 64.5 & 55.3 & 53.0 \\
 \midrule
 \multicolumn{5}{l}{\textit{Robustness: wider Patchscopes layer sweep}} \\
-\quad Patchscopes, all 32 layers & 79.6 & 64.1 & 51.6 & 46.4 \\
+\quad Patchscopes, all 32 layers & 78.4 & 63.2 & 50.1 & 45.2 \\
 \bottomrule
 \end{tabular}
 \caption{Recovery rate (\%) of the final $i$ phrase tokens, OLMo-2-7B.
 Isolation rows are computed over phrases
 (1,112 at $i=2$); context rows over
-(phrase, context) instances (9,148,
-8,529,
-4,677 and
-2,386 at $i=2\ldots5$).
+(phrase, context) instances (5,023,
+4,651,
+2,606 and
+1,333 at $i=2\ldots5$).
 Patchscopes counts a success if \emph{any} probed layer recovers the
 continuation, over the eight layers used throughout this paper
 (\S\ref{sec:setup}); isolation rows sweep all 32. The final row re-runs the

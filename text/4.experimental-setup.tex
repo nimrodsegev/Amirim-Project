@@ -39,16 +39,14 @@ collected as an instance of the film \textit{Before Sunrise}.} This gives two
 views of the same expression: \textit{Empire \underline{\hspace{1.2em}}} on its
 own, and \textit{he went to NYC to see the Empire \underline{\hspace{1.2em}}}.
 
-This yields $9{,}955$ (phrase, context) instances covering $1{,}096$ of the
-$1{,}164$ phrases. $44.8\%$ of the instances are duplicates, leaving $5{,}498$
-distinct pairs. Decoding is greedy, so a duplicate gives the same outcome and
-overall rates barely move ($64.8\%$ versus $64.5\%$ at $i=3$), but the effective
-sample is about half the instance count; we therefore compute every per-phrase
-statistic (\S\ref{sec:stability}) over distinct contexts only. Each instance
-gives one trial per usable lookahead distance, $24{,}740$ in all at
-$i \in \{2,3,4,5\}$. Idioms dominate these trials ($20{,}371$ of them), so
-aggregate rates run close to idiom rates, and we report per-category results
-separately in \S\ref{sec:disagreement}.
+Repeated occurrences of the same context for a phrase are collapsed, so every
+pair is counted once. This yields $5{,}498$ distinct (phrase, context) pairs
+covering $1{,}096$ of the $1{,}164$ phrases. Most phrases contribute five
+distinct contexts and only $12$ reach the full ten. Each pair gives one trial
+per usable lookahead distance, $13{,}613$ in all at $i \in \{2,3,4,5\}$. Idioms
+dominate these trials ($11{,}104$ of them), so aggregate rates run close to
+idiom rates, and we report per-category results separately in
+\S\ref{sec:disagreement}.
 
 \subsection{Models}
 

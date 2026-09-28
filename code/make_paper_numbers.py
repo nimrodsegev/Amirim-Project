@@ -256,8 +256,8 @@ out["probe_phrase_correlation"] = {
 out["external"] = {
     "note": ("Probe metrics require data/{generation_,}probing_features.npz "
              "(hidden states, produced on the cluster and not stored in this repo). "
-             "Values below are transcribed from the July 2026 analysis reports "
-             "and the August 2026 summary deck."),
+             "Values below are transcribed from the September 2026 "
+             "deduplicated rerun logs."),
     "layers_probed": [5, 7, 10, 13, 15, 20, 25, 30],
     "probe_config": {
         "architecture": "MLP, one hidden layer of 32 units",
@@ -273,86 +273,65 @@ out["external"] = {
         },
     },
     "patchscopes_label_probe": {
-        "pos_rate_pct":   {"5": 6.6, "7": 14.7, "10": 18.8, "13": 16.9, "15": 18.5, "20": 36.8, "25": 47.7, "30": 40.2},
-        "accuracy_pct":   {"5": 89.6, "7": 82.7, "10": 82.3, "13": 81.1, "15": 82.0, "20": 72.4, "25": 68.2, "30": 67.6},
-        "majority_baseline_pct": {"5": 93.4, "7": 85.3, "10": 81.2, "13": 83.1, "15": 81.5, "20": 63.2, "25": 52.3, "30": 59.8},
-        "balanced_accuracy_pct": {"5": 76.0, "7": 70.2, "10": 76.5, "13": 74.8, "15": 76.3, "20": 70.4, "25": 68.1, "30": 66.4},
-        "precision_pct":  {"5": 33.9, "7": 42.8, "10": 52.3, "13": 45.8, "15": 51.1, "20": 62.4, "25": 67.2, "30": 59.7},
-        "auc_roc":        {"5": 0.89, "7": 0.82, "10": 0.85, "13": 0.85, "15": 0.87, "20": 0.78, "25": 0.74, "30": 0.74},
+        "pos_rate_pct":   {"5": 6.4, "7": 14.1, "10": 18.2, "13": 16.4, "15": 17.8, "20": 35.8, "25": 46.4, "30": 39.1},
+        "accuracy_pct":   {"5": 87.6, "7": 82.3, "10": 79.8, "13": 80.0, "15": 80.8, "20": 71.0, "25": 68.8, "30": 68.7},
+        "majority_baseline_pct": {"5": 93.6, "7": 85.9, "10": 81.8, "13": 83.6, "15": 82.2, "20": 64.2, "25": 53.6, "30": 60.9},
+        "balanced_accuracy_pct": {"5": 78.5, "7": 75.7, "10": 77.6, "13": 76.5, "15": 77.5, "20": 69.7, "25": 68.6, "30": 68.0},
+        "precision_pct":  {"5": 29.5, "7": 41.8, "10": 46.5, "13": 43.4, "15": 47.4, "20": 58.4, "25": 66.2, "30": 59.1},
+        "auc_roc":        {"5": 0.906, "7": 0.838, "10": 0.855, "13": 0.855, "15": 0.870, "20": 0.768, "25": 0.741, "30": 0.738},
     },
     "generation_label_probe": {
         "pos_rate_pct": 69.1,
-        "accuracy_pct":   {"5": 70.4, "7": 71.5, "10": 72.4, "13": 74.3, "15": 74.8, "20": 74.0, "25": 75.3, "30": 77.5},
-        "balanced_accuracy_pct": {"5": 69.8, "7": 71.0, "10": 72.0, "13": 73.6, "15": 74.2, "20": 73.6, "25": 74.6, "30": 76.8},
-        "precision_pct":  {"5": 83.3, "7": 84.2, "10": 84.9, "13": 85.6, "15": 86.1, "20": 85.8, "25": 86.2, "30": 87.6},
-        "auc_roc":        {"5": 0.76, "7": 0.78, "10": 0.80, "13": 0.81, "15": 0.81, "20": 0.80, "25": 0.81, "30": 0.83},
-        "early_layers_balanced_accuracy_pct": {"0": 58.6, "1": 65.1, "2": 66.5, "5": 69.8},
-        "early_layers_note": ("Monotone, with no irregularity at L2. The "
-                              "patchscopes-label probe on the same states dips "
-                              "at L2 (55.4%, down from 76.6% at L1); that dip "
-                              "is most likely instability from a positive class "
-                              "of 0.6-1.2%, but no multi-seed check was run to "
-                              "confirm it."),
-        "early_layers_precision_pct": {"0": 75.4, "1": 80.6, "2": 80.9, "5": 83.3},
-        "held_out_category_balanced_accuracy_pct": {
-            "none":     {"13": 73.6, "25": 74.6, "30": 76.8},
-            "building": {"13": 69.1, "25": 62.6, "30": 63.4},
-            "idiom":    {"13": 68.7, "25": 68.9, "30": 72.3},
-            "movie":    {"13": 72.4, "25": 72.7, "30": 73.5},
-        },
+        "accuracy_pct":   {"5": 72.1, "7": 73.6, "10": 73.2, "13": 74.6, "15": 76.0, "20": 74.1, "25": 74.8, "30": 76.7},
+        "balanced_accuracy_pct": {"5": 68.6, "7": 70.2, "10": 70.1, "13": 71.5, "15": 73.0, "20": 71.4, "25": 72.5, "30": 74.1},
+        "precision_pct":  {"5": 81.1, "7": 82.0, "10": 82.1, "13": 83.0, "15": 83.8, "20": 83.1, "25": 83.9, "30": 84.6},
+        "auc_roc":        {"5": 0.751, "7": 0.772, "10": 0.769, "13": 0.792, "15": 0.799, "20": 0.792, "25": 0.806, "30": 0.820},
     },
     "patchscopes_per_layer_success_pct": {
-        "2":  {"5": 14.9, "7": 24.5, "10": 29.8, "13": 27.1, "15": 28.5, "20": 51.0, "25": 62.2, "30": 59.2},
-        "3":  {"5": 7.7,  "7": 14.3, "10": 18.3, "13": 16.9, "15": 18.6, "20": 38.2, "25": 48.1, "30": 39.1},
-        "4":  {"5": 4.3,  "7": 9.2,  "10": 12.0, "13": 10.7, "15": 12.8, "20": 25.0, "25": 34.7, "30": 25.7},
-        "5":  {"5": 2.3,  "7": 5.5,  "10": 9.4,  "13": 8.8,  "15": 9.1,  "20": 21.8, "25": 29.4, "30": 20.8},
-        "L0_L1_L2_pooled_i2_5": {"0": 0.7, "1": 0.8, "2": 1.6, "any_of_3": 1.9},
+        "2":  {"5": 14.2, "7": 23.4, "10": 28.7, "13": 26.0, "15": 27.4, "20": 49.5, "25": 60.7, "30": 58.1},
+        "3":  {"5": 7.2,  "7": 13.7, "10": 17.4, "13": 16.2, "15": 17.8, "20": 37.3, "25": 47.0, "30": 38.2},
+        "4":  {"5": 3.9,  "7": 8.6,  "10": 11.1, "13": 10.0, "15": 11.9, "20": 23.4, "25": 33.2, "30": 24.7},
+        "5":  {"5": 2.4,  "7": 5.6,  "10": 8.9,  "13": 8.3,  "15": 8.3,  "20": 21.1, "25": 27.5, "30": 20.3},
+        "L0_L1_L2_pooled_i2_5": {"0": 0.6, "1": 0.8, "2": 1.5, "any_of_3": 1.8},
     },
-    "patchscopes_8L_union_in_context_pct": {"2": 73.2, "3": 57.5, "4": 43.9, "5": 38.7},
+    "patchscopes_8L_union_in_context_pct": {"2": 71.9, "3": 56.6, "4": 42.3, "5": 37.3},
     "agreement_8L_pooled_i2_5": {
-        "n": 24740, "agreement_pct": 78.7,
-        "generation_only_pct": 15.7, "patchscopes_only_pct": 5.6,
-        "both_pct": 53.4, "neither_pct": 25.3,
-        "patchscopes_pct": 59.0, "generation_pct": 69.1,
-        "note": ("Reported in the July 2026 analysis report as agreement 78.7%, "
-                 "generation-only 15.7%, patchscopes-only 5.6%. The remaining "
-                 "cells follow from those and the fixed 69.1% generation rate; "
-                 "they are derived from rounded percentages, so we quote "
-                 "percentages rather than counts."),
+        "n": 13613, "agreement_pct": 77.8,
+        "generation_only_pct": 16.6, "patchscopes_only_pct": 5.6,
+        "both_pct": 52.0, "neither_pct": 25.8,
+        "patchscopes_pct": 57.6, "generation_pct": 68.5,
+        "note": ("Computed on the deduplicated set by matching the two feature "
+                 "files on (phrase, instance, i); all four cells are measured, "
+                 "not derived from rounded percentages."),
     },
-    "category_8L_pooled_i2_5_pct": {"building": 47.2, "idiom": 57.4, "movie": 54.7},
+    "category_8L_pooled_i2_5_pct": {"building": 46.4, "idiom": 58.0, "movie": 59.9},
     "generation_confidence": {
         "definition": ("Geometric mean of the probability the model assigned to "
                        "each token it actually generated, over the steps needed "
                        "to complete the phrase."),
-        "mean_when_success": 0.878, "mean_when_failure": 0.447,
-        "median_when_success": 0.934, "median_when_failure": 0.416,
-        "by_probe_outcome_L25": {
-            "true_positive":  {"n": 2491, "mean": 0.904, "median": 0.950},
-            "false_negative": {"n": 864,  "mean": 0.791, "median": 0.824},
-            "false_positive": {"n": 412,  "mean": 0.599, "median": 0.636},
-            "true_negative":  {"n": 1091, "mean": 0.414, "median": 0.394},
-        },
+        "mean_when_success": 0.877, "mean_when_failure": 0.450,
+        "median_when_success": 0.934, "median_when_failure": 0.419,
+        "note": ("The breakdown by probe outcome (TP/FN/FP/TN) is not reported: "
+                 "it was not recomputed on the deduplicated set."),
     },
     "false_positive_llm_judgement": {
-        "n": 412, "valid_alternate_pct": 62.9, "partially_right_pct": 17.5, "unrelated_pct": 19.7,
-        "counts": {"valid_alternate": 259, "partially_right": 72, "unrelated": 81},
-        "judge": ("ChatGPT (web interface); the specific model version was not "
-                  "recorded at the time. The prompt is reproduced verbatim in "
-                  "the appendix. A separate informal pass by a different "
-                  "assistant reached a similar split but used no fixed rubric "
-                  "and is not reported."),
+        "n": 212, "valid_alternate_pct": 59.9, "partially_right_pct": 22.2, "unrelated_pct": 17.9,
+        "counts": {"valid_alternate": 127, "partially_right": 47, "unrelated": 38},
+        "judge": ("ChatGPT, GPT-5.6 Sol, run on the deduplicated set in a single "
+                  "batch. The prompt is reproduced verbatim in the appendix."),
     },
     "false_positive_by_model_confidence": {
-        "n": 412,
-        "model_confident_gt_0_7_pct": 40.0,
-        "model_unsure_lt_0_3_pct": 10.4,
-        "middle_pct": 49.6,
-        "note": "Independent of the LLM adjudication; splits the same 412 cases by the model's own confidence.",
+        "n": 212,
+        "mean": 0.636, "median": 0.681,
+        "model_confident_gt_0_7_pct": 46.2,
+        "model_unsure_lt_0_3_pct": 7.1,
+        "middle_pct": 46.7,
+        "note": "Independent of the LLM adjudication; splits the same 212 cases by the model's own confidence.",
     },
     "qwen25_14b_generation_pct": {
         "isolated": {"1": 82.1, "2": 54.3, "3": 28.4, "4": 18.8, "5": 17.4, "6": 11.8, "7": 13.9, "8": 15.4},
-        "in_context": {"2": 84.8, "3": 66.2, "4": 57.4, "5": 54.7},
+        "note": ("Isolated only. The in-context replication was run on the "
+                 "pre-deduplication contexts and is not reported."),
     },
 }
 
@@ -413,17 +392,6 @@ NUM["external"]["clp_pilot"] = {
                            "aggressively a policy drafted."),
 }
 
-NUM["external"]["layer_group_pooling"] = {
-    "note": ("Deck slide 11. Grouping the eight probed layers into A={5,7}, "
-             "B={10,13,15}, C={20,25,30} and asking, per phrase, which groups "
-             "contain at least one context at one layer that succeeded. Pooled "
-             "over up to 10 contexts, so this is a deliberately generous "
-             "criterion. Requires data/probing_features.npz to recompute."),
-    "A_and_B_and_C_pct": 47.8,
-    "B_and_C_only_pct": 17.3,
-    "C_only_pct": 33.7,
-    "covered_pct": 98.8,
-}
 with open(OUT, "w") as f:
     json.dump(NUM, f, indent=2)
 print("appended transcribed deck results")
