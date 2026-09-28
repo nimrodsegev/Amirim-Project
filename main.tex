@@ -52,9 +52,10 @@ tightly by phrase: given several natural contexts, a phrase tends to be
 recovered in almost all of them or in almost none. The signal can also be read
 straight from the state, with no intervention at all: a small classifier reading
 a single hidden state predicts whether the model will complete the phrase, at
-$87.6\%$ precision. Models
-therefore carry usable information about words they have not yet produced, and
-whether it is there can be told in advance from a single hidden state.
+$87.6\%$ precision. Models therefore carry usable information about words they
+have not yet produced, and that information can be detected before those words
+appear. That is the kind of advance signal a decoding method would need in order
+to commit several tokens at once.
 \end{abstract}
 
 \input{text/1.introduction}
