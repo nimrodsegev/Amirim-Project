@@ -27,12 +27,15 @@ substantially at every distance.}
 \label{fig:context}
 \end{figure}
 
-We interrupt OLMo-2-7B inside each phrase, leaving $i$ tokens unread, and let it
-continue greedily for $i+3$ tokens from the prefix it has actually seen. The
-trial succeeds if the unread tokens appear in that continuation.
-Table~\ref{tab:main} gives the result. With the phrase in its original sentence,
-the remaining tokens appear in $84.0\%$ of instances at $i=2$, $64.8\%$ at $i=3$
-and $53.6\%$ at $i=5$. So this is not a small effect that dies out after one
+We interrupt OLMo-2-7B inside each phrase, leaving $i$ tokens unread, and ask
+whether those tokens can be recovered at that point: with Patchscopes, by
+reading the hidden state at the cut, and with our baseline, by letting the model
+continue greedily for $i+3$ tokens from the prefix it has actually seen. A trial
+succeeds if the unread tokens appear in the output. Table~\ref{tab:main} gives
+the result. With the phrase in its original sentence, Patchscopes, over its
+eight probed layers (\S\ref{sec:setup}), recovers the remaining tokens in
+$73.2\%$ of instances at $i=2$, $57.5\%$ at $i=3$ and $38.7\%$ at $i=5$; the model's own continuation recovers them in $84.0\%$,
+$64.8\%$ and $53.6\%$. So this is not a small effect that dies out after one
 token: it holds several tokens ahead, well past ordinary next-token prediction.
 
 \paragraph{Isolation understates the effect.}
@@ -137,7 +140,8 @@ only $5.6\%$.
 Much of that gap comes from how many layers we gave Patchscopes. The comparison
 above uses eight. Sweeping all $32$ raises its in-context rate from $73.2\%$ to
 $79.6\%$ at $i=2$ and from $38.7\%$ to $46.4\%$ at $i=5$ (Table~\ref{tab:main}),
-lifts agreement to $81.1\%$, and brings the disagreement close to even; at $i=3$
+lifts agreement to $81.1\%$, and rebalances the disagreement from roughly
+three-to-one to roughly three-to-two; at $i=3$
 the two then differ by $0.7$ points overall. Some disagreement remains at $32$
 layers, with $18.9\%$ of instances classified differently and $7.8\%$ recovered
 only by Patchscopes. We keep the eight-layer sweep as our primary measurement
