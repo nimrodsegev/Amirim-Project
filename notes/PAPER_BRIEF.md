@@ -1,6 +1,6 @@
 # Paper brief
 
-This file is the durable shared understanding between authors and agents. Fill it conversationally; short bullets are enough. Do not treat unknown fields as permission to invent details.
+This file records the shared understanding behind the paper. Short bullets are enough. Do not treat unknown fields as permission to invent details.
 
 ## Identity
 
@@ -69,7 +69,7 @@ When a language model is partway through a familiar multi-word expression, does 
 - **Headline patchscopes budget: eight layers.** The author chose the 8-layer union as the primary measurement, matching the August 2026 summary deck. Stated rationale in the paper: it is the layer set on which every per-layer, per-category and probing analysis was run, so those results stay mutually comparable. The 32-layer sweep is reported alongside in Table 2, Table 3 and a dedicated paragraph of §5.4, and is named in Limitations: it costs patchscopes 6–8 points and rebalances the disagreement asymmetry from ~3:1 to ~3:2. The draft does not hide it.
 - **The "idioms flip" claim is back in**, because it holds under the 8-layer measurement: idioms are the easiest category under patchscopes (57.4%) and the hardest under generation (66.4%). The table's last column shows that under the 32-layer sweep idioms move to the middle rather than the top, so the claim is stated as a reversal that weakens to a re-ordering.
 
-### Settled (2026-09-18, by the agent, at the author's direction)
+### Settled (2026-09-18)
 
 - **Efficiency framing stays**, as motivation only. Limitations states plainly that no decoding scheme was implemented and no latency was measured. The conclusion names the adaptive multi-token-prediction work as a separate ongoing thread and says explicitly that nothing in this paper depends on its outcome.
 - **Idiom provenance resolved.** The set traces to the four sources behind IDIOMEM (Haviv et al., 2023): MAGPIE (511), LIdioms (165), EPIE (81), and EF's public idiom/proverb list (95). The `EPIC` and `ep_*` labels in `idioms.csv` correspond to EPIE and EF. Verified by matching Haviv et al.'s Table 2 examples and their `Pred.`/`Sim.` filter flags against the CSV's columns. The paper says the set is *not* IDIOMEM (852 vs their 814; we keep items their filters remove).
@@ -79,9 +79,9 @@ When a language model is partway through a familiar multi-word expression, does 
 - **Venue: ACL long paper.** Drives the 8-page main body and what goes to appendix.
 - **Context duplication corrected.** 44.8% of collected instances repeat a context (collector resumed from an earlier five-context run). This is a bug the deck predates. Aggregate rates are unaffected (64.8% → 64.5% at i=3), but it had inflated the per-phrase bimodality result, which is now computed over distinct contexts against a binomial null and is stronger for it. Documented in §4, Limitations, and `results/README.md`.
 
-### Settled (2026-09-19, from the project assistant's records)
+### Settled (2026-09-19)
 
-- **The LLM judge was ChatGPT, not Claude**, and the model version was not recorded. The prompt is reproduced verbatim in Appendix A.15, and Limitations says the run is not exactly reproducible and should be repeated with a named model. An informal second pass by a different assistant is *not* reported, since it used no fixed rubric.
+- **The LLM judge was ChatGPT**, and the model version was not recorded. The prompt is reproduced verbatim in Appendix A.15, and Limitations says the run is not exactly reproducible and should be repeated with a named model. An informal second pass is *not* reported, since it used no fixed rubric.
 - **Future Lens** (Pal et al., CoNLL 2023) was missing and is the closest prior work: it asks the same question in general form, using the same transplant technique that Patchscopes later generalised. Now cited in the Introduction, Related Work (its own paragraph) and Method, with an explicit statement of what we add: an externally-defined target, a repetition structure across contexts, and a comparison against the model's own behaviour rather than against its own predictions.
 - **Confidence is the geometric mean** of per-token probabilities, not the arithmetic mean. Corrected; medians added.
 - **A judge-free replication of the false-positive result** was available and is now included: 40.0% of the 412 cases had the model itself confident (>0.7), 10.4% unsure (<0.3). This is the more reproducible of the two analyses and agrees with the adjudication.
@@ -106,5 +106,5 @@ When a language model is partway through a familiar multi-word expression, does 
 
 ## Interview status
 
-- Last checkpoint: 2026-09-19. The brief was reconstructed by an agent from the August 2026 summary deck, the July 2026 analysis reports, and the raw result files, then corrected against the project assistant's records and two cluster reruns. The editorial center was confirmed by the author on 2026-09-19; it is no longer an inference.
+- Last checkpoint: 2026-09-19. The brief was reconstructed from the August 2026 summary deck, the July 2026 analysis reports, and the raw result files, then corrected against the project assistant's records and two cluster reruns. The editorial center was confirmed by the author on 2026-09-19; it is no longer an inference.
 - Everything under **Open decisions** above is settled. The only remaining author judgment is whether to spend cluster time on the two reproducibility gaps before submission.

@@ -154,8 +154,8 @@ for i in all_i:
     os_ = o.get("success", 0)
     fs = f_.get("success", 0)
     if os_ == 0 and fs == 0: continue
-    o_str = f"{100*o.get('early',0)/os_:.0f}/{100*o.get('middle',0)/os_:.0f}/{100*o.get('late',0)/os_:.0f}" if os_ else "—"
-    f_str = f"{100*f_.get('early',0)/fs:.0f}/{100*f_.get('middle',0)/fs:.0f}/{100*f_.get('late',0)/fs:.0f}" if fs else "—"
+    o_str = f"{100*o.get('early',0)/os_:.0f}/{100*o.get('middle',0)/os_:.0f}/{100*o.get('late',0)/os_:.0f}" if os_ else "-"
+    f_str = f"{100*f_.get('early',0)/fs:.0f}/{100*f_.get('middle',0)/fs:.0f}/{100*f_.get('late',0)/fs:.0f}" if fs else "-"
     print(f"{i:<5}{o_str:<25}{f_str:<25}")
 
 print("\nDone. Saved to results/lookahead_5x_fixed.json")

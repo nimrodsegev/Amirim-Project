@@ -102,7 +102,7 @@ def analyze_phrase(phrase):
                     if rest.lower() in txt.lower():
                         actual_layer = ln + 1
                         third = "early" if actual_layer <= 10 else ("middle" if actual_layer <= 21 else "late")
-                        # keep best (first found) — don't overwrite if already set
+                        # keep best (first found), don't overwrite if already set
                         if not results[tokens_remaining]["success"]:
                             results[tokens_remaining] = {
                                 "success": True,

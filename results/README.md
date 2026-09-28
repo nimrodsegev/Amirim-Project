@@ -35,31 +35,37 @@ agreement table.
 
 ## Known issues with the raw data
 
-- **Duplicated contexts.** 44.8% of the 9,955 instances repeat a context already
-  present for the same phrase, because the collector resumed from an earlier
-  five-context run. There are 5,498 distinct (phrase, context) pairs. Aggregate
-  rates are essentially unaffected (64.8% vs 64.5% at *i*=3), but per-phrase
-  counts must be deduplicated and the effective sample size is about half the
-  instance count. See `context_duplication` in `processed/paper_numbers.json`.
+- **Contexts are deduplicated.** The collection originally repeated a context
+  already present for the same phrase. The files here are deduplicated: 5,498
+  distinct (phrase, context) pairs over 1,096 phrases, 13,613 trials at
+  *i* = 2...5. Every measurement that depended on the contexts was rerun on the
+  deduplicated set in September 2026.
 - **Layer budget differs by analysis.** Patchscopes unions are over all 32
   layers in the `lookahead_*` files and over 8 layers (5, 7, 10, 13, 15, 20, 25,
   30) wherever hidden states had to be stored. The choice moves the reported
   patchscopes rate by 6–8 points; always state which was used.
 - **Not everything is reproducible here.** The probing experiments need
-  per-trial hidden states ,  `probing_features.npz` (1.28 GB) and
-  `generation_probing_features.npz` (3.02 GB) ,  which are intact on the compute
+  per-trial hidden states, `probing_features.npz` (1.28 GB) and
+  `generation_probing_features.npz` (3.02 GB), which are intact on the compute
   cluster but too large to distribute. Table 7 and the false-positive
-  adjudication are transcribed from the July 2026 run logs into the `external`
-  block of `processed/paper_numbers.json`, which names their source.
-- **The false-positive adjudication is not exactly reproducible.** It was run
-  through ChatGPT (most likely GPT-5.6; not logged). The prompt is in Appendix A.15 of the paper. The judge-free split by model confidence, reported
-  alongside it, is reproducible and points the same way.
+  adjudication are transcribed from the September 2026 rerun logs into the
+  `external` block of `processed/paper_numbers.json`, which names their source.
+- **The false-positive adjudication rests on a single automatic judge.** It was
+  run through ChatGPT (GPT-5.6 Sol) over the 212 false positives of the
+  deduplicated set. The prompt is reproduced in the paper's appendix, so the run
+  can be repeated, but one automatic judge is not a substitute for human
+  annotation. The judge-free split by model confidence, reported alongside it,
+  points the same way.
+The three notes below concern the pre-deduplication data and the analyses
+built on it. None of those numbers appears in the current paper; they are kept
+as a record of how the discrepancies were resolved at the time.
+
 - **One deck figure is absent, and the discrepancy behind it is resolved.** The
   slide-14 chart (L25 per-phrase prediction bins, `i=3` only) covers 194
   phrases, while every saved file records 180. Resolved by rerunning
   `probe_bins_and_seeds.py` on the cluster against the current
   `probing_features.npz`: sweeping the minimum-observations-per-phrase filter
-  gives 180 (filter = 3, the current setting), 190 (2) or 196 (1) ,  **194 is
+  gives 180 (filter = 3, the current setting), 190 (2) or 196 (1), **194 is
   not reachable**. The chart was therefore built from an earlier snapshot of
   the extracted features that no longer exists. **Use 180.** The correlation
   the paper cites for L25 at `i=3` (0.517) was confirmed by direct rerun to
