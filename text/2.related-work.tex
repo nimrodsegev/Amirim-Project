@@ -1,88 +1,65 @@
 \section{Related Work}
 \label{sec:related}
-\yuval{the related work section needs to be shorter. right now its 7 paragraph, it should focus on 3-4 high-level topics and write one paragraph about each. we don't need to give a lot of detail about things that are related in motivation or background, we can concisely describe only the interesting finding from them. when mentioning related methods or works that showed similar things, we can group several works in one sentence (for examples look at the related work section in Future Lens, like "Memorization in language models"). We should give more space only to works that are closer to what we're doing here, to answer the question of the reader "what is new here that wasn't shown there? does this show something that other works haven't already shown?"}
 
 \paragraph{Representations of units larger than a token.}
-The closest earlier work is \citet{kaplan-etal-2025-tokens}, who show
-that when a word is split into several subword tokens, early attention
-aggregates the pieces into the final subtoken and feed-forward layers then write
-a whole-word representation into that position. They read these states out with
-Patchscopes and find that the model can regenerate words for which no single
-vocabulary token exists, which they interpret as a latent lexicon broader than
-the tokenizer's vocabulary. Their unit is a word the model has finished reading; ours is a phrase it has
-not. The two share a method but not a claim: pulling together evidence already
-seen is a weaker thing than anticipating evidence not yet seen.
-\citet{reif-etal-2026-vocab} build on the same picture to reshape model
-vocabularies, and \citet{artzy-schwartz-2024-attend} add evidence that attention
-gathers information early and later layers work on the result.
-
-\paragraph{Idioms and memorised sequences.}
-\citet{haviv-etal-2023-understanding} study how transformers recall memorised
-idiom completions, and find the process to be two-stage: early layers promote
-the memorised token to the top of the output distribution, and upper layers
-raise the model's confidence in it. They study how a single target token is recalled; we measure how far ahead
-recall reaches and how it varies across phrases and sentences. Our idiom set is drawn from
-MAGPIE \citep{haagsma-etal-2020-magpie} and
-LIdioms \citep{moussallem-etal-2018-lidioms}.
-
-\paragraph{Anticipating future tokens from one hidden state.}
-Our question was posed, in a more general form, by Future
-Lens \citep{pal-etal-2023-future}: given the hidden state of a single token at
-position $t$, can the tokens at positions $\geq t+2$ be recovered? They answer
-it with linear approximation and with causal intervention (transplanting the
-state into a different context and reading what the model then produces), and
-report better than $48\%$ accuracy at some layers of GPT-J-6B. That transplant
-is the technique Patchscopes later generalised, and our use of Patchscopes is a
-direct descendant of it.
-
-We differ in what is anticipated and in what it is checked against. Future Lens
-scores the recovered tokens against whatever the model would have written next;
-we score them against the phrase, which is fixed in advance and does not move
-with the model. That lets us repeat a phrase across many sentences
-(\S\ref{sec:stability}) and set the transplant against the model's own writing
-on matched instances (\S\ref{sec:disagreement}). Future Lens compares two
-\emph{decoding} methods against the model's output; we compare a decoding
-method against the model's behaviour, and find that they disagree in ways that
-change conclusions.
+Language models build representations that span more than one token.
+\citet{kaplan-etal-2025-tokens} show that when a word is split into several
+subword tokens, early attention gathers the pieces into the final subtoken and
+later layers write a whole-word representation into that position. Reading those
+states with Patchscopes, they recover words for which no single vocabulary token
+exists, which they read as a latent lexicon wider than the tokenizer's
+vocabulary. Related work builds on the same picture to reshape model
+vocabularies \citep{reif-etal-2026-vocab} and to show that attention gathers
+information early while later layers work on the result
+\citep{artzy-schwartz-2024-attend}. Closer to our phrases,
+\citet{haviv-etal-2023-understanding} find that memorised idiom completions are
+recalled in two stages: early layers promote the memorised token to the top of
+the output distribution, and upper layers raise the model's confidence in it.
+All of these concern a unit the model has finished reading, or a single token it
+is about to emit. Ours is a phrase it has not read yet.
 
 \paragraph{Reading hidden states.}
 The logit lens \citep{nostalgebraist-2020-logitlens} projects an intermediate
-state through the unembedding to ask what token it would predict.
-Patchscopes \citep{ghandeharioun-etal-2024-patchscopes} generalises both it and
-the Future Lens intervention by injecting the state into an arbitrary prompt and
-letting the model write it out, which lifts the restriction that the answer be
-a single vocabulary item and so allows multi-token outputs. All three act on a representation at inference time, and all raise the same
-question: is what comes out what the model would otherwise have used? We test
-that directly in \S\ref{sec:disagreement}.
+state through the unembedding to ask what token it would predict. Patchscopes
+\citep{ghandeharioun-etal-2024-patchscopes} generalises this by injecting the
+state into an arbitrary prompt and letting the model write out what it finds,
+which lifts the restriction that the answer be a single vocabulary item and so
+allows multi-token answers. Both raise the same question: is what comes out what
+the model would otherwise have used? We put that question to the test by
+comparing against the model's own continuations on matched instances
+(\S\ref{sec:disagreement}).
 
-\paragraph{Probing internal states for future correctness.}
-\citet{orgad-etal-2025-llms} show that hidden states encode more about the
-truthfulness of a forthcoming answer than the output distribution reveals, that
-the signal concentrates in particular tokens, and that probes trained on it
-generalise poorly across datasets. Our probe is the same kind of thing pointed at a different question, not whether
-an answer will be true but whether a phrase will be finished, and it behaves
-similarly, including the limited transfer across categories in
-Appendix~\ref{app:details}. In a similar spirit,
-\citet{gekhman-etal-2024-fine} treat a model's pre-existing knowledge of an item
-as a measurable quantity predicting downstream behaviour.
+\paragraph{Recovering tokens the model has not yet produced.}
+Our question was posed, in a more general form, by Future Lens
+\citep{pal-etal-2023-future}: given the hidden state of a single token at
+position $t$, can the tokens at positions $\geq t+2$ be recovered? They answer
+with linear approximation and with a causal intervention, transplanting the
+state into a different context and reading what the model then produces, and
+report better than $48\%$ accuracy at some layers of GPT-J-6B. That transplant
+is the technique Patchscopes later generalised, and our use of it is a direct
+descendant. What is new here is the target. Future Lens scores the recovered
+tokens against whatever the model itself would have written next, so the target
+moves with the model. We score against the phrase, which is fixed in advance and
+does not. That lets us ask two things they cannot: whether the same phrase comes
+back across many different sentences (\S\ref{sec:stability}), and how the
+intervention compares with the model's own behaviour on identical inputs
+(\S\ref{sec:disagreement}).
 
-\paragraph{Using upcoming tokens to save computation.}
-If a model's state already determines several upcoming tokens, that redundancy
-can be spent. Speculative decoding \citep{leviathan-etal-2023-fast} drafts
-several tokens with a cheaper process and verifies them with the target model;
-multi-token prediction heads \citep{gloeckle-etal-2024-better} train the model
-to emit several tokens at once; and LayerSkip
-\citep{elhoushi-etal-2024-layerskip} exits early and self-speculates.
-\citet{aynetdinov-akbik-2025-babies} show that a multi-token prediction
-objective helps even 130M-parameter models under severe data constraints,
-suggesting the capacity to train for lookahead is not confined to large models.
-
-Closest to the use our probe suggests is CLP \citep{xie-zhou-2026-clp}, which
-trains one small linear layer on the hidden state to set how many drafted tokens
-to accept at each step, reporting $1.14\times$--$1.29\times$ on Qwen2.5 without
-measurable quality loss: the same kind of read as our probe, used to make a
-decoding decision rather than to answer a question. All of these methods assume
-that upcoming tokens are predictable in a usable way. We measure that directly,
-for one well-defined class
-of continuations, and say when it is reliable. We implement no decoding
+\paragraph{Using what the state already knows.}
+Hidden states carry information about behaviour that has not happened yet.
+\citet{orgad-etal-2025-llms} show they encode more about whether a forthcoming
+answer will be truthful than the output distribution reveals, and that probes
+trained on this signal transfer poorly across datasets;
+\citet{gekhman-etal-2024-fine} treat a model's prior knowledge of an item as a
+measurable quantity that predicts downstream behaviour. Our probe is the same
+kind of instrument pointed at a different question, and it shows the same
+limited transfer across categories (Appendix~\ref{app:details}). A parallel line
+of work spends this redundancy on speed: speculative decoding
+\citep{leviathan-etal-2023-fast}, multi-token prediction objectives
+\citep{gloeckle-etal-2024-better,aynetdinov-akbik-2025-babies}, early exit with
+self-speculation \citep{elhoushi-etal-2024-layerskip}, and CLP
+\citep{xie-zhou-2026-clp}, which reads a single hidden state to decide how many
+drafted tokens to accept. These methods assume that upcoming tokens are
+predictable in a usable way. We measure how far that holds for one well-defined
+class of continuations, and say when it is reliable. We implement no decoding
 method here and report no speed-ups of our own.

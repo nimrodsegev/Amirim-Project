@@ -4,20 +4,20 @@ Amirim final project (HUJI, CS 68101). Nimrod Segev, advised by Yuval Reif and
 Roy Schwartz. Written in ACL format; this repository is synced to Overleaf.
 
 **The paper asks:** when a model is partway through a familiar fixed phrase, does
-its hidden state already carry enough information to recover the rest? We measure
-this two ways on identical inputs, and the two ways disagree in a way that
-changes conclusions.
+its hidden state already carry enough information to recover the rest? We read
+the state with Patchscopes, using the model's own continuation as a baseline, and
+find that the rest of the phrase is often recoverable several tokens early.
 
 ## If you are reviewing this
 
 Read in this order:
 
-1. **`main.tex` compiled** (or the PDF in Overleaf). About 9 pages of body plus
-   limitations, references and appendix.
-2. **`notes/PAPER_BRIEF.md`** — the claim-and-evidence map. Every claim in the
+1. **`main.tex` compiled** (or the PDF in Overleaf). Body, then limitations,
+   references and appendix.
+2. **`notes/PAPER_BRIEF.md`**, the claim-and-evidence map. Every claim in the
    paper is listed there with the file the number comes from and the caveat that
    applies. It also records which decisions were made deliberately and why.
-3. **`results/README.md`** — what is in the raw result files, and three known
+3. **`results/README.md`**, what is in the raw result files, and three known
    issues with the data that the paper discloses.
 
 The two things most worth your judgement are noted at the end of
@@ -84,12 +84,18 @@ version was not logged. Both are stated as limitations in the paper.
 
 ## State of the draft
 
-Complete. The argument, structure, figures and numbers are all in place, and the
-draft has been through three rounds of external review. Every number in the main
-text except the two noted above traces to `results/processed/paper_numbers.json`,
-which regenerates from `results/raw/`.
+Revised against Yuval's review of 2026-09-28. All 26 of his inline comments are
+addressed; each was deleted in the commit that acted on it, so the absence of
+`\yuval{}` macros in `text/` is the record that none is outstanding. His general
+notes (plain language, terminology, captions, no mention of bugs) were applied
+across the whole paper rather than only where he flagged them.
+
+Every number in the main text except the two noted above traces to
+`results/processed/paper_numbers.json`, which regenerates from `results/raw/`.
 
 Not yet done, and flagged in the paper's Limitations rather than hidden: a
 phrase-clustered bootstrap for confidence intervals, a frequency-matched
 non-phrase control, and a measurement of how often these phrases occur in
-pretraining data.
+pretraining data. One further item is a fix rather than a limitation: 44.8% of
+the collected contexts are duplicates, and deduplicating requires rerunning the
+8-layer Patchscopes sweep and all probe training on the cluster.

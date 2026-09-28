@@ -17,6 +17,17 @@ one sequence's worth of computation: the sweep still decodes one sequence per
 layer. Decoding is greedy
 throughout, for both measurements, with \texttt{max\_new\_tokens} $= i+3$.
 
+\subsection{Scoring at the token level}
+
+The target is the decoded string of the final $i$ tokens, which for some phrases
+begins mid-word: at $i=2$ in \textit{Sistine Chapel} the target is
+\textit{istine Chapel}, and in \textit{Pulp Fiction} it is \textit{ulp Fiction}.
+The criterion is applied identically to both measurements, so comparisons
+between them are unaffected, but absolute rates for phrases with unusual
+tokenization are not directly interpretable as ``the model produced the
+phrase''. Rerunning with word-aligned cut points would make the absolute numbers
+cleaner.
+
 \subsection{Patchscope prompt ablation}
 
 The prompt \texttt{"Repeat this: X"} offers one slot for the injected state.
@@ -278,5 +289,17 @@ All main-text numbers except Table~\ref{tab:probes} and the adjudication in
 \S\ref{sec:falsepos} are regenerated from \texttt{results/raw/} by scripts
 under \texttt{code/}: one writes a processed JSON file, which the table and
 figure scripts then consume. The experiment scripts that produced the raw
-results sit alongside them. Per-trial hidden states are not distributed. The
-repository README gives the exact filenames and the commands to run them.
+results sit alongside them. The repository README gives the exact filenames and
+the commands to run them.
+
+The two exceptions are worth stating plainly. The probing experiments need
+per-trial hidden states, $1.28$\,GB for the Patchscopes labels and $3.02$\,GB
+for the generation labels. These are too large to distribute and remain on the
+compute cluster, so the probe numbers in Table~\ref{tab:probes} are reported
+from the run logs rather than recomputed from this repository. The
+false-positive adjudication of \S\ref{sec:falsepos} rests on a single judge with
+no human validation and no inter-annotator agreement, and the ChatGPT version
+used was not logged at the time (most likely GPT-5.6, though we cannot confirm
+it), so that run is not exactly reproducible either; it should be rerun with a
+named model before the number is relied on. The confidence-based split in
+\S\ref{sec:falsepos} uses no judge, is reproducible, and points the same way.
