@@ -61,16 +61,21 @@ for xe in (cut_x + 0.6, ur):
 ax.text((cut_x + ur) / 2, 17.2, "target: the $i=3$ unread tokens",
         fontsize=6.5, ha="center", va="center", color=INK)
 
-# the state we lift, and where it goes
+# The interrupted input feeds two procedures, and they take different things
+# from it: Patchscopes takes the hidden state, generation takes only the prefix.
 hx = cut_x - TW / 2 - TG / 2
-ax.plot([hx, hx], [21.2, 13.2], color=PS, lw=0.9)
-ax.text(hx - 1.3, 17.6, "$h^{\\ell}_p$", fontsize=8.2, color=PS, ha="right",
-        va="center")
+ax.plot([hx, hx], [21.2, 13.2], color="#c6c6c6", lw=0.9)
+ax.text(hx - 1.2, 17.6, "at the cut", fontsize=6.3, color=GREY, ha="right",
+        va="center", style="italic")
 ax.plot([16, 62], [13.2, 13.2], color="#c6c6c6", lw=0.8)
-arrow(16, 13.2, 16, 10.4, color=PS)
-arrow(62, 13.2, 62, 10.4, color=GEN)
+arrow(16, 13.2, 16, 10.6, color=PS)
+arrow(62, 13.2, 62, 10.6, color=GEN)
+ax.text(17.1, 11.9, "takes $h^{\\ell}_p$", fontsize=6.6, color=PS, ha="left",
+        va="center")
+ax.text(63.1, 11.9, "takes the prefix only", fontsize=6.6, color=GEN,
+        ha="left", va="center")
 
-# --- the two readouts ------------------------------------------------------
+# --- the two measurements ------------------------------------------------------
 ax.text(1, 9.0, "1", fontsize=6.4, color="white", ha="center", va="center",
         weight="bold",
         bbox=dict(boxstyle="circle,pad=0.22", fc=PS, ec="none"))
@@ -83,7 +88,7 @@ box(31.4, 2.4, 15.0, 4.6, "\u201cof the Rings\u201d", ec="#dcdcdc")
 ax.text(52, 9.0, "2", fontsize=6.4, color="white", ha="center", va="center",
         weight="bold",
         bbox=dict(boxstyle="circle,pad=0.22", fc=GEN, ec="none"))
-ax.text(55.0, 9.0, "generation", fontsize=7.3, color=GEN, weight="bold",
+ax.text(55.0, 9.0, "Generation", fontsize=7.3, color=GEN, weight="bold",
         va="center")
 box(52, 2.4, 28.0, 4.6, "\u2026films such as The Lord", ec=GEN)
 arrow(80.7, 4.7, 84.5, 4.7, color=GEN)

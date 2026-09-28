@@ -8,7 +8,7 @@
 tokens unread, and ask whether those tokens are recoverable from that point by
 two different means: injecting the hidden state into an unrelated prompt
 (Patchscopes), or letting the model continue from the prefix it has actually
-seen (generation). Both are scored identically. In both, only the first token is
+seen (generation, our baseline). Both are scored identically. In both, only the first token is
 produced from the state shown; decoding then continues autoregressively, so a
 multi-token recovery does not imply that every token was separately encoded in
 $h^{\ell}_p$.}
@@ -71,8 +71,8 @@ each of those tokens is separately encoded in the state at the cut: after the
 first generated token, the rest may follow from what has already been emitted.
 What a success shows is that the state carries enough information to bring the
 continuation out. We use \emph{recognition} in this practical sense throughout:
-a phrase is recognized at distance $i$ when the measurement named recovers its
-remaining $i$ tokens under the matching rule below.
+a phrase is recognized at distance $i$ when the measurement in question
+recovers its remaining $i$ tokens under the matching rule below.
 
 \subsection{Success criterion}
 \label{sec:criterion}
