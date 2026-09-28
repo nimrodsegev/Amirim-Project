@@ -142,36 +142,38 @@ ax.text(TOTX, B1 + COLH / 2, "160\nlayer-passes", ha="left", va="center",
 # recoverable from the state there? No layers are skipped: the cut is a position
 # in the phrase, not an early exit.
 B2 = 7
-ax.text(X0, B2 + COLH + 15.5, "what we ask", ha="left", va="center",
+ax.text(X0, B2 + COLH + 15.0, "what we ask", ha="left", va="center",
         fontsize=6.9, color=CUT, weight="bold")
 for k, t in enumerate(TOKS[:2]):
     column(X0 + k * (CW + GAP), B2, t, 32, PS, LIGHT_PS)
 
 lord_r = X0 + (CW + GAP) + CW        # right edge of the 'Lord' column
-ax.plot([lord_r + 1.3] * 2, [B2 - 1.0, B2 + COLH + 1.0],
+cx = lord_r + 1.3                    # the cut line
+ax.plot([cx] * 2, [B2 - 1.0, B2 + COLH + 1.0],
         color=CUT, lw=1.1, ls=(0, (2.4, 1.7)))
-ax.text(lord_r + 3.4, B2 - 3.4, "cut", ha="center", va="center",
+ax.text(cx + 2.4, B2 - 3.4, "cut", ha="center", va="center",
         fontsize=5.8, color=CUT, weight="bold")
 
-rx = X0 + 2 * (CW + GAP) + 4.0
+# The unread tokens, set well clear of the cut so the arrow has room to land.
+rx = X0 + 2 * (CW + GAP) + 9.0
 rw = (X0 + SPAN) - rx
 ax.add_patch(FancyBboxPatch((rx, B2), rw, COLH,
                             boxstyle="round,pad=0.05,rounding_size=0.5",
                             facecolor="none", edgecolor=GREY,
                             linewidth=0.75, linestyle=(0, (2.6, 2.0))))
 ax.text(rx + rw / 2, B2 + COLH / 2, "\u201cof the Rings\u201d",
-        ha="center", va="center", fontsize=6.9, color=GREY)
+        ha="center", va="center", fontsize=6.4, color=GREY)
 ax.text(rx + rw / 2, B2 - 8.2, "$i=3$ tokens still unread", ha="center",
         va="center", fontsize=5.8, color=GREY, style="italic")
 
-# the state at the cut, and the question asked of it
-ax.text(lord_r - CW / 2, B2 + COLH + 3.2, "", ha="center")
-ax.add_patch(FancyArrowPatch((lord_r - CW / 2, B2 + COLH + 1.2),
-                             (rx + rw / 2, B2 + COLH + 1.2),
+# The question, asked of the state at the cut. The arrow leaves from the cut
+# (not from over the token labels) and arcs below its caption.
+ax.add_patch(FancyArrowPatch((cx + 1.0, B2 + COLH + 2.2),
+                             (rx + rw / 2, B2 + COLH + 1.4),
                              arrowstyle="-|>", mutation_scale=8.5,
                              color=PS, lw=1.0, shrinkA=0, shrinkB=0,
-                             connectionstyle="arc3,rad=-0.42"))
-ax.text(rx + rw / 2, B2 + COLH + 8.8,
+                             connectionstyle="arc3,rad=-0.26"))
+ax.text(rx + rw / 2, B2 + COLH + 9.6,
         "already recoverable here?", ha="center", va="center",
         fontsize=6.9, color=PS, weight="bold")
 
