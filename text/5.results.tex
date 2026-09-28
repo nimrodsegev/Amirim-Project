@@ -189,9 +189,8 @@ fluent.
 hidden state and predicts whether recovery succeeds; the two differ only in
 which measurement supplies the label. The grey line is the raw accuracy a
 majority-class guess would reach on the Patchscopes label. It is shown because
-that label's positive rate moves sharply with depth, from $93.6\%$ at L5 to
-$53.6\%$ at L25, which is why we report balanced accuracy rather than raw
-accuracy.}
+that baseline moves sharply with depth, from $93.6\%$ at L5 to $53.6\%$ at L25,
+which is why we report balanced accuracy rather than raw accuracy.}
 \label{fig:probes}
 \end{figure}
 
@@ -247,9 +246,9 @@ probe at L25, cases where the probe predicted completion and exact-match scoring
 recorded a failure, by presenting each (target, generated text) pair to ChatGPT
 with a three-way rubric (Appendix~\ref{app:judge}). It labelled $127$ cases
 ($59.9\%$) valid alternates, $47$ ($22.2\%$) partially correct and $38$
-($17.9\%$) unrelated. Typical cases are \textit{laughs best} for \textit{laughs
-loudest} and \textit{beat around the bush} for \textit{beat about the bush}: the
-more common form of the expression, scored as a failure.
+($17.9\%$) unrelated. Typical cases are \textit{plowshares} for
+\textit{ploughshares} and \textit{around the bush} for \textit{about the bush}:
+the more common form of the expression, scored as a failure.
 
 This is a single judge with no human validation, so we report it as indicative
 of the direction of the bias rather than as a corrected accuracy. Read that way,
