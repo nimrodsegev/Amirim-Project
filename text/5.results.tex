@@ -1,6 +1,14 @@
 \section{Results}
 \label{sec:results}
-\yuval{We need a short opening here that helps the reader know what to expect in this section, goes over what we study/measure here at a high level (and concisely) - just to give a "map" of this section}
+
+We begin with the central measurement: how often the rest of a phrase can be
+recovered at each lookahead distance, with and without the surrounding sentence
+(\S\ref{sec:lookahead}). We then ask whether recovery is spread evenly across
+phrases or concentrated in some of them (\S\ref{sec:stability}), and how far our
+two measurements agree with each other (\S\ref{sec:disagreement}). Finally we
+ask whether a small classifier reading a single hidden state can tell in advance
+whether the model will get the phrase right (\S\ref{sec:probe}), and what the
+cases it gets wrong look like (\S\ref{sec:falsepos}).
 
 \subsection{Phrases are recovered several tokens ahead}
 \label{sec:lookahead}
@@ -10,22 +18,22 @@
 \begin{figure}[t]
 \centering
 \includegraphics[width=\columnwidth]{figures/context_vs_isolation}
-\caption{Recovery rate against lookahead distance, for both readouts, with and
-without natural context. Both Patchscopes curves sweep all $32$ layers, so the
-context comparison is like for like; the eight-layer budget used elsewhere in
-the paper appears in Table~\ref{tab:main}. Presented alone the two readouts are
-nearly indistinguishable. In context both rise sharply, by $25$--$36$ points for
-generation and $22$--$33$ for Patchscopes, and generation pulls slightly ahead.\yuval{The caption gives the main numbers and conclusion, and the next paragraphs in the text give them again. Unless the numbers are very surprising and strong, we should let the caption describe what we're seeing in the figure (so the reader knows how to read it) and the high-level trends, and leave the detailed comparison and its meaning to the prose. The same caption-vs-text repetition occurs at other figures too.}\yuval{minor: for all plots, if you can, capitalize the first letters of the first word in each axes or legend label}}
+\caption{Recovery rate against lookahead distance $i$. Solid curves are phrases
+in their original sentences; dashed curves are the same phrases presented alone.
+Both Patchscopes curves sweep all $32$ layers, so the context comparison is like
+for like; the eight-layer budget used elsewhere in the paper appears in
+Table~\ref{tab:main}. Recovery falls as $i$ grows, and context raises it
+substantially at every distance.}
 \label{fig:context}
 \end{figure}
 
-\yuval{When presenting results/analyses, we should always go in this order: what we measured or did (concisely) -> describing the results -> conclusions. the thing that's missing a lot in this section currently is thie first part - what we measured/did. even if this was said earlier in the paper, the reader still needs a reminder here, so they wouldn't have to search for it.}
-
-Table~\ref{tab:main} gives the central measurement. In natural context, the
-remaining tokens of a familiar phrase appear in OLMo-2-7B's next $i+3$ generated
-tokens in $84.0\%$ of instances at $i=2$, $64.8\%$ at $i=3$ and $53.6\%$ at
-$i=5$. So this is not a small effect that dies out after one token: it holds several
-tokens ahead, well past ordinary next-token prediction.
+We interrupt OLMo-2-7B inside each phrase, leaving $i$ tokens unread, and let it
+continue greedily for $i+3$ tokens from the prefix it has actually seen. The
+trial succeeds if the unread tokens appear in that continuation.
+Table~\ref{tab:main} gives the result. With the phrase in its original sentence,
+the remaining tokens appear in $84.0\%$ of instances at $i=2$, $64.8\%$ at $i=3$
+and $53.6\%$ at $i=5$. So this is not a small effect that dies out after one
+token: it holds several tokens ahead, well past ordinary next-token prediction.
 
 \paragraph{Isolation understates the effect.}
 The same phrases presented alone, with no surrounding text, are recovered far
@@ -38,22 +46,20 @@ poor stand-in for how a model actually meets these expressions, and for these
 phrases and models, testing in isolation badly understates what the model can
 do.
 
-\paragraph{In isolation the two readouts nearly coincide.}
+\paragraph{In isolation the two measurements nearly coincide.}
 The lower pair of curves in Figure~\ref{fig:context} is the isolated condition,
-and the two readouts track each other within a point or two at every distance:
+and the two track each other within a point or two at every distance:
 $57.8\%$ against $59.2\%$ at $i=2$, $16.5\%$ against $17.6\%$ at $i=5$. Whatever
 separates them in context (\S\ref{sec:disagreement}) does not appear when the
 phrase stands alone, itself a clue that the disagreement is something context
-creates rather than a fixed property of the instruments.
+creates rather than something fixed about how we measure.
 
 \paragraph{Successes persist beyond the range we analyse.}
-We stop at $i=5$ because the samples thin out fast: $185$ phrases at $i=6$ and
-$51$ at $i=8$. The effect does not stop there, though. In context, generation
-recovers $48.9\%$ of the $1{,}123$ trials at $i=6$ and $41.7\%$ of the $312$ at
-$i=8$. We draw nothing from so thin a tail, and mention it only because an
-earlier version of this work found zero successes at $i \geq 6$, which turned
-out to be a generation-budget artifact (\S\ref{sec:criterion}) rather than a
-property of the model.\yuval{no need to mention bugs here or anywhere in the paper. Also, the language shouldn't be like a novel ("We draw nothing from so thin a tail"), but simple and precise}
+We stop at $i=5$ because few phrases are long enough to go further: only $185$
+phrases reach $i=6$ and $51$ reach $i=8$. Recovery does not stop there. In
+context, generation recovers $48.9\%$ of the $1{,}123$ trials at $i=6$ and
+$41.7\%$ of the $312$ at $i=8$. These samples are small, so we report them for
+completeness and base no claims on them.
 
 \subsection{Recovery varies systematically by phrase}
 \label{sec:stability}
@@ -62,14 +68,12 @@ property of the model.\yuval{no need to mention bugs here or anywhere in the pap
 \centering
 \includegraphics[width=\columnwidth]{figures/per_phrase_consistency}
 \caption{Share of its own distinct contexts in which each phrase's continuation
-is recovered at $i=3$, generation readout, over the $803$ phrases with at least
+is recovered at $i=3$ by generation, over the $803$ phrases with at least
 five distinct contexts. Grey is the binomial distribution expected if every
 context were an independent draw at the pooled rate $p=0.64$. The two extreme
 bins are kept separate because most phrases have exactly five distinct contexts.
-The observed distribution puts mass at both ends, where the null has almost
-none: $7.7\%$ of phrases fail everywhere and $31.5\%$ succeed everywhere,
-against $0.5\%$ and $10.1\%$ under the null; the null instead piles up in the middle, where the observed
-distribution is thin.}
+The observed distribution has mass at both ends, where the null has almost
+none, and is thin in the middle, where the null concentrates.}
 \label{fig:consistency}
 \end{figure}
 
@@ -87,7 +91,7 @@ context is an independent draw at the pooled rate $p = 0.645$
 recovered in \emph{every} context, where the null predicts $10.1\%$, and
 $7.7\%$ in none at all, where it predicts $0.5\%$. The null instead concentrates
 in the middle, putting $56.0\%$ of its mass in the two central bins against
-$32.3\%$ observed. The Patchscopes readout is more extreme still, with $37.4\%$
+$32.3\%$ observed. Patchscopes is more extreme still, with $37.4\%$
 of phrases recovered in at least $90\%$ of their contexts against a null of
 $9.5\%$.
 
@@ -115,76 +119,59 @@ establish it. Over all $32$ layers the median first successful layer is L16 and
 $41.9\%$ of successes appear at or before L10, so phrase information becomes
 readable gradually and, for a large minority, early.
 
-\subsection{The two readouts disagree}
+\subsection{Patchscopes and generation do not always agree}
 \label{sec:disagreement}
 
 \input{tables/agreement}
 \input{tables/disagreement_examples}
 \input{tables/categories}
 
-So far we have reported both readouts as if they were interchangeable
-measurements of one underlying quantity. They are not. Table~\ref{tab:agreement}
-compares them on identical instances (same phrase, same context, same cut
-point, same success criterion), and they agree on $78.7\%$ of the $24{,}740$
-pooled trials.
+We have so far reported the two measurements side by side. Here we compare them
+directly, on identical instances: the same phrase, the same context, the same
+cut point and the same success criterion. They agree on $78.7\%$ of the
+$24{,}740$ pooled trials (Table~\ref{tab:agreement}). The disagreement is
+lopsided: generation recovers a continuation that Patchscopes misses in
+$15.7\%$ of instances, while Patchscopes recovers one that generation misses in
+only $5.6\%$.
 
-The residual $21.3\%$ is the informative part. It is lopsided: generation
-recovers a continuation that Patchscopes misses in $15.7\%$ of instances, while
-Patchscopes recovers one that generation misses in only $5.6\%$, roughly a
-three-to-one asymmetry. Read on its own, that says Patchscopes undercounts what
-the model can do.
+Much of that gap comes from how many layers we gave Patchscopes. The comparison
+above uses eight. Sweeping all $32$ raises its in-context rate from $73.2\%$ to
+$79.6\%$ at $i=2$ and from $38.7\%$ to $46.4\%$ at $i=5$ (Table~\ref{tab:main}),
+lifts agreement to $81.1\%$, and brings the disagreement close to even; at $i=3$
+the two then differ by $0.7$ points overall. Some disagreement remains at $32$
+layers, with $18.9\%$ of instances classified differently and $7.8\%$ recovered
+only by Patchscopes. We keep the eight-layer sweep as our primary measurement
+because every per-layer, per-category and probing analysis was run on that layer
+set. Readers comparing our Patchscopes rates against other work should note that
+the budget moves them by six to eight points.\nimrod{Worth discussing: when
+Patchscopes fails and generation succeeds, we cannot tell from these
+measurements whether the intervention missed something the state holds or the
+model simply was not looking ahead at that point. I have not tried to settle it
+here.}
 
-The two failure directions look qualitatively different, and neither is simply
-an instrument defect. The examples in Table~\ref{tab:disagree} are illustrative
-rather than a systematic sample, so what follows is a reading of them, not a
-measured property of the disagreement. Where Patchscopes succeeds and
-generation does not, the intervention can bring the phrase out of the state
-while the surrounding context steers generation elsewhere: given
-\textit{Why should one person be brought up}, it writes \textit{a wealthy
-family, with every opportunity} rather than \textit{in the lap of luxury}. That
-is a different continuation, not a wrong one, and a reminder that our criterion
-asks for a specific string rather than a good completion. Where generation
-succeeds and Patchscopes does not, the patchscope reaches for a neighbour: for
-\textit{a bird in the hand is worth two in the bush} it returns \textit{worth
-more than one}. There the readout recovered the sense and lost the wording.
+The examples in Table~\ref{tab:disagree} suggest the two kinds of disagreement
+differ in character, though they are illustrative rather than a systematic
+sample. Where Patchscopes succeeds and generation does not, the intervention
+brings the phrase out of the state while the surrounding context steers
+generation elsewhere: given \textit{Why should one person be brought up}, the
+model writes \textit{a wealthy family, with every opportunity} rather than
+\textit{in the lap of luxury}. That is a different continuation, not a wrong
+one, and a reminder that our criterion asks for a specific string rather than a
+good completion. Where generation succeeds and Patchscopes does not, the
+patchscope reaches for a neighbour: for \textit{a bird in the hand is worth two
+in the bush} it returns \textit{worth more than one}, recovering the sense and
+losing the wording.
 
-\paragraph{The asymmetry is partly a layer-budget artifact.}
-The comparison above gives Patchscopes eight layers. Sweeping all $32$ raises
-its in-context rate from $73.2\%$ to $79.6\%$ at $i=2$ and from $38.7\%$ to
-$46.4\%$ at $i=5$ (Table~\ref{tab:main}), lifts agreement to $81.1\%$, and
-rebalances the disagreement from three-to-one to roughly three-to-two
-(Table~\ref{tab:agreement}). At $i=3$ the two readouts then differ by $0.7$
-points overall. Most of the apparent superiority of generation is therefore a
-statement about how thoroughly Patchscopes was sampled, not about the model.
-What survives the wider sweep is the disagreement itself: even at $32$ layers,
-$18.9\%$ of instances are classified differently, and $7.8\%$ are recovered only
-by Patchscopes. The two instruments are not nested, and no layer budget makes
-one a refinement of the other.
-
-We keep the eight-layer readout as our primary measurement because every
-per-layer, per-category and probing analysis was run on that layer set. Readers
-comparing our Patchscopes rates against other work should note that the budget
-moves them by six to eight points.
-
-\paragraph{Category difficulty is readout-dependent.}
-Table~\ref{tab:categories} breaks the pooled rates down by phrase kind, and the
-two readouts do not merely differ in level; they reverse an ordering. Under
+\paragraph{The two rank phrase categories differently.}
+Table~\ref{tab:categories} breaks the pooled rates down by phrase kind. Under
 Patchscopes, idioms are the \emph{easiest} category at $57.4\%$, ahead of film
 titles ($54.7\%$) and landmarks ($47.2\%$). Under generation, idioms are the
-\emph{hardest} at $66.4\%$, well behind film titles ($84.5\%$) and landmarks
-($75.3\%$). One explanation, which we have not tested, is the
+\emph{hardest} at $66.4\%$, behind film titles ($84.5\%$) and landmarks
+($75.3\%$). Under the wider $32$-layer sweep idioms sit in the middle of the
+Patchscopes ranking rather than at the top, so the difference narrows but does
+not disappear. One possible explanation, which we have not tested, is the
 scoring artifact of \S\ref{sec:falsepos}: idioms have accepted variants, so
-exact-match scoring would penalise them most under the readout that produces
-the most fluent continuations. Confirming that would need the adjudication
-repeated per category. Under the wider $32$-layer sweep idioms move to the middle of the
-Patchscopes ranking rather than the top, so the reversal weakens to a
-re-ordering, but the categories are still ranked differently by the two
-instruments.
-
-The practical consequence is narrow but concrete. A study measuring only with
-Patchscopes would report that this model handles idioms better than landmarks or
-titles; one measuring only with generation would report the opposite. Both would
-be reporting their instrument as much as their model.
+exact matching would penalise them most where the continuations are most fluent.
 
 \subsection{The hidden state predicts generation success}
 \label{sec:probe}
@@ -192,21 +179,22 @@ be reporting their instrument as much as their model.
 \begin{figure}[t]
 \centering
 \includegraphics[width=\columnwidth]{figures/probe_balanced_accuracy}
-\caption{Balanced accuracy of the two probes by layer, against the raw accuracy
-a majority-class guess would achieve on the Patchscopes label. That baseline
-moves from $93.4\%$ at L5 to $52.3\%$ at L25 as the positive rate shifts, which
-is why raw accuracy on that label cannot be compared across layers and balanced
-accuracy is used instead. The label then determines the shape: predicting
-Patchscopes success peaks in the middle layers, while predicting generation
-success trends upward to a maximum at L30.}
+\caption{Balanced accuracy of the two probes by layer. Each probe reads a single
+hidden state and predicts whether recovery succeeds; the two differ only in
+which measurement supplies the label. The grey line is the raw accuracy a
+majority-class guess would reach on the Patchscopes label. It is shown because
+that label's positive rate moves sharply with depth, from $93.4\%$ at L5 to
+$52.3\%$ at L25, which is why we report balanced accuracy rather than raw
+accuracy.}
 \label{fig:probes}
 \end{figure}
 
-If phrase anticipation is carried by the representation, it should be readable
-from the representation without an intervention. We train a small MLP on the raw
-hidden state at the cut position to predict whether the readout succeeds, pooling
+If the model is really looking ahead, that should be visible in the hidden state
+itself, without any intervention. We train a small MLP on the raw hidden state at
+the cut position to predict whether recovery succeeds, pooling
 $i \in \{2,3,4,5\}$ and splitting by phrase so that no test phrase is seen in
-training (Appendix~\ref{app:details}).
+training (Appendix~\ref{app:details}). We train two versions, differing only in
+which measurement supplies the label.
 
 Predicting \emph{generation success} works well. Balanced accuracy trends
 upward with depth, from $69.8\%$ at L5 to a maximum of $76.8\%$ at L30 with a
@@ -236,7 +224,7 @@ moves from $6.6\%$ at L5 to $47.7\%$ at L25 as Patchscopes itself gets better.
 A reader interested in \emph{where in the model phrase information lives} would
 draw opposite conclusions from the two probes. We read the generation-label
 probe as the more trustworthy of the two, since its label does not depend on the
-layer being probed, but the divergence is itself the point.
+layer being probed.
 
 The same mid-network peak appears when we ask whether the Patchscopes-label
 probe tracks phrase identity rather than a general notion of difficulty.
@@ -250,8 +238,8 @@ own behaviour does.
 \subsection{Most apparent errors are valid alternates}
 \label{sec:falsepos}
 
-The probe's precision is bounded by the scoring criterion, not only by the
-model. We adjudicated all $412$ false positives of the generation-label probe at
+Some of what we count as probe mistakes may be mistakes in the scoring rather
+than in the probe. We checked all $412$ false positives of the generation-label probe at
 L25, cases where the probe predicted completion and exact-match scoring
 recorded a failure, by presenting each (target, generated text) pair to
 ChatGPT with a three-way rubric (Appendix~\ref{app:judge}). It labelled $259$

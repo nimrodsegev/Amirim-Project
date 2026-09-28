@@ -7,17 +7,15 @@ Hidden states are extracted with a single forward pass over
 \texttt{[BOS]} $+$ context $+$ phrase, with \texttt{output\_hidden\_states}
 enabled. The BOS token is required: the state of a phrase's first token at
 position $0$ differs substantially from its state at position $1$ after a BOS,
-and omitting it produces degenerate patchscope outputs.\footnote{This was the
-source of a long-lived bug in an earlier version of this work, in which
-patchscope outputs for well-known phrases were unrelated to the input.}
+and omitting it produces degenerate patchscope outputs.
 Positions are enumerated from the first phrase token to the second-to-last; the
 BOS and the final phrase token are never cut points.
 
-For the Patchscopes readout, the states for all probed layers are stacked into
+For Patchscopes, the states for all probed layers are stacked into
 one batch and decoded in a single \texttt{generate} call. This is one call, not
 one sequence's worth of computation: the sweep still decodes one sequence per
 layer. Decoding is greedy
-throughout, for both readouts, with \texttt{max\_new\_tokens} $= i+3$.
+throughout, for both measurements, with \texttt{max\_new\_tokens} $= i+3$.
 
 \subsection{Patchscope prompt ablation}
 
@@ -35,12 +33,12 @@ long $i$ is not a shortage of output positions.
 \input{tables/replication}
 
 Table~\ref{tab:replication} repeats the central measurement on OLMo-3-7B
-(\texttt{allenai/Olmo-3-1025-7B}; both readouts share the OLMo-2 protocol, but
+(\texttt{allenai/Olmo-3-1025-7B}; both measurements share the OLMo-2 protocol, but
 note that this tokenizer does not prepend a BOS token) and on Qwen2.5-14B
-(\texttt{Qwen/Qwen2.5-14B}, generation readout only). OLMo-2-7B is
+(\texttt{Qwen/Qwen2.5-14B}, generation only). OLMo-2-7B is
 \texttt{allenai/OLMo-2-1124-7B}. All three are base checkpoints, not
 instruction-tuned. The
-qualitative picture is stable across all three: anticipation several tokens
+qualitative picture is stable across all three: recovery several tokens
 ahead, a large context effect, and a monotone decline with $i$. The absolute
 levels differ, and not in the direction model scale would predict: OLMo-3-7B
 is consistently below OLMo-2-7B, and Qwen2.5-14B, at roughly twice the
@@ -272,7 +270,7 @@ adaptive logic, pointing at this model's interaction with the inference engine
 rather than at any policy. They were also more common for the aggressive
 fixed-length policies (six of ten prompts against two for CLP), so that speed
 advantage is not free. We report the pilot only because it bounds how much the
-anticipation we measure might be worth in practice.
+lookahead we measure might be worth in practice.
 
 \subsection{Reproducing the numbers}
 

@@ -34,16 +34,16 @@ ctx_p32 = NUM["in_context"]["patchscopes_olmo2_32L"]
 fig, ax = plt.subplots(figsize=(3.3, 2.15))
 xs = range(len(IS))
 ax.plot(xs, [ctx_g[str(i)][2] for i in IS], "o-", ms=3.4, color=C["gen"],
-        label="generation, in context")
+        label="Generation, in context")
 ax.plot(xs, [ctx_p32[str(i)][2] for i in IS], "s-", ms=3.4, color=C["ps"],
-        label="patchscopes, in context")
+        label="Patchscopes, in context")
 ax.plot(xs, [iso_g[str(i)][2] for i in IS], "o--", ms=3.4, color=C["gen"],
-        alpha=.5, label="generation, alone")
+        alpha=.5, label="Generation, alone")
 ax.plot(xs, [iso_p[str(i)][2] for i in IS], "s--", ms=3.4, color=C["ps"],
-        alpha=.5, label="patchscopes, alone")
+        alpha=.5, label="Patchscopes, alone")
 ax.set_xticks(list(xs)); ax.set_xticklabels([f"${i}$" for i in IS])
-ax.set_xlabel("lookahead distance $i$")
-ax.set_ylabel("recovery rate (%)")
+ax.set_xlabel("Lookahead distance $i$")
+ax.set_ylabel("Recovery rate (%)")
 ax.set_ylim(0, 100)
 ax.grid(axis="y", lw=.4, alpha=.3); ax.set_axisbelow(True)
 ax.legend(frameon=False, fontsize=6.1, loc="upper right")
@@ -63,7 +63,7 @@ sel = {p_: list(d.values()) for p_, d in by.items() if len(d) >= 5}
 n = len(sel)
 pool = sum(sum(v) for v in sel.values()) / sum(len(v) for v in sel.values())
 
-LABELS = ["none", "1-25%", "25-50%", "50-75%", "75-99%", "all"]
+LABELS = ["None", "1-25%", "25-50%", "50-75%", "75-99%", "All"]
 
 
 def which(frac):
@@ -87,12 +87,12 @@ fig, ax = plt.subplots(figsize=(3.2, 2.0))
 xs = range(6)
 w = .38
 ax.bar([x - w / 2 for x in xs], [100 * o / n for o in obs], width=w,
-       color=C["gen"], label="observed")
+       color=C["gen"], label="Observed")
 ax.bar([x + w / 2 for x in xs], [100 * e / n for e in exp], width=w,
-       color="#b9b9b9", label=f"binomial null ($p={pool:.2f}$)")
+       color="#b9b9b9", label=f"Binomial null ($p={pool:.2f}$)")
 ax.set_xticks(list(xs)); ax.set_xticklabels(LABELS, fontsize=6.4)
-ax.set_xlabel("share of a phrase's contexts recovered")
-ax.set_ylabel("% of phrases")
+ax.set_xlabel("Share of a phrase's contexts recovered")
+ax.set_ylabel("Phrases (%)")
 ax.legend(frameon=False, fontsize=6.4)
 ax.grid(axis="y", lw=.4, alpha=.3); ax.set_axisbelow(True)
 save(fig, "per_phrase_consistency")
@@ -104,7 +104,7 @@ per = NUM["external"]["patchscopes_per_layer_success_pct"]
 for i, style in zip(["2", "3", "4", "5"], ["o-", "s-", "^-", "v-"]):
     ax.plot(L, [per[i][str(l)] for l in L], style, ms=3,
             label=f"$i={i}$", alpha=.9)
-ax.set_xlabel("layer"); ax.set_ylabel("patchscopes success (%)")
+ax.set_xlabel("Layer"); ax.set_ylabel("Patchscopes success (%)")
 ax.set_xticks(L); ax.grid(axis="y", lw=.4, alpha=.3); ax.set_axisbelow(True)
 ax.legend(frameon=False)
 save(fig, "patchscopes_by_layer")
@@ -114,13 +114,13 @@ fig, ax = plt.subplots(figsize=(3.2, 2.25))
 ps = NUM["external"]["patchscopes_label_probe"]["balanced_accuracy_pct"]
 ge = NUM["external"]["generation_label_probe"]["balanced_accuracy_pct"]
 base = NUM["external"]["patchscopes_label_probe"]["majority_baseline_pct"]
-ax.plot(L, [ps[str(l)] for l in L], "s-", ms=3, color=C["ps"], label="patchscopes label")
-ax.plot(L, [ge[str(l)] for l in L], "o-", ms=3, color=C["gen"], label="generation label")
+ax.plot(L, [ps[str(l)] for l in L], "s-", ms=3, color=C["ps"], label="Patchscopes label")
+ax.plot(L, [ge[str(l)] for l in L], "o-", ms=3, color=C["gen"], label="Generation label")
 ax.plot(L, [base[str(l)] for l in L], "^--", ms=2.6, color=C["grey"], alpha=.75,
-        label="majority-class baseline (raw acc.)")
+        label="Majority-class baseline (raw acc.)")
 ax.axhline(50, ls=":", lw=.8, color=C["grey"])
-ax.text(5.4, 52.2, "chance", ha="left", fontsize=6, color=C["grey"])
-ax.set_xlabel("layer"); ax.set_ylabel("%")
+ax.text(5.4, 52.2, "Chance", ha="left", fontsize=6, color=C["grey"])
+ax.set_xlabel("Layer"); ax.set_ylabel("%")
 ax.set_xticks(L); ax.set_ylim(40, 100)
 ax.grid(axis="y", lw=.4, alpha=.3); ax.set_axisbelow(True)
 ax.legend(frameon=False, fontsize=6.2, ncol=2, loc="upper center",
@@ -133,8 +133,8 @@ hist = NUM["first_successful_layer"]["histogram"]
 ls = sorted(int(k) for k in hist)
 tot = NUM["first_successful_layer"]["n_successes"]
 ax.bar(ls, [100 * hist[str(l)] / tot for l in ls], color=C["alt"], width=.8)
-ax.set_xlabel("first layer at which the patchscope succeeds")
-ax.set_ylabel("% of successes")
+ax.set_xlabel("First layer at which the patchscope succeeds")
+ax.set_ylabel("Successes (%)")
 ax.grid(axis="y", lw=.4, alpha=.3); ax.set_axisbelow(True)
 save(fig, "first_successful_layer")
 
@@ -145,11 +145,11 @@ print("done")
 corr = json.load(open(RAW / "correlation_per_i.json"))
 Ls = sorted(corr, key=int)
 fig, ax = plt.subplots(figsize=(3.2, 1.9))
-for key, lab, st in (("3", "$i=3$", "o-"), ("all", "pooled $i=2\\ldots5$", "s--")):
+for key, lab, st in (("3", "$i=3$", "o-"), ("all", "Pooled $i=2\\ldots5$", "s--")):
     ax.plot([int(l) for l in Ls], [corr[l][key][0] for l in Ls], st, ms=3,
             label=lab, color=C["alt"] if key == "3" else C["grey"],
             alpha=1 if key == "3" else .75)
-ax.set_xlabel("layer"); ax.set_ylabel("Pearson $r$")
+ax.set_xlabel("Layer"); ax.set_ylabel("Pearson $r$")
 ax.set_xticks([int(l) for l in Ls]); ax.set_ylim(0, .75)
 ax.grid(axis="y", lw=.4, alpha=.3); ax.set_axisbelow(True)
 ax.legend(frameon=False, loc="lower center")
@@ -169,16 +169,16 @@ for j, (k, lab) in enumerate(order):
     a.text(j, conf[k]["mean"] + .02, f'{conf[k]["mean"]:.3f}', ha="center", fontsize=6.5)
 a.set_xticks(range(4))
 a.set_xticklabels([f'{lab}\n$n$={conf[k]["n"]:,}' for k, lab in order], fontsize=6.5)
-a.set_ylabel("mean model confidence"); a.set_ylim(0, 1.05)
+a.set_ylabel("Mean model confidence"); a.set_ylim(0, 1.05)
 a.axvline(1.5, ls=":", lw=.8, color="#c9c9c9")
-a.text(0.5, 1.0, "model succeeded", ha="center", fontsize=6.3, color=C["grey"], style="italic")
-a.text(2.5, 1.0, "model failed", ha="center", fontsize=6.3, color=C["grey"], style="italic")
+a.text(0.5, 1.0, "Model succeeded", ha="center", fontsize=6.3, color=C["grey"], style="italic")
+a.text(2.5, 1.0, "Model failed", ha="center", fontsize=6.3, color=C["grey"], style="italic")
 a.grid(axis="y", lw=.4, alpha=.3); a.set_axisbelow(True)
 
 b = axes[1]
-segs = [("valid_alternate_pct", "valid alternate", "#2e8b57"),
-        ("partially_right_pct", "partially right", "#c9a227"),
-        ("unrelated_pct", "unrelated", C["grey"])]
+segs = [("valid_alternate_pct", "Valid alternate", "#2e8b57"),
+        ("partially_right_pct", "Partially right", "#c9a227"),
+        ("unrelated_pct", "Unrelated", C["grey"])]
 left = 0
 for k, lab, col in segs:
     v = fp[k]
@@ -189,7 +189,7 @@ for k, lab, col in segs:
 b.set_xlim(0, 100); b.set_ylim(-.75, .95); b.set_yticks([])
 b.legend(frameon=False, fontsize=6.3, ncol=3, loc="upper center",
          handlelength=1.0, columnspacing=1.2, handletextpad=0.4)
-b.set_xlabel(f'all {fp["n"]} probe false positives, adjudicated')
+b.set_xlabel(f'All {fp["n"]} probe false positives, adjudicated')
 for sp in ("left", "right", "top"):
     b.spines[sp].set_visible(False)
 save(fig, "confidence_and_falsepos")
@@ -205,10 +205,10 @@ xs = range(len(keys) + 1)
 bacc = [early[k] for k in keys] + [ge["balanced_accuracy_pct"]["30"]]
 prec = [eprec[k] for k in keys] + [ge["precision_pct"]["30"]]
 w = .38
-ax.bar([x - w / 2 for x in xs], bacc, width=w, color=C["gen"], label="balanced acc.")
-ax.bar([x + w / 2 for x in xs], prec, width=w, color=C["ps"], label="precision")
+ax.bar([x - w / 2 for x in xs], bacc, width=w, color=C["gen"], label="Balanced acc.")
+ax.bar([x + w / 2 for x in xs], prec, width=w, color=C["ps"], label="Precision")
 ax.axhline(50, ls=":", lw=.8, color=C["grey"])
-ax.text(-0.42, 51.5, "chance", ha="left", fontsize=6, color=C["grey"])
+ax.text(-0.42, 51.5, "Chance", ha="left", fontsize=6, color=C["grey"])
 ax.set_xticks(list(xs))
 ax.set_xticklabels([f"L{k}" for k in keys] + ["L30\n(best)"], fontsize=6.8)
 ax.set_ylabel("%"); ax.set_ylim(0, 100)
