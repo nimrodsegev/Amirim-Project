@@ -1,5 +1,6 @@
 \section{Results}
 \label{sec:results}
+\yuval{We need a short opening here that helps the reader know what to expect in this section, goes over what we study/measure here at a high level (and concisely) - just to give a "map" of this section}
 
 \subsection{Phrases are recovered several tokens ahead}
 \label{sec:lookahead}
@@ -14,9 +15,11 @@ without natural context. Both Patchscopes curves sweep all $32$ layers, so the
 context comparison is like for like; the eight-layer budget used elsewhere in
 the paper appears in Table~\ref{tab:main}. Presented alone the two readouts are
 nearly indistinguishable. In context both rise sharply, by $25$--$36$ points for
-generation and $22$--$33$ for Patchscopes, and generation pulls slightly ahead.}
+generation and $22$--$33$ for Patchscopes, and generation pulls slightly ahead.\yuval{The caption gives the main numbers and conclusion, and the next paragraphs in the text give them again. Unless the numbers are very surprising and strong, we should let the caption describe what we're seeing in the figure (so the reader knows how to read it) and the high-level trends, and leave the detailed comparison and its meaning to the prose. The same caption-vs-text repetition occurs at other figures too.}\yuval{minor: for all plots, if you can, capitalize the first letters of the first word in each axes or legend label}}
 \label{fig:context}
 \end{figure}
+
+\yuval{When presenting results/analyses, we should always go in this order: what we measured or did (concisely) -> describing the results -> conclusions. the thing that's missing a lot in this section currently is thie first part - what we measured/did. even if this was said earlier in the paper, the reader still needs a reminder here, so they wouldn't have to search for it.}
 
 Table~\ref{tab:main} gives the central measurement. In natural context, the
 remaining tokens of a familiar phrase appear in OLMo-2-7B's next $i+3$ generated
@@ -50,7 +53,7 @@ recovers $48.9\%$ of the $1{,}123$ trials at $i=6$ and $41.7\%$ of the $312$ at
 $i=8$. We draw nothing from so thin a tail, and mention it only because an
 earlier version of this work found zero successes at $i \geq 6$, which turned
 out to be a generation-budget artifact (\S\ref{sec:criterion}) rather than a
-property of the model.
+property of the model.\yuval{no need to mention bugs here or anywhere in the paper. Also, the language shouldn't be like a novel ("We draw nothing from so thin a tail"), but simple and precise}
 
 \subsection{Recovery varies systematically by phrase}
 \label{sec:stability}
