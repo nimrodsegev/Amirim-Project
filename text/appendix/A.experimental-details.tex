@@ -5,9 +5,8 @@
 
 Hidden states are extracted with a single forward pass over
 \texttt{[BOS]} $+$ context $+$ phrase, with \texttt{output\_hidden\_states}
-enabled. The BOS token is required: the state of a phrase's first token at
-position $0$ differs substantially from its state at position $1$ after a BOS,
-and omitting it produces degenerate patchscope outputs.
+enabled. The BOS token matters here: a phrase's first token has a different
+state at position $0$ than at position $1$ after a BOS, so we always include it.
 Positions are enumerated from the first phrase token to the second-to-last; the
 BOS and the final phrase token are never cut points.
 
