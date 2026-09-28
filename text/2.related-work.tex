@@ -32,7 +32,7 @@ position $t$, can the tokens at positions $\geq t+2$ be recovered? They answer
 it with linear approximation and with causal intervention (transplanting the
 state into a different context and reading what the model then produces), and
 report better than $48\%$ accuracy at some layers of GPT-J-6B. That transplant
-is the technique Patchscopes later generalised, and our Patchscopes readout is a
+is the technique Patchscopes later generalised, and our use of Patchscopes is a
 direct descendant of it.
 
 We differ in what is anticipated and in what it is checked against. Future Lens
@@ -51,7 +51,7 @@ state through the unembedding to ask what token it would predict.
 Patchscopes \citep{ghandeharioun-etal-2024-patchscopes} generalises both it and
 the Future Lens intervention by injecting the state into an arbitrary prompt and
 letting the model write it out, which lifts the restriction that the answer be
-a single vocabulary item and so allows multi-token readouts. All three act on a representation at inference time, and all raise the same
+a single vocabulary item and so allows multi-token outputs. All three act on a representation at inference time, and all raise the same
 question: is what comes out what the model would otherwise have used? We test
 that directly in \S\ref{sec:disagreement}.
 
@@ -66,7 +66,7 @@ Appendix~\ref{app:details}. In a similar spirit,
 \citet{gekhman-etal-2024-fine} treat a model's pre-existing knowledge of an item
 as a measurable quantity predicting downstream behaviour.
 
-\paragraph{Exploiting anticipation for efficiency.}
+\paragraph{Using upcoming tokens to save computation.}
 If a model's state already determines several upcoming tokens, that redundancy
 can be spent. Speculative decoding \citep{leviathan-etal-2023-fast} drafts
 several tokens with a cheaper process and verifies them with the target model;
@@ -82,6 +82,7 @@ trains one small linear layer on the hidden state to set how many drafted tokens
 to accept at each step, reporting $1.14\times$--$1.29\times$ on Qwen2.5 without
 measurable quality loss: the same kind of read as our probe, used to make a
 decoding decision rather than to answer a question. All of these methods assume
-useful anticipation exists. We measure it directly, for one well-defined class
+that upcoming tokens are predictable in a usable way. We measure that directly,
+for one well-defined class
 of continuations, and say when it is reliable. We implement no decoding
 method here and report no speed-ups of our own.

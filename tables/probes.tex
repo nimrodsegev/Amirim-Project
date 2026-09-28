@@ -16,13 +16,12 @@
 30 & 40.2 & 66.4 & 59.7 & 76.8 & 87.6 \\
 \bottomrule
 \end{tabular}
-\caption{Probes trained on the hidden state at the cut position to predict each
-readout's outcome, pooled over $i=2\ldots5$, split by phrase (80/20), training
-set class-balanced by downsampling, evaluated on the natural test distribution.
-The generation label has a fixed positive rate of 69.1\% at every
-layer; the patchscopes label does not, which is why its raw accuracy is not
-comparable across layers. Balanced accuracy for the patchscopes label peaks in
-the middle of the model, whereas for the generation label it trends upward with
-depth, dipping slightly at L20 and peaking at L30.}
+\caption{Probes trained on the hidden state at the cut position, pooled over
+$i=2\ldots5$, split by phrase (80/20), training set class-balanced by
+downsampling, evaluated on the natural test distribution. The two differ only in
+which measurement supplies the label. The generation label has a fixed positive
+rate of 69.1\% at every layer; the Patchscopes label does not,
+which is why its raw accuracy is not comparable across layers and balanced
+accuracy should be read instead.}
 \label{tab:probes}
 \end{table}

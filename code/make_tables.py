@@ -118,12 +118,10 @@ write("agreement", r"""\begin{table}[t]
       + r"""\bottomrule
 \end{tabular}
 \caption{Patchscopes and generation on \emph{identical} (phrase, context, $i$)
-instances; all cells are percentages of $n$. Over the eight probed layers the
-two readouts agree on 78.7\% of instances and the disagreement is lopsided:
-generation recovers what Patchscopes misses roughly three times as often as the
-reverse. Widening the Patchscopes sweep to all 32 layers raises agreement to
-81.1\% and rebalances the disagreement, but does not remove it: 7.8\% of
-instances are still recovered only by Patchscopes.}
+instances; all cells are percentages of $n$. The upper block gives the eight
+probed layers used throughout the paper, the lower block the full 32-layer
+sweep. Agreement is high under both, and the layer budget moves how the
+remaining disagreement is split.}
 \label{tab:agreement}
 \end{table}""")
 
@@ -147,14 +145,13 @@ write("probes", r"""\begin{table}[t]
 """ + "\n".join(rows) + rf"""
 \bottomrule
 \end{{tabular}}
-\caption{{Probes trained on the hidden state at the cut position to predict each
-readout's outcome, pooled over $i=2\ldots5$, split by phrase (80/20), training
-set class-balanced by downsampling, evaluated on the natural test distribution.
-The generation label has a fixed positive rate of {ge['pos_rate_pct']}\% at every
-layer; the patchscopes label does not, which is why its raw accuracy is not
-comparable across layers. Balanced accuracy for the patchscopes label peaks in
-the middle of the model, whereas for the generation label it trends upward with
-depth, dipping slightly at L20 and peaking at L30.}}
+\caption{{Probes trained on the hidden state at the cut position, pooled over
+$i=2\ldots5$, split by phrase (80/20), training set class-balanced by
+downsampling, evaluated on the natural test distribution. The two differ only in
+which measurement supplies the label. The generation label has a fixed positive
+rate of {ge['pos_rate_pct']}\% at every layer; the Patchscopes label does not,
+which is why its raw accuracy is not comparable across layers and balanced
+accuracy should be read instead.}}
 \label{{tab:probes}}
 \end{{table}}""")
 
@@ -180,11 +177,10 @@ write("categories", r"""\begin{table}[t]
 \end{tabular}
 \caption{Recovery by phrase category, pooled over $i=2\ldots5$, in natural
 context. \textbf{Trials} counts (phrase, context, $i$) triples, not the
-(phrase, context) instances of Table~\ref{tab:dataset}. The two readouts reverse the ordering of idioms: under Patchscopes
-idioms are the \emph{easiest} category, under generation the hardest. The final
-column repeats the Patchscopes measurement over all 32 layers, under which
-idioms fall to the middle of the ranking; the reversal against generation is
-therefore weaker but does not disappear.}
+(phrase, context) instances of Table~\ref{tab:dataset}. The final column
+repeats the Patchscopes measurement over all 32 layers. The two measurements
+rank the three categories differently, which \S\ref{sec:disagreement}
+discusses.}
 \label{tab:categories}
 \end{table}""")
 

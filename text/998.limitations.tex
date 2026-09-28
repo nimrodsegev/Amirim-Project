@@ -9,7 +9,7 @@
 The target is the decoded string of the final $i$ tokens, which for some phrases
 begins mid-word: at $i=2$ in \textit{Sistine Chapel} the target is
 \textit{istine Chapel}, and in \textit{Pulp Fiction} it is \textit{ulp Fiction}.
-The criterion is applied identically to both readouts, so comparisons between
+The criterion is applied identically to both measurements, so comparisons between
 them are unaffected, but absolute rates for phrases with unusual tokenization
 are not directly interpretable as ``the model produced the phrase''. Rerunning
 with word-aligned cut points would make the absolute numbers cleaner.
@@ -33,12 +33,13 @@ and points the same way.
 
 \paragraph{One model family carries most of the weight.}
 All layer-level and probing results are from OLMo-2-7B. We replicate the
-lookahead curves on OLMo-3-7B and the generation readout on Qwen2.5-14B
+lookahead curves on OLMo-3-7B and generation on Qwen2.5-14B
 (Appendix~\ref{app:details}), and the qualitative pattern holds, but we have not
 established that the layer localisation or the probe's profile transfers. The
 Qwen2.5-14B result is worth flagging in its own right: at roughly twice the
 parameters it does not clearly outperform OLMo-2-7B on this task, which suggests
-that phrase anticipation is not simply a function of general model capability.
+that recovering phrases this way is not simply a function of general model
+capability.
 
 \paragraph{Contexts are duplicated in the collected set.}
 Of the $9{,}955$ (phrase, context) instances, $44.8\%$ are repeats of a context
@@ -86,11 +87,11 @@ pooled trials, so aggregate rates are close to idiom rates. The landmark and
 film-title lists are convenience samples from public web pages rather than
 curated resources.
 
-\paragraph{The Patchscopes readout is sampled, not exhaustive.}
+\paragraph{The Patchscopes sweep is sampled, not exhaustive.}
 Our primary measurement unions eight of the model's $32$ layers, chosen so that
 every per-layer, per-category and probing result rests on the same states. That
 undercounts what a full sweep recovers by six to eight points, and it is the
-single largest contributor to the apparent asymmetry between the two readouts
+single largest contributor to the apparent asymmetry between the two measurements
 (\S\ref{sec:disagreement}). We report the $32$-layer sweep wherever we have it,
 but it is not available for the per-category or probing analyses, so those
 should be read as lower bounds on Patchscopes performance. A budget-matched
