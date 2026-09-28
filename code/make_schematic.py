@@ -108,7 +108,7 @@ print("wrote figures/protocol.pdf")
 # ---------------------------------------------------------------- motivation
 # Slide 3: the cost argument, as two stacked rows of layer columns.
 fig, ax = plt.subplots(figsize=(3.3, 2.45))
-ax.set_xlim(0, 100); ax.set_ylim(-9, 72); ax.axis("off")
+ax.set_xlim(0, 100); ax.set_ylim(-14, 72); ax.axis("off")
 TOKS = ["The", "Lord", "of", "the", "Rings"]
 CW, GAP, X0, COLH = 10.4, 2.6, 2.0, 14.0
 LIGHT_PS, LIGHT_GEN = "#dce6f2", "#f7e6d6"
@@ -148,7 +148,17 @@ for k, t in enumerate(TOKS[:2]):
     column(X0 + k * (CW + GAP), B2, t, 32, PS, LIGHT_PS)
 
 lord_r = X0 + (CW + GAP) + CW        # right edge of the 'Lord' column
+lord_x = X0 + (CW + GAP)             # left edge of the 'Lord' column
 cx = lord_r + 1.3                    # the cut line
+
+# We read the state at eight layers spread through the network, not only at the
+# top, so mark several depths rather than committing the figure to one layer.
+for frac in (0.32, 0.55, 0.78):
+    ty = B2 + COLH * frac
+    ax.plot([lord_x + 1.8, lord_r - 1.8], [ty, ty], color=PS, lw=0.9,
+            solid_capstyle="round")
+ax.text((X0 + lord_r) / 2, B2 - 12.6, "read at several depths", ha="center",
+        va="center", fontsize=5.8, color=PS, style="italic")
 ax.plot([cx] * 2, [B2 - 1.0, B2 + COLH + 1.0],
         color=CUT, lw=1.1, ls=(0, (2.4, 1.7)))
 ax.text(cx + 2.4, B2 - 3.4, "cut", ha="center", va="center",

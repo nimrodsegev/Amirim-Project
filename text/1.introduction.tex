@@ -8,7 +8,8 @@
 at a time costs a full pass through the $32$-layer network for every token
 (top). We interrupt the model partway through the phrase, leaving $i$ tokens
 unread, and ask whether those tokens can already be recovered from the hidden
-state at the cut (bottom). Figure~\ref{fig:protocol} shows the two ways we
+state at the cut (bottom). We read that state at several depths in the network
+rather than only at the end. Figure~\ref{fig:protocol} shows the two ways we
 check.}
 \label{fig:motivation}
 \end{figure}
