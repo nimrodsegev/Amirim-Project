@@ -103,7 +103,7 @@ context were an independent coin flip at the same rate. Some expressions are
 recovered in most of their occurrences and others in almost none. That does not show the phrase \emph{itself} is what matters, because we have
 not separated a phrase from the things that travel with it: how often it appears
 in pretraining, how long it is, how it is tokenized, what category it belongs
-to, and how alike its contexts happen to be (\S\ref{sec:limitations}). What it does show is that
+to, and how alike its contexts happen to be (see Limitations). What it does show is that
 outcomes group tightly by phrase: sentences containing the same expression
 behave much more alike than chance would predict. Whether that is the phrase
 itself or something that comes with it remains open. Either way it is what makes
@@ -228,8 +228,8 @@ draw opposite conclusions from the two probes. We read the generation-label
 probe as the more trustworthy of the two, since its label does not depend on the
 layer being probed.
 
-The same mid-network peak appears when we ask whether the Patchscopes-label
-probe tracks phrase identity rather than a general notion of difficulty.
+A similar picture appears when we ask whether the Patchscopes-label probe
+tracks phrase identity rather than a general notion of difficulty.
 Comparing each held-out phrase's mean predicted probability with its true
 success rate, the correlation peaks at $r=0.61$ (L10) and falls away at both
 ends, to $0.44$ at L5 and $0.53$ at L30 (Appendix~\ref{app:details}). We have

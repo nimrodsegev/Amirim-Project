@@ -157,7 +157,7 @@ for frac in (0.32, 0.55, 0.78):
     ty = B2 + COLH * frac
     ax.plot([lord_x + 1.8, lord_r - 1.8], [ty, ty], color=PS, lw=0.9,
             solid_capstyle="round")
-ax.text((X0 + lord_r) / 2, B2 - 12.6, "read at several depths", ha="center",
+ax.text(lord_x + CW / 2, B2 - 12.6, "read at several depths", ha="center",
         va="center", fontsize=5.8, color=PS, style="italic")
 ax.plot([cx] * 2, [B2 - 1.0, B2 + COLH + 1.0],
         color=CUT, lw=1.1, ls=(0, (2.4, 1.7)))
