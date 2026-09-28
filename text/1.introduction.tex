@@ -70,7 +70,7 @@ well a model handles these expressions cannot be judged from the phrase alone
 (\S\ref{sec:lookahead}). Recovery also varies systematically by phrase. A
 phrase tends to be recovered in nearly all of its contexts or in nearly none,
 much more often than if each context succeeded independently at the same
-average rate (\S\ref{sec:stability}). The same information can be read from the
-state without any intervention. A small classifier looking at one hidden vector
-predicts whether the model will finish the phrase, at $74.1\%$ balanced
-accuracy and $84.6\%$ precision (\S\ref{sec:probe}).
+average rate (\S\ref{sec:stability}). The hidden state also predicts whether
+the model will finish the phrase, with no intervention at all. A small
+classifier looking at one hidden vector reaches $74.1\%$ balanced accuracy and
+$84.6\%$ precision (\S\ref{sec:probe}).
