@@ -1,7 +1,7 @@
 # Do Language Models Recognize a Phrase Before Reading It?
 
-Amirim final project (HUJI, CS 68101). Nimrod Segev, Yuval Reif and Roy
-Schwartz; the project is Nimrod's, supervised by Yuval and Roy. Written in ACL
+An Amirim final project (HUJI, CS 68101) by Nimrod Segev, supervised by Yuval
+Reif and Roy Schwartz. The paper is authored by all three. Written in ACL
 format; this repository is synced to Overleaf.
 
 **The paper asks:** when a model is partway through a familiar fixed phrase, does
@@ -46,7 +46,7 @@ three options are documented in a comment above the `\usepackage` line.
 | `results/raw/` | analysis outputs from the cluster runs |
 | `results/processed/` | `paper_numbers.json`, the single source for every reported value |
 | `code/` | the scripts that produced the results, and that rebuild the tables and figures |
-| `notes/PAPER_BRIEF.md` | claim-and-evidence map, generated from `paper_numbers.json` |
+| `notes/PAPER_BRIEF.md` | claim-and-evidence map, written by `code/make_paper_brief.py` |
 | `results/legacy/` | outputs the current pipeline does not read |
 | `requirements-*.txt` | artifact and experiment dependencies |
 | `sources/papers/` | related-work PDFs |
@@ -60,6 +60,7 @@ python3 code/make_paper_numbers.py   # results/raw/ -> results/processed/paper_n
 python3 code/make_tables.py          # -> tables/*.tex
 python3 code/make_figures.py         # -> figures/*.pdf
 python3 code/make_schematic.py       # -> figures/protocol.pdf, figures/motivation.pdf
+python3 code/make_paper_brief.py     # -> notes/PAPER_BRIEF.md
 ```
 
 All four are deterministic: two consecutive runs produce byte-identical output.

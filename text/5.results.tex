@@ -196,10 +196,10 @@ which is why we report balanced accuracy rather than raw accuracy.}
 
 If information about the continuation is already present at the cut, it should
 be detectable in the hidden state without a Patchscopes intervention. We train
-a small MLP on the raw hidden state at the cut position to predict whether
-recovery succeeds, pooling $i \in \{2,3,4,5\}$ and splitting by phrase so that
-no test phrase is seen in training (Appendix~\ref{app:details}). We train two
-versions, differing only in which measurement supplies the label.
+a small MLP on the hidden state at the cut position to predict whether recovery
+succeeds, pooling $i \in \{2,3,4,5\}$ and splitting by phrase so that no test
+phrase is seen in training (Appendix~\ref{app:details}). We train two versions,
+differing only in which measurement supplies the label.
 
 Predicting \emph{generation success} works well. Balanced accuracy trends
 upward with depth, from $68.6\%$ at L5 to a maximum of $74.1\%$ at L30 with a

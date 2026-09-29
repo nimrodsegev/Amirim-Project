@@ -3,6 +3,7 @@
 # repository; see the note in README.md. Tested with Python 3.11.
 torch>=2.0
 transformers>=4.40
+accelerate>=0.26          # transformers needs it for device_map= loading
 datasets>=2.18
 scikit-learn>=1.3
 numpy>=1.24
