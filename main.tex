@@ -21,6 +21,30 @@
 \definecolor{hit}{HTML}{1B7F4B}
 \input{editing_macros}
 
+% Title block laid out as in Kaplan et al. (ICLR 2025): a small-caps title and a
+% left-aligned author block. acl.sty fixes both to centred bold inside
+% \@maketitle, so we override it here. acl.sty defines these in an
+% \AtBeginDocument hook, so ours has to run after it. The anonymise branch that
+% the `review` mode depends on is kept.
+\makeatletter
+\AtBeginDocument{%
+  \renewcommand\outauthor{%
+    \begin{tabular}[t]{@{}l@{}}%
+      \ifacl@anonymize
+        \bfseries Anonymous ACL submission
+      \else
+        \@author
+      \fi
+    \end{tabular}}%
+  \def\@maketitle{\vbox to \titlebox{\hsize\textwidth
+    \linewidth\hsize \vskip 0.125in minus 0.125in \raggedright
+    {\LARGE\scshape \@title \par}
+    \vskip 0.2in plus 1fil minus 0.1in
+    {\normalsize \outauthor \par}
+    \vskip 0.3in plus 2fil minus 0.1in}}%
+}
+\makeatother
+
 \title{Do Language Models Recognize a Phrase Before Reading It?}
 % Author block laid out as in Kaplan et al. (ICLR 2025): one author line,
 % one affiliation line, then brace-grouped addresses. acl.sty imposes no author
@@ -28,7 +52,7 @@
 \author{
   Nimrod Segev, Yuval Reif, and Roy Schwartz \\[2pt]
   The Hebrew University of Jerusalem \\[2pt]
-  \texttt{\{nimrod.segev,yuval.reif,roy.schwartz1\}@mail.huji.ac.il}
+  \small\texttt{\{nimrod.segev,yuval.reif,roy.schwartz1\}@mail.huji.ac.il}
 }
 
 \begin{document}
