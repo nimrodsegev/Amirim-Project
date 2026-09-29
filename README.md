@@ -4,26 +4,13 @@ An Amirim final project (HUJI, CS 68101) by Nimrod Segev, supervised by Yuval
 Reif and Roy Schwartz. The paper is authored by all three. Written in ACL
 format; this repository is synced to Overleaf.
 
-**The paper asks:** when a model is partway through a familiar fixed phrase, does
-its hidden state already carry enough information to recover the rest? We read
-the state with Patchscopes, using the model's own continuation as a baseline, and
-find that the rest of the phrase is often recoverable several tokens early.
-
-## If you are reviewing this
-
-Read in this order:
-
-1. **`main.tex` compiled** (or the PDF in Overleaf). Body, then limitations,
-   references and appendix.
-2. **`notes/PAPER_BRIEF.md`**, the claim-and-evidence map. Every claim in the
-   paper is listed there with the file the number comes from and the caveat that
-   applies. It also records which decisions were made deliberately and why.
-3. **`results/README.md`**, what is in the raw result files, and the known
-   issues with the data that the paper discloses.
-
-The open items are listed at the end of `notes/PAPER_BRIEF.md`: no confidence
-intervals, no frequency-matched control, and no measured pretraining frequency.
-All three are stated in the paper's Limitations rather than hidden.
+When a model is partway through a familiar fixed phrase, does its hidden state
+already carry enough information to recover the rest? We interrupt OLMo-2-7B at
+a controlled lookahead distance across 1,164 idioms, landmark names and film
+titles, read the state with Patchscopes, and use the model's own continuation as
+a baseline. The rest of the phrase is often recoverable several tokens early,
+and a small classifier reading one hidden state predicts in advance whether the
+model will get it right.
 
 ## Build
 
@@ -33,9 +20,9 @@ latexmk -pdf main.tex                       # TeX Live 2023 or newer
 ```
 
 `main.tex` is in `preprint` mode: author names visible, page numbers, no line
-numbers. Switch to `review` for an anonymised build with line numbers (useful if
-you want to refer to line numbers in comments), or `final` for camera-ready. The
-three options are documented in a comment above the `\usepackage` line.
+numbers. Switch to `review` for an anonymised build with line numbers, or
+`final` for camera-ready. The three options are documented in a comment above
+the `\usepackage` line.
 
 ## Layout
 
@@ -44,13 +31,13 @@ three options are documented in a comment above the `\usepackage` line.
 | `text/` | one file per section; appendices under `text/appendix/` |
 | `tables/`, `figures/` | generated, see below. Do not hand-edit |
 | `results/raw/` | analysis outputs from the cluster runs |
-| `results/processed/` | `paper_numbers.json`, the single source for every reported value |
-| `code/` | the scripts that produced the results, and that rebuild the tables and figures |
-| `notes/PAPER_BRIEF.md` | claim-and-evidence map, written by `code/make_paper_brief.py` |
+| `results/processed/` | `paper_numbers.json`, the source for every reported value |
 | `results/legacy/` | outputs the current pipeline does not read |
+| `code/` | the scripts that produced the results and rebuild the tables and figures |
+| `notes/PAPER_BRIEF.md` | claim-and-evidence map, written by `code/make_paper_brief.py` |
 | `requirements-*.txt` | artifact and experiment dependencies |
 | `sources/papers/` | related-work PDFs |
-| `custom.bib` | verified references not in the ACL Anthology |
+| `custom.bib` | references not in the ACL Anthology |
 | `anthology-1.bib`, `anthology-2.bib` | ACL Anthology snapshot (2026-09-15) |
 
 ## Regenerating tables and figures
@@ -63,68 +50,52 @@ python3 code/make_schematic.py       # -> figures/protocol.pdf, figures/motivati
 python3 code/make_paper_brief.py     # -> notes/PAPER_BRIEF.md
 ```
 
-All four are deterministic: two consecutive runs produce byte-identical output.
+All five are deterministic: two consecutive runs produce byte-identical output.
 Two tables hold qualitative examples rather than computed values and are
 hand-written, so the scripts do not touch them:
 `tables/disagreement_examples.tex` and `tables/falsepos_examples.tex`.
 
+```bash
+python3 code/check_citations.py .    # every cite key resolves, no duplicates
+```
+
+## Data
+
+The phrase set is 1,164 fixed multi-word expressions: 852 idioms, 127 landmark
+names and 185 film titles. Natural occurrences come from FineWeb-Edu, up to ten
+sentences per phrase with up to 150 tokens of preceding text. Repeated contexts
+for the same phrase are collapsed, giving 5,498 distinct (phrase, context) pairs
+over 1,096 phrases and 13,613 trials at lookahead distances 2 to 5.
+
+`results/raw/` holds the per-trial outputs these were computed from, and
+`results/README.md` describes each file and the known issues with the data.
+
 ## Running the experiment scripts
 
-`code/phrase_recognition/` holds the scripts that produced `results/raw/` on the
-compute cluster. They are here for provenance and **cannot be run from a clone
-as-is**: they expect a GPU, a `data/` directory at the working root, and inputs
-that are not in this repository, chiefly
-`data/phrases_with_context_v2.json` (the collected contexts) and the per-trial
-hidden states `data/probing_features.npz` (1.28 GB) and
-`data/generation_probing_features.npz` (3.02 GB). Each writes into `results/`,
-and those outputs were copied here into `results/raw/`.
-
-`code/rerun_dedup.sh` is the September 2026 rerun: it deduplicates the context
-file and re-runs every affected script in order. It documents which script
-produced which raw file. Dependencies for these are in
+`code/phrase_recognition/` holds the scripts that produced `results/raw/` on a
+compute cluster. They need a GPU and a `data/` directory at the working root
+containing inputs that are not in this repository: `phrases_with_context_v2.json`
+(the collected contexts) and the per-trial hidden states `probing_features.npz`
+(1.28 GB) and `generation_probing_features.npz` (3.02 GB). Each script writes
+into `results/`, and those outputs were copied here. Dependencies are in
 `requirements-experiments.txt`.
 
-## Checks
-
-```bash
-python3 code/check_citations.py .
-```
+`code/rerun_dedup.sh` runs the whole chain in order and records which script
+produces which file.
 
 ## What is not reproducible here
 
-Table 7 (probe metrics) and the false-positive adjudication in §5.5 are the only
-numbers not regenerated by the scripts above. The probes need per-trial hidden
-states, 1.28 GB and 3.02 GB, which are intact on the compute cluster but too
-large to distribute; the adjudication was run through ChatGPT (GPT-5.6 Sol),
-which the paper names so the run can be repeated. Both are stated as
-limitations in the paper.
+Two numbers in the paper are not regenerated by the scripts above.
 
-## State of the draft
+The probe metrics in Table 7 need the per-trial hidden states, which are too
+large to distribute and stay on the cluster. They are transcribed from the run
+logs into the `external` block of `paper_numbers.json`, which names their source.
 
-Revised against Yuval's review of 2026-09-28. All 26 of his inline comments are
-addressed; each was deleted in the commit that acted on it, so the absence of
-`\yuval{}` macros in `text/` is the record that none is outstanding. His general
-notes (plain language, terminology, captions, no mention of bugs) were applied
-across the whole paper rather than only where he flagged them.
+The false-positive adjudication in §5.5 was run through ChatGPT (GPT-5.6 Sol).
+The prompt is reproduced in the paper's appendix so the run can be repeated, but
+a single automatic judge is not a substitute for human annotation.
 
-Every number in the main text except the two noted above traces to
-`results/processed/paper_numbers.json`, which regenerates from `results/raw/`.
-
-The contexts were deduplicated on 2026-09-28 and every affected measurement was
-rerun on the cluster: the Patchscopes sweeps, both feature extractions, all
-probe training, the category breakdown and the false-positive adjudication.
-`results/raw/` holds the rerun outputs. Headline rates moved by about a point
-and no conclusion changed, with two exceptions worth knowing: the probe's
-precision fell from 87.6% to 84.6%, and film titles overtook idioms as the
-easiest category under Patchscopes once the category breakdown was restricted to
-i=2..5 as its caption always claimed.
-
-Some analyses were not rerun and are therefore not reported rather than carried
-forward stale: the in-context replication on OLMo-3 and Qwen, the generation-label
-probe at the earliest layers, the held-out-category generalisation, the
-layer-group pooling, and the confidence breakdown by probe outcome.
-
-Not yet done, and flagged in the paper's Limitations rather than hidden: a
-phrase-clustered bootstrap for confidence intervals, a frequency-matched
-non-phrase control, and a measurement of how often these phrases occur in
+Both are stated in the paper's Limitations, along with the analyses that remain
+undone: confidence intervals from a phrase-clustered bootstrap, a
+frequency-matched control, and a measurement of how often these phrases occur in
 pretraining data.
