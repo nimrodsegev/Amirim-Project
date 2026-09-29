@@ -61,13 +61,14 @@ We take the same prefix, context plus the first $p$ phrase tokens, and let
 the model generate greedily for $i+3$ tokens, with no intervention of any kind.
 Success is judged by the same string-containment criterion.
 
-The two answer different questions. Patchscopes asks what a single hidden state
-can be made to give up, and it is the tool we use to look inside the model.
-Generation asks whether the model goes on to write the phrase at all, so we
-treat it as the ground truth for the model's behaviour rather than as a second
-way of reading the state. The two are not interchangeable:
-\S\ref{sec:disagreement} shows cases where Patchscopes recovers a phrase the
-model does not go on to write.
+The two answer different questions. Patchscopes tests whether the target phrase
+can be recovered from a single hidden state, and it is our main tool for
+looking inside the model. Generation records what the model actually does under
+greedy decoding: whether it goes on to produce the phrase. We treat it as
+ground truth for the model's behaviour in that setting, not as another way of
+reading the state. The two are not interchangeable: \S\ref{sec:disagreement}
+shows cases where Patchscopes recovers a phrase the model does not go on to
+produce.
 
 Both measurements decode one token at a time, so recovering a target of several
 tokens does not show that each of those tokens is separately encoded in the
