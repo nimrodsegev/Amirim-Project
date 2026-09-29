@@ -54,12 +54,12 @@ advance to check against.
 We index the question by \emph{lookahead distance} $i$: the number of phrase
 tokens still unread at the point where we interrupt the model. At $i=4$ in
 \textit{The Lord of the Rings}, the model has read only \textit{The}, and we
-ask whether \textit{Lord of the Rings} is recoverable from its state. To answer
-that we use Patchscopes \citep{ghandeharioun-etal-2024-patchscopes}. We lift
+ask whether \textit{Lord of the Rings} is recoverable from its state. Our main
+analysis uses Patchscopes \citep{ghandeharioun-etal-2024-patchscopes}. We lift
 the hidden state at the cut point, copy it into an unrelated prompt, and see
-whether the model writes out the missing tokens. As a baseline for what the
-model actually does with the same input, we also let it simply carry on from
-the text it has read.
+whether the model writes out the missing tokens. Separately, we let the model
+carry on from the text it has read, which tells us whether it goes on to
+produce the phrase itself.
 
 The rest of a familiar phrase is often recoverable several tokens early. Over
 $1.1$k expressions in $5.5$k naturally occurring phrase-context pairs,

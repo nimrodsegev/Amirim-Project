@@ -29,10 +29,10 @@ substantially at every distance.}
 
 We interrupt OLMo-2-7B inside each phrase, leaving $i$ tokens unread, and ask
 whether those tokens can be recovered at that point: with Patchscopes, by
-reading the hidden state at the cut, and with our baseline, by letting the
-model continue greedily for $i+3$ tokens from the prefix it has actually seen.
-A trial succeeds if the unread tokens appear in the output.
-Table~\ref{tab:main} gives the result. With the phrase in its original
+reading the hidden state at the cut, and by letting the model continue greedily
+for $i+3$ tokens from the prefix it has actually seen, which shows whether it
+produces the phrase itself. A trial succeeds if the unread tokens appear in the
+output. Table~\ref{tab:main} gives the result. With the phrase in its original
 sentence, Patchscopes, over its eight probed layers (\S\ref{sec:setup}),
 recovers the remaining tokens in $71.9\%$ of instances at $i=2$, $56.6\%$ at
 $i=3$ and $37.3\%$ at $i=5$; the model's own continuation recovers them in

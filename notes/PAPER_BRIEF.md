@@ -33,7 +33,7 @@ its hidden state already carry enough information to recover the rest?
 | Claim | Evidence | Where | Scope or caveat |
 |---|---|---|---|
 | Familiar phrases are recovered several tokens early | Patchscopes, in context, `i`=2/3/4/5 | `external.patchscopes_8L_union_in_context_pct`: 71.9 / 56.6 / 42.3 / 37.3 | Eight probed layers, the budget used throughout the paper |
-| The model's own continuation recovers more | Generation, in context | `in_context.generation_olmo2`: 83.3 / 64.5 / 55.3 / 53.0 | Generation is the baseline, not a second reading of the state |
+| The model goes on to produce the phrase more often than Patchscopes recovers it | Generation, in context | `in_context.generation_olmo2`: 83.3 / 64.5 / 55.3 / 53.0 | Generation is the baseline, not a second reading of the state |
 | Natural context raises recovery a lot | Same phrases, isolated vs in context | generation 59.2 / 31.2 / 20.6 / 17.6 isolated; Patchscopes 32L 57.8 / 30.9 / 19.4 / 16.5 isolated vs 78.4 / 63.2 / 50.1 / 45.2 in context | Isolation is not the natural operating condition |
 | Outcomes cluster strongly by phrase | Per-phrase success vs a binomial null | `per_phrase_consistency_i3`: 31.5% of phrases recovered in >=90% of contexts against a null of 10.1% | At `i`=3 over the 803 phrases with >=5 distinct contexts. Shows clustering, **not** that phrase identity causes it: frequency, length, tokenization, category and context similarity are not separated |
 | A probe on one hidden state predicts completion | MLP on a single hidden state, generation label | `external.generation_label_probe`: 74.1% balanced accuracy, 84.6% precision at L30 | One phrase-level split at seed 42; features are standardised before training. Not recomputable from this repo, the feature arrays stay on the cluster |
@@ -49,7 +49,7 @@ its hidden state already carry enough information to recover the rest?
 |---|---|---|
 | Tokens still unread at the cut | **lookahead distance `i`** | "position", "offset" |
 | Reading a hidden state via an injected prompt | **Patchscopes** | "readout"; "the model knows" without qualification |
-| Greedy continuation from the true prefix | **generation**, our **baseline** | "readout"; "ground truth" |
+| Greedy continuation from the true prefix | **generation**, our ground truth for the model's behaviour | "readout"; a second reading of the hidden state |
 | Holding information about tokens not yet read | **looking ahead / lookahead** | "anticipation" |
 | A phrase recovered at some layer | **recovered / recognized at distance `i`** | "predicted" |
 | Fixed multi-word expression | **phrase** | "entity", "collocation" |

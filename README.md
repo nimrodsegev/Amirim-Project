@@ -7,10 +7,10 @@ Written in ACL format; this repository is synced to Overleaf.
 When a model is partway through a familiar fixed phrase, does its hidden state
 already carry enough information to recover the rest? We interrupt OLMo-2-7B at
 a controlled lookahead distance across 1,164 idioms, landmark names and film
-titles, read the state with Patchscopes, and use the model's own continuation
-as a baseline. The rest of the phrase is often recoverable several tokens
-early, and a small classifier reading one hidden state predicts in advance
-whether the model will get it right.
+titles, read the state with Patchscopes, and let the model continue on its own
+to see whether it actually produces the phrase. The rest of the phrase is often
+recoverable several tokens early, and a small classifier reading one hidden
+state predicts in advance whether the model will get it right.
 
 ## Build
 

@@ -8,7 +8,7 @@
 tokens unread, and ask whether those tokens are recoverable from that point by
 two different means: injecting the hidden state into an unrelated prompt
 (Patchscopes), or letting the model continue from the prefix it has actually
-seen (generation, our baseline). Both are scored identically. In both, only the first token is
+seen (generation). Both are scored identically. In both, only the first token is
 produced from the state shown; decoding then continues autoregressively, so a
 multi-token recovery does not imply that every token was separately encoded in
 $h^{\ell}_p$.}
@@ -18,10 +18,10 @@ $h^{\ell}_p$.}
 We now describe how we measure whether the rest of a phrase can be recovered
 partway through it. We first define where we interrupt the model and how far
 ahead we ask it to look. We then describe the two measurements we take at that
-point: reading the hidden state with Patchscopes, and letting the model
-continue on its own, which serves as our baseline. Finally we give the rule
-that decides whether a trial succeeded. Figure~\ref{fig:protocol} summarises
-the protocol.
+point: reading the hidden state with Patchscopes, which is our main analysis,
+and letting the model continue on its own, which shows what it actually does.
+Finally we give the rule that decides whether a trial succeeded.
+Figure~\ref{fig:protocol} summarises the protocol.
 
 \subsection{Lookahead distance}
 
@@ -42,8 +42,8 @@ of interest here.
 \label{sec:measures}
 
 We ask whether the remaining tokens are recoverable from the model at position
-$p$ in two ways. Both take the same input and differ only in what is done with
-it.
+$p$ in two ways. Both start from the same interrupted input and differ in what
+they take from it.
 
 \paragraph{Patchscopes.}
 Following \citet{ghandeharioun-etal-2024-patchscopes}, and ultimately the causal
@@ -56,15 +56,18 @@ report the union over layers: it succeeds if \emph{any} probed layer
 succeeds. This is deliberately generous, and \S\ref{sec:disagreement} shows how
 much the number of layers in the union changes the result.
 
-\paragraph{Generation, our baseline.}
+\paragraph{Generation.}
 We take the same prefix, context plus the first $p$ phrase tokens, and let
 the model generate greedily for $i+3$ tokens, with no intervention of any kind.
 Success is judged by the same string-containment criterion.
 
-The two measurements answer different questions. Patchscopes asks what can be
-pulled out of a single hidden state. Generation asks what the model actually
-does when it continues the real sentence, which is why we treat it as a
-baseline rather than as a second way of inspecting the state.
+The two answer different questions. Patchscopes asks what a single hidden state
+can be made to give up, and it is the tool we use to look inside the model.
+Generation asks whether the model goes on to write the phrase at all, so we
+treat it as the ground truth for the model's behaviour rather than as a second
+way of reading the state. The two are not interchangeable:
+\S\ref{sec:disagreement} shows cases where Patchscopes recovers a phrase the
+model does not go on to write.
 
 Both measurements decode one token at a time, so recovering a target of several
 tokens does not show that each of those tokens is separately encoded in the

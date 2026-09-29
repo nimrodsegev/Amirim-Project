@@ -59,7 +59,7 @@ its hidden state already carry enough information to recover the rest?
 | Claim | Evidence | Where | Scope or caveat |
 |---|---|---|---|
 | Familiar phrases are recovered several tokens early | Patchscopes, in context, `i`=2/3/4/5 | `external.patchscopes_8L_union_in_context_pct`: {j(p8)} | Eight probed layers, the budget used throughout the paper |
-| The model's own continuation recovers more | Generation, in context | `in_context.generation_olmo2`: {j(g_ctx)} | Generation is the baseline, not a second reading of the state |
+| The model goes on to produce the phrase more often than Patchscopes recovers it | Generation, in context | `in_context.generation_olmo2`: {j(g_ctx)} | Generation is the baseline, not a second reading of the state |
 | Natural context raises recovery a lot | Same phrases, isolated vs in context | generation {j(g_iso)} isolated; Patchscopes 32L {j(p_iso)} isolated vs {j(p32)} in context | Isolation is not the natural operating condition |
 | Outcomes cluster strongly by phrase | Per-phrase success vs a binomial null | `per_phrase_consistency_i3`: {pp['observed_pct']['at_least_90']}% of phrases recovered in >=90% of contexts against a null of {pp['binomial_null_pct']['at_least_90']}% | At `i`=3 over the {pp['phrases_with_at_least_5_distinct_contexts']} phrases with >=5 distinct contexts. Shows clustering, **not** that phrase identity causes it: frequency, length, tokenization, category and context similarity are not separated |
 | A probe on one hidden state predicts completion | MLP on a single hidden state, generation label | `external.generation_label_probe`: {ge['balanced_accuracy_pct']['30']}% balanced accuracy, {ge['precision_pct']['30']}% precision at L30 | One phrase-level split at seed 42; features are standardised before training. Not recomputable from this repo, the feature arrays stay on the cluster |
@@ -75,7 +75,7 @@ its hidden state already carry enough information to recover the rest?
 |---|---|---|
 | Tokens still unread at the cut | **lookahead distance `i`** | "position", "offset" |
 | Reading a hidden state via an injected prompt | **Patchscopes** | "readout"; "the model knows" without qualification |
-| Greedy continuation from the true prefix | **generation**, our **baseline** | "readout"; "ground truth" |
+| Greedy continuation from the true prefix | **generation**, our ground truth for the model's behaviour | "readout"; a second reading of the hidden state |
 | Holding information about tokens not yet read | **looking ahead / lookahead** | "anticipation" |
 | A phrase recovered at some layer | **recovered / recognized at distance `i`** | "predicted" |
 | Fixed multi-word expression | **phrase** | "entity", "collocation" |
