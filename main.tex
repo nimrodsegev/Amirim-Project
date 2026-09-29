@@ -26,29 +26,28 @@
 % \@maketitle, so we override it here. acl.sty defines these in an
 % \AtBeginDocument hook, so ours has to run after it. The anonymise branch that
 % the `review` mode depends on is kept.
-\makeatletter
-\AtBeginDocument{%
-  \renewcommand\outauthor{%
-    \begin{tabular}[t]{@{}l@{}}%
-      \ifacl@anonymize
-        \bfseries Anonymous ACL submission
-      \else
-        \@author
-      \fi
-    \end{tabular}}%
-  \def\@maketitle{\vbox to \titlebox{\hsize\textwidth
-    \linewidth\hsize \vskip 0.125in minus 0.125in \raggedright
-    {\LARGE\scshape \@title \par}
-    \vskip 0.2in plus 1fil minus 0.1in
-    {\normalsize \outauthor \par}
-    \vskip 0.3in plus 2fil minus 0.1in}}%
-}
-\makeatother
+
+% Yuval: I commented this out so the title is at ACL format, and not ICLR's format
+% \makeatletter
+% \AtBeginDocument{%
+%   \renewcommand\outauthor{%
+%     \begin{tabular}[t]{@{}l@{}}%
+%       \ifacl@anonymize
+%         \bfseries Anonymous ACL submission
+%       \else
+%         \@author
+%       \fi
+%     \end{tabular}}%
+%   \def\@maketitle{\vbox to \titlebox{\hsize\textwidth
+%     \linewidth\hsize \vskip 0.125in minus 0.125in \raggedright
+%     {\LARGE\scshape \@title \par}
+%     \vskip 0.2in plus 1fil minus 0.1in
+%     {\normalsize \outauthor \par}
+%     \vskip 0.3in plus 2fil minus 0.1in}}%
+% }
+% \makeatother
 
 \title{Do Language Models Recognize a Phrase Before Reading It?}
-% Author block laid out as in Kaplan et al. (ICLR 2025): one author line,
-% one affiliation line, then brace-grouped addresses. acl.sty imposes no author
-% format, so this is only content, not a change to the class.
 \author{
   \textbf{Nimrod Segev, Yuval Reif, and Roy Schwartz} \\[2pt]
   The Hebrew University of Jerusalem \\[2pt]
@@ -71,12 +70,12 @@ phrase are
 recovered in $56.6\%$ of instances three tokens before the phrase ends and
 $37.3\%$ five tokens before. The same phrases shown with no surrounding sentence
 are recovered far less often, so a model meeting these expressions in real text
-is in a much better position than an isolated test would suggest. Recovery is highly consistent within a phrase. Across natural contexts, a
-phrase tends to be recovered almost always or almost never. A small classifier trained on a single hidden state, with no intervention at
-all, predicts whether the model will complete the phrase at $84.6\%$ precision. Models therefore carry usable information about words they
+is in a much better position than an isolated test would suggest. Interestingly, recovery is highly consistent within a phrase: across natural contexts, a
+phrase tends to be recovered almost always or almost never. We further show that a small probe trained on a single hidden state, predicts whether the model will complete the phrase at $84.6\%$ precision. Our results show models carry usable information about words they
 have not yet produced, and that information can be detected before those words
-appear. A decoding method that commits several tokens at once would need
-information of exactly this kind.
+appear. 
+% A decoding method that commits several tokens at once would need
+% information of exactly this kind.
 \end{abstract}
 
 \input{text/1.introduction}
