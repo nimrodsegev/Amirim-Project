@@ -8,3 +8,5 @@
 *.synctex.gz
 main.pdf
 .DS_Store
+__pycache__/
+*.pyc
