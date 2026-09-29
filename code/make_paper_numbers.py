@@ -341,7 +341,7 @@ with open(OUT, "w") as f:
 print(f"wrote {OUT}")
 
 
-# ---- Additional transcribed results (August 2026 deck) --------------------
+# ---- Additional externally recorded results -------------------------------
 NUM = json.load(open(OUT))
 NUM["external"]["clp_pilot"] = {
     "note": ("Separate reproduction of CLP (Xie and Zhou, 2026) on Qwen3.5-2B "
@@ -373,4 +373,4 @@ NUM["external"]["clp_pilot"] = {
 
 with open(OUT, "w") as f:
     json.dump(NUM, f, indent=2)
-print("appended transcribed deck results")
+print("appended external results")

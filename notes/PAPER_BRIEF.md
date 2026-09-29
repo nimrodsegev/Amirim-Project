@@ -41,7 +41,7 @@ its hidden state already carry enough information to recover the rest?
 | The layer budget moves Patchscopes rates | 8 layers vs all 32 | 71.9 / 56.6 / 42.3 / 37.3 against 78.4 / 63.2 / 50.1 / 45.2 | Six to eight points. Always state which budget a Patchscopes rate used |
 | The two rank categories differently | Same categories, both measurements | `external.category_8L_pooled_i2_5_pct` and `category_pooled_i2_5` | Patchscopes 8L: movie 59.9 > idiom 58.0 > building 46.4. Generation: movie 83.9 > building 74.1 > idiom 65.7. Film titles lead under both; landmarks and idioms swap. The 32L sweep gives the same ordering as 8L (movie 67.4 > idiom 64.7 > building 55.7) |
 | Exact matching understates real knowledge | Judge over the probe's false positives | `external.false_positive_llm_judgement`: 59.9% valid alternate, 22.2% partially right, 17.9% unrelated, n=212 | One automatic judge (ChatGPT, GPT-5.6 Sol), no human validation. Probe-selected, not a sample of all failures, so it does not correct the headline rates. The judge-free confidence split agrees: 46.2% of those cases had model confidence above 0.7 |
-| Probe confidence tracks phrase identity | Correlation with true per-phrase rate | `probe_phrase_correlation.by_layer_i3`: peaks at r=0.611 (L10), 0.441 at L5, 0.527 at L30 | Patchscopes label only; the equivalent on generation-label features was not run |
+| Probe scores track per-phrase recovery rates | Correlation between each phrase's mean predicted probability and its observed Patchscopes success rate | `probe_phrase_correlation.by_layer_i3`: peaks at r=0.611 (L10), 0.441 at L5, 0.527 at L30 | Patchscopes label only; the equivalent on generation-label features was not run |
 
 ## Terminology
 
