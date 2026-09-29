@@ -1,6 +1,7 @@
 # Results
 
-Keep immutable analysis outputs in `raw/` and derived, paper-ready data in `processed/`. Record provenance for every reported value.
+`raw/` holds the per-trial analysis outputs from the cluster runs. `processed/`
+holds `paper_numbers.json`, the single source for every value the paper reports.
 
 ## How the paper's numbers are produced
 
@@ -11,74 +12,49 @@ python3 code/make_figures.py         # processed/ + raw/ -> figures/*.pdf
 python3 code/make_schematic.py       # -> figures/protocol.pdf, figures/motivation.pdf
 ```
 
-Every number in the main text except Table 7 (probe metrics) and the
-false-positive adjudication in §5.5 is recomputed by these scripts. Do not edit `tables/*.tex`
-or `figures/*.pdf` by hand; change the script and re-run.
+Every number in the main text except Table 7 and the false-positive adjudication
+in §5.5 is recomputed by these scripts. Do not edit `tables/*.tex` or
+`figures/*.pdf` by hand; change the script and re-run.
 
 ## What is in `raw/`
 
 | File | Model | Condition | Measurement |
 |---|---|---|---|
-| `lookahead_analysis_fixed.json` | OLMo-2-7B | isolated | patchscopes, 32 layers |
-| `lookahead_5x_fixed.json` | OLMo-2-7B | isolated | patchscopes, 5-slot prompt ablation |
-| `lookahead_olmo3_fixed.json` | OLMo-3-7B | isolated | patchscopes, 32 layers |
+| `lookahead_analysis_fixed.json` | OLMo-2-7B | isolated | Patchscopes, 32 layers |
+| `lookahead_5x_fixed.json` | OLMo-2-7B | isolated | Patchscopes, 5-slot prompt ablation |
+| `lookahead_olmo3_fixed.json` | OLMo-3-7B | isolated | Patchscopes, 32 layers |
 | `generation_truth_naked.json` | OLMo-2-7B | isolated | greedy generation |
-| `lookahead_with_context_full.json` | OLMo-2-7B | FineWeb-Edu context | patchscopes, 32 layers |
-| `lookahead_olmo3_with_context.json` | OLMo-3-7B | FineWeb-Edu context | patchscopes, 32 layers |
+| `lookahead_with_context_full.json` | OLMo-2-7B | FineWeb-Edu context | Patchscopes, 32 layers |
+| `lookahead_olmo3_with_context.json` | OLMo-3-7B | FineWeb-Edu context | Patchscopes, 32 layers |
 | `generation_truth_context.json` | OLMo-2-7B | FineWeb-Edu context | greedy generation |
-| `correlation_per_i.json` | OLMo-2-7B | per-phrase correlation from the 8-layer runs |
-
-Five files that the current pipeline does not read have moved to `legacy/`;
-see `legacy/README.md`.
+| `correlation_per_i.json` | OLMo-2-7B | per-phrase correlation, 8 layers |
 
 `lookahead_with_context_full.json` and `generation_truth_context.json` are
 row-aligned: record *k* of one is the same (phrase, context) instance as record
 *k* of the other. `make_paper_numbers.py` asserts this before computing the
 agreement table.
 
-## Known issues with the raw data
+Outputs the current pipeline does not read are in `legacy/`.
 
-- **Contexts are deduplicated.** The collection originally repeated a context
-  already present for the same phrase. The files here are deduplicated: 5,498
-  distinct (phrase, context) pairs over 1,096 phrases, 13,613 trials at
-  *i* = 2...5. Every measurement that depended on the contexts was rerun on the
-  deduplicated set in September 2026.
-- **Layer budget differs by analysis.** Patchscopes unions are over all 32
-  layers in the `lookahead_*` files and over 8 layers (5, 7, 10, 13, 15, 20, 25,
-  30) wherever hidden states had to be stored. The choice moves the reported
-  patchscopes rate by 6–8 points; always state which was used.
-- **Not everything is reproducible here.** The probing experiments need
-  per-trial hidden states, `probing_features.npz` (1.28 GB) and
-  `generation_probing_features.npz` (3.02 GB), which are intact on the compute
-  cluster but too large to distribute. Table 7 and the false-positive
-  adjudication are transcribed from the September 2026 rerun logs into the
-  `external` block of `processed/paper_numbers.json`, which names their source.
-- **The false-positive adjudication rests on a single automatic judge.** It was
-  run through ChatGPT (GPT-5.6 Sol) over the 212 false positives of the
-  deduplicated set. The prompt is reproduced in the paper's appendix, so the run
-  can be repeated, but one automatic judge is not a substitute for human
-  annotation. The judge-free split by model confidence, reported alongside it,
-  points the same way.
-The three notes below concern the pre-deduplication data and the analyses
-built on it. None of those numbers appears in the current paper; they are kept
-as a record of how the discrepancies were resolved at the time.
+## What to know when reading these files
 
-- **One deck figure is absent, and the discrepancy behind it is resolved.** The
-  slide-14 chart (L25 per-phrase prediction bins, `i=3` only) covers 194
-  phrases, while every saved file records 180. Resolved by rerunning
-  `probe_bins_and_seeds.py` on the cluster against the current
-  `probing_features.npz`: sweeping the minimum-observations-per-phrase filter
-  gives 180 (filter = 3, the current setting), 190 (2) or 196 (1), **194 is
-  not reachable**. The chart was therefore built from an earlier snapshot of
-  the extracted features that no longer exists. **Use 180.** The correlation
-  the paper cites for L25 at `i=3` (0.517) was confirmed by direct rerun to
-  four decimal places, so it belongs to the 180-phrase set.
-- **One recorded correlation did not reproduce.** The same rerun returned 0.499
-  for the natural-training MLP at L25, against the 0.531 in
-  `legacy/probing_bins_seeds.json`. Most likely package-version drift. Both values are
-  recorded in `bin_chart_provenance` in `processed/paper_numbers.json` and the
-  paper footnotes the discrepancy. The balanced-MLP value, which is the one the
-  figure uses, reproduced exactly.
-- **A third variant exists, do not confuse it.** `sanity_check_probe_l25.py`
-  trains on `i=3` data only and gives 178 phrases at r=0.614. It is not used in
-  the paper.
+**The contexts are deduplicated.** Each (phrase, context) pair appears once:
+5,498 pairs over 1,096 phrases, 13,613 trials at *i* = 2 to 5.
+
+**The layer budget differs by analysis.** Patchscopes unions are over all 32
+layers in the `lookahead_*` files, and over 8 layers (5, 7, 10, 13, 15, 20, 25,
+30) wherever per-trial hidden states had to be stored. The choice moves the
+Patchscopes rate by 6 to 8 points, so any rate should say which budget produced
+it.
+
+**Two results are not regenerated here.** The probing experiments need the
+per-trial hidden states, `probing_features.npz` (1.28 GB) and
+`generation_probing_features.npz` (3.02 GB), which stay on the cluster. Table 7
+and the false-positive adjudication are transcribed from the run logs into the
+`external` block of `processed/paper_numbers.json`, which names their source.
+
+**The adjudication used a single automatic judge.** ChatGPT (GPT-5.6 Sol) over
+the 212 false positives of the L25 generation-label probe. The prompt is in the
+paper's appendix so the run can be repeated, but one automatic judge is not a
+substitute for human annotation. The split by the model's own confidence, which
+uses no judge, points the same way.
